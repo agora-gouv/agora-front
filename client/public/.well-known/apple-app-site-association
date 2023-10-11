@@ -1,10 +1,23 @@
 {
   "applinks": {
-      "apps": [],
       "details": [
       {
-        "appID": "PR958DC548.fr.gouv.agora",
-        "paths": ["*"]
+        "appIDs": ["PR958DC548.fr.gouv.agora"],
+        "components": [
+               {
+                  "#": "no_universal_links",
+                  "exclude": true,
+                  "comment": "Matches any URL with a fragment that equals no_universal_links and instructs the system not to open it as a universal link."
+               },
+               {
+                  "/": "/qags/*",
+                  "comment": "Matches any URL with a path that starts with /qags/."
+               },
+               {
+                  "/": "/consultations/*",
+                  "comment": "Matches any URL with a path that starts with /consultations/."
+               },
+             ]
       }
     ]
   }
