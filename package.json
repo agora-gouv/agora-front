@@ -15,7 +15,7 @@
     "@gouvfr/dsfr": "^1.11.2",
     "@gouvminint/vue-dsfr": "^5.15.0",
     "jsdom": "^24.0.0",
-    "nuxt": "^3.11.2",
+    "nuxt": "^3.12.4",
     "nuxt-simple-sitemap": "^4.4.1",
     "typescript": "^5.4.5",
     "vue-matomo": "^4.2.0"
