@@ -1,18 +1,20 @@
 server {
-    listen 80;
-    server_name participation-citoyenne.fr www.participation-citoyenne.fr;
-
-    return 301 https://agora.gouv.fr/participation-citoyenne;
-}
-
-server {
-    server_name localhost;
+    server_name <%= ENV['DOMAIN_NAME'] %>;
     listen <%= ENV['PORT'] %>;
 
     location / {
         proxy_set_header  X-Remote-Address $remote_addr;
         proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass http://localhost:<%= ENV['PORT'] %>;
+        proxy_pass http://localhost:<%= ENV['NITRO_PORT'] %>;
         proxy_redirect default;
+    }
+}
+
+server {
+    server_name agora.incubateur.net www.agora.incubateur.net participation-citoyenne.fr www.participation-citoyenne.fr;
+    listen <%= ENV['PORT'] %>;
+
+    location / {
+      return 301 https://agora.gouv.fr/participation-citoyenne;
     }
 }
