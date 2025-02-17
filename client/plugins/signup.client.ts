@@ -12,29 +12,33 @@ interface LoginResponse {
   jwtExpirationEpochMilli: string,
 }
 
+const localStorageLoginRefreshToken = "loginToken"
+const localStorageJwtToken = "jwtToken"
+const localStorageJwtExpiration = "jwtExpirationEpochMilli"
+
 export default defineNuxtPlugin(async nuxtApp => {
   const isSignupEnabled = false
   if (!isSignupEnabled) {return}
   
-  if (localStorage.getItem("loginToken") == null) {
+  if (localStorage.getItem(localStorageLoginRefreshToken) == null) {
     const content = await signup()
-    localStorage.setItem("loginToken", content.loginToken)
-    localStorage.setItem("jwtToken", content.jwtToken)
-    localStorage.setItem("jwtExpirationEpochMilli", content.jwtExpirationEpochMilli)
+    localStorage.setItem(localStorageLoginRefreshToken, content.loginToken)
+    localStorage.setItem(localStorageJwtToken, content.jwtToken)
+    localStorage.setItem(localStorageJwtExpiration, content.jwtExpirationEpochMilli)
   }
   
-  const jwtExpirationEpochMilli = parseInt(localStorage.getItem("jwtExpirationEpochMilli")!!)
+  const jwtExpirationEpochMilli = parseInt(localStorage.getItem(localStorageJwtExpiration)!!)
   
   const now = new Date()
   now.setHours(now.getHours() - 1);
   const oneHourAgo = now.getTime()
   
   if (jwtExpirationEpochMilli < oneHourAgo) {
-    const loginToken = localStorage.getItem("loginToken")!!
+    const loginToken = localStorage.getItem(localStorageLoginRefreshToken)!!
     const freshAuthInfo = await logUser(loginToken)
 
-    localStorage.setItem("jwtToken", freshAuthInfo.jwtToken)
-    localStorage.setItem("jwtExpirationEpochMilli", freshAuthInfo.jwtExpirationEpochMilli)
+    localStorage.setItem(localStorageJwtToken, freshAuthInfo.jwtToken)
+    localStorage.setItem(localStorageJwtExpiration, freshAuthInfo.jwtExpirationEpochMilli)
   }
 });
 
