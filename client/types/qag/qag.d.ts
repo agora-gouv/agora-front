@@ -13,7 +13,6 @@ export default interface Qag{
   response: { 
     author: string,
     authorDescription: string,
-    authorPortraitUrl?: string, // TODO: à définir si besoin ou non
     responseDate: string,
     videoUrl: string,
     videoWidth: number,

@@ -26,7 +26,7 @@ const expandedSectionId = ref('')
 
       <div v-else-if="section.type=='focusNumber'" class="fr-callout">
         <h2 class="fr-h3 fr-mb-0">{{ section.title }}</h2>
-        <p v-html="section.description"></p>
+        <div v-html="section.description"></div>
       </div>
 
       <div v-else-if="section.type=='video'">
