@@ -104,7 +104,7 @@ const estSurLaPageLancement = props.consultation.goals != null
   <BandeauTelechargementAdaptatif v-else title="Téléchargez l'application pour donner votre avis."/>
 </template>
 
-<style>
+<style scoped>
 .info-question {
   .progress-bar {
     background-color: #dcdcdc;
