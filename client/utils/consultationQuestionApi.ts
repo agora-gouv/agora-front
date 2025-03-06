@@ -1,6 +1,7 @@
 import { AsyncData } from "nuxt/app";
 import { FetchError } from "ofetch";
 import { ConsultationQuestionsApiDTO } from "~/client/types/consultation/consultationQuestionsApiDTO";
+import { ConsultationAnswersApiDTO } from "~/client/types/consultation/consultationAnswersApiDTO";
 
 export class ConsultationQuestionApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;
@@ -20,17 +21,20 @@ export class ConsultationQuestionApi {
     return questions
   }
 
-  async sendAnswers(consultationId: string, jwtToken: string) {
+  async sendAnswers(consultationId: string, answers: Record<string, string | string[]>, jwtToken: string) {
     const routeConsultationUrl = `${this.baseUrl}/consultations/${consultationId}/responses`
-    const consultationAnswersApiDTO = {
-      consultationId: "",
-      responses: [
-        {
-          questionId: "",
-          choiceIds: [""],
-          responseText: ""
-        }
-      ]
+
+    const dtoAnswers = Object.entries(answers).map(([questionId, response]) => {
+      return {
+        questionId: questionId,
+        choiceIds: Array.isArray(response) ? response : [response],
+        responseText: ""
+      }
+    }) 
+      
+    const consultationAnswersApiDTO: ConsultationAnswersApiDTO = {
+      consultationId: consultationId,
+      responses: dtoAnswers
     }
 
     const {

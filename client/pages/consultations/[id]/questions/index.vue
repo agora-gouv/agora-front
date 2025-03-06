@@ -17,25 +17,12 @@ await initQuestions()
   <div class="fr-col-offset-1 fr-col-10">
     <router-link :to="`/consultations/` + consultationId">Retour à la consultation</router-link>
 
-    <div class="fr-stepper fr-mt-4w">
-      <h2 class="fr-stepper__title">
-        Question {{ currentQuestion?.order }}
-      </h2>
-      <div class="fr-stepper__steps" :data-fr-current-step="currentQuestion?.order" :data-fr-steps="getQuestionCount()"></div>
-    </div>
-
+    <Stepper :title="`Question ${currentQuestion?.order}`" :current-step="currentQuestion!!.order" :total-steps="getQuestionCount()!!" />
 
     <h3 class="question-title">{{ currentQuestion?.title }}</h3>
 
-    <section v-if="currentQuestion?.popupDescription != null" class="fr-accordion">
-      <h4 class="fr-accordion__title">
-        <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-106">Plus de précision</button>
-      </h4>
-      <div class="fr-collapse" id="accordion-106">
-        <h5 class="fr-h5">Contenu</h5>
-        <p>{{ currentQuestion?.popupDescription }}</p>
-      </div>
-    </section>
+    <Accordion v-if="currentQuestion?.popupDescription != null" title="Contenu" 
+               :description="currentQuestion?.popupDescription" button-label="Plus de précision" />
 
     <form @submit.prevent="submit">
 
@@ -47,7 +34,7 @@ await initQuestions()
 
           <div class="fr-fieldset__element" v-for="choice in currentQuestion.possibleChoices">
             <div class="fr-radio-group">
-              <input type="radio" :id="choice.id" :value="choice.id" v-model="answers[currentQuestion.id]">
+              <input type="radio" :id="choice.id" :value="{checkbox: choice.id}" v-model="answers[currentQuestion.id]">
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
               </label>
@@ -66,7 +53,7 @@ await initQuestions()
 
           <div class="fr-fieldset__element" v-for="choice in currentQuestion.possibleChoices">
             <div class="fr-checkbox-group">
-              <input :id="choice.id" type="checkbox" :value="choice.id" v-model="answers[currentQuestion.id]"
+              <input :id="choice.id" type="checkbox" :value="{checkbox: choice.id}" v-model="answers[currentQuestion.id]"
                      aria-describedby="checkboxes-1-messages">
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
@@ -85,7 +72,8 @@ await initQuestions()
           <label class="fr-label" for="textarea">
             Attention à n’indiquer ni données personnelles qui pourraient vous identifier, ni de lien vers un site internet
           </label>
-          <textarea class="fr-input" id="textarea" v-model="answers[currentQuestion.id]"></textarea>
+          <textarea class="fr-input" id="textarea"
+                    v-model="answers[currentQuestion.id].text"></textarea>
         </div>
       </div>
 

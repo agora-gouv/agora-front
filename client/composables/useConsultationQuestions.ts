@@ -10,16 +10,15 @@ import {
 import { Ref } from "vue";
 
 // TODO : 
-// - répondre au questionnaire
-
 // - refactorer les class/types de questions ci-dessous
 // - me faire reviewer par un fronteux Nuxt ou Next
 
 // - extraire les composants de la page questions (un composant par type de question)
 
-// - utiliser le nextQuestionId si présent
 // - questions ouvertes
 // - réponse ouvertes (aux questions fermées)
+
+// - utiliser le nextQuestionId si présent
 // - questions conditionnelles
 export const useConsultationQuestions = () => {
   const consultationQuestionApi = new ConsultationQuestionApi();
@@ -56,11 +55,9 @@ export const useConsultationQuestions = () => {
     currentQuestion.value = getCurrentQuestion()
   }
 
-
   const submit = async () => {
-    console.log(answers.value);
     const jwtToken = (await useAuthentication())?.jwtToken
-    await consultationQuestionApi.sendAnswers(consultationId, jwtToken!!)
+    await consultationQuestionApi.sendAnswers(consultationId, answers.value, jwtToken!!)
   }
 
   watchEffect(() => {
@@ -102,7 +99,6 @@ export class QuestionUniqueChoice {
     );
   }
 }
-
 
 class ConsultationQuestions {
   constructor(
