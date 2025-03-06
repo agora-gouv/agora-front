@@ -10,17 +10,20 @@ import {
 import { Ref } from "vue";
 
 // TODO : 
-// - utiliser le nextQuestionId si présent
-// - répondre au questionnaire (en étant authentifié)
+// - répondre au questionnaire
+
 // - refactorer les class/types de questions ci-dessous
-// - refactorer l'auth en composable
-// - extraire les composants de la page questions (un composant par type de question)
 // - me faire reviewer par un fronteux Nuxt ou Next
-// - choix ouverts
+
+// - extraire les composants de la page questions (un composant par type de question)
+
+// - utiliser le nextQuestionId si présent
+// - questions ouvertes
+// - réponse ouvertes (aux questions fermées)
 // - questions conditionnelles
 export const useConsultationQuestions = () => {
   const consultationQuestionApi = new ConsultationQuestionApi();
-
+  
   const consultationId = useRoute().params.id as string;
   
   const questions: Ref<ConsultationQuestions | undefined> = ref();
@@ -56,7 +59,8 @@ export const useConsultationQuestions = () => {
 
   const submit = async () => {
     console.log(answers.value);
-    await consultationQuestionApi.sendAnswers("o")
+    const jwtToken = (await useAuthentication())?.jwtToken
+    await consultationQuestionApi.sendAnswers(consultationId, jwtToken!!)
   }
 
   watchEffect(() => {

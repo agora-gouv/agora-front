@@ -20,7 +20,7 @@ export class ConsultationQuestionApi {
     return questions
   }
 
-  async sendAnswers(consultationId: string) {
+  async sendAnswers(consultationId: string, jwtToken: string) {
     const routeConsultationUrl = `${this.baseUrl}/consultations/${consultationId}/responses`
     const consultationAnswersApiDTO = {
       consultationId: "",
@@ -38,7 +38,10 @@ export class ConsultationQuestionApi {
       error: errorQuestions
     } = await useFetch(routeConsultationUrl, {
       method: "POST",
-      body: consultationAnswersApiDTO
+      body: consultationAnswersApiDTO,
+      headers: {
+        "Authorization": `Bearer ${jwtToken}`
+      }
     }) as AsyncData<{ askDemographicInfo: boolean }, FetchError>
 
     if (errorQuestions.value) {
