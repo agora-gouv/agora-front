@@ -6,20 +6,70 @@ import {
   QuestionOpenedApiDTO,
   QuestionUniqueChoiceApiDTO,
   QuestionWithConditionApiDTO
-} from "~/client/types/consultation/consultationQuestionsDTO";
+} from "~/client/types/consultation/consultationQuestionsApiDTO";
 import { Ref } from "vue";
 
+// TODO : 
+// - utiliser le nextQuestionId si présent
+// - répondre au questionnaire (en étant authentifié)
+// - refactorer les class/types de questions ci-dessous
+// - refactorer l'auth en composable
+// - extraire les composants de la page questions (un composant par type de question)
+// - me faire reviewer par un fronteux Nuxt ou Next
+// - choix ouverts
+// - questions conditionnelles
 export const useConsultationQuestions = () => {
-  const questions: Ref<ConsultationQuestions | undefined> = ref();
   const consultationQuestionApi = new ConsultationQuestionApi();
 
-  const fetchQuestions = async (consultationId: string) => {
+  const consultationId = useRoute().params.id as string;
+  
+  const questions: Ref<ConsultationQuestions | undefined> = ref();
+  const currentIndexQuestion: Ref<number> = ref(1);
+  const currentQuestion: Ref<Question | undefined> = ref()
+  const answers = ref({});
+
+  const initQuestions = async () => {
     const questionsApi = (await consultationQuestionApi.getQuestions(consultationId)).value
 
-    questions.value =  ConsultationQuestions.fromApi(questionsApi);
+    questions.value = ConsultationQuestions.fromApi(questionsApi);
+    currentQuestion.value = getCurrentQuestion()
   }
-  
-  return {questions, fetchQuestions};
+
+  const getCurrentQuestion = () => {
+    return questions.value?.questions.filter((question) => question.order === currentIndexQuestion.value)[0]
+  }
+
+  const nextQuestion = () => {
+    currentIndexQuestion.value++
+    currentQuestion.value = getCurrentQuestion()
+  }
+
+  const getQuestionCount = () => {
+    return questions.value?.questionCount
+  }
+
+  const previousQuestion = () => {
+    currentIndexQuestion.value--
+    currentQuestion.value = getCurrentQuestion()
+  }
+
+
+  const submit = async () => {
+    console.log(answers.value);
+    await consultationQuestionApi.sendAnswers("o")
+  }
+
+  watchEffect(() => {
+    if (currentQuestion.value === undefined) return;
+    if (!answers.value[currentQuestion.value!!.id]) {
+      answers.value[currentQuestion.value!!.id] = [];
+    }
+  });
+
+  return {
+    currentQuestion, initQuestions, getQuestionCount, nextQuestion, 
+    previousQuestion, consultationId, answers, submit
+  };
 }
 
 export class QuestionUniqueChoice {
@@ -73,7 +123,7 @@ class ConsultationQuestions {
 
 type Question = QuestionUniqueChoice | QuestionOpened | QuestionMultipleChoices | Chapter | QuestionWithCondition;
 
-class QuestionMultipleChoices {
+export class QuestionMultipleChoices {
   constructor(public id: string,
               public title: string,
               public order: number,
@@ -101,7 +151,7 @@ class QuestionMultipleChoices {
   }
 }
 
-class QuestionOpened {
+export class QuestionOpened {
   constructor(public id: string,
               public title: string,
               public order: number,
@@ -124,7 +174,7 @@ class QuestionOpened {
   }
 }
 
-class Chapter {
+export class Chapter {
   constructor(public id: string,
               public title: string,
               public order: number,
@@ -149,7 +199,7 @@ class Chapter {
   }
 }
 
-class QuestionWithCondition {
+export class QuestionWithCondition {
   constructor(public id: string,
               public title: string,
               public order: number,
