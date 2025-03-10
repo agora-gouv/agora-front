@@ -13,9 +13,6 @@ import { Ref } from "vue";
 // - refactorer les class/types de questions ci-dessous
 // - extraire les composants de la page questions (un composant par type de question)
 
-// - questions ouvertes
-// - réponse ouvertes (aux questions fermées)
-
 // - utiliser le nextQuestionId si présent
 // - questions conditionnelles
 

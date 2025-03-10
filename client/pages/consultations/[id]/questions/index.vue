@@ -11,18 +11,23 @@ const {
 
 await initQuestions()
 
+const isChecked = (choiceId) => {
+  console.log("here " + answersCheckbox.value[currentQuestion.value!!.id].includes(choiceId))
+  return answersCheckbox.value[currentQuestion.value!!.id].includes(choiceId);
+}
+
 </script>
 
 <template>
   <div class="fr-col-offset-1 fr-col-10">
     <router-link :to="`/consultations/` + consultationId">Retour à la consultation</router-link>
 
-    <Stepper :title="`Question ${currentQuestion?.order}`" :current-step="currentQuestion!!.order" :total-steps="questionCount!!" />
+    <Stepper :title="`Question ${currentQuestion?.order}`" :current-step="currentQuestion!!.order" :total-steps="questionCount!!"/>
 
     <h3 class="question-title">{{ currentQuestion?.title }}</h3>
 
-    <Accordion v-if="currentQuestion?.popupDescription != null" title="Contenu" 
-               :description="currentQuestion?.popupDescription" button-label="Plus de précision" />
+    <Accordion v-if="currentQuestion?.popupDescription != null" title="Contenu"
+               :description="currentQuestion?.popupDescription" button-label="Plus de précision"/>
 
     <form @submit.prevent="submit">
 
@@ -38,6 +43,7 @@ await initQuestions()
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
               </label>
+              <input v-if="choice.hasOpenTextField && isChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]"/>
             </div>
           </div>
           <div class="fr-messages-group" id="radio-hint-messages" aria-live="assertive">
@@ -58,6 +64,8 @@ await initQuestions()
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
               </label>
+              <input v-if="choice.hasOpenTextField && isChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]"
+                     class="fr-input"/>
               <div class="fr-messages-group" id="checkboxes-1-messages" aria-live="assertive">
               </div>
             </div>
@@ -77,15 +85,17 @@ await initQuestions()
         </div>
       </div>
 
-      <ConsultationQuestionsChapter 
-        v-if="currentQuestion instanceof Chapter" 
+      <ConsultationQuestionsChapter
+        v-if="currentQuestion instanceof Chapter"
         :description="currentQuestion.description"
         :image-transcription="currentQuestion.imageTranscription"
         :image-url="currentQuestion.imageUrl"
       />
     </form>
 
-    <DsfrButton v-if="hasPreviousQuestion.valueOf()" class="fr-btn fr-btn--secondary fr-mt-4w" @click="previousQuestion()">Question précédente</DsfrButton>
+    <DsfrButton v-if="hasPreviousQuestion.valueOf()" class="fr-btn fr-btn--secondary fr-mt-4w" @click="previousQuestion()">Question
+      précédente
+    </DsfrButton>
     <DsfrButton v-if="hasNextQuestion.valueOf()" class="fr-btn fr-mt-4w" @click="nextQuestion()">Question suivante</DsfrButton>
     <DsfrButton v-if="!hasNextQuestion.valueOf()" class="fr-btn fr-mt-4w" @click="submit()">Envoyer</DsfrButton>
   </div>
