@@ -6,8 +6,8 @@ definePageMeta({
 
 const {
   currentQuestion, questionCount, initQuestions, hasNextQuestion, hasPreviousQuestion,
-  nextQuestion, previousQuestion, consultationId, answers, submit
-} = useConsultationQuestions();
+  nextQuestion, previousQuestion, consultationId, submit, answersCheckbox, answersText
+} = useConsultationQuestionsForm();
 
 await initQuestions()
 
@@ -34,7 +34,7 @@ await initQuestions()
 
           <div class="fr-fieldset__element" v-for="choice in currentQuestion.possibleChoices">
             <div class="fr-radio-group">
-              <input type="radio" :id="choice.id" :value="{checkbox: choice.id}" v-model="answers[currentQuestion.id]">
+              <input type="radio" :id="choice.id" :value="choice.id" v-model="answersCheckbox[currentQuestion.id]">
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
               </label>
@@ -53,7 +53,7 @@ await initQuestions()
 
           <div class="fr-fieldset__element" v-for="choice in currentQuestion.possibleChoices">
             <div class="fr-checkbox-group">
-              <input :id="choice.id" type="checkbox" :value="{checkbox: choice.id}" v-model="answers[currentQuestion.id]"
+              <input :id="choice.id" type="checkbox" :value="choice.id" v-model="answersCheckbox[currentQuestion.id]"
                      aria-describedby="checkboxes-1-messages">
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
@@ -73,7 +73,7 @@ await initQuestions()
             Attention à n’indiquer ni données personnelles qui pourraient vous identifier, ni de lien vers un site internet
           </label>
           <textarea class="fr-input" id="textarea"
-                    v-model="answers[currentQuestion.id].text"></textarea>
+                    v-model="answersText[currentQuestion.id]"></textarea>
         </div>
       </div>
 
@@ -85,7 +85,7 @@ await initQuestions()
       />
     </form>
 
-    <DsfrButton v-if="hasPreviousQuestion.valueOf()" class="fr-btn fr-btn--secondary" @click="previousQuestion()">Question précédente</DsfrButton>
+    <DsfrButton v-if="hasPreviousQuestion.valueOf()" class="fr-btn fr-btn--secondary fr-mt-4w" @click="previousQuestion()">Question précédente</DsfrButton>
     <DsfrButton v-if="hasNextQuestion.valueOf()" class="fr-btn fr-mt-4w" @click="nextQuestion()">Question suivante</DsfrButton>
     <DsfrButton v-if="!hasNextQuestion.valueOf()" class="fr-btn fr-mt-4w" @click="submit()">Envoyer</DsfrButton>
   </div>

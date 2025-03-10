@@ -21,17 +21,17 @@ export class ConsultationQuestionApi {
     return questions
   }
 
-  async sendAnswers(consultationId: string, answers: Record<string, string | string[]>, jwtToken: string) {
+  async sendAnswers(consultationId: string, answersCheckbox: Record<string, string | string[]>, answersText: Record<string, string>, jwtToken: string) {
     const routeConsultationUrl = `${this.baseUrl}/consultations/${consultationId}/responses`
 
-    const dtoAnswers = Object.entries(answers).map(([questionId, response]) => {
+    const dtoAnswers = Object.entries(answersCheckbox).map(([questionId, response]) => {
       return {
         questionId: questionId,
         choiceIds: Array.isArray(response) ? response : [response],
-        responseText: ""
+        responseText: answersText[questionId] ? answersText[questionId] : ""
       }
-    }) 
-      
+    })
+    
     const consultationAnswersApiDTO: ConsultationAnswersApiDTO = {
       consultationId: consultationId,
       responses: dtoAnswers

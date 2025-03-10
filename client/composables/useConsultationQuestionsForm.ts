@@ -15,18 +15,19 @@ import { Ref } from "vue";
 
 // - questions ouvertes
 // - réponse ouvertes (aux questions fermées)
+
 // - utiliser le nextQuestionId si présent
 // - questions conditionnelles
-// - ajouter v-model par type de réponse
 
-export const useConsultationQuestions = () => {
+export const useConsultationQuestionsForm = () => {
   const consultationQuestionApi = new ConsultationQuestionApi();
   
   const consultationId = useRoute().params.id as string;
   
   const questions: Ref<ConsultationQuestions | undefined> = ref();
   const currentIndexQuestion: Ref<number> = ref(1);
-  const answers = ref({});
+  const answersCheckbox = ref({});
+  const answersText = ref({});
   
   const currentQuestion: Ref<Question | undefined> = computed(() => {
     return questions.value?.questions.filter((question) => question.order === currentIndexQuestion.value)[0];
@@ -57,19 +58,19 @@ export const useConsultationQuestions = () => {
 
   const submit = async () => {
     const jwtToken = (await useAuthentication())?.jwtToken
-    await consultationQuestionApi.sendAnswers(consultationId, answers.value, jwtToken!!)
+    await consultationQuestionApi.sendAnswers(consultationId, answersCheckbox.value, answersText.value, jwtToken!!)
   }
 
   watchEffect(() => {
     if (currentQuestion.value === undefined) return;
-    if (!answers.value[currentQuestion.value!!.id]) {
-      answers.value[currentQuestion.value!!.id] = [];
+    if (!answersCheckbox.value[currentQuestion.value!!.id]) {
+      answersCheckbox.value[currentQuestion.value!!.id] = [];
     }
   });
 
   return {
     currentQuestion, initQuestions, questionCount, nextQuestion, hasPreviousQuestion,
-    previousQuestion, consultationId, answers, submit, hasNextQuestion
+    previousQuestion, consultationId, answersCheckbox, submit, hasNextQuestion, answersText
   };
 }
 
