@@ -11,15 +11,14 @@ import { Ref } from "vue";
 
 // TODO : 
 // - refactorer les class/types de questions ci-dessous
-// - me faire reviewer par un fronteux Nuxt ou Next
-
 // - extraire les composants de la page questions (un composant par type de question)
 
 // - questions ouvertes
 // - réponse ouvertes (aux questions fermées)
-
 // - utiliser le nextQuestionId si présent
 // - questions conditionnelles
+// - ajouter v-model par type de réponse
+
 export const useConsultationQuestions = () => {
   const consultationQuestionApi = new ConsultationQuestionApi();
   
@@ -27,32 +26,33 @@ export const useConsultationQuestions = () => {
   
   const questions: Ref<ConsultationQuestions | undefined> = ref();
   const currentIndexQuestion: Ref<number> = ref(1);
-  const currentQuestion: Ref<Question | undefined> = ref()
   const answers = ref({});
+  
+  const currentQuestion: Ref<Question | undefined> = computed(() => {
+    return questions.value?.questions.filter((question) => question.order === currentIndexQuestion.value)[0];
+  })
+  const hasNextQuestion = computed(() => {
+    return questions.value!!.questions.some((question) => question.order > currentIndexQuestion.value);
+  })
+  const hasPreviousQuestion = computed(() => {
+    return currentIndexQuestion.value > 1;
+  })
+  const questionCount = computed(() => {
+    return questions.value?.questionCount
+  })
 
   const initQuestions = async () => {
     const questionsApi = (await consultationQuestionApi.getQuestions(consultationId)).value
 
     questions.value = ConsultationQuestions.fromApi(questionsApi);
-    currentQuestion.value = getCurrentQuestion()
-  }
-
-  const getCurrentQuestion = () => {
-    return questions.value?.questions.filter((question) => question.order === currentIndexQuestion.value)[0]
   }
 
   const nextQuestion = () => {
     currentIndexQuestion.value++
-    currentQuestion.value = getCurrentQuestion()
-  }
-
-  const getQuestionCount = () => {
-    return questions.value?.questionCount
   }
 
   const previousQuestion = () => {
     currentIndexQuestion.value--
-    currentQuestion.value = getCurrentQuestion()
   }
 
   const submit = async () => {
@@ -68,8 +68,8 @@ export const useConsultationQuestions = () => {
   });
 
   return {
-    currentQuestion, initQuestions, getQuestionCount, nextQuestion, 
-    previousQuestion, consultationId, answers, submit
+    currentQuestion, initQuestions, questionCount, nextQuestion, hasPreviousQuestion,
+    previousQuestion, consultationId, answers, submit, hasNextQuestion
   };
 }
 

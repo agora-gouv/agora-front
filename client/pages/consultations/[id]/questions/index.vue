@@ -5,7 +5,7 @@ definePageMeta({
 })
 
 const {
-  currentQuestion, getQuestionCount, initQuestions,
+  currentQuestion, questionCount, initQuestions, hasNextQuestion, hasPreviousQuestion,
   nextQuestion, previousQuestion, consultationId, answers, submit
 } = useConsultationQuestions();
 
@@ -17,7 +17,7 @@ await initQuestions()
   <div class="fr-col-offset-1 fr-col-10">
     <router-link :to="`/consultations/` + consultationId">Retour à la consultation</router-link>
 
-    <Stepper :title="`Question ${currentQuestion?.order}`" :current-step="currentQuestion!!.order" :total-steps="getQuestionCount()!!" />
+    <Stepper :title="`Question ${currentQuestion?.order}`" :current-step="currentQuestion!!.order" :total-steps="questionCount!!" />
 
     <h3 class="question-title">{{ currentQuestion?.title }}</h3>
 
@@ -77,21 +77,17 @@ await initQuestions()
         </div>
       </div>
 
-      <div v-if="currentQuestion instanceof Chapter">
-        <div v-html="currentQuestion.description"></div>
-        <img class="fr-my-3w" :src="currentQuestion.imageUrl" alt="">
-
-        <DsfrTranscription title="Transcription" :content="currentQuestion.imageTranscription"/>
-      </div>
-
+      <ConsultationQuestionsChapter 
+        v-if="currentQuestion instanceof Chapter" 
+        :description="currentQuestion.description"
+        :image-transcription="currentQuestion.imageTranscription"
+        :image-url="currentQuestion.imageUrl"
+      />
     </form>
 
-    <DsfrButton class="fr-btn fr-btn--secondary" @click="previousQuestion()">Question précédente</DsfrButton>
-    <DsfrButton class="fr-btn fr-mt-4w" @click="nextQuestion()">Question suivante</DsfrButton>
-    <DsfrButton class="fr-btn fr-btn--secondary">
-      Passer cette question
-    </DsfrButton>
-    <DsfrButton class="fr-btn fr-mt-4w" @click="submit()">Envoyer</DsfrButton>
+    <DsfrButton v-if="hasPreviousQuestion.valueOf()" class="fr-btn fr-btn--secondary" @click="previousQuestion()">Question précédente</DsfrButton>
+    <DsfrButton v-if="hasNextQuestion.valueOf()" class="fr-btn fr-mt-4w" @click="nextQuestion()">Question suivante</DsfrButton>
+    <DsfrButton v-if="!hasNextQuestion.valueOf()" class="fr-btn fr-mt-4w" @click="submit()">Envoyer</DsfrButton>
   </div>
 </template>
 
