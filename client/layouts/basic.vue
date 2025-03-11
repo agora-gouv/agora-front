@@ -87,7 +87,11 @@ if (error.value) {
   />
   <main>
     <div class="fr-container fr-mb-8w">
-      <slot/>
+      <div class="fr-grid-row fr-grid-row--center">
+        <div class="fr-col-10">
+          <slot/>
+        </div>
+      </div>
     </div>    
   </main>
   <DsfrFooter

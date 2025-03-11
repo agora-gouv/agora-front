@@ -27,7 +27,7 @@ onMounted(()=>{
   <div class="bandeau-adaptatif fr-grid-row fr-py-1w">
     <div class="fr-col-12 fr-col-md-6 fr-grid-row fr-grid-row--middle">
       <div>
-        <h1>{{title}}</h1>
+        <h2>{{title}}</h2>
         
         <p v-if="description">
           {{description}}
@@ -109,8 +109,10 @@ onMounted(()=>{
     z-index: -1;
   }
 
-  h1 {
+  h2 {
     color: var(--blue-france-sun-113-625);
+    font-size: 2.5rem;
+    line-height: 3rem;
   }
 
   .fr-btn {

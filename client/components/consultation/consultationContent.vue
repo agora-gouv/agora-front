@@ -6,6 +6,8 @@ const props = defineProps<{
   consultation: Consultation
 }>()
 
+const userHasAnswered = useRoute().query.answered
+
 const estEnCours = props.consultation.consultationDates?.endDate
   && new Date() < new Date(props.consultation.consultationDates.endDate)
 
@@ -18,6 +20,10 @@ const estSurLaPageLancement = props.consultation.goals != null
     {{ consultation.titrePageWeb }}
     <span class="fr-display--xs">{{ consultation.sousTitrePageWeb }}</span>
   </p>
+
+  <div v-if="userHasAnswered" class="fr-alert fr-alert--success">
+    <h6 class="fr-alert__title">Vos réponses ont bien été envoyées.</h6>
+  </div>
 <!--  <ConsultationShare :shareText="props.consultation.shareText" :shareTitle="props.consultation.title"/>-->
 
   <div class="fr-grid fr-mb-2w fr-mt-6w">
@@ -104,7 +110,7 @@ const estSurLaPageLancement = props.consultation.goals != null
   <BandeauTelechargementAdaptatif v-else title="Téléchargez l'application pour donner votre avis."/>
 </template>
 
-<style>
+<style scoped>
 .info-question {
   .progress-bar {
     background-color: #dcdcdc;
