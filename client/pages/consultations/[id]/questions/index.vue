@@ -5,7 +5,7 @@ definePageMeta({
 })
 
 const {
-  currentQuestion, questionCount, initQuestions, hasNextQuestion, hasPreviousQuestion,
+  currentQuestion, questionCount, initQuestions, hasNextQuestion, hasPreviousQuestion, errorMessage,
   nextQuestion, previousQuestion, consultationId, submit, answersCheckbox, answersText,
 } = useConsultationQuestionsForm();
 
@@ -29,7 +29,11 @@ const expandedSectionId = ref("")
 <template>
   <div class="fr-col-offset-1 fr-col-10 fr-pt-3w">
     <a :href="`/consultations/${consultationId}`">Retour à la consultation</a>
-
+    
+    <div v-if="errorMessage" class="fr-alert fr-alert--error fr-mt-2w">
+      <h6 class="fr-alert__title">{{ errorMessage }}</h6>
+    </div>
+    
     <Stepper :title="`Question ${currentQuestion?.order}`" :current-step="currentQuestion!!.order" :total-steps="questionCount!!"/>
 
     <h3 class="question-title">{{ currentQuestion?.title }}</h3>

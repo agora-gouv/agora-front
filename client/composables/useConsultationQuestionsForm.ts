@@ -9,8 +9,6 @@ import {
 } from "~/client/types/consultation/consultationQuestionsApiDTO";
 import { Ref } from "vue";
 
-// - gestion des erreur d'envoi
-
 export const useConsultationQuestionsForm = () => {
   const consultationQuestionApi = new ConsultationQuestionApi();
 
@@ -21,6 +19,7 @@ export const useConsultationQuestionsForm = () => {
   const answersCheckbox = ref({});
   const answersText = ref({});
   const respondedQuestions: Ref<string[]> = ref([])
+  const errorMessage = ref("")
 
   const currentQuestion: Ref<Question | undefined> = computed(() => {
     return questions.value?.questions.find((question) => question.order === currentIndexQuestion.value);
@@ -63,7 +62,13 @@ export const useConsultationQuestionsForm = () => {
 
   const submit = async () => {
     const jwtToken = (await useAuthentication())?.jwtToken
-    await consultationQuestionApi.sendAnswers(consultationId, answersCheckbox.value, answersText.value, jwtToken!!)
+    try {
+      await consultationQuestionApi.sendAnswers(consultationId, answersCheckbox.value, answersText.value, jwtToken!!)
+    } catch (error) {
+      console.log(error)
+      errorMessage.value = "Impossible d'envoyer vos réponses, veuillez ré-essayer."
+      return
+    }
 
     await navigateTo({
       path: `/consultations/${consultationId}/updates/fin-de-la-consultation`,
@@ -81,8 +86,8 @@ export const useConsultationQuestionsForm = () => {
   });
 
   return {
-    currentQuestion, initQuestions, questionCount, nextQuestion, hasPreviousQuestion,
-    previousQuestion, consultationId, answersCheckbox, submit, hasNextQuestion, answersText
+    currentQuestion, initQuestions, questionCount, nextQuestion, hasPreviousQuestion, errorMessage,
+    previousQuestion, consultationId, answersCheckbox, submit, hasNextQuestion, answersText,
   };
 }
 
