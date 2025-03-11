@@ -44,19 +44,16 @@ export const useConsultationQuestionsForm = () => {
     respondedQuestions.value.push(currentQuestion.value?.id!!)
     if (nextQuestionId === undefined) {
       currentIndexQuestion.value++
-      
       return
     }
 
     currentIndexQuestion.value = questions.value?.questions.find((question) => question.id === nextQuestionId)?.order!!
-    
     return
   }
 
   const previousQuestion = () => {
     const lastQuestion = respondedQuestions.value.pop()
     currentIndexQuestion.value = questions.value?.questions.find((question) => question.id === lastQuestion!!)?.order!!
-    
     return
   }
 
