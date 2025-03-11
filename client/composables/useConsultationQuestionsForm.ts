@@ -10,7 +10,6 @@ import {
 import { Ref } from "vue";
 
 // - gestion des erreur d'envoi
-// - page après envoi
 
 export const useConsultationQuestionsForm = () => {
   const consultationQuestionApi = new ConsultationQuestionApi();
@@ -30,7 +29,7 @@ export const useConsultationQuestionsForm = () => {
     return questions.value!!.questions.some((question) => question.order > currentIndexQuestion.value);
   })
   const hasPreviousQuestion = computed(() => {
-    return currentIndexQuestion.value > 1;
+    return respondedQuestions.value.length >= 1;
   })
   const questionCount = computed(() => {
     return questions.value?.questionCount
@@ -46,24 +45,35 @@ export const useConsultationQuestionsForm = () => {
     respondedQuestions.value.push(currentQuestion.value?.id!!)
     if (nextQuestionId === undefined) {
       currentIndexQuestion.value++
+      
       return
     }
 
     currentIndexQuestion.value = questions.value?.questions.find((question) => question.id === nextQuestionId)?.order!!
+    
     return
   }
 
   const previousQuestion = () => {
     const lastQuestion = respondedQuestions.value.pop()
     currentIndexQuestion.value = questions.value?.questions.find((question) => question.id === lastQuestion!!)?.order!!
+    
+    return
   }
 
   const submit = async () => {
     const jwtToken = (await useAuthentication())?.jwtToken
     await consultationQuestionApi.sendAnswers(consultationId, answersCheckbox.value, answersText.value, jwtToken!!)
+
+    await navigateTo({
+      path: `/consultations/${consultationId}/updates/fin-de-la-consultation`,
+      query: {
+        answered: "true",
+      }
+    })
   }
 
-  watchEffect(() => {
+  watchEffect(function storeAnswersAsArray() {
     if (currentQuestion.value === undefined) return;
     if (!answersCheckbox.value[currentQuestion.value!!.id]) {
       answersCheckbox.value[currentQuestion.value!!.id] = [];

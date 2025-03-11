@@ -15,10 +15,10 @@ export const useAuthentication = async () => {
   const jwtExpirationEpochMilli = parseInt(localStorage.getItem(localStorageJwtExpiration)!!)
 
   const now = new Date()
-  now.setHours(now.getHours() - 1);
-  const oneHourAgo = now.getTime()
+  now.setHours(now.getHours() - 3);
+  const threeHoursAgo = now.getTime()
 
-  if (jwtExpirationEpochMilli < oneHourAgo) {
+  if (jwtExpirationEpochMilli < threeHoursAgo) {
     const loginToken = localStorage.getItem(localStorageLoginRefreshToken)!!
     const freshAuthInfo = await authenticationApi.login(loginToken)
 

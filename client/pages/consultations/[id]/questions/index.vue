@@ -6,7 +6,7 @@ definePageMeta({
 
 const {
   currentQuestion, questionCount, initQuestions, hasNextQuestion, hasPreviousQuestion,
-  nextQuestion, previousQuestion, consultationId, submit, answersCheckbox, answersText
+  nextQuestion, previousQuestion, consultationId, submit, answersCheckbox, answersText,
 } = useConsultationQuestionsForm();
 
 await initQuestions()
@@ -15,13 +15,20 @@ const isTextChoiceChecked = (choiceId) => {
   return answersCheckbox.value[currentQuestion.value!!.id].includes(choiceId);
 }
 
+const isMaximumChoices = computed(() => {
+  if (currentQuestion.value instanceof QuestionMultipleChoices) {
+    return answersCheckbox.value[currentQuestion.value?.id!!].length >= currentQuestion.value.maxChoices
+  }
+  return false
+})
+
 const expandedSectionId = ref("")
 
 </script>
 
 <template>
   <div class="fr-col-offset-1 fr-col-10 fr-pt-3w">
-    <a :href="`/consultations/` + consultationId">Retour à la consultation</a>
+    <a :href="`/consultations/${consultationId}`">Retour à la consultation</a>
 
     <Stepper :title="`Question ${currentQuestion?.order}`" :current-step="currentQuestion!!.order" :total-steps="questionCount!!"/>
 
@@ -47,7 +54,7 @@ const expandedSectionId = ref("")
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
               </label>
-              <input v-if="choice.hasOpenTextField && isTextChoiceChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]" class="fr-input"/>
+              <input maxlength="200" v-if="choice.hasOpenTextField && isTextChoiceChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]" class="fr-input"/>
             </div>
           </div>
           <div class="fr-messages-group" id="radio-hint-messages" aria-live="assertive">
@@ -72,12 +79,12 @@ const expandedSectionId = ref("")
           <div class="fr-fieldset__element" v-for="choice in currentQuestion.possibleChoices">
             <div class="fr-checkbox-group">
               <input :id="choice.id" type="checkbox" :value="choice.id" v-model="answersCheckbox[currentQuestion.id]"
-                     aria-describedby="checkboxes-1-messages">
+                     aria-describedby="checkboxes-1-messages" :disabled="isMaximumChoices && !answersCheckbox[currentQuestion.id!!].includes(choice.id)">
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
               </label>
               <input v-if="choice.hasOpenTextField && isTextChoiceChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]"
-                     class="fr-input"/>
+                     class="fr-input" maxlength="200"/>
               <div class="fr-messages-group" id="checkboxes-1-messages" aria-live="assertive">
               </div>
             </div>
@@ -100,7 +107,7 @@ const expandedSectionId = ref("")
           <label class="fr-label" for="textarea">
             Attention à n’indiquer ni données personnelles qui pourraient vous identifier, ni de lien vers un site internet
           </label>
-          <textarea class="fr-input" id="textarea"
+          <textarea class="fr-input" id="textarea" maxlength="400"
                     v-model="answersText[currentQuestion.id]"></textarea>
         </div>
         <ConsultationQuestionButtons
@@ -125,7 +132,7 @@ const expandedSectionId = ref("")
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
               </label>
-              <input v-if="choice.hasOpenTextField && isTextChoiceChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]" class="fr-input"/>
+              <input v-if="choice.hasOpenTextField && isTextChoiceChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]"  maxlength="200" class="fr-input"/>
             </div>
           </div>
           <div class="fr-messages-group" id="radio-hint-messages" aria-live="assertive">
