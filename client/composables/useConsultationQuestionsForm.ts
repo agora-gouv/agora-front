@@ -25,10 +25,9 @@ export const useConsultationQuestionsForm = () => {
   const currentIndexQuestion: Ref<number> = ref(1);
   const answersCheckbox = ref({});
   const answersText = ref({});
-  const nextConditionalQuestionId: Ref<string | undefined> = ref()
   
   const currentQuestion: Ref<Question | undefined> = computed(() => {
-    return questions.value?.questions.filter((question) => question.order === currentIndexQuestion.value)[0];
+    return questions.value?.questions.find((question) => question.order === currentIndexQuestion.value);
   })
   const hasNextQuestion = computed(() => {
     return questions.value!!.questions.some((question) => question.order > currentIndexQuestion.value);
@@ -47,16 +46,7 @@ export const useConsultationQuestionsForm = () => {
   }
 
   const nextQuestion = () => {
-    if (nextConditionalQuestionId.value === undefined) {
-      return currentIndexQuestion.value++
-    }
-    
-    const nextQuestion = currentIndexQuestion.value = questions.value!!.questions.find((question) => {
-      return question.id == nextConditionalQuestionId.value!!;
-    })!!.order
-    nextConditionalQuestionId.value = undefined
-    
-    return nextQuestion
+    return currentIndexQuestion.value++
   }
 
   const previousQuestion = () => {
@@ -74,7 +64,7 @@ export const useConsultationQuestionsForm = () => {
       answersCheckbox.value[currentQuestion.value!!.id] = [];
     }
   });
-
+  
   return {
     currentQuestion, initQuestions, questionCount, nextQuestion, hasPreviousQuestion,
     previousQuestion, consultationId, answersCheckbox, submit, hasNextQuestion, answersText
