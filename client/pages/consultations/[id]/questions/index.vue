@@ -39,7 +39,7 @@ const expandedSectionId = ref("")
     <h3 class="question-title">{{ currentQuestion?.title }}</h3>
 
     <DsfrAccordion v-if="currentQuestion?.popupDescription" title="Plus de précision" 
-                   :expanded-id="expandedSectionId" @expand="id => expandedSectionId!! = id">
+                   :expanded-id="expandedSectionId" @expand="id => expandedSectionId = id">
       <h5>Contenu</h5>
       <div v-html="currentQuestion?.popupDescription"/>
     </DsfrAccordion>
