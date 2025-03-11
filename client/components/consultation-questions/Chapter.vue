@@ -9,9 +9,9 @@ defineProps<{
 <template>
   <div>
     <div v-html="description"></div>
-    <img class="fr-my-3w" :src="imageUrl" alt="">
+    <img class="fr-my-3w" v-if="imageUrl" :src="imageUrl" alt="">
 
-    <DsfrTranscription @click.prevent title="Transcription" :content="imageTranscription"/>
+    <DsfrTranscription v-if="imageTranscription" @click.prevent title="Transcription" :content="imageTranscription"/>
   </div>
 </template>
 

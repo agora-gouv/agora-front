@@ -11,23 +11,27 @@ const {
 
 await initQuestions()
 
-const isChecked = (choiceId) => {
-  console.log("here " + answersCheckbox.value[currentQuestion.value!!.id].includes(choiceId))
+const isTextChoiceChecked = (choiceId) => {
   return answersCheckbox.value[currentQuestion.value!!.id].includes(choiceId);
 }
+
+const expandedSectionId = ref("")
 
 </script>
 
 <template>
-  <div class="fr-col-offset-1 fr-col-10">
-    <router-link :to="`/consultations/` + consultationId">Retour à la consultation</router-link>
+  <div class="fr-col-offset-1 fr-col-10 fr-pt-3w">
+    <a :href="`/consultations/` + consultationId">Retour à la consultation</a>
 
     <Stepper :title="`Question ${currentQuestion?.order}`" :current-step="currentQuestion!!.order" :total-steps="questionCount!!"/>
 
     <h3 class="question-title">{{ currentQuestion?.title }}</h3>
 
-    <Accordion v-if="currentQuestion?.popupDescription != null" title="Contenu"
-               :description="currentQuestion?.popupDescription" button-label="Plus de précision"/>
+    <DsfrAccordion v-if="currentQuestion?.popupDescription" title="Plus de précision" 
+                   :expanded-id="expandedSectionId" @expand="id => expandedSectionId = id">
+      <h5>Contenu</h5>
+      <div v-html="currentQuestion?.popupDescription"/>
+    </DsfrAccordion>
 
     <form @submit.prevent="submit">
 
@@ -43,7 +47,7 @@ const isChecked = (choiceId) => {
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
               </label>
-              <input v-if="choice.hasOpenTextField && isChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]"/>
+              <input v-if="choice.hasOpenTextField && isTextChoiceChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]" class="fr-input"/>
             </div>
           </div>
           <div class="fr-messages-group" id="radio-hint-messages" aria-live="assertive">
@@ -64,7 +68,7 @@ const isChecked = (choiceId) => {
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
               </label>
-              <input v-if="choice.hasOpenTextField && isChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]"
+              <input v-if="choice.hasOpenTextField && isTextChoiceChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]"
                      class="fr-input"/>
               <div class="fr-messages-group" id="checkboxes-1-messages" aria-live="assertive">
               </div>
@@ -85,6 +89,26 @@ const isChecked = (choiceId) => {
         </div>
       </div>
 
+      <div v-if="currentQuestion instanceof QuestionWithCondition">
+        <fieldset class="fr-fieldset" id="radio-hint" aria-labelledby="radio-hint-legend radio-hint-messages">
+          <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id="radio-hint-legend">
+            Vous pouvez choisir une seule réponse.
+          </legend>
+
+          <div class="fr-fieldset__element" v-for="choice in currentQuestion.possibleChoices">
+            <div class="fr-radio-group">
+              <input type="radio" :id="choice.id" :value="choice.id" v-model="answersCheckbox[currentQuestion.id]">
+              <label class="fr-label" :for="choice.id">
+                {{ choice.label }}
+              </label>
+              <input v-if="choice.hasOpenTextField && isTextChoiceChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]" class="fr-input"/>
+            </div>
+          </div>
+          <div class="fr-messages-group" id="radio-hint-messages" aria-live="assertive">
+          </div>
+        </fieldset>
+      </div>
+      
       <ConsultationQuestionsChapter
         v-if="currentQuestion instanceof Chapter"
         :description="currentQuestion.description"
@@ -108,5 +132,9 @@ const isChecked = (choiceId) => {
 
 img {
   width: 80%;
+}
+
+a {
+  color: var(--blue-france-sun-113-625)
 }
 </style>

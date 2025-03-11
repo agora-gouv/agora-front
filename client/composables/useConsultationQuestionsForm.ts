@@ -10,11 +10,11 @@ import {
 import { Ref } from "vue";
 
 // TODO : 
-// - refactorer les class/types de questions ci-dessous
-// - extraire les composants de la page questions (un composant par type de question)
-
-// - utiliser le nextQuestionId si présent
 // - questions conditionnelles
+// - utiliser le nextQuestionId !!!
+
+// - gestion des erreur d'envoi
+// - page après envoi
 
 export const useConsultationQuestionsForm = () => {
   const consultationQuestionApi = new ConsultationQuestionApi();
@@ -25,6 +25,7 @@ export const useConsultationQuestionsForm = () => {
   const currentIndexQuestion: Ref<number> = ref(1);
   const answersCheckbox = ref({});
   const answersText = ref({});
+  const nextConditionalQuestionId: Ref<string | undefined> = ref()
   
   const currentQuestion: Ref<Question | undefined> = computed(() => {
     return questions.value?.questions.filter((question) => question.order === currentIndexQuestion.value)[0];
@@ -46,7 +47,16 @@ export const useConsultationQuestionsForm = () => {
   }
 
   const nextQuestion = () => {
-    currentIndexQuestion.value++
+    if (nextConditionalQuestionId.value === undefined) {
+      return currentIndexQuestion.value++
+    }
+    
+    const nextQuestion = currentIndexQuestion.value = questions.value!!.questions.find((question) => {
+      return question.id == nextConditionalQuestionId.value!!;
+    })!!.order
+    nextConditionalQuestionId.value = undefined
+    
+    return nextQuestion
   }
 
   const previousQuestion = () => {
