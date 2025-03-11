@@ -53,6 +53,14 @@ const expandedSectionId = ref("")
           <div class="fr-messages-group" id="radio-hint-messages" aria-live="assertive">
           </div>
         </fieldset>
+        <ConsultationQuestionButtons
+          :hasPreviousQuestion = "hasPreviousQuestion.valueOf()"
+          :hasNextQuestion = "hasNextQuestion.valueOf()"
+          :nextQuestionId = "currentQuestion.nextQuestionId!!"
+          :nextQuestion = "nextQuestion"
+          :previousQuestion = "previousQuestion"
+          :submit = "submit"
+        />
       </div>
 
       <div v-if="currentQuestion instanceof QuestionMultipleChoices">
@@ -77,6 +85,14 @@ const expandedSectionId = ref("")
           <div class="fr-messages-group" id="checkboxes-messages" aria-live="assertive">
           </div>
         </fieldset>
+        <ConsultationQuestionButtons
+          :hasPreviousQuestion = "hasPreviousQuestion.valueOf()"
+          :hasNextQuestion = "hasNextQuestion.valueOf()"
+          :nextQuestionId = "currentQuestion.nextQuestionId!!"
+          :nextQuestion = "nextQuestion"
+          :previousQuestion = "previousQuestion"
+          :submit = "submit"
+        />
       </div>
 
       <div v-if="currentQuestion instanceof QuestionOpened">
@@ -87,6 +103,14 @@ const expandedSectionId = ref("")
           <textarea class="fr-input" id="textarea"
                     v-model="answersText[currentQuestion.id]"></textarea>
         </div>
+        <ConsultationQuestionButtons
+          :hasPreviousQuestion = "hasPreviousQuestion.valueOf()"
+          :hasNextQuestion = "hasNextQuestion.valueOf()"
+          :nextQuestionId = "currentQuestion.nextQuestionId!!"
+          :nextQuestion = "nextQuestion"
+          :previousQuestion = "previousQuestion"
+          :submit = "submit"
+        />
       </div>
 
       <div v-if="currentQuestion instanceof QuestionWithCondition">
@@ -107,21 +131,33 @@ const expandedSectionId = ref("")
           <div class="fr-messages-group" id="radio-hint-messages" aria-live="assertive">
           </div>
         </fieldset>
+        <ConsultationQuestionButtons
+          :hasPreviousQuestion = "hasPreviousQuestion.valueOf()"
+          :hasNextQuestion = "hasNextQuestion.valueOf()"
+          :nextQuestionId = "currentQuestion.possibleChoices.find((choice) => choice.id == answersCheckbox[currentQuestion!!.id])?.nextQuestionId!!"
+          :nextQuestion = "nextQuestion"
+          :previousQuestion = "previousQuestion"
+          :submit = "submit"
+        />
       </div>
-      
-      <ConsultationQuestionsChapter
-        v-if="currentQuestion instanceof Chapter"
-        :description="currentQuestion.description"
-        :image-transcription="currentQuestion.imageTranscription"
-        :image-url="currentQuestion.imageUrl"
-      />
-    </form>
 
-    <DsfrButton v-if="hasPreviousQuestion.valueOf()" class="fr-btn fr-btn--secondary fr-mt-4w" @click="previousQuestion()">Question
-      précédente
-    </DsfrButton>
-    <DsfrButton v-if="hasNextQuestion.valueOf()" class="fr-btn fr-mt-4w" @click="nextQuestion()">Question suivante</DsfrButton>
-    <DsfrButton v-if="!hasNextQuestion.valueOf()" class="fr-btn fr-mt-4w" @click="submit()">Envoyer</DsfrButton>
+      <div v-if="currentQuestion instanceof Chapter">
+        <div v-html="currentQuestion.description"></div>
+        <img class="fr-my-3w" v-if="currentQuestion.imageUrl" :src="currentQuestion.imageUrl" alt="">
+
+        <DsfrTranscription v-if="currentQuestion.imageTranscription" @click.prevent title="Transcription" :content="currentQuestion.imageTranscription"/>
+        
+        <ConsultationQuestionButtons
+          :hasPreviousQuestion = "hasPreviousQuestion.valueOf()"
+          :hasNextQuestion = "hasNextQuestion.valueOf()"
+          :nextQuestionId = "currentQuestion.nextQuestionId!!"
+          :nextQuestion = "nextQuestion"
+          :previousQuestion = "previousQuestion"
+          :submit = "submit"
+        />
+      </div>
+
+    </form>
   </div>
 </template>
 

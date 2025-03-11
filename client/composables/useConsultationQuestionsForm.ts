@@ -9,23 +9,20 @@ import {
 } from "~/client/types/consultation/consultationQuestionsApiDTO";
 import { Ref } from "vue";
 
-// TODO : 
-// - questions conditionnelles
-// - utiliser le nextQuestionId !!!
-
 // - gestion des erreur d'envoi
 // - page après envoi
 
 export const useConsultationQuestionsForm = () => {
   const consultationQuestionApi = new ConsultationQuestionApi();
-  
+
   const consultationId = useRoute().params.id as string;
-  
+
   const questions: Ref<ConsultationQuestions | undefined> = ref();
   const currentIndexQuestion: Ref<number> = ref(1);
   const answersCheckbox = ref({});
   const answersText = ref({});
-  
+  const respondedQuestions: Ref<string[]> = ref([])
+
   const currentQuestion: Ref<Question | undefined> = computed(() => {
     return questions.value?.questions.find((question) => question.order === currentIndexQuestion.value);
   })
@@ -45,12 +42,20 @@ export const useConsultationQuestionsForm = () => {
     questions.value = ConsultationQuestions.fromApi(questionsApi);
   }
 
-  const nextQuestion = () => {
-    return currentIndexQuestion.value++
+  const nextQuestion = (nextQuestionId: string | undefined) => {
+    respondedQuestions.value.push(currentQuestion.value?.id!!)
+    if (nextQuestionId === undefined) {
+      currentIndexQuestion.value++
+      return
+    }
+
+    currentIndexQuestion.value = questions.value?.questions.find((question) => question.id === nextQuestionId)?.order!!
+    return
   }
 
   const previousQuestion = () => {
-    currentIndexQuestion.value--
+    const lastQuestion = respondedQuestions.value.pop()
+    currentIndexQuestion.value = questions.value?.questions.find((question) => question.id === lastQuestion!!)?.order!!
   }
 
   const submit = async () => {
@@ -64,7 +69,7 @@ export const useConsultationQuestionsForm = () => {
       answersCheckbox.value[currentQuestion.value!!.id] = [];
     }
   });
-  
+
   return {
     currentQuestion, initQuestions, questionCount, nextQuestion, hasPreviousQuestion,
     previousQuestion, consultationId, answersCheckbox, submit, hasNextQuestion, answersText
