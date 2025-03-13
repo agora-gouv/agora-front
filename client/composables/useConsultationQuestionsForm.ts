@@ -100,7 +100,7 @@ export class QuestionUniqueChoice {
     public popupDescription?: string
   ) {
   }
-
+  
   static fromApi(dto: QuestionUniqueChoiceApiDTO): QuestionUniqueChoice {
     return new QuestionUniqueChoice(
       dto.id,
