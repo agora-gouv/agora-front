@@ -1,32 +1,16 @@
 <script setup lang="ts">
 import type Link from '~/client/types/dsfr/link';
-import type Qag from '~/client/types/qag/qag';
-import { FetchError } from "ofetch";
-import { AsyncData } from "nuxt/app";
-import QuestionAuGouvernementContent from "~/client/types/content/questionAuGouvernementContent";
 import { DsfrTranscription } from "@gouvminint/vue-dsfr";
 
 definePageMeta({
   layout: 'basic'
 })
-const route = useRoute()
-const runtimeConfig = useRuntimeConfig()
 
+const qagId = useRoute().params.id.toString()
 
-const apiBaseUrl = runtimeConfig.public.apiBaseUrl
+const qag = await (new QagApi()).getQag(qagId)
 
-const qagId = route.params.id
-const routeQagUrl = `${apiBaseUrl}/api/public/qags/${qagId}`
-const {data: qag, error: qagError} = await useFetch(routeQagUrl) as AsyncData<Qag, FetchError>
-if (qagError.value) {
-  throw createError({statusCode: qagError.value!.statusCode})
-}
-
-const routeUrl = `${apiBaseUrl}/content/page-site-vitrine-question-au-gouvernement`
-const {data: content, error} = await useFetch(routeUrl) as AsyncData<QuestionAuGouvernementContent, FetchError>
-if (error.value) {
-  throw createError({statusCode: error.value!.statusCode})
-}
+const content = await (new PageContentApi()).getQuestionAuGouvernementContent()
 
 const sousTitreWithUsername = content.value.sousTitre.replace("{}", qag.value.username)
 const texteSoutienWithUsername = content.value.texteSoutien
