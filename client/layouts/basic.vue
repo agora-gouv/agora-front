@@ -16,6 +16,7 @@ const operatorImgStyleFooter: CSSProperties = {
   'max-height': '120px',
   'margin-left': '2rem'
 }
+const skipLinks = [{ text: 'Contenu principal', id: 'main' }]
 
 const mandatoryLinks: {label: string, to: string}[] = [{
   label: `Accessibilité: ${a11yCompliance}`,
@@ -78,6 +79,7 @@ if (error.value) {
 </script>
 
 <template>
+  <DsfrSkipLinks :links="skipLinks" />
   <DsfrHeader
     :logo-text="logoText"
     :operator-img-src="operatorImgSrc"
@@ -85,7 +87,7 @@ if (error.value) {
     :service-title="accueilContent.titreHeader"
     :service-description="accueilContent.sousTitreHeader"
   />
-  <main>
+  <main id="main">
     <div class="fr-container fr-mb-8w">
       <div class="fr-grid-row fr-grid-row--center">
         <div class="fr-col-10">
