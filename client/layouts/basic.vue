@@ -5,6 +5,8 @@ import { AsyncData } from "nuxt/app";
 import AccueilContent from "~/client/types/content/accueilContent";
 import { FetchError } from "ofetch";
 
+const runtimeConfig = useRuntimeConfig();
+
 const logoText = ['Gouvernement']
 const a11yCompliance = 'Partiellement conforme'
 const operatorImgSrc: string = '/logo_agora.svg'
@@ -49,6 +51,30 @@ const ecosystemLinks: {label: string, href: string}[] = [{
     label: 'data.gouv.fr',
 }]
 
+const menu = [
+  {
+    to: '/',
+    text: 'Accueil'
+  },
+  runtimeConfig.public.features.pedagogie === '1' && {
+    title: 'Comprendre la participation citoyenne ?',
+    links: [
+      { to: '/participation-citoyenne', text: 'Qu’est-ce que c’est ?' },
+      { to: '/participation-citoyenne#comment-ca-marche', text: 'Comment ça marche ?' },
+      { to: '/participation-citoyenne#engagements', text: 'Les engagements de l’État' },
+      { to: '/participation-citoyenne#acteurs', text: 'Les acteurs' },
+    ]
+  },
+  runtimeConfig.public.features.quags === '1' && {
+    to: '/quags',
+    text: 'Questions citoyennes',
+  },
+  runtimeConfig.public.features.consultations === '1' && {
+    to: '/consultations',
+    text: 'Consultations',
+  },
+].filter(element => element != undefined)
+
 const preferences = reactive({
   theme: '',
   scheme: '',
@@ -65,8 +91,6 @@ onMounted(() => {
 
   watchEffect(() => setScheme(preferences.scheme))
 })
-
-const runtimeConfig = useRuntimeConfig()
 
 const apiBaseUrl = runtimeConfig.public.apiBaseUrl
 const routeUrl = `${apiBaseUrl}/content/page-site-vitrine-accueil`
@@ -86,7 +110,13 @@ if (error.value) {
     :operator-img-style="operatorImgStyle"
     :service-title="accueilContent.titreHeader"
     :service-description="accueilContent.sousTitreHeader"
-  />
+  >
+    <template #mainnav>
+      <DsfrNavigation
+        :nav-items="menu"
+      />
+    </template>
+  </DsfrHeader>
   <main id="main">
     <div class="fr-container fr-mb-8w">
       <div class="fr-grid-row fr-grid-row--center">

@@ -11,6 +11,7 @@ import {
   DsfrSkipLinks,
   DsfrTile,
   DsfrTranscription,
+  DsfrNavigation,
   DsfrVideo,
 } from "@gouvminint/vue-dsfr";
 import { addIcons, OhVueIcon } from 'oh-vue-icons';
@@ -30,6 +31,7 @@ const icons = [
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrSkipLinks', DsfrSkipLinks);
   nuxtApp.vueApp.component('DsfrHeader', DsfrHeader);
+  nuxtApp.vueApp.component('DsfrNavigation', DsfrNavigation);
   nuxtApp.vueApp.component('DsfrFooter', DsfrFooter);
   nuxtApp.vueApp.component('DsfrBreadcrumb', DsfrBreadcrumb);
   nuxtApp.vueApp.component('DsfrVideo', DsfrVideo);
