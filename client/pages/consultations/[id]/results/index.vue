@@ -7,11 +7,6 @@ definePageMeta({
 const consultationId = useRoute().params.id.toString()
 const consultationResults = (await (new ConsultationApi().getConsultationResults(consultationId))).value
 
-// TODO :
-// - retourner les questions dans l'ordre
-// - trier les réponses par le + de vote
-// - design progress bar
-
 </script>
 
 <template>
