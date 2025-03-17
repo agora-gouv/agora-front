@@ -6,7 +6,6 @@ import ParticipationCharter from "~/client/types/participation_charter/participa
 import DeclarationAccessibiliteContent from "~/client/types/content/declarationAccessibiliteContent";
 import ConditionGeneralesContent from "~/client/types/content/conditionGeneralesContent";
 import QuestionAuGouvernementContent from "~/client/types/content/questionAuGouvernementContent";
-import ConsultationsContent from "~/client/types/content/consultationsContent";
 
 export class PageContentApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;
