@@ -28,12 +28,6 @@ const consultationResults = (await (new ConsultationApi().getConsultationResults
       /> {{ consultationResults.participantCount }} participants</p>
     </div>
 
-
-    <div class="question" v-for="consultationQuestion in consultationResults.resultsOpen" :key="consultationQuestion.questionId">
-      <h3>{{ consultationQuestion.questionTitle }}</h3>
-      <p>L’analyse des réponses à cette question sera disponible dans la synthèse</p>
-    </div>
-
     <div class="question" v-for="consultationQuestion in consultationResults.resultsUniqueChoice" :key="consultationQuestion.questionId">
       <h3>{{ consultationQuestion.questionTitle }}</h3>
 
@@ -44,6 +38,11 @@ const consultationResults = (await (new ConsultationApi().getConsultationResults
         </label>
         <progress :value="consultationResponse.ratio" max="100"></progress>
       </div>
+    </div>
+
+    <div class="question" v-for="consultationQuestion in consultationResults.resultsOpen" :key="consultationQuestion.questionId">
+      <h3>{{ consultationQuestion.questionTitle }}</h3>
+      <p>L’analyse des réponses à cette question sera disponible dans la synthèse</p>
     </div>
 
     <div class="question" v-for="consultationQuestion in consultationResults.resultsMultipleChoice" :key="consultationQuestion.questionId">
