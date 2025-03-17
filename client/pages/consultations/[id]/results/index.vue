@@ -27,28 +27,38 @@ const consultationResults = (await (new ConsultationApi().getConsultationResults
 
     <div>
       <h2>Réponses des participants</h2>
-      <p>{{ consultationResults.participantCount }} participants</p>
+      <p><VIcon
+        name="ri-group-line"
+        class="icon"
+      /> {{ consultationResults.participantCount }} participants</p>
     </div>
 
 
-    <div v-for="consultationQuestion in consultationResults.resultsOpen" :key="consultationQuestion.questionId">
-      <h2>{{ consultationQuestion.questionTitle }}</h2>
+    <div class="question" v-for="consultationQuestion in consultationResults.resultsOpen" :key="consultationQuestion.questionId">
+      <h3>{{ consultationQuestion.questionTitle }}</h3>
+      <p>L’analyse des réponses à cette question sera disponible dans la synthèse</p>
     </div>
 
-    <div v-for="consultationQuestion in consultationResults.resultsUniqueChoice" :key="consultationQuestion.questionId">
-      <h2>{{ consultationQuestion.questionTitle }}</h2>
+    <div class="question" v-for="consultationQuestion in consultationResults.resultsUniqueChoice" :key="consultationQuestion.questionId">
+      <h3>{{ consultationQuestion.questionTitle }}</h3>
 
-      <div v-for="consultationResponse in consultationQuestion.responses">
-        <label>{{ consultationResponse.label }}</label>
+      <div v-for="consultationResponse in consultationQuestion.responses" style="position: relative;">
+        <label class="progress-label">
+          <span class="ratio">{{ consultationResponse.ratio }} %</span>
+          {{ consultationResponse.label }}
+        </label>
         <progress :value="consultationResponse.ratio" max="100"></progress>
       </div>
     </div>
 
-    <div v-for="consultationQuestion in consultationResults.resultsMultipleChoice" :key="consultationQuestion.questionId">
-      <h2>{{ consultationQuestion.questionTitle }}</h2>
-
+    <div class="question" v-for="consultationQuestion in consultationResults.resultsMultipleChoice" :key="consultationQuestion.questionId">
+      <h3>{{ consultationQuestion.questionTitle }}</h3>
+      <p>Plusieurs réponses possibles</p>
       <div v-for="consultationResponse in consultationQuestion.responses">
-        <label>{{ consultationResponse.label }}</label>
+        <label class="progress-label">
+          <span class="ratio">{{ consultationResponse.ratio }} %</span>
+          {{ consultationResponse.label }}
+        </label>
         <progress :value="consultationResponse.ratio" max="100"></progress>
       </div>
     </div>
@@ -61,11 +71,59 @@ const consultationResults = (await (new ConsultationApi().getConsultationResults
   color: var(--blue-france-sun-113-625)
 }
 
+.question {
+  margin-top: 3em;
+}
+
 img {
   width: 80%;
 }
 
 a {
   color: var(--blue-france-sun-113-625)
+}
+
+progress {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+progress::-webkit-progress-bar {
+  background-color: white;
+  border-radius: 5px;
+  /*border: 2px solid #6A6AF4;*/
+  border: 1px solid #929292;
+}
+
+progress::-webkit-progress-value {
+  background-color: #ECECFE;
+  border-radius: 5px;
+}
+
+.progress-label {
+  position: absolute;
+  width: 100%;
+  margin-left: 4px;
+  text-align: left;
+  line-height: 40px;
+  color: #161616;
+  z-index: 1;
+  font-size: 14px;
+  
+  .ratio {
+    font-weight: bold;
+    margin-right: 4px;
+    margin-left: 8px;
+  }
+}
+
+h2 {
+  color: var(--blue-france-sun-113-625);
+}
+
+h3 {
+  font-size: 18px;
 }
 </style>
