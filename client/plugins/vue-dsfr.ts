@@ -1,6 +1,6 @@
 import { AgoraApple, AgoraGoogle } from '../assets/icons'
 import {
-  DsfrAccordion, 
+  DsfrAccordion,
   DsfrAlert,
   DsfrBadge,
   DsfrBreadcrumb,
@@ -13,13 +13,13 @@ import {
   DsfrVideo,
 } from "@gouvminint/vue-dsfr";
 import { addIcons, OhVueIcon } from 'oh-vue-icons';
-import {RiHeartLine, RiCalendar2Line, RiTimerLine, RiGroupLine, RiQuestionnaireLine, RiCheckLine, RiGroup2Line} from 'oh-vue-icons/icons';
+import { RiCalendar2Line, RiCheckLine, RiGroup2Line, RiGroupLine, RiHeartLine, RiQuestionnaireLine, RiTimerLine } from 'oh-vue-icons/icons';
 
 const icons = [
   AgoraApple,
   AgoraGoogle,
   RiHeartLine,
-  RiCalendar2Line, 
+  RiCalendar2Line,
   RiCheckLine,
   RiTimerLine,
   RiGroupLine,
