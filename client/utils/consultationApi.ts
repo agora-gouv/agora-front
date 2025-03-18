@@ -2,6 +2,7 @@ import { AsyncData } from "nuxt/app";
 import Consultation from "~/client/types/consultation/consultation";
 import { FetchError } from "ofetch";
 import { ConsultationResultsApiDTO } from "~/client/types/consultation/consultationResultsApiDTO";
+import ConsultationsListApiDTO from "~/client/types/consultation/consultationsList";
 
 export class ConsultationApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;
@@ -49,5 +50,20 @@ export class ConsultationApi {
     }
 
     return consultationResults
-  }  
+  }
+
+  async getAllConsultations() {
+    const routeConsultationResponsesUrl = `${this.baseUrl}/consultations`
+
+    const {
+      data: consultations,
+      error: errorConsultation
+    } = await useFetch(routeConsultationResponsesUrl) as AsyncData<ConsultationsListApiDTO, FetchError>
+
+    if (errorConsultation.value) {
+      throw createError({statusCode: errorConsultation.value!.statusCode})
+    }
+
+    return consultations
+  }
 }
