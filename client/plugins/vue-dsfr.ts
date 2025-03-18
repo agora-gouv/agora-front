@@ -15,7 +15,7 @@ import {
   DsfrVideo,
 } from "@gouvminint/vue-dsfr";
 import { addIcons, OhVueIcon } from 'oh-vue-icons';
-import {RiHeartLine, RiCalendar2Line, RiTimerLine, RiGroupLine, RiQuestionnaireLine, RiCheckLine} from 'oh-vue-icons/icons';
+import {RiHeartLine, RiCalendar2Line, RiTimerLine, RiGroupLine, RiQuestionnaireLine, RiCheckLine, RiGroup2Line} from 'oh-vue-icons/icons';
 
 const icons = [
   AgoraApple,
@@ -25,7 +25,8 @@ const icons = [
   RiCheckLine,
   RiTimerLine,
   RiGroupLine,
-  RiQuestionnaireLine
+  RiQuestionnaireLine,
+  RiGroup2Line
 ]
 
 export default defineNuxtPlugin((nuxtApp) => {
