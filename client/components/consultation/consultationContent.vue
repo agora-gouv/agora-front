@@ -37,25 +37,29 @@ const estSurLaPageLancement = props.consultation.goals != null
         <div v-if="consultation.questionsInfo" class="info-question fr-px-2w fr-py-1w">
           <div class="fr-mb-1w">
             <VIcon
-              name="ri-calendar-2-line"
+              icon="ri:calendar-2-line"
+              :inline="true"
             />
             Jusqu'au {{ new Date(consultation.questionsInfo.endDate).toLocaleDateString("fr-FR") }}
           </div>
           <div class="fr-mb-1w">
             <VIcon
-              name="ri-questionnaire-line"
+              icon="ri:questionnaire-line"
+              :inline="true"
             />
             {{ consultation.questionsInfo.questionCount }}
           </div>
           <div class="fr-mb-1w">
             <VIcon
-              name="ri-timer-line"
+              icon="ri:timer-line"
+              :inline="true"
             />
             {{ consultation.questionsInfo.estimatedTime }}
           </div>
           <div class="fr-mb-1w">
             <VIcon
-              name="ri-group-line"
+              icon="ri:group-line"
+              :inline="true"
             />
             <span class="fr-pl-1v" v-if="consultation.questionsInfo.participantCount == 0">Aucun participant</span>
             <span class="fr-pl-1v" v-else-if="consultation.questionsInfo.participantCount == 1">1 participant</span>

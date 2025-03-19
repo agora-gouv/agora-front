@@ -12,19 +12,19 @@ defineProps<{
   <div :class="{'current-update': currentUpdateId == update.updateId, 'last-update': update.status=='current', 'next-update' : update.status ==='incoming'}">
     <div class="step"></div>
     <VIcon
-      name="ri-check-line"
+      icon="ri:check-line"
       class="icon icon-fill"
       v-if="update.status==='done'"
     />
 
     <VIcon
-      name="ri-check-line"
+      icon="ri:check-line"
       class="icon"
       v-else-if="update.status==='current'"
     />
 
     <VIcon
-      name="ri-calendar-2-line"
+      icon="ri:calendar-2-line"
       class="icon"
       v-else-if="update.status==='incoming'"
     />

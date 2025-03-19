@@ -14,20 +14,12 @@ import {
   DsfrNavigation,
   DsfrVideo,
 } from "@gouvminint/vue-dsfr";
-import { addIcons, OhVueIcon } from 'oh-vue-icons';
-import { RiCalendar2Line, RiCheckLine, RiGroup2Line, RiGroupLine, RiHeartLine, RiQuestionnaireLine, RiTimerLine } from 'oh-vue-icons/icons';
+import { addIcon, Icon, listIcons } from '@iconify/vue';
 
-const icons = [
-  AgoraApple,
-  AgoraGoogle,
-  RiHeartLine,
-  RiCalendar2Line,
-  RiCheckLine,
-  RiTimerLine,
-  RiGroupLine,
-  RiQuestionnaireLine,
-  RiGroup2Line
-]
+const icons = {
+  'agora:apple': AgoraApple,
+  'agora:google': AgoraGoogle,
+}
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrSkipLinks', DsfrSkipLinks);
@@ -43,8 +35,9 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrTile', DsfrTile);
   nuxtApp.vueApp.component('DsfrBadge', DsfrBadge)
   nuxtApp.vueApp.component('DsfrAlert', DsfrAlert);
-
-
-  addIcons(...icons);
-  nuxtApp.vueApp.component('VIcon', OhVueIcon);
+  
+  Object.entries(icons).forEach(([name, icon]) => {
+    addIcon(name, icon)
+  })
+  nuxtApp.vueApp.component('VIcon', Icon);
 })

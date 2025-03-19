@@ -112,9 +112,7 @@ if (error.value) {
     :service-description="accueilContent.sousTitreHeader"
   >
     <template #mainnav>
-      <DsfrNavigation
-        :nav-items="menu"
-      />
+      <DsfrNavigation :nav-items="menu" />
     </template>
   </DsfrHeader>
   <main id="main">
