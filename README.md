@@ -8,7 +8,7 @@ Application de participation citoyenne
 
 ### Pré-requis
 
-Vous aurez besoin de [NodeJS](https://nodejs.org/) v18+ et [Yarn](https://yarnpkg.com/) pour lancer ce projet.
+Vous aurez besoin de [NodeJS](https://nodejs.org/) pour lancer ce projet.
 
 Nous vous recommandons de regarder la [documentation de Nuxt 3](https://v3.nuxtjs.org)
 et la [documentation de VueDsfr](https://vue-dsfr.netlify.app).
@@ -22,7 +22,7 @@ cp env.example .env
 ### Installation des dépendances
 
 ```bash
-yarn install
+npm clean-install
 ```
 
 ### Lancer nuxt en mode développement
@@ -30,7 +30,7 @@ yarn install
 Démarre le serveur sur http://localhost:3000
 
 ```bash
-yarn dev
+npm run dev
 ```
 
 ### Générer le code de production
@@ -38,7 +38,13 @@ yarn dev
 Génère le code de production de l’application:
 
 ```bash
-yarn build
+npm run build
+```
+
+Qui peut ensuite être servi en local avec
+
+```bash
+npm run start
 ```
 
 Regarder ensuite la [documentation de Nuxt concernant le déploiement](https://v3.nuxtjs.org/docs/deployment).
