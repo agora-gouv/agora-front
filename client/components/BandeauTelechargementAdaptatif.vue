@@ -43,6 +43,7 @@ onMounted(()=>{
               title="Télécharger sur l’AppStore - nouvelle fenêtre"
             >
               <VIcon
+                :ssr="true"
                 icon="agora:apple"
                 class="fr-mr-1w"
               />
@@ -65,6 +66,7 @@ onMounted(()=>{
               title="Télécharger sur GooglePlay - nouvelle fenêtre"
             >
               <VIcon
+                :ssr="true"
                 icon="agora:google"
                 class="fr-mr-1w"
               />

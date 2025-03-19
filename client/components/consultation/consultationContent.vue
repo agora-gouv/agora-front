@@ -39,11 +39,13 @@ const estSurLaPageLancement = props.consultation.goals != null
             <VIcon
               icon="ri:calendar-2-line"
               :inline="true"
+              :ssr="true"
             />
             Jusqu'au {{ new Date(consultation.questionsInfo.endDate).toLocaleDateString("fr-FR") }}
           </div>
           <div class="fr-mb-1w">
             <VIcon
+              :ssr="true"
               icon="ri:questionnaire-line"
               :inline="true"
             />
@@ -51,6 +53,7 @@ const estSurLaPageLancement = props.consultation.goals != null
           </div>
           <div class="fr-mb-1w">
             <VIcon
+              :ssr="true"
               icon="ri:timer-line"
               :inline="true"
             />
@@ -58,6 +61,7 @@ const estSurLaPageLancement = props.consultation.goals != null
           </div>
           <div class="fr-mb-1w">
             <VIcon
+              :ssr="true"
               icon="ri:group-line"
               :inline="true"
             />
