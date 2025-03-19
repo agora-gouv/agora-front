@@ -65,8 +65,8 @@ const menu = [
       { to: '/participation-citoyenne#acteurs', text: 'Les acteurs' },
     ]
   },
-  runtimeConfig.public.features.quags === '1' && {
-    to: '/quags',
+  runtimeConfig.public.features.qags === '1' && {
+    to: '/questions-citoyennes',
     text: 'Questions citoyennes',
   },
   runtimeConfig.public.features.consultations === '1' && {
