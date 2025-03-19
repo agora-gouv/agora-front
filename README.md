@@ -8,7 +8,7 @@ Application de participation citoyenne
 
 ### Pré-requis
 
-Vous aurez besoin de [NodeJS](https://nodejs.org/) pour lancer ce projet.
+Vous aurez besoin de [NodeJS](https://nodejs.org/) (la version requise est indiquée dans le fichier [package.json](./package.json)) pour lancer ce projet.
 
 Nous vous recommandons de regarder la [documentation de Nuxt 3](https://v3.nuxtjs.org)
 et la [documentation de VueDsfr](https://vue-dsfr.netlify.app).
