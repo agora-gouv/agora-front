@@ -66,7 +66,7 @@ const menu = [
     ]
   },
   runtimeConfig.public.features.qags === '1' && {
-    to: '/questions-citoyennes',
+    to: '/qags',
     text: 'Questions citoyennes',
   },
   runtimeConfig.public.features.consultations === '1' && {
