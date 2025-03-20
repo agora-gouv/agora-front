@@ -98,11 +98,11 @@ onMounted(()=>{
   position: relative;
   color: var(--blue-france-sun-113-625);
 
-  &:before {
+  &::before {
     content: "";
     position: absolute;
     width: 100vw;
-    height: calc(100%);
+    height: 100%;
     top: 0;
     left: 50%;
     -webkit-transform: translateX(-50%);
@@ -121,7 +121,7 @@ onMounted(()=>{
     width: 100%;
     justify-content: center;
 
-    &:after {
+    &::after {
       display: none;
     }
   }
