@@ -1,3 +1,5 @@
+import Thematique from "~/client/types/thematique/thematique";
+
 export default interface ConsultationsListApiDTO {
   ongoing: ConsultationOngoingApiDTO[],
   answered: ConsultationFinishedApiDTO[],
@@ -10,7 +12,7 @@ interface ConsultationOngoingApiDTO {
   title: string,
   coverUrl: string,
   endDate: string,
-  thematique: ConsultationThematiqueApiDTO,
+  thematique: Thematique,
   highlightLabel?: string,
   territory: string,
 }
@@ -20,14 +22,9 @@ interface ConsultationFinishedApiDTO {
   slug: string,
   title: string,
   coverUrl: string,
-  thematique: ConsultationThematiqueApiDTO,
+  thematique: Thematique,
   step: number,
   updateLabel?: string
   updateDate: string,
   territory: string,
-}
-
-interface ConsultationThematiqueApiDTO {
-  "label": string,
-  "picto": string,
 }
