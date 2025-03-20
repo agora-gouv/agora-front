@@ -23,7 +23,9 @@ const consultationResults = (await (new ConsultationApi().getConsultationResults
     <div>
       <h2>Réponses des participants</h2>
       <p><VIcon
-        name="ri-group-line"
+        :ssr="true"
+        :inline="true"
+        icon="ri:group-line"
         class="icon"
       /> {{ consultationResults.participantCount }} participants</p>
     </div>

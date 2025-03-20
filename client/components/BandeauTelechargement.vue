@@ -27,7 +27,7 @@ onMounted(()=>{
           <div v-if="!isMobileRef || platformRef == 'iOS'" class="fr-col-12 fr-col-lg-6">
             <a class="fr-btn fr-btn--secondary" href="https://apps.apple.com/app/6449599025" target="_blank"
                rel="noopener" title="Téléchargez sur l’AppStore - nouvelle fenêtre">
-              <VIcon name="agora-apple" class="fr-mr-1w" />
+              <VIcon icon="agora:apple" :ssr="true" class="fr-mr-1w" />
               Téléchargez sur l’AppStore
             </a>
             <div v-if="platformRef=='desktop'" class="qr-code fr-my-2w">
@@ -41,7 +41,7 @@ onMounted(()=>{
           <div v-if="!isMobileRef || platformRef == 'android'" class="fr-col-12 fr-col-lg-6">
             <a class="fr-btn fr-btn--secondary" href="https://play.google.com/store/apps/details?id=fr.gouv.agora"
                target="_blank" rel="noopener" title="Téléchargez sur GooglePlay - nouvelle fenêtre">
-              <VIcon name="agora-google" class="fr-mr-1w" />
+              <VIcon icon="agora:google" :ssr="true" class="fr-mr-1w" />
               Téléchargez sur GooglePlay
             </a>
             <div v-if="platformRef=='desktop'" class="qr-code fr-my-2w">
