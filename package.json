@@ -14,6 +14,7 @@
   "dependencies": {
     "@gouvfr/dsfr": "^1.11.2",
     "@gouvminint/vue-dsfr": "^8.3.0",
+    "@nuxtjs/robots": "^5.2.8",
     "@nuxtjs/sitemap": "^7.2.9",
     "jsdom": "^24.0.0",
     "nuxt": "^3.16.1",
@@ -24,7 +25,6 @@
   "devDependencies": {
     "@nuxt/types": "^2.17.3",
     "@nuxt/typescript-build": "^3.0.2",
-    "@nuxtjs/robots": "^3.0.0",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/user-event": "^14.5.2",
     "@testing-library/vue": "^8.0.3",
