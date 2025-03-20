@@ -36,6 +36,17 @@ const consultations = await (new ConsultationApi().getAllConsultations())
           </div>
         </div>
       </div>
+      <div class="fr-card__header">
+        <div class="fr-card__img">
+          <img class="fr-responsive-img" :src="consultation.coverUrl" alt=""/>
+
+          <ul class="fr-badges-group">
+            <li>
+              <p class="fr-badge fr-badge--green-emeraude">{{ consultation.thematique.picto }} {{ consultation.thematique.label }}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <h2>Consultations terminées</h2>
@@ -56,11 +67,11 @@ const consultations = await (new ConsultationApi().getAllConsultations())
           </div>
           <div class="fr-card__header">
             <div class="fr-card__img">
-              <img class="fr-responsive-img" :src="consultation.coverUrl" alt="" />
+              <img class="fr-responsive-img" :src="consultation.coverUrl" alt=""/>
             </div>
             <ul class="fr-badges-group">
               <li>
-                <p class="fr-badge fr-badge--green-emeraude">{{consultation.thematique.picto}} {{consultation.thematique.label}}</p>
+                <p class="fr-badge fr-badge--green-emeraude">{{ consultation.thematique.picto }} {{ consultation.thematique.label }}</p>
               </li>
             </ul>
           </div>
