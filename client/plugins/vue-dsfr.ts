@@ -14,7 +14,7 @@ import {
   DsfrNavigation,
   DsfrVideo,
 } from "@gouvminint/vue-dsfr";
-import { addIcon, Icon, listIcons } from '@iconify/vue';
+import { addIcon, Icon } from '@iconify/vue';
 
 const icons = {
   'agora:apple': AgoraApple,
