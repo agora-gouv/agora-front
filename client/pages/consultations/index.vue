@@ -13,6 +13,16 @@ const consultations = await (new ConsultationApi().getAllConsultations())
     <h2>Consultations en cours</h2>
     <div class="fr-card fr-enlarge-link fr-card--horizontal" v-for="consultation in consultations.ongoing" :key="consultation.id">
       <div class="fr-card__body">
+        <div class="fr-card__header">
+          <div class="fr-card__img">
+            <img class="fr-responsive-img" :src="consultation.coverUrl" alt="" />
+          </div>
+          <ul class="fr-badges-group">
+            <li>
+              <p class="fr-badge fr-badge--green-emeraude">{{consultation.thematique.picto}} {{consultation.thematique.label}}</p>
+            </li>
+          </ul>
+        </div>
         <div class="fr-card__content">
           <h3 class="fr-card__title">
             <a :href="consultation.slug">{{ consultation.title }}</a>
