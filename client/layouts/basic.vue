@@ -73,7 +73,7 @@ const menu = [
     to: '/consultations',
     text: 'Consultations',
   },
-].filter(element => element != undefined)
+].filter(element => Boolean(element))
 
 const preferences = reactive({
   theme: '',
