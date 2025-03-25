@@ -4,6 +4,7 @@
 * Send new values
 * Feature Flipper
 * Explication "De quoi s'agit-il ?" pour les catégories socio-pro
+* Explication "Pourquoi me demande-t-on cela ?" pour le fieldset de profil de voteur
 * */
 
 definePageMeta({
@@ -35,6 +36,13 @@ const categoriesJob = [
   {text: "Retraités", value: 'RE'},
   {text: "Autre / Sans activité professionnelle", value: 'AU'},
   {text: "Je ne sais pas", value: 'UN'}
+]
+
+const frequences = [
+  {label: "Sans réponse", value: ''},
+  {label: "Souvent", value: 'S'},
+  {label: "Parfois", value: 'P'},
+  {label: "Jamais", value: 'J'},
 ]
 </script>
 
@@ -82,5 +90,20 @@ const categoriesJob = [
     >
       <template #label>De quelle catégorie socio-professionnelle faites-vous partie ?</template>
     </DsfrSelect>
+    
+    <DsfrFieldset>
+      <!-- FIXME (GAFI 25-03-2025): Pas très explicite comme legend -->
+      <template #legend>Diriez-vous que...</template>
+      <template>
+        <DsfrRadioButtonSet
+          :modelValue="''"
+          inline
+          :options="frequences"
+          name="voteFrequency"
+        >
+          <template #legend>Je vote&hellip;</template>
+        </DsfrRadioButtonSet>
+      </template>
+    </DsfrFieldset>
   </form>
 </template>
