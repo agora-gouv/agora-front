@@ -11,34 +11,19 @@ const consultations = await (new ConsultationApi().getAllConsultations())
 <template>
   <div class="fr-mb-2w fr-mt-6w">
     <h2>Consultations en cours</h2>
-    <div class="fr-card fr-enlarge-link fr-card--horizontal" v-for="consultation in consultations.ongoing" :key="consultation.id">
-      <div class="fr-card__body">
-        <div class="fr-card__content">
-          <h3 class="fr-card__title">
-            <a :href="`consultations/${consultation.slug}`">{{ consultation.title }}</a>
-          </h3>
-          <div class="fr-card__start">
-            <ul class="fr-tags-group">
-              <li>
-                <p class="fr-tag">En cours</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="fr-card__header">
-        <div class="fr-card__img">
-          <img class="fr-responsive-img" :src="consultation.coverUrl" alt=""/>
 
-          <ul class="fr-badges-group">
-            <li>
-              <p class="fr-badge fr-badge--green-emeraude">{{ consultation.thematique.picto }} {{ consultation.thematique.label }}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
+    <DsfrCard
+      :img-src="consultation.coverUrl"
+      :link="consultation.slug"
+      :title="consultation.title"
+      :badges="[{label: consultation.thematique.picto + consultation.thematique.label, type: 'new'}]"
+      description=""
+      :end-detail="'se termine le ' + consultation.endDate.substring(0, 10)"
+      alt-img=""
+      horizontal
+      v-for="consultation in consultations.ongoing" :key="consultation.id"
+    />
+    
     <h2>Consultations terminées</h2>
     <div class="fr-grid-row">
       <div class="fr-col fr-col-sm-6 fr-col-md-4 fr-mb-2w" v-for="consultation in consultations.finished" :key="consultation.id">
@@ -61,7 +46,7 @@ const consultations = await (new ConsultationApi().getAllConsultations())
             </div>
             <ul class="fr-badges-group">
               <li>
-                <p class="fr-badge fr-badge--green-emeraude">{{ consultation.thematique.picto }} {{ consultation.thematique.label }}</p>
+                <p class="fr-badge">{{ consultation.thematique.picto }} {{ consultation.thematique.label }}</p>
               </li>
             </ul>
           </div>
@@ -88,6 +73,10 @@ const consultations = await (new ConsultationApi().getAllConsultations())
 .fr-card .fr-card__body .fr-card__content {
   margin: 0;
   padding-bottom: 0;
+}
+
+.fr-card__detail {
+  font-size: 14px;
 }
 
 h1, h2 {
