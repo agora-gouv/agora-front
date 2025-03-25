@@ -21,9 +21,21 @@ const genres = [
   <h1>Mes informations</h1>
   <form action="/profile" method="POST">
     <DsfrSelect
+      name="gender"
       :options="genres"
     >
       <template #label>Vous êtes...</template>
     </DsfrSelect>
+
+    <DsfrInput
+      name="yearOfBirth"
+      labelVisible
+      type="number"
+      min="1000"
+      max="9999"
+      placeholder="YYYY"
+    >
+      <template #label>Quelle est votre année de naissance ?</template>
+    </DsfrInput>
   </form>
 </template>
