@@ -2,6 +2,7 @@
 /* TODO : 
 * Get default values
 * Send new values
+* Feature Flipper
 * */
 
 definePageMeta({
@@ -31,11 +32,21 @@ const genres = [
       name="yearOfBirth"
       labelVisible
       type="number"
-      min="1000"
+      min="1900"
       max="9999"
       placeholder="YYYY"
     >
       <template #label>Quelle est votre année de naissance ?</template>
+    </DsfrInput>
+
+    <DsfrInput
+      name="department"
+      labelVisible
+      type="text"
+      placeholder="75"
+      hint="Indiquez le numéro de département. Exemple : 75"
+    >
+      <template #label>Dans quel département ou collectivité d'outre-mer vivez-vous ?</template>
     </DsfrInput>
   </form>
 </template>
