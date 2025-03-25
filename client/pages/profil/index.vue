@@ -3,6 +3,7 @@
 * Get default values
 * Send new values
 * Feature Flipper
+* Explication "De quoi s'agit-il ?" pour les catégories socio-pro
 * */
 
 definePageMeta({
@@ -23,6 +24,18 @@ const typesVilles = [
   {text: "Autre / Je ne sais pas", value: 'A'},
 ]
 
+const categoriesJob = [
+  {text: "Agriculteurs", value: 'AG'},
+  {text: "Artisans, commerçants, chefs d'entreprise", value: 'AR'},
+  {text: "Cadres", value: 'CA'},
+  {text: "Professions intermédiaires", value: 'PI'},
+  {text: "Employés", value: 'EM'},
+  {text: "Ouvriers", value: 'OU'},
+  {text: "Étudiants", value: 'ET'},
+  {text: "Retraités", value: 'RE'},
+  {text: "Autre / Sans activité professionnelle", value: 'AU'},
+  {text: "Je ne sais pas", value: 'UN'}
+]
 </script>
 
 <template>
@@ -61,6 +74,13 @@ const typesVilles = [
       :options="typesVilles"
     >
       <template #label>Vous habitez plutôt&hellip;</template>
+    </DsfrSelect>
+
+    <DsfrSelect
+      name="jobCategory"
+      :options="categoriesJob"
+    >
+      <template #label>De quelle catégorie socio-professionnelle faites-vous partie ?</template>
     </DsfrSelect>
   </form>
 </template>
