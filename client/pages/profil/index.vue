@@ -16,6 +16,13 @@ const genres = [
   {text: "Autre", value: 'A'}
 ]
 
+const typesVilles = [
+  {text: "Non renseigné", value: ''},
+  {text: "En milieu rural", value: 'R'},
+  {text: "En milieu urbain", value: 'U'},
+  {text: "Autre / Je ne sais pas", value: 'A'},
+]
+
 </script>
 
 <template>
@@ -25,7 +32,7 @@ const genres = [
       name="gender"
       :options="genres"
     >
-      <template #label>Vous êtes...</template>
+      <template #label>Vous êtes&hellip;</template>
     </DsfrSelect>
 
     <DsfrInput
@@ -48,5 +55,12 @@ const genres = [
     >
       <template #label>Dans quel département ou collectivité d'outre-mer vivez-vous ?</template>
     </DsfrInput>
+
+    <DsfrSelect
+      name="cityType"
+      :options="typesVilles"
+    >
+      <template #label>Vous habitez plutôt&hellip;</template>
+    </DsfrSelect>
   </form>
 </template>
