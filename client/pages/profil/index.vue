@@ -113,6 +113,16 @@ const frequences = [
           <template #legend>Je m'engage sur le terrain&hellip;</template>
           <template #hint>Exemples : faire partie d'une association, manifester, participer à des débats publics ou aux conseils municipaux de ma ville, etc.</template>
         </DsfrRadioButtonSet>
+
+        <DsfrRadioButtonSet
+          :modelValue="''"
+          inline
+          :options="frequences"
+          name="consultationFrequency"
+        >
+          <template #legend>Je m'engage en ligne&hellip;</template>
+          <template #hint>Exemples : donner mon avis via des consultations en ligne, signer une pétition, défendre des causes sur les réseaux sociaux, etc.</template>
+        </DsfrRadioButtonSet>
       </template>
     </DsfrFieldset>
   </form>
