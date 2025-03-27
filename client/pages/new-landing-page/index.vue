@@ -138,13 +138,21 @@ useHead({
   </main>
 </template>
 
-<style>
+<style scoped>
 main {
   border-left: 1px solid var(--grey-925-125);
 }
 
 img {
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
+}
+
+p:has(+ul) {
+  margin-bottom : 0;
+}
+
+ul {
+  margin-bottom: 3rem;
 }
 
 h2 {
