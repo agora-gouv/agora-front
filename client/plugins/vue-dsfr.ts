@@ -9,10 +9,10 @@ import {
   DsfrFooter,
   DsfrHeader,
   DsfrModal,
+  DsfrNavigation,
   DsfrSkipLinks,
   DsfrTile,
   DsfrTranscription,
-  DsfrNavigation,
   DsfrVideo,
 } from "@gouvminint/vue-dsfr";
 import { addIcon, Icon } from '@iconify/vue';
@@ -37,7 +37,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrTile', DsfrTile);
   nuxtApp.vueApp.component('DsfrBadge', DsfrBadge)
   nuxtApp.vueApp.component('DsfrAlert', DsfrAlert);
-  
+
   Object.entries(icons).forEach(([name, icon]) => {
     addIcon(name, icon)
   })
