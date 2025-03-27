@@ -5,13 +5,14 @@ import {
   DsfrBadge,
   DsfrBreadcrumb,
   DsfrButton,
+  DsfrCard,
   DsfrFooter,
   DsfrHeader,
   DsfrModal,
+  DsfrNavigation,
   DsfrSkipLinks,
   DsfrTile,
   DsfrTranscription,
-  DsfrNavigation,
   DsfrVideo,
 } from "@gouvminint/vue-dsfr";
 import { addIcon, Icon } from '@iconify/vue';
@@ -26,6 +27,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrHeader', DsfrHeader);
   nuxtApp.vueApp.component('DsfrNavigation', DsfrNavigation);
   nuxtApp.vueApp.component('DsfrFooter', DsfrFooter);
+  nuxtApp.vueApp.component('DsfrCard', DsfrCard);
   nuxtApp.vueApp.component('DsfrBreadcrumb', DsfrBreadcrumb);
   nuxtApp.vueApp.component('DsfrVideo', DsfrVideo);
   nuxtApp.vueApp.component('DsfrModal', DsfrModal);
@@ -35,7 +37,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrTile', DsfrTile);
   nuxtApp.vueApp.component('DsfrBadge', DsfrBadge)
   nuxtApp.vueApp.component('DsfrAlert', DsfrAlert);
-  
+
   Object.entries(icons).forEach(([name, icon]) => {
     addIcon(name, icon)
   })
