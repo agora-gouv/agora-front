@@ -1,7 +1,6 @@
 <script setup lang="ts">
 /* TODO : 
 * Get default values
-* Send new values
 * Feature Flipper
 * Explication "De quoi s'agit-il ?" pour les catégories socio-pro
 * Explication "Pourquoi me demande-t-on cela ?" pour le fieldset de profil de voteur
@@ -11,10 +10,26 @@ definePageMeta({
   layout: 'basic'
 })
 
+
+async function submit(event) {
+  const {jwtToken} = await useAuthentication()
+  const formData = new FormData(event.currentTarget)
+  await new ProfilApi().editProfil({
+      "gender": formData.get('gender'),
+      "yearOfBirth": Number(formData.get('yearOfBirth')),
+      "department": formData.get('department'),
+      "cityType": formData.get('cityType'),
+      "jobCategory": formData.get('jobCategory'),
+      "voteFrequency": formData.get('voteFrequency'),
+      "publicMeetingFrequency": formData.get('publicMeetingFrequency'),
+      "consultationFrequency": formData.get('consultationFrequency'),
+    }, jwtToken)
+}
+
 const genres = [
   {text: "Non renseigné", value: ''},
-  {text: "Une femme", value: 'M'},
-  {text: "Un homme", value: 'F'},
+  {text: "Une femme", value: 'F'},
+  {text: "Un homme", value: 'M'},
   {text: "Autre", value: 'A'}
 ]
 
@@ -48,7 +63,7 @@ const frequences = [
 
 <template>
   <h1>Mes informations</h1>
-  <form action="/profile" method="POST">
+  <form @submit.prevent="submit">
     <DsfrSelect
       name="gender"
       :options="genres"
@@ -90,7 +105,7 @@ const frequences = [
     >
       <template #label>De quelle catégorie socio-professionnelle faites-vous partie ?</template>
     </DsfrSelect>
-    
+
     <DsfrFieldset>
       <!-- FIXME (GAFI 25-03-2025): Pas très explicite comme legend -->
       <template #legend>Diriez-vous que...</template>
@@ -111,7 +126,9 @@ const frequences = [
           name="publicMeetingFrequency"
         >
           <template #legend>Je m'engage sur le terrain&hellip;</template>
-          <template #hint>Exemples : faire partie d'une association, manifester, participer à des débats publics ou aux conseils municipaux de ma ville, etc.</template>
+          <template #hint>Exemples : faire partie d'une association, manifester, participer à des débats publics ou aux conseils municipaux
+            de ma ville, etc.
+          </template>
         </DsfrRadioButtonSet>
 
         <DsfrRadioButtonSet
@@ -121,9 +138,12 @@ const frequences = [
           name="consultationFrequency"
         >
           <template #legend>Je m'engage en ligne&hellip;</template>
-          <template #hint>Exemples : donner mon avis via des consultations en ligne, signer une pétition, défendre des causes sur les réseaux sociaux, etc.</template>
+          <template #hint>Exemples : donner mon avis via des consultations en ligne, signer une pétition, défendre des causes sur les
+            réseaux sociaux, etc.
+          </template>
         </DsfrRadioButtonSet>
       </template>
     </DsfrFieldset>
+    <DsfrButton label="Enregistrer"/>
   </form>
 </template>
