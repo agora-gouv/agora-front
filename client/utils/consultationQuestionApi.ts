@@ -31,7 +31,7 @@ export class ConsultationQuestionApi {
         responseText: answersText[questionId] ? answersText[questionId] : ""
       }
     })
-    
+
     const consultationAnswersApiDTO: ConsultationAnswersApiDTO = {
       consultationId: consultationId,
       responses: dtoAnswers

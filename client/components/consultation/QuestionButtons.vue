@@ -1,23 +1,21 @@
 <script setup lang="ts">
-
 defineProps<{
   hasPreviousQuestion: boolean
   hasNextQuestion: boolean
-  nextQuestionId: string
+  nextQuestionId: string | undefined
   
-  nextQuestion: (nextQuestionId: string) => void
+  nextQuestion: (nextQuestionId: string | undefined) => void
   previousQuestion: () => void
-  submit: () => void
 }>()
 </script>
 
 <template>
   <div class="fr-mt-3w">
-    <DsfrButton v-if="hasPreviousQuestion" class="fr-btn fr-btn--secondary fr-mr-4w" @click="previousQuestion()">Question
+    <DsfrButton type="button" v-if="hasPreviousQuestion" class="fr-btn fr-btn--secondary fr-mr-4w" @click="previousQuestion()">Question
       précédente
     </DsfrButton>
-    <DsfrButton v-if="hasNextQuestion" class="fr-btn fr-mr-4w" @click="nextQuestion(nextQuestionId)">Question suivante</DsfrButton>
-    <DsfrButton v-if="!hasNextQuestion" class="fr-btn fr-mr-4w" @click="submit()">Envoyer</DsfrButton>
+    <DsfrButton type="button" v-if="hasNextQuestion" class="fr-btn fr-mr-4w" @click="nextQuestion(nextQuestionId)">Question suivante</DsfrButton>
+    <DsfrButton v-if="!hasNextQuestion" class="fr-btn fr-mr-4w">Envoyer</DsfrButton>
   </div>
 </template>
 
