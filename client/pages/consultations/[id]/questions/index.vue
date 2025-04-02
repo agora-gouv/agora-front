@@ -23,29 +23,29 @@ const isMaximumChoices = computed(() => {
 })
 
 const expandedSectionId = ref("")
-
 </script>
 
 <template>
   <div class="fr-col-offset-1 fr-col-10 fr-pt-3w">
-    <a :href="`/consultations/${consultationId}`">Retour à la consultation</a>
-    
+    <a id="top" :href="`/consultations/${consultationId}`">Retour à la consultation</a>
+
     <div v-if="errorMessage" class="fr-alert fr-alert--error fr-mt-2w">
       <h6 class="fr-alert__title">{{ errorMessage }}</h6>
     </div>
-    
+
     <Stepper :title="`Question ${currentQuestion?.order}`" :current-step="currentQuestion!!.order" :total-steps="questionCount!!"/>
 
     <h3 class="question-title">{{ currentQuestion?.title }}</h3>
 
-    <DsfrAccordion v-if="currentQuestion?.popupDescription" title="Plus de précision" 
-                   :expanded-id="expandedSectionId" @expand="id => expandedSectionId = id">
-      <h5>Contenu</h5>
-      <div v-html="currentQuestion?.popupDescription"/>
-    </DsfrAccordion>
+    <DsfrAccordionsGroup>
+      <DsfrAccordion v-if="currentQuestion?.popupDescription" title="Plus de précision"
+                     :expanded-id="expandedSectionId" @expand="id => expandedSectionId = id">
+        <h5>Contenu</h5>
+        <div v-html="currentQuestion?.popupDescription"/>
+      </DsfrAccordion>
+    </DsfrAccordionsGroup>
 
     <form @submit.prevent="submit">
-
       <div v-if="currentQuestion instanceof QuestionUniqueChoice">
         <fieldset class="fr-fieldset" id="radio-hint" aria-labelledby="radio-hint-legend radio-hint-messages">
           <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id="radio-hint-legend">
@@ -58,19 +58,19 @@ const expandedSectionId = ref("")
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
               </label>
-              <input maxlength="200" v-if="choice.hasOpenTextField && isTextChoiceChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]" class="fr-input"/>
+              <input maxlength="200" v-if="choice.hasOpenTextField && isTextChoiceChecked(choice.id)" type="text"
+                     v-model="answersText[currentQuestion.id]" class="fr-input"/>
             </div>
           </div>
           <div class="fr-messages-group" id="radio-hint-messages" aria-live="assertive">
           </div>
         </fieldset>
         <ConsultationQuestionButtons
-          :hasPreviousQuestion = "hasPreviousQuestion.valueOf()"
-          :hasNextQuestion = "hasNextQuestion.valueOf()"
-          :nextQuestionId = "currentQuestion.nextQuestionId!!"
-          :nextQuestion = "nextQuestion"
-          :previousQuestion = "previousQuestion"
-          :submit = "submit"
+          :hasPreviousQuestion="hasPreviousQuestion.valueOf()"
+          :hasNextQuestion="hasNextQuestion.valueOf()"
+          :nextQuestionId="currentQuestion.nextQuestionId"
+          :nextQuestion="nextQuestion"
+          :previousQuestion="previousQuestion"
         />
       </div>
 
@@ -83,7 +83,8 @@ const expandedSectionId = ref("")
           <div class="fr-fieldset__element" v-for="choice in currentQuestion.possibleChoices">
             <div class="fr-checkbox-group">
               <input :id="choice.id" type="checkbox" :value="choice.id" v-model="answersCheckbox[currentQuestion.id]"
-                     aria-describedby="checkboxes-1-messages" :disabled="isMaximumChoices && !answersCheckbox[currentQuestion.id!!].includes(choice.id)">
+                     aria-describedby="checkboxes-1-messages"
+                     :disabled="isMaximumChoices && !answersCheckbox[currentQuestion.id!!].includes(choice.id)">
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
               </label>
@@ -97,12 +98,11 @@ const expandedSectionId = ref("")
           </div>
         </fieldset>
         <ConsultationQuestionButtons
-          :hasPreviousQuestion = "hasPreviousQuestion.valueOf()"
-          :hasNextQuestion = "hasNextQuestion.valueOf()"
-          :nextQuestionId = "currentQuestion.nextQuestionId!!"
-          :nextQuestion = "nextQuestion"
-          :previousQuestion = "previousQuestion"
-          :submit = "submit"
+          :hasPreviousQuestion="hasPreviousQuestion.valueOf()"
+          :hasNextQuestion="hasNextQuestion.valueOf()"
+          :nextQuestionId="currentQuestion.nextQuestionId"
+          :nextQuestion="nextQuestion"
+          :previousQuestion="previousQuestion"
         />
       </div>
 
@@ -115,12 +115,11 @@ const expandedSectionId = ref("")
                     v-model="answersText[currentQuestion.id]"></textarea>
         </div>
         <ConsultationQuestionButtons
-          :hasPreviousQuestion = "hasPreviousQuestion.valueOf()"
-          :hasNextQuestion = "hasNextQuestion.valueOf()"
-          :nextQuestionId = "currentQuestion.nextQuestionId!!"
-          :nextQuestion = "nextQuestion"
-          :previousQuestion = "previousQuestion"
-          :submit = "submit"
+          :hasPreviousQuestion="hasPreviousQuestion.valueOf()"
+          :hasNextQuestion="hasNextQuestion.valueOf()"
+          :nextQuestionId="currentQuestion.nextQuestionId"
+          :nextQuestion="nextQuestion"
+          :previousQuestion="previousQuestion"
         />
       </div>
 
@@ -136,19 +135,19 @@ const expandedSectionId = ref("")
               <label class="fr-label" :for="choice.id">
                 {{ choice.label }}
               </label>
-              <input v-if="choice.hasOpenTextField && isTextChoiceChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]"  maxlength="200" class="fr-input"/>
+              <input v-if="choice.hasOpenTextField && isTextChoiceChecked(choice.id)" type="text" v-model="answersText[currentQuestion.id]"
+                     maxlength="200" class="fr-input"/>
             </div>
           </div>
           <div class="fr-messages-group" id="radio-hint-messages" aria-live="assertive">
           </div>
         </fieldset>
         <ConsultationQuestionButtons
-          :hasPreviousQuestion = "hasPreviousQuestion.valueOf()"
-          :hasNextQuestion = "hasNextQuestion.valueOf()"
-          :nextQuestionId = "currentQuestion.possibleChoices.find((choice) => choice.id == answersCheckbox[currentQuestion!!.id])?.nextQuestionId!!"
-          :nextQuestion = "nextQuestion"
-          :previousQuestion = "previousQuestion"
-          :submit = "submit"
+          :hasPreviousQuestion="hasPreviousQuestion.valueOf()"
+          :hasNextQuestion="hasNextQuestion.valueOf()"
+          :nextQuestionId="currentQuestion.possibleChoices.find((choice) => choice.id == answersCheckbox[currentQuestion!!.id])?.nextQuestionId!!"
+          :nextQuestion="nextQuestion"
+          :previousQuestion="previousQuestion"
         />
       </div>
 
@@ -156,15 +155,15 @@ const expandedSectionId = ref("")
         <div v-html="currentQuestion.description"></div>
         <img class="fr-my-3w" v-if="currentQuestion.imageUrl" :src="currentQuestion.imageUrl" alt="">
 
-        <DsfrTranscription v-if="currentQuestion.imageTranscription" @click.prevent title="Transcription" :content="currentQuestion.imageTranscription"/>
-        
+        <DsfrTranscription v-if="currentQuestion.imageTranscription" @click.prevent title="Transcription"
+                           :content="currentQuestion.imageTranscription"/>
+
         <ConsultationQuestionButtons
-          :hasPreviousQuestion = "hasPreviousQuestion.valueOf()"
-          :hasNextQuestion = "hasNextQuestion.valueOf()"
-          :nextQuestionId = "currentQuestion.nextQuestionId!!"
-          :nextQuestion = "nextQuestion"
-          :previousQuestion = "previousQuestion"
-          :submit = "submit"
+          :hasPreviousQuestion="hasPreviousQuestion.valueOf()"
+          :hasNextQuestion="hasNextQuestion.valueOf()"
+          :nextQuestionId="currentQuestion.nextQuestionId"
+          :nextQuestion="nextQuestion"
+          :previousQuestion="previousQuestion"
         />
       </div>
 
