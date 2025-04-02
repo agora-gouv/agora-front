@@ -27,7 +27,7 @@ const expandedSectionId = ref("")
 
 <template>
   <div class="fr-col-offset-1 fr-col-10 fr-pt-3w">
-    <a :href="`/consultations/${consultationId}`">Retour à la consultation</a>
+    <a id="top" :href="`/consultations/${consultationId}`">Retour à la consultation</a>
 
     <div v-if="errorMessage" class="fr-alert fr-alert--error fr-mt-2w">
       <h6 class="fr-alert__title">{{ errorMessage }}</h6>
