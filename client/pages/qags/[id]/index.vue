@@ -52,13 +52,7 @@ const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Questions citoyennes'
         Par <b>{{ qag.response.author }}</b>, le {{ new Date(qag.response.responseDate).toLocaleDateString("fr-FR") }}
         <p class="fr-text--xs"> {{ qag.response.authorDescription }}</p>
 
-        <DsfrVideo
-          v-if="qag.response.videoHeight > qag.response.videoWidth"
-          :src="qag.response.videoUrl"
-          :transcription-content="qag.response.transcription"
-        />
-
-        <div v-else>
+        <div>
           <video controls height="100%" class="fr-responsive-id fr-responsive-vid__player fr-content-media">
             <source :src=qag.response.videoUrl type="video/mp4"/>
           </video>
@@ -106,5 +100,11 @@ const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Questions citoyennes'
 
 .question-text {
   color: var(--blue-france-sun-113-625)
+}
+
+div video:not([href])[controls] {
+  cursor: auto;
+  max-height: 70vh;
+  background-color: rgb(0, 0, 0);
 }
 </style>

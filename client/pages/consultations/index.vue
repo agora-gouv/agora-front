@@ -6,6 +6,9 @@ useHead({
   title: 'Consultations - Agora',
 })
 
+const runtimeConfig = useRuntimeConfig()
+const domainUrl = runtimeConfig.public.domainName
+
 const consultations = await (new ConsultationApi().getAllConsultations())
 </script>
 <template>
@@ -14,7 +17,7 @@ const consultations = await (new ConsultationApi().getAllConsultations())
 
     <DsfrCard
       :img-src="consultation.coverUrl"
-      :link="consultation.slug"
+      :link="`${domainUrl}/consultations/${consultation.slug}`"
       :title="consultation.title"
       :badges="[{label: consultation.thematique.picto + consultation.thematique.label, type: 'new'}]"
       description=""
@@ -30,7 +33,7 @@ const consultations = await (new ConsultationApi().getAllConsultations())
       <div class="fr-col fr-col-sm-6 fr-col-md-4 fr-mb-2w" v-for="consultation in consultations.finished" :key="consultation.id">
         <DsfrCard
           :img-src="consultation.coverUrl"
-          :link="consultation.slug"
+          :link="`${domainUrl}/consultations/${consultation.slug}`"
           :title="consultation.title"
           :badges="[{label: consultation.thematique.picto + consultation.thematique.label, type: 'info'}]"
           description=""

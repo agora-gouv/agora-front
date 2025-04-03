@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 definePageMeta({
-  layout: 'basic'
+  layout: 'basic',
 })
 
 const {
@@ -12,7 +12,11 @@ const {
 await initQuestions()
 
 const isTextChoiceChecked = (choiceId) => {
-  return answersCheckbox.value[currentQuestion.value!!.id].includes(choiceId);
+  if (currentQuestion?.value?.id == null || answersCheckbox.value[currentQuestion.value!!.id] == null) {
+    return false
+  }
+  
+  answersCheckbox.value[currentQuestion.value!!.id].includes(choiceId);
 }
 
 const isMaximumChoices = computed(() => {

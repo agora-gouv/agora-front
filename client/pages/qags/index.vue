@@ -7,6 +7,9 @@ useHead({
   title: 'Réponses des Questions au Gouvernement - Agora',
 })
 
+const runtimeConfig = useRuntimeConfig()
+const domainUrl = runtimeConfig.public.domainName
+
 const qags = (await (new QagApi().getQags(1))).value.responses
 </script>
 <template>
@@ -17,7 +20,7 @@ const qags = (await (new QagApi().getQags(1))).value.responses
           <div class="fr-card__body">
             <div class="fr-card__content">
               <h3 class="fr-card__title">
-                <a :href="`qags/${qag.qagId}`">{{ qag.title }}</a>
+                <a :href="`${domainUrl}/qags/${qag.qagId}`">{{ qag.title }}</a>
               </h3>
               <div class="fr-card__start">
                 <img :src="qag.authorPortraitUrl" alt="Portrait de l'auteur" class="fr-card__portrait">
