@@ -39,9 +39,8 @@ defineProps<{
     <div class="content-date">
       {{ update.date ? new Date(update.date).toLocaleDateString("fr-FR") : 'Prochainement'}}
     </div>
-    <a :href="`/consultations/${consultationSlug}/updates/${update.slug ?? update.updateId}`"  class="fr-mt-1w action">
-      {{ update.actionText}}    
-    </a>
+
+    <NuxtLink :to="`/consultations/${consultationSlug}/updates/${update.slug ?? update.updateId}`" class="fr-mt-1w action">{{ update.actionText}}</NuxtLink>
   </div>
     
   </div>

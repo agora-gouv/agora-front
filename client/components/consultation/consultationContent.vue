@@ -102,9 +102,9 @@ const estSurLaPageLancement = props.consultation.goals != null
   <ConsultationSections :sections="consultation.body.headerSections"/>
   <ConsultationSections :sections="consultation.body.sections"/>
 
-  <a :href="'/consultations/' + consultation.id + '/questions'" v-if="estEnCours" class="fr-mb-4w fr-btn">
+  <NuxtLink :to="'/consultations/' + consultation.id + '/questions'" v-if="estEnCours" class="fr-mb-4w fr-btn">
     Répondre à la consultation
-  </a>
+  </NuxtLink>
 
   <DsfrTile
     v-if="consultation.downloadAnalysisUrl"
