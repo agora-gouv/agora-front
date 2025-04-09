@@ -63,81 +63,81 @@ const maxYear = new Date().getFullYear()
       <template #label>Vous êtes&hellip;</template>
     </DsfrSelect>
 
-        <DsfrInput
-          name="yearOfBirth"
-          labelVisible
-          type="number"
-          min="1900"
-          :max="maxYear"
-          placeholder="YYYY"
-          :model-value="profil?.yearOfBirth"
-        >
-          <template #label>Quelle est votre année de naissance ?</template>
-        </DsfrInput>
-    
-        <DsfrInput
-          name="department"
-          labelVisible
-          type="text"
-          placeholder="75"
-          hint="Indiquez le numéro de département. Exemple : 75"
-          :model-value="profil?.department"
-        >
-          <template #label>Dans quel département ou collectivité d'outre-mer vivez-vous ?</template>
-        </DsfrInput>
+    <DsfrInputGroup
+      name="yearOfBirth"
+      labelVisible
+      type="number"
+      min="1900"
+      :max="maxYear"
+      placeholder="YYYY"
+      label="Quelle est votre année de naissance ?"
+      :model-value="profil?.yearOfBirth"
+    >
+    </DsfrInputGroup>
 
-        <DsfrSelect
-          name="cityType"
-          :options="typesVilles"
-          :model-value="profil?.cityType"
-        >
-          <template #label>Vous habitez plutôt&hellip;</template>
-        </DsfrSelect>
+    <DsfrInputGroup
+      name="department"
+      labelVisible
+      type="text"
+      placeholder="75"
+      label="Dans quel département ou collectivité d'outre-mer vivez-vous ?"
+      hint="Indiquez le numéro de département. Exemple : 75"
+      :model-value="profil?.department"
+    >
+    </DsfrInputGroup>
 
-        <DsfrSelect
-          name="jobCategory"
-          :options="categoriesJob"
-          :model-value="profil?.jobCategory"
-        >
-          <template #label>De quelle catégorie socio-professionnelle faites-vous partie ?</template>
-        </DsfrSelect>
+    <DsfrSelect
+      name="cityType"
+      :options="typesVilles"
+      :model-value="profil?.cityType"
+    >
+      <template #label>Vous habitez plutôt&hellip;</template>
+    </DsfrSelect>
 
-        <DsfrFieldset>
-          <!-- FIXME (GAFI 25-03-2025): Pas très explicite comme legend -->
-          <template #legend>Diriez-vous que...</template>
-            <DsfrRadioButtonSet
-              inline
-              :options="frequences"
-              name="voteFrequency"
-              :model-value="profil?.voteFrequency"
-            >
-              <template #legend>Je vote&hellip;</template>
-            </DsfrRadioButtonSet>
+    <DsfrSelect
+      name="jobCategory"
+      :options="categoriesJob"
+      :model-value="profil?.jobCategory"
+    >
+      <template #label>De quelle catégorie socio-professionnelle faites-vous partie ?</template>
+    </DsfrSelect>
 
-            <DsfrRadioButtonSet
-              :model-value="profil?.publicMeetingFrequency"
-              inline
-              :options="frequences"
-              name="publicMeetingFrequency"
-            >
-              <template #legend>Je m'engage sur le terrain&hellip;</template>
-              <template #hint>Exemples : faire partie d'une association, manifester, participer à des débats publics ou aux conseils municipaux
-                de ma ville, etc.
-              </template>
-            </DsfrRadioButtonSet>
+    <DsfrFieldset>
+      <!-- FIXME (GAFI 25-03-2025): Pas très explicite comme legend -->
+      <template #legend>Diriez-vous que...</template>
+      <DsfrRadioButtonSet
+        inline
+        :options="frequences"
+        name="voteFrequency"
+        :model-value="profil?.voteFrequency"
+      >
+        <template #legend>Je vote&hellip;</template>
+      </DsfrRadioButtonSet>
 
-            <DsfrRadioButtonSet
-              :model-value="profil?.consultationFrequency"
-              inline
-              :options="frequences"
-              name="consultationFrequency"
-            >
-              <template #legend>Je m'engage en ligne&hellip;</template>
-              <template #hint>Exemples : donner mon avis via des consultations en ligne, signer une pétition, défendre des causes sur les
-                réseaux sociaux, etc.
-              </template>
-            </DsfrRadioButtonSet>
-        </DsfrFieldset>
+      <DsfrRadioButtonSet
+        :model-value="profil?.publicMeetingFrequency"
+        inline
+        :options="frequences"
+        name="publicMeetingFrequency"
+      >
+        <template #legend>Je m'engage sur le terrain&hellip;</template>
+        <template #hint>Exemples : faire partie d'une association, manifester, participer à des débats publics ou aux conseils municipaux
+          de ma ville, etc.
+        </template>
+      </DsfrRadioButtonSet>
+
+      <DsfrRadioButtonSet
+        :model-value="profil?.consultationFrequency"
+        inline
+        :options="frequences"
+        name="consultationFrequency"
+      >
+        <template #legend>Je m'engage en ligne&hellip;</template>
+        <template #hint>Exemples : donner mon avis via des consultations en ligne, signer une pétition, défendre des causes sur les
+          réseaux sociaux, etc.
+        </template>
+      </DsfrRadioButtonSet>
+    </DsfrFieldset>
     <DsfrButton label="Enregistrer"/>
   </form>
 </template>

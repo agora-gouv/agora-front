@@ -8,6 +8,7 @@ import {
   DsfrFooter,
   DsfrHeader,
   DsfrInput,
+  DsfrInputGroup,
   DsfrModal,
   DsfrSkipLinks,
   DsfrTile,
@@ -40,6 +41,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrBadge', DsfrBadge)
   nuxtApp.vueApp.component('DsfrAlert', DsfrAlert);
   nuxtApp.vueApp.component('DsfrInput', DsfrInput);
+  nuxtApp.vueApp.component('DsfrInputGroup', DsfrInputGroup);
   nuxtApp.vueApp.component('DsfrSelect', DsfrSelect);
   nuxtApp.vueApp.component('DsfrFieldset', DsfrFieldset);
   nuxtApp.vueApp.component('DsfrRadioButtonSet', DsfrRadioButtonSet);
