@@ -109,13 +109,13 @@ const maxYear = new Date().getFullYear()
         inline
         :options="frequences"
         name="voteFrequency"
-        :model-value="profil?.voteFrequency"
+        :model-value="profil?.voteFrequency ?? ''"
       >
         <template #legend>Je vote&hellip;</template>
       </DsfrRadioButtonSet>
 
       <DsfrRadioButtonSet
-        :model-value="profil?.publicMeetingFrequency"
+        :model-value="profil?.publicMeetingFrequency ?? ''"
         inline
         :options="frequences"
         name="publicMeetingFrequency"
@@ -127,7 +127,7 @@ const maxYear = new Date().getFullYear()
       </DsfrRadioButtonSet>
 
       <DsfrRadioButtonSet
-        :model-value="profil?.consultationFrequency"
+        :model-value="profil?.consultationFrequency ?? ''"
         inline
         :options="frequences"
         name="consultationFrequency"
