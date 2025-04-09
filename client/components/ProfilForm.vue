@@ -1,12 +1,4 @@
 <script setup lang="ts">
-/* TODO : 
-* Feature Flipper
-* Explication "De quoi s'agit-il ?" pour les catégories socio-pro
-* Explication "Pourquoi me demande-t-on cela ?" pour le fieldset de profil de voteur
-* mettre l'année actuelle comme valeur max pour yearOfBirth
-* Notif on success
-* */
-
 const {jwtToken} = await useAuthentication()
 const profil = await new ProfilApi().getProfil(jwtToken);
 
@@ -57,6 +49,8 @@ const frequences = [
   {label: "Parfois", value: 'P'},
   {label: "Jamais", value: 'J'},
 ]
+
+const maxYear = new Date().getFullYear()
 </script>
 
 <template>
@@ -74,7 +68,7 @@ const frequences = [
           labelVisible
           type="number"
           min="1900"
-          max="9999"
+          :max="maxYear"
           placeholder="YYYY"
           :model-value="profil?.yearOfBirth"
         >
