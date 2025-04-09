@@ -12,6 +12,7 @@ import {
   DsfrModal,
   DsfrNavigation,
   DsfrSkipLinks,
+  DsfrTag,
   DsfrTile,
   DsfrTranscription,
   DsfrVideo,
@@ -29,6 +30,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrNavigation', DsfrNavigation);
   nuxtApp.vueApp.component('DsfrFooter', DsfrFooter);
   nuxtApp.vueApp.component('DsfrCard', DsfrCard);
+  nuxtApp.vueApp.component('DsfrTag', DsfrTag);
   nuxtApp.vueApp.component('DsfrBreadcrumb', DsfrBreadcrumb);
   nuxtApp.vueApp.component('DsfrVideo', DsfrVideo);
   nuxtApp.vueApp.component('DsfrAccordionsGroup', DsfrAccordionsGroup);

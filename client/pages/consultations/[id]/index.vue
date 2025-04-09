@@ -26,7 +26,7 @@ const consultation = await new ConsultationApi().getConsultation(consultationId.
 
 <template>
   <div>
-    <ConsultationContent :consultation="consultation"/>
+    <ConsultationOther :consultation="consultation"/>
   </div>
 </template>
 

@@ -57,7 +57,10 @@ const expandedSectionId = ref('')
 .section {
   margin-bottom: 3vh;
 }
-video {
+
+div video:not([href])[controls] {
+  cursor: auto;
   max-height: 70vh;
+  background-color: rgb(0, 0, 0);
 }
 </style>
