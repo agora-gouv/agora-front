@@ -59,19 +59,23 @@ export const useConsultationQuestionsForm = () => {
 
   const submit = async () => {
     const jwtToken = (await useAuthentication())?.jwtToken
+    var shouldAskDemographicInfo;
     try {
-      await consultationQuestionApi.sendAnswers(consultationId, answersCheckbox.value, answersText.value, jwtToken!!)
+      shouldAskDemographicInfo = await consultationQuestionApi.sendAnswers(consultationId, answersCheckbox.value, answersText.value, jwtToken!!)
     } catch (error) {
       console.log(error)
       errorMessage.value = "Impossible d'envoyer vos réponses, veuillez ré-essayer."
       return
     }
 
+    if (shouldAskDemographicInfo.value.askDemographicInfo) {
+      await navigateTo({path: `/consultations/${consultationId}/questions/donnees-demographiques`})
+      return
+    }
+
     await navigateTo({
       path: `/consultations/${consultationId}/updates/fin-de-la-consultation`,
-      query: {
-        answered: "true",
-      }
+      query: {answered: "true"}
     })
   }
 
@@ -100,7 +104,7 @@ export class QuestionUniqueChoice {
     public popupDescription?: string
   ) {
   }
-  
+
   static fromApi(dto: QuestionUniqueChoiceApiDTO): QuestionUniqueChoice {
     return new QuestionUniqueChoice(
       dto.id,
