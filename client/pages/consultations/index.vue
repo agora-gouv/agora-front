@@ -16,14 +16,20 @@ const consultations = await (new ConsultationApi().getAllConsultations())
       :img-src="consultation.coverUrl"
       :link="`/consultations/${consultation.slug}`"
       :title="consultation.title"
-      :badges="[{label: consultation.thematique.picto + consultation.thematique.label, type: 'new'}]"
       description=""
-      :end-detail="'se termine le ' + consultation.endDate.substring(0, 10)"
       alt-img=""
       horizontal
       v-for="consultation in consultations.ongoing" :key="consultation.id"
       class="fr-mb-2w"
-    />
+    >
+      <template #start-details>
+        <DsfrBadge :label="`${consultation.thematique.picto} ${consultation.thematique.label}`" no-icon/>
+      </template>
+      <template #end-details>
+        <div>se termine le <Date :date="consultation.endDate" /></div>
+      </template>
+    </DsfrCard>
+    
 
     <h2>Consultations terminées</h2>
     <div class="fr-grid-row">
@@ -32,10 +38,15 @@ const consultations = await (new ConsultationApi().getAllConsultations())
           :img-src="consultation.coverUrl"
           :link="`/consultations/${consultation.slug}`"
           :title="consultation.title"
-          :badges="[{label: consultation.thematique.picto + consultation.thematique.label, type: 'info'}]"
           description=""
-          alt-img=""
-        />
+          alt-img="">
+          <template #start-details>
+            <DsfrBadge :label="`${consultation.thematique.picto} ${consultation.thematique.label}`" no-icon/>
+            <div>terminée le <Date :date="consultation.updateDate" /></div>
+          </template>
+          <template #end-details>
+          </template>
+        </DsfrCard>
       </div>
     </div>
   </div>
@@ -46,6 +57,14 @@ const consultations = await (new ConsultationApi().getAllConsultations())
   height: auto;
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.fr-badge {
+  font-size: 12px;
+}
+
+.fr-card__start div {
+  font-size: 12px;
 }
 
 h1, h2 {

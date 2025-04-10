@@ -32,7 +32,8 @@ const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Questions citoyennes'
 
     <div class="question fr-p-2w fr-mx-1w">
       <p class="fr-text--lead">
-        {{ qag.thematique.picto + " " + qag.thematique.label }}
+        <span aria-hidden="true">{{ qag.thematique.picto }}</span>
+        <span>{{ qag.thematique.label }}</span>
       </p>
       <DsfrBadge v-if="qag.status=='selectedForResponse'" type="info" label="Réponse à venir"/>
       <DsfrBadge v-else-if="qag.status=='responseAvailable'" type="success" label="Réponse reçue"/>
@@ -49,13 +50,11 @@ const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Questions citoyennes'
       <p class="fr-text--lead" v-else>Réponse du Gouvernement</p>
 
       <div class="fr-px-1w">
-        Par <b>{{ qag.response.author }}</b>, le {{ new Date(qag.response.responseDate).toLocaleDateString("fr-FR") }}
+        Par <b>{{ qag.response.author }}</b>, le <Date :date="qag.response.responseDate" />
         <p class="fr-text--xs"> {{ qag.response.authorDescription }}</p>
 
         <div>
-          <video controls height="100%" class="fr-responsive-id fr-responsive-vid__player fr-content-media">
-            <source :src=qag.response.videoUrl type="video/mp4"/>
-          </video>
+          <Video :url=qag.response.videoUrl />
           <DsfrTranscription class="fr-my-1" :content="qag.response.transcription"/>
         </div>
 
@@ -100,11 +99,5 @@ const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Questions citoyennes'
 
 .question-text {
   color: var(--blue-france-sun-113-625)
-}
-
-div video:not([href])[controls] {
-  cursor: auto;
-  max-height: 70vh;
-  background-color: rgb(0, 0, 0);
 }
 </style>

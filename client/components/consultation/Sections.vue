@@ -31,12 +31,10 @@ const expandedSectionId = ref('')
 
       <div v-else-if="section.type=='video'">
         <div v-if="section.authorInfo">
-          Par <b>{{ section.authorInfo.name }}</b>, le {{ new Date(section.authorInfo.date).toLocaleDateString("fr-FR") }}
+          Par <b>{{ section.authorInfo.name }}</b>, le <Date :date="section.authorInfo.date" />
           <p class="fr-text--xs"> {{ section.authorInfo.message }}</p>
         </div>
-        <video controls width="100%" class="fr-responsive-id fr-responsive-vid__player fr-content-media">
-          <source :src=section.url type="video/mp4"/>
-        </video>
+        <Video :url="section.url" />
         <DsfrTranscription class="fr-my-1" :content="section.transcription"/>
       </div>
 
@@ -56,8 +54,5 @@ const expandedSectionId = ref('')
 <style>
 .section {
   margin-bottom: 3vh;
-}
-video {
-  max-height: 70vh;
 }
 </style>

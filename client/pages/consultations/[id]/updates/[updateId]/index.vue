@@ -20,7 +20,7 @@ links.value = [
 <template>
   <DsfrBreadcrumb :links="links"/>
   <div>
-    <ConsultationContent :consultation="consultationUpdate"/>
+    <ConsultationOther :consultation="consultationUpdate"/>
   </div>
 </template>
 
