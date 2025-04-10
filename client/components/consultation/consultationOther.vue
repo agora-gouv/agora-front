@@ -126,8 +126,7 @@ const estEnCours = props.consultation.consultationDates?.endDate
       2fr
       [right-end];
   column-gap: 2em;
-  grid-auto-flow: dense;
-  
+  grid-auto-flow: dense;  
 }
 
 @media screen and (max-width: 767px) {
