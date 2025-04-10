@@ -10,13 +10,6 @@ const userHasAnswered = useRoute().query.answered
 
 const estEnCours = props.consultation.consultationDates?.endDate
   && new Date() < new Date(props.consultation.consultationDates.endDate)
-
-const toReadableDate = (date: string) => {
-  const options: Intl.DateTimeFormatOptions = { year: "numeric", month: "long", day: "numeric" }
-  
-  return new Date(date).toLocaleDateString("fr-FR", options)
-}
-
 </script>
 
 <template>
@@ -29,9 +22,10 @@ const toReadableDate = (date: string) => {
         <div class="history" v-if="consultation.history">
           <h2>Suivi de la consultation</h2>
           <ul>
-            <li class="active fr-grid-row" v-for="update in consultation.history">
+            <li class="fr-grid-row" :aria-current="consultation.updateId == update.updateId" v-for="update in consultation.history">
               <div class="fr-col-1">
-                <VIcon icon="ri:checkbox-circle-fill" :ssr="true"/>
+                <VIcon v-if="update.status ==='incoming'" icon="ri:checkbox-circle" :ssr="true"/>
+                <VIcon v-else icon="ri:checkbox-circle-fill" :ssr="true"/>
               </div>
               <div class="fr-col-11">
                 <div class="fr-ml-1w">
@@ -39,17 +33,19 @@ const toReadableDate = (date: string) => {
                             class="fr-mt-1w action">{{ update.title }}
                   </NuxtLink>
                 </div>
-                <div class="fr-ml-1w">{{ toReadableDate(update.date!!) }}</div>
+                <Date class="fr-ml-1w" :date="update.date!!"/>
               </div>
             </li>
           </ul>
         </div>
         <div v-if="consultation.goals" class="goals fr-p-3w fr-my-4w">
           <p class="fr-h5">La consultation en un clin d'œil</p>
-          <div class="fr-mt-2w fr-grid-row" v-for="goal in consultation.goals">
-            <span class="picto fr-col-2 fr-pt-1w">{{ goal.picto }}</span>
-            <span class="fr-col-10" v-html="goal.description"></span>
-          </div>
+          <ul class="fr-mt-2w" v-for="goal in consultation.goals">
+            <li class="fr-grid-row">
+              <span aria-hidden="true" class="picto fr-col-2 fr-pt-1w">{{ goal.picto }}</span>
+              <span class="fr-col-10" v-html="goal.description"></span>
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -72,7 +68,8 @@ const toReadableDate = (date: string) => {
         <div v-if="consultation.questionsInfo" class="info-question fr-px-2w fr-py-1w">
           <div class="fr-mb-2w">
             <VIcon icon="ri:calendar-2-line" :inline="true" :ssr="true"/>
-            Jusqu'au {{ toReadableDate(consultation.questionsInfo.endDate) }}
+            Jusqu'au
+            <Date :date="consultation.questionsInfo.endDate"/>
           </div>
           <div class="fr-mb-2w">
             <VIcon :ssr="true" icon="ri:questionnaire-line" :inline="true"/>
@@ -123,10 +120,12 @@ const toReadableDate = (date: string) => {
 </template>
 
 <style>
-.hyphen {
+h1::after {
+  content: "";
   border-bottom: var(--blue-france-main-525) 4px solid;
   width: 80px;
-  margin-bottom: 1.6em;
+  height: 20px;
+  display: block;
 }
 
 .fr-badge {
@@ -145,6 +144,11 @@ h2 {
   color: var(--blue-france-sun-113-625);
 }
 
+.goals ul {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
 .history {
   h2 {
     font-size: 1.4em;
@@ -159,16 +163,22 @@ h2 {
       color: var(--blue-france-sun-113-625);
     }
 
-    li.active {
+    li {
+      margin-left: 1em;
+      .iconify {
+        width: 1.4em;
+        height: 1.4em;
+        margin-left: 1.2em;
+      }
+    }
+
+    li[aria-current="true"] {
       border-left-width: 4px;
       border-left-color: var(--blue-france-sun-113-625);
       border-left-style: solid;
-      padding-left: 1em;
 
       .iconify {
         color: var(--blue-france-main-525);
-        width: 1.4em;
-        height: 1.4em;
       }
     }
   }

@@ -37,7 +37,8 @@ defineProps<{
      {{update.title }}
    </div>
     <div class="content-date">
-      {{ update.date ? new Date(update.date).toLocaleDateString("fr-FR") : 'Prochainement'}}
+      <Date v-if="update.date" :date="update.date" />
+      <div v-else>Prochainement</div>
     </div>
 
     <NuxtLink :to="`/consultations/${consultationSlug}/updates/${update.slug ?? update.updateId}`" class="fr-mt-1w action">{{ update.actionText}}</NuxtLink>
