@@ -28,12 +28,12 @@ const estEnCours = props.consultation.consultationDates?.endDate
                 <VIcon v-else icon="ri:checkbox-circle-fill" :ssr="true"/>
               </div>
               <div class="fr-col-11">
-                <div class="fr-ml-1w">
+                <div class="fr-ml-3w">
                   <NuxtLink :to="`/consultations/${consultation.slug}/updates/${update.slug ?? update.updateId}`"
                             class="fr-mt-1w action">{{ update.title }}
                   </NuxtLink>
                 </div>
-                <Date class="fr-ml-1w" :date="update.date!!"/>
+                <Date class="fr-ml-3w" :date="update.date!!"/>
               </div>
             </li>
           </ul>
@@ -152,6 +152,7 @@ h2 {
 .history {
   h2 {
     font-size: 1.4em;
+    margin-bottom: 0;
   }
 
   ul {
@@ -163,13 +164,18 @@ h2 {
       color: var(--blue-france-sun-113-625);
     }
 
-    li {
-      margin-left: 1em;
+    li {            
+      margin-left: 0.5em;
+      padding: 0.5em 0;
       .iconify {
         width: 1.4em;
         height: 1.4em;
         margin-left: 1.2em;
       }
+    }
+
+    li[aria-current="true"] {
+      margin-left: 4px;
     }
 
     li[aria-current="true"] {
