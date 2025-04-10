@@ -126,7 +126,19 @@ const estEnCours = props.consultation.consultationDates?.endDate
       2fr
       [right-end];
   column-gap: 2em;
-  grid-auto-flow: dense;
+  grid-auto-flow: dense;  
+}
+
+@media screen and (max-width: 767px) {
+  .consultation {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 0;
+  }
+
+  .consultation .left-column {
+    display: none;
+  }
 }
 
 .consultation .left-column {
