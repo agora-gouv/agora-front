@@ -26,18 +26,17 @@ export class AuthenticationApi {
   async signup(): Promise<SignupResponse> {
     const runtimeConfig = useRuntimeConfig()
     const routeUrl = `${runtimeConfig.public.apiBaseUrl}/signup`
-    const {data: content, error} = await useFetch(routeUrl, {
-      method: "POST",
-      headers: {
-        "versionCode": "1",
-        "platform": "web",
-      }
-    }) as AsyncData<SignupResponse, FetchError>
-
-    if (error.value) {
-      throw createError({statusCode: error.value!.statusCode})
+    try {
+      const content = await $fetch<SignupResponse, FetchError>(routeUrl, {
+        method: "POST",
+        headers: {
+          "versionCode": "1",
+          "platform": "web",
+        }
+      })
+      return content
+    } catch (error) {
+      throw createError({statusCode: error.statusCode})
     }
-
-    return content.value
   }
 }

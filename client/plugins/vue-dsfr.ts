@@ -9,6 +9,8 @@ import {
   DsfrCard,
   DsfrFooter,
   DsfrHeader,
+  DsfrInput,
+  DsfrInputGroup,
   DsfrModal,
   DsfrNavigation,
   DsfrSkipLinks,
@@ -16,6 +18,9 @@ import {
   DsfrTile,
   DsfrTranscription,
   DsfrVideo,
+  DsfrSelect,
+  DsfrFieldset,
+  DsfrRadioButtonSet,
 } from "@gouvminint/vue-dsfr";
 import { addIcon, Icon } from '@iconify/vue';
 
@@ -41,7 +46,12 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrTile', DsfrTile);
   nuxtApp.vueApp.component('DsfrBadge', DsfrBadge)
   nuxtApp.vueApp.component('DsfrAlert', DsfrAlert);
-
+  nuxtApp.vueApp.component('DsfrInput', DsfrInput);
+  nuxtApp.vueApp.component('DsfrInputGroup', DsfrInputGroup);
+  nuxtApp.vueApp.component('DsfrSelect', DsfrSelect);
+  nuxtApp.vueApp.component('DsfrFieldset', DsfrFieldset);
+  nuxtApp.vueApp.component('DsfrRadioButtonSet', DsfrRadioButtonSet);
+  
   Object.entries(icons).forEach(([name, icon]) => {
     addIcon(name, icon)
   })
