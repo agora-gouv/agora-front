@@ -61,7 +61,12 @@ const maxYear = new Date().getFullYear()
 
 const vAutofocus = {
   mounted: (element) => {
-    element.focus({ focusVisible: false })
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion)').matches
+    element.scrollIntoView({
+      block: "center",
+      behavior: prefersReducedMotion ? "auto" : "smooth"
+    })
+    element.focus({ preventScroll: true })
   } 
 }
 </script>
