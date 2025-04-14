@@ -19,7 +19,7 @@ defineProps<{
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .history {
   display: flex;
 

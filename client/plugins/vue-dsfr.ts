@@ -1,19 +1,22 @@
 import { AgoraApple, AgoraGoogle } from '../assets/icons'
 import {
   DsfrAccordion,
+  DsfrAccordionsGroup,
   DsfrAlert,
   DsfrBadge,
   DsfrBreadcrumb,
   DsfrButton,
+  DsfrCard,
   DsfrFooter,
   DsfrHeader,
   DsfrInput,
   DsfrInputGroup,
   DsfrModal,
+  DsfrNavigation,
   DsfrSkipLinks,
+  DsfrTag,
   DsfrTile,
   DsfrTranscription,
-  DsfrNavigation,
   DsfrVideo,
   DsfrSelect,
   DsfrFieldset,
@@ -31,8 +34,11 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrHeader', DsfrHeader);
   nuxtApp.vueApp.component('DsfrNavigation', DsfrNavigation);
   nuxtApp.vueApp.component('DsfrFooter', DsfrFooter);
+  nuxtApp.vueApp.component('DsfrCard', DsfrCard);
+  nuxtApp.vueApp.component('DsfrTag', DsfrTag);
   nuxtApp.vueApp.component('DsfrBreadcrumb', DsfrBreadcrumb);
   nuxtApp.vueApp.component('DsfrVideo', DsfrVideo);
+  nuxtApp.vueApp.component('DsfrAccordionsGroup', DsfrAccordionsGroup);
   nuxtApp.vueApp.component('DsfrModal', DsfrModal);
   nuxtApp.vueApp.component('DsfrAccordion', DsfrAccordion);
   nuxtApp.vueApp.component('DsfrButton', DsfrButton);

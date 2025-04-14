@@ -24,7 +24,7 @@ const estSurLaPageLancement = props.consultation.goals != null
   <div v-if="userHasAnswered" class="fr-alert fr-alert--success">
     <h6 class="fr-alert__title">Vos réponses ont bien été envoyées.</h6>
   </div>
-<!--  <ConsultationShare :shareText="props.consultation.shareText" :shareTitle="props.consultation.title"/>-->
+  <!--  <ConsultationShare :shareText="props.consultation.shareText" :shareTitle="props.consultation.title"/>-->
 
   <div class="fr-grid fr-mb-2w fr-mt-6w">
     <div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters">
@@ -101,6 +101,10 @@ const estSurLaPageLancement = props.consultation.goals != null
 
   <ConsultationSections :sections="consultation.body.headerSections"/>
   <ConsultationSections :sections="consultation.body.sections"/>
+
+  <NuxtLink :to="'/consultations/' + consultation.id + '/questions'" v-if="estEnCours" class="fr-mb-4w fr-btn">
+    Répondre à la consultation
+  </NuxtLink>
 
   <DsfrTile
     v-if="consultation.downloadAnalysisUrl"

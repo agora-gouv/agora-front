@@ -24,14 +24,18 @@ export class ConsultationQuestionApi {
   async sendAnswers(consultationId: string, answersCheckbox: Record<string, string | string[]>, answersText: Record<string, string>, jwtToken: string) {
     const routeConsultationUrl = `${this.baseUrl}/consultations/${consultationId}/responses`
 
-    const dtoAnswers = Object.entries(answersCheckbox).map(([questionId, response]) => {
-      return {
-        questionId: questionId,
-        choiceIds: Array.isArray(response) ? response : [response],
-        responseText: answersText[questionId] ? answersText[questionId] : ""
-      }
-    })
-    
+    const dtoAnswers = Object.entries(answersCheckbox)
+      .map(([questionId, response]) => {
+        return {
+          questionId: questionId,
+          choiceIds: Array.isArray(response) ? response : [response],
+          responseText: answersText[questionId] ? answersText[questionId] : ""
+        }
+      })
+      .filter((response) =>
+        response.choiceIds.length > 0 || response.responseText !== ""
+      )
+
     const consultationAnswersApiDTO: ConsultationAnswersApiDTO = {
       consultationId: consultationId,
       responses: dtoAnswers
