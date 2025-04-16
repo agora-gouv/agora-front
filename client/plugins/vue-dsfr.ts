@@ -7,20 +7,23 @@ import {
   DsfrBreadcrumb,
   DsfrButton,
   DsfrCard,
+  DsfrFieldset,
   DsfrFooter,
   DsfrHeader,
   DsfrInput,
   DsfrInputGroup,
   DsfrModal,
   DsfrNavigation,
+  DsfrRadioButtonSet,
+  DsfrSelect,
   DsfrSkipLinks,
+  DsfrTabContent,
+  DsfrTabItem,
+  DsfrTabs,
   DsfrTag,
   DsfrTile,
   DsfrTranscription,
   DsfrVideo,
-  DsfrSelect,
-  DsfrFieldset,
-  DsfrRadioButtonSet,
 } from "@gouvminint/vue-dsfr";
 import { addIcon, Icon } from '@iconify/vue';
 
@@ -51,7 +54,10 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrSelect', DsfrSelect);
   nuxtApp.vueApp.component('DsfrFieldset', DsfrFieldset);
   nuxtApp.vueApp.component('DsfrRadioButtonSet', DsfrRadioButtonSet);
-  
+  nuxtApp.vueApp.component('DsfrTabs', DsfrTabs);
+  nuxtApp.vueApp.component('DsfrTabItem', DsfrTabItem);
+  nuxtApp.vueApp.component('DsfrTabContent', DsfrTabContent);
+
   Object.entries(icons).forEach(([name, icon]) => {
     addIcon(name, icon)
   })
