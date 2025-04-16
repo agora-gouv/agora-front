@@ -66,16 +66,16 @@ const vAutofocus = {
       block: "center",
       behavior: prefersReducedMotion ? "auto" : "smooth"
     })
-    element.focus({ preventScroll: true })
+    element.focus({ preventScroll: true, focusVisible: true, })
   } 
 }
 </script>
 
 <template>
-  <DsfrAlert tabindex="-1" v-autofocus v-if="status === 'success'" type="success" title="Modifications enregistrées">
+  <DsfrAlert tabindex="-1" v-autofocus v-if="status === 'success'" type="success" title="Modifications enregistrées" class="fr-mb-4w">
     Vos modifications ont été enregistrées avec succès.
   </DsfrAlert>
-  <DsfrAlert tabindex="-1" v-autofocus v-if="status === 'error'" type="error" title="Un problème est survenu">
+  <DsfrAlert tabindex="-1" v-autofocus v-if="status === 'error'" type="error" title="Un problème est survenu" class="fr-mb-4w">
     <p>
       Un problème est survenu avec l'enregistrement de vos informations.
       Veuillez réessayer plus tard.
