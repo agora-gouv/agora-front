@@ -12,18 +12,20 @@ const objectif = "Exprimer une opinion"
 const thematique = "🌾 Agriculture et alimentation"
 const titre = "Mieux rémunérer les agriculteurs : quels leviers pour le consommateur ?"
 const illustration = "https://intuition-software.com/wp-content/uploads/2021/06/Checklist-1-edited-scaled.jpg"
-const annéeLancement = "2024"
+const anneeLancement = "2024"
 const porteur = "Ministère de la Transition Écologique et de la Cohésion des Territoires"
 const site = "Concertation « notre avenir énergétique » - Octobre 2022- Janvier 2023"
-const ouverture = "Ouvert à tous"
-const format = "Présentiel"
-const status = "Bientôt ouvert à la participation"
+const debutConsultation = "2024-10-12"
+const finConsultation = "2024-12-10"
+const statut = "ouvert à la participation"
+const condition = "ouvert à tous"
+const modalite = "en ligne"
 
 const tabListName = 'Liste d’onglet'
 const tabTitles = [
-  {title: 'Titre 1'},
-  {title: 'Titre 2'},
-  {title: 'Titre 3'},
+  {title: 'Lancement de la consultation'},
+  {title: 'Analyse des résultats'},
+  {title: 'Suivi de la consultation'},
 ]
 const activeTab = ref(0)
 
@@ -47,99 +49,149 @@ const etape1 = "Contexte\n" +
 </script>
 
 <template>
-  <div>
-    <template>
-      <div class="fr-mt-4w">
-        <div class="consultation">
-          <DsfrBadge :label="etat" type="success" no-icon/>
+  <div class="fr-mt-4w">
+    <div class="header-grid">
+      <div>
+        <div class="fr-mb-2w">
+          <DsfrBadge :label="etat" type="success" class="fr-mr-1w" no-icon/>
           <DsfrBadge :label="objectif" type="info" no-icon/>
-          <DsfrTag :label="thematique"/>
-          <h1>{{ titre }}</h1>
-          <img :src="illustration" alt="" class="fr-mt-2w fr-responsive-img"/>
-
-          <div>
-            <p>Année de lancement : {{ annéeLancement }}</p>
-            <p>Porteur : {{ porteur }}</p>
-            <p>Site de la consultation : {{ site }}</p>
-            <a :href="site" class="fr-btn">Site officiel de la consultation</a>
-          </div>
-
-          <DsfrTabs
-            v-model="activeTab"
-            :tab-list-name="tabListName"
-            :tab-titles="tabTitles"
-          >
-            <template #tab-items>
-              <DsfrTabItem
-                v-for="(tab, index) of tabTitles"
-                :key="index"
-                :tab-id="index.toString()"
-                :panel-id="index.toString()"
-                @click="activeTab = index"
-              >
-                {{ tab.title }}
-              </DsfrTabItem>
-            </template>
-
-            <DsfrTabContent
-              panel-id="0"
-              tab-id="0"
-            >
-              <DsfrBadge :label="ouverture" type="warning" no-icon/>
-              <DsfrBadge :label="format" type="new" no-icon/>
-              <DsfrBadge :label="status" class="fr-badge--purple-glycine" no-icon/>
-
-              <p>
-                <VIcon icon="ri:calendar-2-line" :inline="true" :ssr="true"/>
-                Dates d’ouverture à la participation : du 14 avril 2024 au 15 juin 2024
-              </p>
-              <p>
-                <VIcon icon="ri:calendar-2-line" :inline="true" :ssr="true"/>
-                Statut de la consultation : bientôt ouvert à la participation / ouvert à la participation / consultation terminée
-              </p>
-              <p>
-                <VIcon icon="ri:calendar-2-line" :inline="true" :ssr="true"/>
-                Dates d’ouverture à la participation : du 14 avril 2024 au 15 juin 2024
-              </p>
-              <p>
-                <VIcon icon="ri:calendar-2-line" :inline="true" :ssr="true"/>
-                Conditions de participation : ouvert à tous / tirage au sort
-              </p>
-              <p>
-                <VIcon icon="ri:calendar-2-line" :inline="true" :ssr="true"/>
-                Modalités de participation : en ligne / présentiel
-              </p>
-              
-              {{ etape1 }}
-            </DsfrTabContent>
-
-            <DsfrTabContent
-              panel-id="1"
-              tab-id="1"
-            >
-              <div>Contenu 3 avec d'<em><strong>autres composants</strong></em></div>
-            </DsfrTabContent>
-
-            <DsfrTabContent
-              panel-id="2"
-              tab-id="2"
-            >
-              <div>
-                <p>Contenu 4 avec beaucoup de contenus</p>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae fugit sit et eos a officiis adipisci nulla repellat
-                  cupiditate? Assumenda, explicabo ullam laboriosam ex sit corporis enim illum a itaque.</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi animi quis quos consectetur alias delectus recusandae
-                  sunt quisquam incidunt provident quidem, at voluptatibus id, molestias et? Temporibus perspiciatis aut voluptates.</p>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam obcaecati at delectus iusto possimus! Molestiae,
-                  iusto veritatis. Nostrum magni officiis autem, in ullam aliquid, mollitia, commodi architecto vitae omnis vero.</p>
-              </div>
-            </DsfrTabContent>
-          </DsfrTabs>
         </div>
+        <p>{{ thematique }}</p>
+        <h1>{{ titre }}</h1>
       </div>
-    </template>
+      <div>
+        <img :src="illustration" alt="" class="fr-mt-2w fr-responsive-img"/>
+      </div>
+    </div>
+
+    <div class="cadre-meta fr-mb-8w">
+      <p>
+        <VIcon icon="ri:calendar-fill" :inline="true" :ssr="true"/>
+        <b>Année de lancement :</b> {{ anneeLancement }}
+      </p>
+      <p>
+        <VIcon icon="ri:government-fill" :inline="true" :ssr="true"/>
+        <b>Porteur :</b> {{ porteur }}
+      </p>
+      <a :href="site" class="fr-btn" rel="external" target="_blank">Site officiel de la consultation</a>
+    </div>
+
+    <DsfrTabs
+      v-model="activeTab"
+      :tab-list-name="tabListName"
+      :tab-titles="tabTitles"
+    >
+      <template #tab-items>
+        <DsfrTabItem
+          v-for="(tab, index) of tabTitles"
+          :key="index"
+          :tab-id="index.toString()"
+          :panel-id="index.toString()"
+          @click="activeTab = index"
+        >
+          {{ tab.title }}
+        </DsfrTabItem>
+      </template>
+
+      <DsfrTabContent
+        panel-id="0"
+        tab-id="0"
+      >
+        <p>
+          <VIcon icon="ri:time-fill" :inline="true" :ssr="true"/>
+          <b>Statut de la consultation :</b> {{ statut }}
+        </p>
+        <p>
+          <VIcon icon="ri:calendar-2-fill" :inline="true" :ssr="true"/>
+          <b>Dates d’ouverture à la participation :</b> du
+          <Date :date="debutConsultation"/>
+          au
+          <Date :date="finConsultation"/>
+        </p>
+        <p>
+          <VIcon icon="ri:team-fill" :inline="true" :ssr="true"/>
+          <b>Conditions de participation :</b> {{ condition }}
+        </p>
+        <p>
+          <VIcon icon="ri:message-2-fill" :inline="true" :ssr="true"/>
+          <b>Modalités de participation :</b> {{ modalite }}
+        </p>
+        {{ etape1 }}
+      </DsfrTabContent>
+
+      <DsfrTabContent
+        panel-id="1"
+        tab-id="1"
+      >
+        <div>Contenu 3 avec d'<em><strong>autres composants</strong></em></div>
+      </DsfrTabContent>
+
+      <DsfrTabContent
+        panel-id="2"
+        tab-id="2"
+      >
+        <div>
+          <p>Contenu 4 avec beaucoup de contenus</p>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae fugit sit et eos a officiis adipisci nulla repellat
+            cupiditate? Assumenda, explicabo ullam laboriosam ex sit corporis enim illum a itaque.</p>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi animi quis quos consectetur alias delectus recusandae
+            sunt quisquam incidunt provident quidem, at voluptatibus id, molestias et? Temporibus perspiciatis aut voluptates.</p>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam obcaecati at delectus iusto possimus! Molestiae,
+            iusto veritatis. Nostrum magni officiis autem, in ullam aliquid, mollitia, commodi architecto vitae omnis vero.</p>
+        </div>
+      </DsfrTabContent>
+    </DsfrTabs>
   </div>
 </template>
 
 <style>
+.header-grid {
+  display: grid;
+  grid-template-columns: 
+      [left-start]
+      2fr
+      [left-end right-start]
+      1fr
+      [right-end];
+  column-gap: 2em;
+  grid-auto-flow: dense;
+}
+
+@media screen and (max-width: 767px) {
+  .header-grid {
+    grid-template-columns: 
+      [left-start]
+      2fr
+      [left-end];
+  }
+  
+  img {
+    display: none;
+  }
+}
+
+.cadre-meta {
+  background-color: var(--blue-france-950-100);
+  padding: 2em;
+  margin-top: 1em;
+  
+  a {
+    margin-top: 1em;
+  }
+}
+
+p {
+  margin-bottom: 0.8em;
+  
+  .vicon {
+    color: var(--blue-france-sun-113-625) !important;
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.5em;
+  }
+  
+  b {
+    color: var(--blue-france-sun-113-625);
+  }
+}
 </style>
