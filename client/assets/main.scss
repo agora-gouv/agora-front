@@ -7,3 +7,11 @@ body {
 .text-align-center {
   text-align: center;
 }
+
+body {
+  scroll-behavior: smooth;
+
+  @media (prefers-reduced-motion) {
+    scroll-behavior: auto;
+  }
+}

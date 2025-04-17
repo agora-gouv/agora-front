@@ -10,10 +10,13 @@ const userHasAnswered = useRoute().query.answered
 
 const estEnCours = props.consultation.consultationDates?.endDate
   && new Date() < new Date(props.consultation.consultationDates.endDate)
+
+
+const runtimeConfig = useRuntimeConfig();
+const isResponseActivated = runtimeConfig.public.features.consultations == '1'
 </script>
 
 <template>
-  <!--  <ConsultationShare :shareText="props.consultation.shareText" :shareTitle="props.consultation.title"/>-->
   <div class="fr-mt-4w">
     <div v-if="userHasAnswered" class="fr-alert fr-alert--success fr-mb-2w">
       <h6 class="fr-alert__title">Vos réponses ont bien été envoyées.</h6>
@@ -60,8 +63,7 @@ const estEnCours = props.consultation.consultationDates?.endDate
         </div>
         <ConsultationSections :sections="consultation.body.headerSections"/>
         <ConsultationSections :sections="consultation.body.sections"/>
-        <NuxtLink :to="'/consultations/' + consultation.id + '/questions'" v-if="estEnCours"
-                  class="fr-mb-4w fr-btn">
+        <NuxtLink :to="'/consultations/' + consultation.id + '/questions'" v-if="estEnCours && isResponseActivated" class="fr-mb-4w fr-btn">
           Répondre à la consultation
         </NuxtLink>
       </div>
@@ -138,7 +140,14 @@ const estEnCours = props.consultation.consultationDates?.endDate
   }
 
   .consultation .left-column {
-    display: none;
+    .fr-responsive-img, .goals {
+      display: none;
+    }
+
+    .history {
+      display: block;
+      margin-bottom: 2em;
+    }
   }
 }
 

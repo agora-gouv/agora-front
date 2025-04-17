@@ -19,6 +19,7 @@ const operatorImgStyleFooter: CSSProperties = {
   'margin-left': '2rem'
 }
 const skipLinks = [{ text: 'Contenu principal', id: 'main' }]
+const profil = [{ label: 'Mon profil', to: '/profil', icon: 'ri:account-circle-line' }]
 
 const mandatoryLinks: {label: string, to: string}[] = [{
   label: `Accessibilité: ${a11yCompliance}`,
@@ -110,6 +111,7 @@ if (error.value) {
     :operator-img-style="operatorImgStyle"
     :service-title="accueilContent.titreHeader"
     :service-description="accueilContent.sousTitreHeader"
+    :quick-links="profil"
   >
     <template #mainnav>
       <DsfrNavigation :nav-items="menu" />
