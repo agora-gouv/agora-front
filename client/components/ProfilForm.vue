@@ -3,6 +3,23 @@ const {jwtToken} = await useAuthentication()
 const profil = await new ProfilApi().getProfil(jwtToken);
 const status = useState<'pending' | 'success' | 'error'>(() => 'pending')
 
+const departements = useNuxtApp().$departements
+  .value
+  .regions
+  .flatMap(region => region.departements)
+  .sort((departement1, departement2) => departement1.codePostal < departement2.codePostal)
+  .map(departement => ({
+    value: departement.codePostal,
+    text: `${departement.codePostal} – ${departement.label}`
+  }))
+const departementsOptions = [
+  { value: '', text: 'Non renseigné'},
+  ...departements,
+  { value: '99', text: '99 – Étranger' }
+]
+
+console.log(departements)
+
 async function submit(event) {
   const formData = new FormData(event.currentTarget)
   status.value = "pending"
@@ -103,16 +120,15 @@ const vAutofocus = {
     >
     </DsfrInputGroup>
 
-    <DsfrInputGroup
+    <DsfrSelect
       name="department"
       labelVisible
-      type="text"
       placeholder="75"
       label="Dans quel département ou collectivité d'outre-mer vivez-vous ?"
-      hint="Indiquez le numéro de département. Exemple : 75"
+      :options="departementsOptions"
       :model-value="profil?.department"
     >
-    </DsfrInputGroup>
+    </DsfrSelect>
 
     <DsfrSelect
       name="cityType"
