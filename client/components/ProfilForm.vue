@@ -38,6 +38,7 @@ const typesVilles = [
 ]
 
 const categoriesJob = [
+  {text: "Non renseigné", value: ''},
   {text: "Agriculteurs", value: 'AG'},
   {text: "Artisans, commerçants, chefs d'entreprise", value: 'AR'},
   {text: "Cadres", value: 'CA'},
