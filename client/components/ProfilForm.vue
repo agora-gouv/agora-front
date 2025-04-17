@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import type {NuxtError} from "@nuxt/types";
+
 const {jwtToken} = await useAuthentication()
 const profil = await new ProfilApi().getProfil(jwtToken);
 const status = useState<'pending' | 'success' | 'error'>(() => 'pending')
+
+const { id = useId() } = defineProps<{
+  id?: string
+}>()
 
 async function submit(event) {
   const formData = new FormData(event.currentTarget)
@@ -81,9 +87,9 @@ const vAutofocus = {
       Un problème est survenu avec l'enregistrement de vos informations.
       Veuillez réessayer plus tard.
     </p>
-    <DsfrButton label="Réessayer" type="submit" form="profil-form"/>
+    <DsfrButton label="Réessayer" type="submit" :form="id"/>
   </DsfrAlert>
-  <form @submit.prevent="submit" id="profil-form">
+  <form @submit.prevent="submit" :id="id">
     <DsfrSelect
       name="gender"
       :options="genres"
