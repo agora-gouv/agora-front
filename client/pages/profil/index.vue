@@ -11,6 +11,11 @@ definePageMeta({
       <Loader id="loader" />
     </template>
     <h1 class="fr-pt-4w" aria-busy="false">Mes informations</h1>
-    <ProfilForm />
+    <ProfilForm id="profil-form"/>
+  </ClientOnly>
+  <ClientOnly>
+    <ClearFormButton form="profil-form">
+      Supprimer mes informations
+    </ClearFormButton>
   </ClientOnly>
 </template>
