@@ -7,13 +7,15 @@ import ConsultationsListApiDTO from "~/client/types/consultation/consultationsLi
 export class ConsultationApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;
 
-  async getConsultation(consultationId: string) {
+  async getConsultation(consultationId: string, jwtToken: string | null) {
     const routeConsultationUrl = `${this.baseUrl}/v2/consultations/${consultationId}`
-
+    
+    const jwtOption = jwtToken ? { headers: {"Authorization": `Bearer ${jwtToken}`} } : {}
+    
     const {
       data: consultation,
       error: errorConsultation
-    } = await useFetch(routeConsultationUrl) as AsyncData<Consultation, FetchError>
+    } = await useFetch(routeConsultationUrl, jwtOption) as AsyncData<Consultation, FetchError>
 
     if (errorConsultation.value) {
       throw createError({statusCode: errorConsultation.value!.statusCode})
@@ -21,19 +23,19 @@ export class ConsultationApi {
 
     return consultation
   }
-  
+
   async getConsultationUpdate(consultationId: string, consultationUpdateId: string) {
     const routeUrl = `${this.baseUrl}/v2/consultations/${consultationId}/updates/${consultationUpdateId}`
 
     const {
-      data: consultationUpdate, 
+      data: consultationUpdate,
       error
     } = await useFetch(routeUrl) as AsyncData<Consultation, FetchError>
 
     if (error.value) {
       throw createError({statusCode: error.value!.statusCode})
     }
-    
+
     return consultationUpdate
   }
 

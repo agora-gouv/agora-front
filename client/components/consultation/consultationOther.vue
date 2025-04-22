@@ -11,7 +11,6 @@ const userHasAnswered = useRoute().query.answered
 const estEnCours = props.consultation.consultationDates?.endDate
   && new Date() < new Date(props.consultation.consultationDates.endDate)
 
-
 const runtimeConfig = useRuntimeConfig();
 const isResponseActivated = runtimeConfig.public.features.consultations == '1'
 </script>
@@ -63,7 +62,7 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
         </div>
         <ConsultationSections :sections="consultation.body.headerSections"/>
         <ConsultationSections :sections="consultation.body.sections"/>
-        <NuxtLink :to="'/consultations/' + consultation.id + '/questions'" v-if="estEnCours && isResponseActivated" class="fr-mb-4w fr-btn">
+        <NuxtLink :to="'/consultations/' + consultation.id + '/questions'" v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser" class="fr-mb-4w fr-btn">
           Répondre à la consultation
         </NuxtLink>
       </div>
