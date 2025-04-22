@@ -18,8 +18,6 @@ const departementsOptions = [
   { value: '99', text: '99 – Étranger' }
 ]
 
-console.log(departements)
-
 async function submit(event) {
   const formData = new FormData(event.currentTarget)
   status.value = "pending"
