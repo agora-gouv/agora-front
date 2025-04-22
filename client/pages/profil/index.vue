@@ -17,11 +17,16 @@ app.provide('departements', departements)
       <Loader id="loader" />
     </template>
     <h1 class="fr-pt-4w" aria-busy="false">Mes informations</h1>
-    <ProfilForm class="fr-pb-4w" />
+    <ProfilForm class="fr-pb-4w" id="profil-form"/>
   </ClientOnly>
   <p>Ces informations nous permettent d'analyser plus finement les résultats des consultations à des fins statistiques et de manière anonyme.</p>
   <p>Conformément au RGPD, vous avez la possibilité de consulter, modifier ou supprimer l'ensemble des informations vous concernant.</p>
-  <a href="/politique-confidentialite">Lire la politique de confidentialité</a>
+  <p><a href="/politique-confidentialite">Lire la politique de confidentialité</a></p>
+  <ClientOnly>
+    <ClearFormButton form="profil-form">
+      Supprimer mes informations
+    </ClearFormButton>
+  </ClientOnly>
 </template>
 
 <style>

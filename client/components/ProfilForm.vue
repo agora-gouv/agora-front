@@ -3,6 +3,10 @@ const {jwtToken} = await useAuthentication()
 const profil = await new ProfilApi().getProfil(jwtToken);
 const status = useState<'pending' | 'success' | 'error'>(() => 'pending')
 
+const { id = useId() } = defineProps<{
+  id?: string
+}>()
+
 const departements = useNuxtApp().$departements
   .value
   .regions
@@ -53,6 +57,7 @@ const typesVilles = [
 ]
 
 const categoriesJob = [
+  {text: "Non renseigné", value: ''},
   {text: "Agriculteurs", value: 'AG'},
   {text: "Artisans, commerçants, chefs d'entreprise", value: 'AR'},
   {text: "Cadres", value: 'CA'},
@@ -95,9 +100,9 @@ const vAutofocus = {
       Un problème est survenu avec l'enregistrement de vos informations.
       Veuillez réessayer plus tard.
     </p>
-    <DsfrButton label="Réessayer" type="submit" form="profil-form"/>
+    <DsfrButton label="Réessayer" type="submit" :form="id"/>
   </DsfrAlert>
-  <form @submit.prevent="submit" id="profil-form" v-bind="$attrs">
+  <form @submit.prevent="submit" :id="id" v-bind="$attrs">
     <DsfrSelect
       name="gender"
       :options="genres"
