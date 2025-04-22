@@ -97,7 +97,7 @@ const vAutofocus = {
     </p>
     <DsfrButton label="Réessayer" type="submit" form="profil-form"/>
   </DsfrAlert>
-  <form @submit.prevent="submit" id="profil-form">
+  <form @submit.prevent="submit" id="profil-form" v-bind="$attrs">
     <DsfrSelect
       name="gender"
       :options="genres"
