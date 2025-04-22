@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type {NuxtError} from "@nuxt/types";
-
 const {jwtToken} = await useAuthentication()
 const profil = await new ProfilApi().getProfil(jwtToken);
 const status = useState<'pending' | 'success' | 'error'>(() => 'pending')
