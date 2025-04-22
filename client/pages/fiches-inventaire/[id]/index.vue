@@ -65,27 +65,15 @@ const activeTab = ref(etape.toLowerCase() === "analyse des résultats" ? 1 : eta
       </li>
     </ul>
 
-    <DsfrTabs
-      v-model="activeTab"
-      :tab-list-name="tabListName"
-      :tab-titles="tabTitles"
-    >
+    <DsfrTabs v-model="activeTab" :tab-list-name="tabListName" :tab-titles="tabTitles">
       <template #tab-items>
-        <DsfrTabItem
-          v-for="(tab, index) of tabTitles"
-          :key="index"
-          :tab-id="index.toString()"
-          :panel-id="index.toString()"
-          @click="activeTab = index"
-        >
+        <DsfrTabItem v-for="(tab, index) of tabTitles" :key="index" :tab-id="index.toString()"
+                     :panel-id="index.toString()" @click="activeTab = index">
           {{ tab.title }}
         </DsfrTabItem>
       </template>
 
-      <DsfrTabContent
-        panel-id="0"
-        tab-id="0"
-      >
+      <DsfrTabContent panel-id="0" tab-id="0">
         <ul class="head">
           <li>
             <VIcon icon="ri:time-fill" :inline="true" :ssr="true"/>
@@ -110,17 +98,11 @@ const activeTab = ref(etape.toLowerCase() === "analyse des résultats" ? 1 : eta
         <div v-html="etape1"></div>
       </DsfrTabContent>
 
-      <DsfrTabContent
-        panel-id="1"
-        tab-id="1"
-      >
+      <DsfrTabContent panel-id="1" tab-id="1">
         <div v-html="etape2"></div>
       </DsfrTabContent>
 
-      <DsfrTabContent
-        panel-id="2"
-        tab-id="2"
-      >
+      <DsfrTabContent panel-id="2" tab-id="2">
         <div v-html="etape3"></div>
       </DsfrTabContent>
     </DsfrTabs>
