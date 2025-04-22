@@ -2,6 +2,7 @@
 const {jwtToken} = await useAuthentication()
 const profil = await new ProfilApi().getProfil(jwtToken);
 const status = useState<'pending' | 'success' | 'error'>(() => 'pending')
+const categorieSocioProModalOpen = useState<boolean>(() => false);
 
 const { id = useId() } = defineProps<{
   id?: string
@@ -102,6 +103,19 @@ const vAutofocus = {
     </p>
     <DsfrButton label="Réessayer" type="submit" :form="id"/>
   </DsfrAlert>
+  <DsfrModal
+    :opened="categorieSocioProModalOpen"
+    title="De quoi s'agit-il ?"
+    :actions="[{ label: 'J\'ai compris', onClick: () => categorieSocioProModalOpen = false }]"
+    @close="() => categorieSocioProModalOpen = false"
+  >
+    <p>
+      Les catégories socio-professionnelles sont des regroupements effectués par l'<abbr>INSEE</abbr> (l'Institut national de la statistique
+      et des études économiques) pour regrouper la population en fonction de leur activité professionnelle et de leur position sociale.
+      Cela permet de comprendre la structure de la population. Si vous avez un doute sur la vôtre, pas d'inquiétude, sélectionnez simplement
+      l'option "Je ne sais pas".
+    </p>
+  </DsfrModal>
   <form @submit.prevent="submit" :id="id" v-bind="$attrs">
     <DsfrSelect
       name="gender"
@@ -146,7 +160,17 @@ const vAutofocus = {
       :options="categoriesJob"
       :model-value="profil?.jobCategory"
     >
-      <template #label>De quelle catégorie socio-professionnelle faites-vous partie ?</template>
+      <template #label>
+        De quelle catégorie socio-professionnelle faites-vous partie ?
+        <!-- FIXME (GAFI 22-04-2025): Devrait être en dehors du label -->
+        <DsfrButton
+          label="De quoi s'agit-il ?"
+          type="button"
+          noOutline
+          tertiary
+          @click="() => categorieSocioProModalOpen = true"
+        />
+      </template>
     </DsfrSelect>
 
     <DsfrFieldset>
