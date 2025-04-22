@@ -2,6 +2,12 @@
 definePageMeta({
   layout: 'basic'
 })
+
+const departements = await new DepartementsApi().getDepartements();
+
+const app = useNuxtApp()
+app.provide('departements', departements)
+
 </script>
 
 <template>
