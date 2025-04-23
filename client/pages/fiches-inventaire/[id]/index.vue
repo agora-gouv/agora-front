@@ -29,7 +29,7 @@ const tabs = [
   {id: "analyse", title: 'Analyse des résultats', content: ficheInventaire.etapeAnalyseHtml},
   {id: "suivi", title: 'Suivi de la consultation', content: ficheInventaire.etapeSuiviHtml},
 ]
-const activeTab = ref(tabs.findIndex((xx) => xx.title.toLowerCase() === etape.toLowerCase()) ?? 0)
+const activeTab = ref(tabs.findIndex((tab) => tab.title.toLowerCase() === etape.toLowerCase()) ?? 0)
 
 const selectPrevious = async () => {
   const newIndex = activeTab.value === 0 ? tabs.length - 1 : activeTab.value - 1
