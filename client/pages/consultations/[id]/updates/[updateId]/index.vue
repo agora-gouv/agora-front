@@ -3,25 +3,32 @@ definePageMeta({
   layout: 'basic'
 })
 
-const route = useRoute()
-const consultationId = route.params.id.toString()
-const consultationUpdateId = route.params.updateId.toString()
 const links = ref()
+const consultationUpdate = ref()
 
-const consultationUpdate = await (new ConsultationApi()).getConsultationUpdate(consultationId, consultationUpdateId)
+onMounted(async () => {
+  const consultationId = useRoute().params.id.toString()
+  const consultationUpdateId = useRoute().params.updateId.toString()
+  const {jwtToken} = await useAuthentication()
+  consultationUpdate.value = (await (new ConsultationApi()).getConsultationUpdate(consultationId, consultationUpdateId, jwtToken)).value
 
-links.value = [
-  {to: '/', text: 'Accueil'},
-  {to: `/consultations/${consultationId}`, text: `Consultation citoyenne "${consultationUpdate.value.title}"`},
-  {text: consultationUpdate.value.history?.find(element => element.updateId == consultationUpdate.value.updateId)?.title ?? ""}
-]
+  links.value = [
+    {to: '/', text: 'Accueil'},
+    {to: `/consultations/${consultationId}`, text: `Consultation citoyenne "${consultationUpdate.value.title}"`},
+    {text: consultationUpdate.value.history?.find(element => element.updateId == consultationUpdate.value.updateId)?.title ?? ""}
+  ]
+})
+
 </script>
 
 <template>
-  <DsfrBreadcrumb :links="links"/>
-  <div>
-    <ConsultationOther :consultation="consultationUpdate"/>
-  </div>
+  <ClientOnly>
+    <template #fallback>
+      <Loader class="fr-mt-4w"/>
+    </template>
+    <DsfrBreadcrumb :links="links"/>
+    <ConsultationOther v-if="consultationUpdate" :consultation="consultationUpdate"/>
+  </ClientOnly>
 </template>
 
 <style>

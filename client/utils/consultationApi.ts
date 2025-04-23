@@ -24,13 +24,15 @@ export class ConsultationApi {
     return consultation
   }
 
-  async getConsultationUpdate(consultationId: string, consultationUpdateId: string) {
+  async getConsultationUpdate(consultationId: string, consultationUpdateId: string, jwtToken: string | null) {
     const routeUrl = `${this.baseUrl}/v2/consultations/${consultationId}/updates/${consultationUpdateId}`
 
+    const jwtOption = jwtToken ? { headers: {"Authorization": `Bearer ${jwtToken}`} } : {}
+    
     const {
       data: consultationUpdate,
       error
-    } = await useFetch(routeUrl) as AsyncData<Consultation, FetchError>
+    } = await useFetch(routeUrl, jwtOption) as AsyncData<Consultation, FetchError>
 
     if (error.value) {
       throw createError({statusCode: error.value!.statusCode})
