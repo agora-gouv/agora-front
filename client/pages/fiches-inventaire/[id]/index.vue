@@ -36,8 +36,7 @@ const selectPrevious = async () => {
   activeTab.value = newIndex
 }
 const selectNext = async () => {
-  const newIndex = activeTab.value === tabs.length - 1 ? 0 : activeTab.value + 1
-  activeTab.value = newIndex
+  activeTab.value = (activeTab.value + 1) % tabs.length
 }
 const selectFirst = async () => {
   activeTab.value = 0
