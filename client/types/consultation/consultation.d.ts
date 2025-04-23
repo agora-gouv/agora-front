@@ -54,6 +54,7 @@ export default interface Consultation{
   history: ConsultationUpdate[],
   titrePageWeb: string,
   sousTitrePageWeb: string,
+  isAnsweredByUser: boolean,
 }
 
 export interface ConsultationUpdate{
