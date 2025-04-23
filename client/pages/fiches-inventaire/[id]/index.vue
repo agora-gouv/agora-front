@@ -21,6 +21,7 @@ const finConsultation = ficheInventaire.fin
 const statut = ficheInventaire.statut
 const condition = ficheInventaire.conditionParticipation
 const modalite = ficheInventaire.modaliteParticipation
+const nombreDeCaracteresMinimumPourAfficherContenu = 20
 
 const tabListName = 'Liste d’onglet'
 const tabs = [
@@ -82,7 +83,7 @@ const selectLast = async () => {
         <TabItem v-for="(tab, index) of tabs" :key="index" :tab-id="tab.id"
                      :panel-id="index.toString()" @click="activeTab = index" @next="selectNext()"
                      @previous="selectPrevious()" @first="selectFirst()" @last="selectLast()"
-                     :disabled="tab.content.length < 20">
+                     :disabled="tab.content.length < nombreDeCaracteresMinimumPourAfficherContenu">
           {{ tab.title }}
         </TabItem>
       </template>
