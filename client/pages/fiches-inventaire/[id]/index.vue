@@ -6,22 +6,9 @@ definePageMeta({
 })
 
 const ficheId = useRoute().params.id as string
-const ficheInventaire = (await new FicheInventaireApi().get(ficheId)).value
+const ficheInventaire = (await new FicheInventaireApi().get(ficheId))!!
 
-const etape = ficheInventaire.etape
-const objectif = ficheInventaire.objectif
-const thematique = `${ficheInventaire.thematique.picto} ${ficheInventaire.thematique.label}`
-const titre = ficheInventaire.titre
-const illustration = ficheInventaire.illustrationUrl
-const anneeLancement = ficheInventaire.anneeDeLancement
-const porteur = ficheInventaire.porteur
-const site = ficheInventaire.lienSite
-const debutConsultation = ficheInventaire.debut
-const finConsultation = ficheInventaire.fin
-const statut = ficheInventaire.statut
-const condition = ficheInventaire.conditionParticipation
-const modalite = ficheInventaire.modaliteParticipation
-const nombreDeCaracteresMinimumPourAfficherContenu = 20
+const neContientQueDesBalisesSansContenu = /^\s*(<[^>]+>\s*)+$/i
 
 const tabListName = 'Étapes de la consultation'
 const tabs = [
@@ -29,11 +16,12 @@ const tabs = [
   {id: "analyse", title: 'Analyse des résultats', content: ficheInventaire.etapeAnalyseHtml},
   {id: "suivi", title: 'Suivi de la consultation', content: ficheInventaire.etapeSuiviHtml},
 ]
-const activeTab = ref(tabs.findIndex((tab) => tab.title.toLowerCase() === etape.toLowerCase()) ?? 0)
+
+const activeTabIndex = tabs.findIndex((tab) => tab.title.toLowerCase() === ficheInventaire.etape.toLowerCase())
+const activeTab = ref(activeTabIndex !== -1 ? activeTabIndex : 0)
 
 const selectPrevious = async () => {
-  const newIndex = activeTab.value === 0 ? tabs.length - 1 : activeTab.value - 1
-  activeTab.value = newIndex
+  activeTab.value = ((activeTab.value - 1) + tabs.length) % tabs.length
 }
 const selectNext = async () => {
   activeTab.value = (activeTab.value + 1) % tabs.length
@@ -50,65 +38,79 @@ const selectLast = async () => {
 <template>
   <div class="fr-mt-4w">
     <div class="header-grid">
-      <div>
+      <div class="reverse">
+        <h1>{{ ficheInventaire.titre }}</h1>
+        <p>{{ `${ficheInventaire.thematique.picto} ${ficheInventaire.thematique.label}` }}</p>
         <div class="fr-mb-2w">
-          <DsfrBadge :label="etape" type="success" class="fr-mr-1w" no-icon/>
-          <DsfrBadge :label="objectif" type="info" no-icon/>
+          <DsfrBadge :label="ficheInventaire.etape" type="success" class="fr-mr-1w" no-icon/>
+          <DsfrBadge :label="ficheInventaire.objectif" type="info" no-icon/>
         </div>
-        <p>{{ thematique }}</p>
-        <h1>{{ titre }}</h1>
       </div>
       <div>
-        <img :src="illustration" alt="" class="fr-mt-2w fr-responsive-img"/>
+        <img :src="ficheInventaire.illustrationUrl" alt="" class="fr-mt-2w fr-responsive-img"/>
       </div>
     </div>
 
-    <ul class="cadre-meta fr-mb-8w head">
-      <li>
-        <VIcon icon="ri:calendar-fill" :inline="true" :ssr="true"/>
-        <b>Année de lancement :</b> {{ anneeLancement }}
-      </li>
-      <li>
-        <VIcon icon="ri:government-fill" :inline="true" :ssr="true"/>
-        <b>Porteur :</b> {{ porteur }}
-      </li>
-      <li>
-        <a :href="site" class="fr-btn" rel="external" target="_blank">Site officiel de la consultation</a>
-      </li>
-    </ul>
+    <div class="cadre-meta fr-mb-8w head">
+      <dl>
+        <div>
+          <dt>
+            <VIcon icon="ri:calendar-fill" :inline="true" :ssr="true"/>
+            Année de lancement :
+          </dt>
+          <dd>{{ ficheInventaire.anneeDeLancement }}</dd>
+        </div>
+        <div>
+          <dt>
+            <VIcon icon="ri:government-fill" :inline="true" :ssr="true"/>
+            Porteur :
+          </dt>
+          <dd>{{ ficheInventaire.porteur }}</dd>
+        </div>
+      </dl>
+      <a :href="ficheInventaire.lienSite" class="fr-btn" rel="external" target="_blank">Site officiel de la consultation</a>
+    </div>
 
     <DsfrTabs v-model="activeTab" :tab-list-name="tabListName" :tab-titles="tabs">
       <template #tab-items>
         <TabItem v-for="(tab, index) of tabs" :key="tab.id" :tab-id="tab.id"
-                     :panel-id="index.toString()" @click="activeTab = index" @next="selectNext()"
-                     @previous="selectPrevious()" @first="selectFirst()" @last="selectLast()"
-                     :disabled="tab.content.length < nombreDeCaracteresMinimumPourAfficherContenu">
+                 :panel-id="index.toString()" @click="activeTab = index" @next="selectNext()"
+                 @previous="selectPrevious()" @first="selectFirst()" @last="selectLast()"
+                 :disabled="neContientQueDesBalisesSansContenu.test(tab.content)">
           {{ tab.title }}
         </TabItem>
       </template>
 
       <DsfrTabContent panel-id="0" tab-id="lancement">
-        <ul class="head">
-          <li>
-            <VIcon icon="ri:time-fill" :inline="true" :ssr="true"/>
-            <b>Statut de la consultation :</b> {{ statut }}
-          </li>
-          <li>
-            <VIcon icon="ri:calendar-2-fill" :inline="true" :ssr="true"/>
-            <b>Dates d’ouverture à la participation :</b> du
-            <Date :date="debutConsultation"/>
-            au
-            <Date :date="finConsultation"/>
-          </li>
-          <li>
-            <VIcon icon="ri:team-fill" :inline="true" :ssr="true"/>
-            <b>Conditions de participation :</b> {{ condition }}
-          </li>
-          <li>
-            <VIcon icon="ri:message-2-fill" :inline="true" :ssr="true"/>
-            <b>Modalités de participation :</b> {{ modalite }}
-          </li>
-        </ul>
+        <dl class="head">
+          <div>
+            <dt>
+              <VIcon icon="ri:time-fill" :inline="true" :ssr="true"/>
+              Statut de la consultation :
+            </dt>
+            <dd>{{ ficheInventaire.statut }}</dd>
+          </div>
+          <div>
+            <dt>
+              <VIcon icon="ri:calendar-2-fill" :inline="true" :ssr="true"/>
+              Dates d’ouverture à la participation :
+            </dt>
+            <dd>
+              du
+              <Date :date="ficheInventaire.debut"/>
+              au
+              <Date :date="ficheInventaire.fin"/>
+            </dd>
+          </div>
+          <div>
+            <dt><VIcon icon="ri:team-fill" :inline="true" :ssr="true"/> Conditions de participation : </dt>
+            <dd>{{ ficheInventaire.conditionParticipation }}</dd>
+          </div>
+          <div>
+            <dt><VIcon icon="ri:message-2-fill" :inline="true" :ssr="true"/> Modalités de participation : </dt>
+            <dd>{{ ficheInventaire.modaliteParticipation }}</dd>
+          </div>
+        </dl>
         <div v-html="tabs[0].content"></div>
       </DsfrTabContent>
 
@@ -124,6 +126,11 @@ const selectLast = async () => {
 </template>
 
 <style>
+.reverse {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .header-grid {
   display: grid;
   grid-template-columns: 
@@ -169,20 +176,27 @@ h2 {
   margin-bottom: 2em;
 }
 
-ul.head {
-  li {
-    list-style: none;
+dl {
+  padding-left: 0;
+  
+  div {
     margin-bottom: 0.8em;
+    
+    dt {
+      display: inline;
+      font-weight: bold;
+      color: var(--blue-france-sun-113-625);
 
-    .vicon {
-      color: var(--blue-france-sun-113-625) !important;
-      width: 1.2em;
-      height: 1.2em;
-      margin-right: 0.5em;
+      .vicon {
+        width: 1.2em;
+        height: 1.2em;
+        margin-right: 0.5em;
+      }
     }
 
-    b {
-      color: var(--blue-france-sun-113-625);
+    dd {
+      display: inline;
+      padding: 0;
     }
   }
 }

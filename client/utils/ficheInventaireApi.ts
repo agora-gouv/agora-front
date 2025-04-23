@@ -1,5 +1,3 @@
-import { AsyncData } from "nuxt/app";
-import { FetchError } from "ofetch";
 import { FicheInventaireApiDTO } from "~/client/types/fiche_inventaire/ficheInventaire";
 
 export class FicheInventaireApi {
@@ -9,11 +7,11 @@ export class FicheInventaireApi {
     const routeFicheInventaireResponsesUrl = `${this.baseUrl}/fiches_inventaire`
 
     const {data: fichesInventaire, error}
-      = await useFetch<FicheInventaireApiDTO>(routeFicheInventaireResponsesUrl)
+      = await useFetch<FicheInventaireApiDTO[]>(routeFicheInventaireResponsesUrl)
 
     if (error.value) throw createError({statusCode: error.value!.statusCode})
 
-    return fichesInventaire
+    return fichesInventaire.value
   }
 
   async get(id: string) {
@@ -24,6 +22,6 @@ export class FicheInventaireApi {
 
     if (error.value) throw createError({statusCode: error.value!.statusCode})
 
-    return ficheInventaire
+    return ficheInventaire.value
   }
 }
