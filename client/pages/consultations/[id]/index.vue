@@ -29,7 +29,7 @@ onMounted(async () => {
   <div>
     <ClientOnly>
       <template #fallback>
-        <Loader id="loader" class="fr-mt-4w" />
+        <Loader class="fr-mt-4w" />
       </template>
       <ConsultationOther v-if="consultation" :consultation="consultation"/>
     </ClientOnly>
