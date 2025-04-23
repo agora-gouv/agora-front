@@ -127,15 +127,20 @@ const vAutofocus = {
     >
     </DsfrInputGroup>
 
-    <DsfrSelect
-      name="department"
-      labelVisible
-      placeholder="75"
-      label="Dans quel département ou collectivité d'outre-mer vivez-vous ?"
-      :options="departementsOptions"
-      :model-value="profil?.department"
-    >
-    </DsfrSelect>
+    <div role="group">
+      <DsfrSelect
+        name="department"
+        labelVisible
+        label="Dans quel département ou collectivité d'outre-mer vivez-vous ?"
+        :options="departementsOptions"
+        :model-value="profil?.department"
+        selectId="select-departement"
+      >
+      </DsfrSelect>
+      <SetValueButton for="select-departement" value="99">
+        J'habite à l'étranger
+      </SetValueButton>
+    </div>
 
     <DsfrSelect
       name="cityType"
@@ -210,3 +215,12 @@ const vAutofocus = {
     <DsfrButton label="Enregistrer"/>
   </form>
 </template>
+
+<style>
+div[role="group"] * + button[aria-controls] {
+  margin-top: -.5rem;
+}
+div[role="group"] {
+  margin-bottom: 1.5rem;
+}
+</style>
