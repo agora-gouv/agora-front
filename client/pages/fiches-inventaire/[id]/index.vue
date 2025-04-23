@@ -6,7 +6,7 @@ definePageMeta({
 })
 
 const ficheId = useRoute().params.id as string
-const ficheInventaire = (await (new FicheInventaireApi().get(ficheId))).value
+const ficheInventaire = (await new FicheInventaireApi().get(ficheId)).value
 
 const etape = ficheInventaire.etape
 const objectif = ficheInventaire.objectif
