@@ -32,6 +32,21 @@ const tabTitles = [
   {title: 'Suivi de la consultation'},
 ]
 
+const selectPrevious = async () => {
+  const newIndex = activeTab.value === 0 ? tabTitles.length - 1 : activeTab.value - 1
+  activeTab.value = newIndex
+}
+const selectNext = async () => {
+  const newIndex = activeTab.value === tabTitles.length - 1 ? 0 : activeTab.value + 1
+  activeTab.value = newIndex
+}
+const selectFirst = async () => {
+  activeTab.value = 0
+}
+const selectLast = async () => {
+  activeTab.value = tabTitles.length - 1
+}
+
 const activeTab = ref(etape.toLowerCase() === "analyse des résultats" ? 1 : etape.toLowerCase() === "suivi de la consultation" ? 2 : 0)
 </script>
 
@@ -68,7 +83,11 @@ const activeTab = ref(etape.toLowerCase() === "analyse des résultats" ? 1 : eta
     <DsfrTabs v-model="activeTab" :tab-list-name="tabListName" :tab-titles="tabTitles">
       <template #tab-items>
         <DsfrTabItem v-for="(tab, index) of tabTitles" :key="index" :tab-id="index.toString()"
-                     :panel-id="index.toString()" @click="activeTab = index">
+                     :panel-id="index.toString()" @click="activeTab = index"
+                     @next="selectNext()"
+                     @previous="selectPrevious()"
+                     @first="selectFirst()"
+                     @last="selectLast()">
           {{ tab.title }}
         </DsfrTabItem>
       </template>
