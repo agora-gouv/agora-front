@@ -6,7 +6,7 @@ definePageMeta({
 const departements = await new DepartementsApi().getDepartements();
 
 const app = useNuxtApp()
-app.provide('departements', departements)
+if (!app.$departements) app.provide('departements', departements);
 
 </script>
 
