@@ -23,7 +23,7 @@ const condition = ficheInventaire.conditionParticipation
 const modalite = ficheInventaire.modaliteParticipation
 const nombreDeCaracteresMinimumPourAfficherContenu = 20
 
-const tabListName = 'Liste d’onglet'
+const tabListName = 'Étapes de la consultation'
 const tabs = [
   {id: "lancement", title: 'Lancement de la consultation', content: ficheInventaire.etapeLancementHtml},
   {id: "analyse", title: 'Analyse des résultats', content: ficheInventaire.etapeAnalyseHtml},
