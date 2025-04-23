@@ -2,6 +2,8 @@
 const {jwtToken} = await useAuthentication()
 const profil = await new ProfilApi().getProfil(jwtToken);
 const status = useState<'pending' | 'success' | 'error'>(() => 'pending')
+const categorieSocioProModalOpen = useState<boolean>(() => false);
+const profilVoteurModalOpen = useState<boolean>(() => false);
 
 const { id = useId() } = defineProps<{
   id?: string
@@ -102,6 +104,8 @@ const vAutofocus = {
     </p>
     <DsfrButton label="Réessayer" type="submit" :form="id"/>
   </DsfrAlert>
+  <ProfilCategorieSocioProModal :open="categorieSocioProModalOpen" @close="() => categorieSocioProModalOpen = false" />
+  <ProfilVoteurModal :open="profilVoteurModalOpen" @close="() => profilVoteurModalOpen = false" />
   <form @submit.prevent="submit" :id="id" v-bind="$attrs">
     <DsfrSelect
       name="gender"
@@ -146,12 +150,30 @@ const vAutofocus = {
       :options="categoriesJob"
       :model-value="profil?.jobCategory"
     >
-      <template #label>De quelle catégorie socio-professionnelle faites-vous partie ?</template>
+      <template #label>
+        De quelle catégorie socio-professionnelle faites-vous partie ?
+        <!-- FIXME (GAFI 22-04-2025): Devrait être en dehors du label -->
+        <DsfrButton
+          label="De quoi s'agit-il ?"
+          type="button"
+          noOutline
+          tertiary
+          @click="() => categorieSocioProModalOpen = true"
+        />
+      </template>
     </DsfrSelect>
 
     <DsfrFieldset>
       <!-- FIXME (GAFI 25-03-2025): Pas très explicite comme legend -->
       <template #legend>Diriez-vous que...</template>
+      <DsfrButton
+        label="Pourquoi me demande-t-on cela ?"
+        type="button"
+        noOutline
+        tertiary
+        @click="() => profilVoteurModalOpen = true"
+      />
+
       <DsfrRadioButtonSet
         inline
         :options="frequences"
