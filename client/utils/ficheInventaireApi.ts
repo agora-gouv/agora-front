@@ -20,7 +20,7 @@ export class FicheInventaireApi {
     const routeFicheInventaireResponsesUrl = `${this.baseUrl}/fiches_inventaire/${id}`
 
     const {data: ficheInventaire, error: error}
-      = await useFetch(routeFicheInventaireResponsesUrl) as AsyncData<FicheInventaireApiDTO, FetchError>
+      = await useFetch<FicheInventaireApiDTO>(routeFicheInventaireResponsesUrl)
 
     if (error.value) throw createError({statusCode: error.value!.statusCode})
 
