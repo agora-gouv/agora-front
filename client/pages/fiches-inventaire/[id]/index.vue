@@ -21,33 +21,30 @@ const finConsultation = ficheInventaire.fin
 const statut = ficheInventaire.statut
 const condition = ficheInventaire.conditionParticipation
 const modalite = ficheInventaire.modaliteParticipation
-const etape1 = ficheInventaire.etapeLancementHtml
-const etape2 = ficheInventaire.etapeAnalyseHtml
-const etape3 = ficheInventaire.etapeSuiviHtml
 
 const tabListName = 'Liste d’onglet'
-const tabTitles = [
-  {title: 'Lancement de la consultation'},
-  {title: 'Analyse des résultats'},
-  {title: 'Suivi de la consultation'},
+const tabs = [
+  {id: "lancement", title: 'Lancement de la consultation', content: ficheInventaire.etapeLancementHtml},
+  {id: "analyse", title: 'Analyse des résultats', content: ficheInventaire.etapeAnalyseHtml},
+  {id: "suivi", title: 'Suivi de la consultation', content: ficheInventaire.etapeSuiviHtml},
 ]
+const activeTab = ref(tabs.findIndex((xx) => xx.title.toLowerCase() === etape.toLowerCase()) ?? 0)
 
 const selectPrevious = async () => {
-  const newIndex = activeTab.value === 0 ? tabTitles.length - 1 : activeTab.value - 1
+  const newIndex = activeTab.value === 0 ? tabs.length - 1 : activeTab.value - 1
   activeTab.value = newIndex
 }
 const selectNext = async () => {
-  const newIndex = activeTab.value === tabTitles.length - 1 ? 0 : activeTab.value + 1
+  const newIndex = activeTab.value === tabs.length - 1 ? 0 : activeTab.value + 1
   activeTab.value = newIndex
 }
 const selectFirst = async () => {
   activeTab.value = 0
 }
 const selectLast = async () => {
-  activeTab.value = tabTitles.length - 1
+  activeTab.value = tabs.length - 1
 }
 
-const activeTab = ref(etape.toLowerCase() === "analyse des résultats" ? 1 : etape.toLowerCase() === "suivi de la consultation" ? 2 : 0)
 </script>
 
 <template>
@@ -80,19 +77,17 @@ const activeTab = ref(etape.toLowerCase() === "analyse des résultats" ? 1 : eta
       </li>
     </ul>
 
-    <DsfrTabs v-model="activeTab" :tab-list-name="tabListName" :tab-titles="tabTitles">
+    <DsfrTabs v-model="activeTab" :tab-list-name="tabListName" :tab-titles="tabs">
       <template #tab-items>
-        <DsfrTabItem v-for="(tab, index) of tabTitles" :key="index" :tab-id="index.toString()"
-                     :panel-id="index.toString()" @click="activeTab = index"
-                     @next="selectNext()"
-                     @previous="selectPrevious()"
-                     @first="selectFirst()"
-                     @last="selectLast()">
+        <TabItem v-for="(tab, index) of tabs" :key="index" :tab-id="tab.id"
+                     :panel-id="index.toString()" @click="activeTab = index" @next="selectNext()"
+                     @previous="selectPrevious()" @first="selectFirst()" @last="selectLast()"
+                     :disabled="tab.content.length < 20">
           {{ tab.title }}
-        </DsfrTabItem>
+        </TabItem>
       </template>
 
-      <DsfrTabContent panel-id="0" tab-id="0">
+      <DsfrTabContent panel-id="0" tab-id="lancement">
         <ul class="head">
           <li>
             <VIcon icon="ri:time-fill" :inline="true" :ssr="true"/>
@@ -114,15 +109,15 @@ const activeTab = ref(etape.toLowerCase() === "analyse des résultats" ? 1 : eta
             <b>Modalités de participation :</b> {{ modalite }}
           </li>
         </ul>
-        <div v-html="etape1"></div>
+        <div v-html="tabs[0].content"></div>
       </DsfrTabContent>
 
-      <DsfrTabContent panel-id="1" tab-id="1">
-        <div v-html="etape2"></div>
+      <DsfrTabContent panel-id="1" tab-id="analyse">
+        <div v-html="tabs[1].content"></div>
       </DsfrTabContent>
 
-      <DsfrTabContent panel-id="2" tab-id="2">
-        <div v-html="etape3"></div>
+      <DsfrTabContent panel-id="2" tab-id="suivi">
+        <div v-html="tabs[2].content"></div>
       </DsfrTabContent>
     </DsfrTabs>
   </div>
