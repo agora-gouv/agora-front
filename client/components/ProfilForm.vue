@@ -13,7 +13,7 @@ const departements = useNuxtApp().$departements
   .value
   .regions
   .flatMap(region => region.departements)
-  .sort((departement1, departement2) => departement1.codePostal < departement2.codePostal)
+  .sort((departement1, departement2) => departement1.codePostal.localeCompare(departement2.codePostal))
   .map(departement => ({
     value: departement.codePostal,
     text: `${departement.codePostal} – ${departement.label}`
