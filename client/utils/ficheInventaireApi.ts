@@ -11,7 +11,7 @@ export class FicheInventaireApi {
 
     if (error.value) throw createError({statusCode: error.value!.statusCode})
 
-    return fichesInventaire.value
+    return fichesInventaire.value!!
   }
 
   async get(id: string) {
@@ -22,6 +22,6 @@ export class FicheInventaireApi {
 
     if (error.value) throw createError({statusCode: error.value!.statusCode})
 
-    return ficheInventaire.value
+    return ficheInventaire.value!!
   }
 }

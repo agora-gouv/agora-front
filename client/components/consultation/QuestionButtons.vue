@@ -15,12 +15,12 @@ const scrollToTop = () => {
 </script>
 
 <template>
-  <div class="fr-mt-3w">
-    <DsfrButton type="button" v-if="hasPreviousQuestion" class="fr-btn fr-btn--secondary fr-mr-4w" @click="previousQuestion(); scrollToTop()">Question
+  <div>
+    <DsfrButton type="button" v-if="hasPreviousQuestion" class="fr-btn fr-btn--secondary fr-mr-4w fr-mt-2w" @click="previousQuestion(); scrollToTop()">Question
       précédente
     </DsfrButton>
-    <DsfrButton type="button" v-if="hasNextQuestion" class="fr-btn fr-mr-4w" @click="nextQuestion(nextQuestionId); scrollToTop()">Question suivante</DsfrButton>
-    <DsfrButton v-if="!hasNextQuestion" class="fr-btn fr-mr-4w">Envoyer</DsfrButton>
+    <DsfrButton type="button" v-if="hasNextQuestion" class="fr-btn fr-mr-4w fr-mt-2w" @click="nextQuestion(nextQuestionId); scrollToTop()">Question suivante</DsfrButton>
+    <DsfrButton v-if="!hasNextQuestion" class="fr-btn fr-mr-4w fr-mt-2w">Envoyer</DsfrButton>
   </div>
 </template>
 

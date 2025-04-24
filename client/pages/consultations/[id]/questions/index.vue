@@ -26,7 +26,7 @@ const isMaximumChoices = computed(() => {
   return false
 })
 
-const expandedSectionId = ref("")
+const activeAccordion = ref<number>()
 </script>
 
 <template>
@@ -41,9 +41,8 @@ const expandedSectionId = ref("")
 
     <h3 class="question-title">{{ currentQuestion?.title }}</h3>
 
-    <DsfrAccordionsGroup>
-      <DsfrAccordion v-if="currentQuestion?.popupDescription" title="Plus de précision"
-                     :expanded-id="expandedSectionId" @expand="id => expandedSectionId = id">
+    <DsfrAccordionsGroup class="fr-my-3w" v-model="activeAccordion">
+      <DsfrAccordion v-if="currentQuestion?.popupDescription" title="Plus de précision" id="accordion-1">
         <h5>Contenu</h5>
         <div v-html="currentQuestion?.popupDescription"/>
       </DsfrAccordion>

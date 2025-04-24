@@ -74,6 +74,10 @@ const menu = [
     to: '/consultations',
     text: 'Consultations',
   },
+  runtimeConfig.public.features.fiches === '1' && {
+    to: '/fiches-inventaire',
+    text: 'Fiches inventaire',
+  },
 ].filter(element => Boolean(element))
 
 const preferences = reactive({

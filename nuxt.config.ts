@@ -65,7 +65,8 @@ export default defineNuxtConfig({
       features: {
         qags: process.env.QAGS_FEATURE,
         consultations: process.env.CONSULTATIONS_FEATURE,
-        pedagogie: process.env.PEDAGOGIE_FEATURE
+        pedagogie: process.env.PEDAGOGIE_FEATURE,
+        fiches: process.env.FICHES_FEATURE,
       },
     },
   },
