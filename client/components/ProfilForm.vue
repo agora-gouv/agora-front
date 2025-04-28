@@ -166,7 +166,6 @@ const vAutofocus = {
         <DsfrButton
           label="De quoi s'agit-il ?"
           type="button"
-          noOutline
           tertiary
           @click="() => categorieSocioProModalOpen = true"
         />
@@ -179,7 +178,6 @@ const vAutofocus = {
       <DsfrButton
         label="Pourquoi me demande-t-on cela ?"
         type="button"
-        noOutline
         tertiary
         @click="() => profilVoteurModalOpen = true"
       />
