@@ -9,11 +9,16 @@ const { id = useId() } = defineProps<{
   id?: string
 }>()
 
+function convertLetters(code: string) {
+  return code.replace(/([A-Za-z])/, (match, letter) => `0${letter}`)
+}
+
 const departements = useNuxtApp().$departements
   .value
   .regions
   .flatMap(region => region.departements)
-  .sort((departement1, departement2) => departement1.codePostal < departement2.codePostal)
+  .sort((departement1, departement2) => convertLetters(departement1.codePostal)
+    .localeCompare(convertLetters(departement2.codePostal), undefined, { numeric: true }))
   .map(departement => ({
     value: departement.codePostal,
     text: `${departement.codePostal} – ${departement.label}`
