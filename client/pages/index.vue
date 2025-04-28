@@ -11,4 +11,5 @@ useHead({
 <template>
   <HomeHero class="fr-pt-4w" />
   <HomeFonctionnalites />
+  <BandeauTelechargementAdaptatif title="Également disponible sur mobile" />
 </template>
