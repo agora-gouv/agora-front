@@ -164,6 +164,7 @@ const vAutofocus = {
         De quelle catégorie socio-professionnelle faites-vous partie ?
         <!-- FIXME (GAFI 22-04-2025): Devrait être en dehors du label -->
         <DsfrButton
+          class="aide-saisie"
           label="De quoi s'agit-il ?"
           type="button"
           tertiary
@@ -176,6 +177,7 @@ const vAutofocus = {
       <!-- FIXME (GAFI 25-03-2025): Pas très explicite comme legend -->
       <template #legend>Diriez-vous que...</template>
       <DsfrButton
+        class="aide-saisie"
         label="Pourquoi me demande-t-on cela ?"
         type="button"
         tertiary
@@ -225,5 +227,14 @@ div[role="group"] * + button[aria-controls] {
 }
 div[role="group"] {
   margin-bottom: 1.5rem;
+}
+/* FIXME (GAFI 28-04-2025): Nécessaire pour palier au style scopé du VueDSFR */
+button.aide-saisie.aide-saisie {
+  display: flex;
+}
+legend + button.aide-saisie,
+legend + * > button.aide-saisie:first-child {
+  margin-top: -1rem;
+  margin-bottom: 1rem;
 }
 </style>
