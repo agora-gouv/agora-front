@@ -111,7 +111,7 @@ onMounted(()=>{
     z-index: -1;
   }
 
-  h2 {
+  :is(h1, h2) {
     color: var(--blue-france-sun-113-625);
     font-size: 2.5rem;
     line-height: 3rem;
