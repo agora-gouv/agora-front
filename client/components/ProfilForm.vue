@@ -58,10 +58,10 @@ const categoriesJob = [
 ]
 
 const frequences = [
-  {label: "Sans réponse", value: ''},
   {label: "Souvent", value: 'S'},
   {label: "Parfois", value: 'P'},
   {label: "Jamais", value: 'J'},
+  {label: "Non renseigné", value: ''},
 ]
 
 const maxYear = new Date().getFullYear()
