@@ -57,22 +57,17 @@ const menu = [
     to: '/',
     text: 'Accueil'
   },
-  runtimeConfig.public.features.pedagogie === '1' && {
-    title: 'Comprendre la participation citoyenne ?',
-    links: [
-      { to: '/participation-citoyenne', text: 'Qu’est-ce que c’est ?' },
-      { to: '/participation-citoyenne#comment-ca-marche', text: 'Comment ça marche ?' },
-      { to: '/participation-citoyenne#engagements', text: 'Les engagements de l’État' },
-      { to: '/participation-citoyenne#acteurs', text: 'Les acteurs' },
-    ]
+  runtimeConfig.public.features.consultations === '1' && {
+    to: '/consultations',
+    text: 'Les initiatives de l’État pour associer les citoyens',
   },
   runtimeConfig.public.features.qags === '1' && {
     to: '/qags',
-    text: 'Questions citoyennes',
+    text: 'Les questions citoyennes au Gouvernement',
   },
-  runtimeConfig.public.features.consultations === '1' && {
-    to: '/consultations',
-    text: 'Consultations',
+  runtimeConfig.public.features.pedagogie === '1' && {
+    text: 'La participation citoyenne en France',
+    to: '/participation-citoyenne'
   },
 ].filter(element => Boolean(element))
 
