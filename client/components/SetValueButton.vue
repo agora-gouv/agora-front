@@ -4,13 +4,7 @@ const { for: target, value } = defineProps<{
   value: HTMLInputElement['value'],
 }>()
 
-function setValue(event) {
-  const form = event.currentTarget.form
-  if (!form || !form.elements[target]) return;
-
-  form.elements[target].value = value
-  form.elements[target].focus()
-}
+const setValue = useSetFormValue(target, value)
 </script>
 
 <template>
