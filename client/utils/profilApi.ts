@@ -1,6 +1,6 @@
 import {FetchError} from "ofetch";
 
-type ProfilInfoDto = {
+export type ProfilInfoDto = {
   "gender": string,
   "yearOfBirth": number,
   "department": string,
@@ -17,20 +17,18 @@ export class ProfilApi {
   async getProfil(token: string) {
     const route = `${this.baseUrl}/profile`
 
-    const {
-      data: profil,
-      error
-    } = await useFetch<ProfilInfoDto, FetchError>(route, {
+    const result = await useFetch<ProfilInfoDto, FetchError>(route, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
-    })
+    });
+    const { data: profil, error } = result
 
     if (error.value) {
       throw createError({statusCode: error.value.statusCode})
     }
 
-    return profil
+    return result
   }
 
   async editProfil(data: ProfilInfoDto, token: string) {
@@ -41,6 +39,33 @@ export class ProfilApi {
     } = await useFetch<never, FetchError>(route, {
       method: "POST",
       body: data,
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    })
+
+    if (error.value) {
+      throw createError({statusCode: error.value.statusCode})
+    }
+  }
+  
+  async resetProfil(token: string) {
+    const route = `${this.baseUrl}/profile`
+
+    const {
+      error
+    } = await useFetch<never, FetchError>(route, {
+      method: "POST",
+      body: {
+        "gender": null,
+        "yearOfBirth": null,
+        "department": null,
+        "cityType": null,
+        "jobCategory": null,
+        "voteFrequency": null,
+        "publicMeetingFrequency": null,
+        "consultationFrequency": null
+      },
       headers: {
         "Authorization": `Bearer ${token}`
       }
