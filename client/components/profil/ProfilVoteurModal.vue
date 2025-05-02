@@ -10,7 +10,7 @@ const emit = defineEmits<{
 <template>
   <DsfrModal
     :opened="open"
-    title="Pouquoi me demande-t-on cela ?"
+    title="Pourquoi me demande-t-on cela ?"
     :actions="[{ label: 'J\'ai compris', onClick: () => emit('close') }]"
     @close="() => emit('close')"
   >
