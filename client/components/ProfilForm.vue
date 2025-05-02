@@ -58,10 +58,10 @@ const categoriesJob = [
 ]
 
 const frequences = [
-  {label: "Sans réponse", value: ''},
   {label: "Souvent", value: 'S'},
   {label: "Parfois", value: 'P'},
   {label: "Jamais", value: 'J'},
+  {label: "Non renseigné", value: ''},
 ]
 
 const maxYear = new Date().getFullYear()
@@ -134,7 +134,7 @@ const maxYear = new Date().getFullYear()
 
     <DsfrFieldset>
       <!-- FIXME (GAFI 25-03-2025): Pas très explicite comme legend -->
-      <template #legend>Diriez-vous que...</template>
+      <template #legend>Votre type d'engagement</template>
       <DsfrButton
         class="aide-saisie"
         label="Pourquoi me demande-t-on cela ?"
@@ -149,7 +149,7 @@ const maxYear = new Date().getFullYear()
         name="voteFrequency"
         :model-value="profil?.voteFrequency ?? ''"
       >
-        <template #legend>Je vote&hellip;</template>
+        <template #legend>À quelle fréquence votez-vous ?</template>
       </DsfrRadioButtonSet>
 
       <DsfrRadioButtonSet
@@ -158,7 +158,7 @@ const maxYear = new Date().getFullYear()
         :options="frequences"
         name="publicMeetingFrequency"
       >
-        <template #legend>Je m'engage sur le terrain&hellip;</template>
+        <template #legend>À quelle fréquence vous engagez-vous sur le terrain ?</template>
         <template #hint>Exemples : faire partie d'une association, manifester, participer à des débats publics ou aux conseils municipaux
           de ma ville, etc.
         </template>
@@ -170,7 +170,7 @@ const maxYear = new Date().getFullYear()
         :options="frequences"
         name="consultationFrequency"
       >
-        <template #legend>Je m'engage en ligne&hellip;</template>
+        <template #legend>À quelle fréquence vous engagez-vous en ligne ?</template>
         <template #hint>Exemples : donner mon avis via des consultations en ligne, signer une pétition, défendre des causes sur les
           réseaux sociaux, etc.
         </template>
