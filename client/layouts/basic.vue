@@ -99,7 +99,7 @@ if (error.value) {
   throw createError({ statusCode: error.value!.statusCode})
 }
 
-onMounted(function focusHash() {
+function focusHash() {
   const hash = location.hash
   if (!hash) return;
 
@@ -110,6 +110,9 @@ onMounted(function focusHash() {
     target.setAttribute('tabindex', '-1')
   }
   target.focus();
+}
+const app = useNuxtApp().vueApp.mixin({
+  mounted: focusHash,
 })
 </script>
 
