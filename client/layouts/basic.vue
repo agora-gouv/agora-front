@@ -96,6 +96,19 @@ const { data: accueilContent, error } = await useFetch(routeUrl) as AsyncData<Ac
 if (error.value) {
   throw createError({ statusCode: error.value!.statusCode})
 }
+
+onMounted(function focusHash() {
+  const hash = location.hash
+  if (!hash) return;
+
+  const target = document.getElementById(hash.substring(1))
+  if (!target) return;
+
+  if (!target.getAttribute('tabindex')) {
+    target.setAttribute('tabindex', '-1')
+  }
+  target.focus();
+})
 </script>
 
 <template>
