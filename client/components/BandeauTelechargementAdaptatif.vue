@@ -24,7 +24,7 @@ onMounted(()=>{
 </script>
 
 <template>
-  <div class="bandeau-adaptatif fr-grid-row fr-py-1w">
+  <div class="bandeau-adaptatif fr-grid-row fr-py-1w break-container">
     <div class="fr-col-12 fr-col-md-6 fr-grid-row fr-grid-row--middle">
       <div>
         <h2>{{title}}</h2>
@@ -95,21 +95,8 @@ onMounted(()=>{
 
 <style lang="scss">
 .bandeau-adaptatif {
-  position: relative;
+  background-color: var(--blue-france-975-75);
   color: var(--blue-france-sun-113-625);
-
-  &::before {
-    content: "";
-    position: absolute;
-    width: 100vw;
-    height: 100%;
-    top: 0;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-    background-color: var(--blue-france-975-75);
-    z-index: -1;
-  }
 
   :is(h1, h2) {
     color: var(--blue-france-sun-113-625);
