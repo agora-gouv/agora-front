@@ -114,11 +114,7 @@ if (error.value) {
   </DsfrHeader>
   <main id="main">
     <div class="fr-container fr-mb-8w">
-      <div class="fr-grid-row fr-grid-row--center">
-        <div class="fr-col-10">
-          <slot/>
-        </div>
-      </div>
+      <slot/>
     </div>    
   </main>
   <DsfrFooter
