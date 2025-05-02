@@ -59,15 +59,17 @@ const menu = [
   },
   runtimeConfig.public.features.consultations === '1' && {
     to: '/consultations',
-    text: 'Les initiatives de l’État pour associer les citoyens',
+    text: 'Initiatives de l’État pour associer les citoyens',
   },
   runtimeConfig.public.features.qags === '1' && {
     to: '/qags',
-    text: 'Les questions citoyennes au Gouvernement',
+    text: 'Questions au Gouvernement',
   },
   runtimeConfig.public.features.pedagogie === '1' && {
-    text: 'La participation citoyenne en France',
-    to: '/participation-citoyenne'
+    text: 'Qu’est-ce que la participation citoyenne ?',
+    to: 'https://www.modernisation.gouv.fr/associer-les-citoyens/quest-ce-que-la-participation-citoyenne',
+    target: "_blank",
+    rel: "noopener noreferrer"
   },
 ].filter(element => Boolean(element))
 
@@ -118,7 +120,6 @@ onMounted(function focusHash() {
     :operator-img-src="operatorImgSrc"
     :operator-img-style="operatorImgStyle"
     :service-title="accueilContent.titreHeader"
-    :service-description="accueilContent.sousTitreHeader"
     :quick-links="profil"
   >
     <template #mainnav>

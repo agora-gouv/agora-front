@@ -31,7 +31,7 @@ const consultations = await (new ConsultationApi().getAllConsultations())
     </DsfrCard>
     
 
-    <h2>Consultations terminées</h2>
+    <h2 id="terminees">Consultations terminées</h2>
     <div class="fr-grid-row">
       <div class="fr-col fr-col-sm-6 fr-col-md-4 fr-mb-2w" v-for="consultation in consultations.finished" :key="consultation.id">
         <DsfrCard

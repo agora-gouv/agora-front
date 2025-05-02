@@ -20,7 +20,7 @@ if (error.value) {
   <div class="tuiles fr-grid-row fr-grid-row--gutters fr-grid-row--center fr-py-8w">
     <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
-        title="prendre part à la politique de la France"
+        title="Donner votre avis sur les politiques publiques"
         imgSrc="./fonctionnalite_1.svg"
         class="tuile"
         to="/consultations"
@@ -29,20 +29,20 @@ if (error.value) {
     </div>
     <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
-        title="Poser des questions au Gouvernement"
+        title="Suivre les résultats"
         imgSrc="./fonctionnalite_2.svg"
         class="tuile"
-        to="/qags"
-        :disabled="!runtimeConfig.public.features.qags"
+        to="/consultations#terminees"
+        :disabled="!runtimeConfig.public.features.consultations"
       />
     </div>
     <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
-        title="En savoir plus sur la participation citoyenne en France"
+        title="Poser vos questions au Gouvernement"
         imgSrc="./fonctionnalite_3.svg"
         class="tuile"
-        to="/participation-citoyenne"
-        :disabled="!runtimeConfig.public.features.pedagogie"
+        to="/qags"
+        :disabled="!runtimeConfig.public.features.qags"
       />
     </div>
   </div>
