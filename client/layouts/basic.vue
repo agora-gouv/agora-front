@@ -105,7 +105,6 @@ if (error.value) {
     :operator-img-src="operatorImgSrc"
     :operator-img-style="operatorImgStyle"
     :service-title="accueilContent.titreHeader"
-    :service-description="accueilContent.sousTitreHeader"
     :quick-links="profil"
   >
     <template #mainnav>
