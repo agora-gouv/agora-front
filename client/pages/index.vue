@@ -9,6 +9,7 @@ useHead({
 </script>
 
 <template>
+  <HomeALaUne />
   <HomeHero class="fr-pt-4w" />
   <HomeFonctionnalites />
   <p>
