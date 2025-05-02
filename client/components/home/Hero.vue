@@ -17,7 +17,7 @@ if (error.value) {
 </script>
 
 <template>
-  <div class="bandeau-adaptatif fr-grid-row fr-py-1w">
+  <div class="hero break-container fr-grid-row fr-py-1w">
     <div class="content fr-col-12 fr-col-md-6 fr-grid-row fr-grid-row--middle">
       <h1>Bienvenue sur le site de la participation citoyenne de l’État</h1>
       <p>
@@ -29,3 +29,10 @@ if (error.value) {
     <img src="/cooperation.svg" alt="" class="fr-col-12 fr-col-md-6">
   </div>
 </template>
+
+<style>
+.hero {
+  background-color: var(--blue-france-975-75);
+  color: var(--blue-france-sun-113-625);
+}
+</style>
