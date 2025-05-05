@@ -71,6 +71,10 @@ const menu = [
     target: "_blank",
     rel: "noopener noreferrer"
   },
+  runtimeConfig.public.features.fiches === '1' && {
+    to: '/fiches-inventaire',
+    text: 'Fiches inventaire',
+  },
 ].filter(element => Boolean(element))
 
 const preferences = reactive({

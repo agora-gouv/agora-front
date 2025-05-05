@@ -1,6 +1,7 @@
 import Thematique from "~/client/types/thematique/thematique";
 
 interface FicheInventaireApiDTO {
+  id: string,
   etapeLancementHtml: string,
   etapeAnalyseHtml: string,
   etapeSuiviHtml: string,

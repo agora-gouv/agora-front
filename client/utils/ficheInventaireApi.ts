@@ -9,9 +9,9 @@ export class FicheInventaireApi {
     const {data: fichesInventaire, error}
       = await useFetch<FicheInventaireApiDTO[]>(routeFicheInventaireResponsesUrl)
 
-    if (error.value) throw createError({statusCode: error.value!.statusCode})
+    if (error.value) throw createError({statusCode: error.value.statusCode})
 
-    return fichesInventaire.value
+    return fichesInventaire.value!
   }
 
   async get(id: string) {
@@ -20,8 +20,8 @@ export class FicheInventaireApi {
     const {data: ficheInventaire, error}
       = await useFetch<FicheInventaireApiDTO>(routeFicheInventaireResponsesUrl)
 
-    if (error.value) throw createError({statusCode: error.value!.statusCode})
+    if (error.value) throw createError({statusCode: error.value.statusCode})
 
-    return ficheInventaire.value
+    return ficheInventaire.value!
   }
 }

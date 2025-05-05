@@ -6,7 +6,7 @@ definePageMeta({
 })
 
 const ficheId = useRoute().params.id as string
-const ficheInventaire = (await new FicheInventaireApi().get(ficheId))!!
+const ficheInventaire = (await new FicheInventaireApi().get(ficheId))
 
 const neContientQueDesBalisesSansContenu = /^\s*(<[^>]+>\s*)+$/i
 
