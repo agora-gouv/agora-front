@@ -19,7 +19,7 @@ if (error.value) {
 <template>
   <div class="hero break-container fr-grid-row fr-py-1w">
     <div class="content fr-col-12 fr-col-md-6 fr-grid-row fr-grid-row--middle">
-      <h1>La plateforme de participation citoyenne de l'EtatÉtat</h1>
+      <h1>La plateforme de participation citoyenne de l'État</h1>
       <p>
         Vous avez votre mot à dire sur la politique de la France, et pas seulement au moment des élections. Découvrez sur Agora comment les
         citoyens contribuent à la décision publique.
