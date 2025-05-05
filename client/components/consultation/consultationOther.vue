@@ -112,7 +112,7 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
     />
     <BandeauTelechargementAdaptatif
       v-if="consultation.questionsInfo && new Date(consultation.questionsInfo.endDate) >= new Date()"
-      title="Pour répondre à cette consultation, rendez-vous sur l’application Agora."/>
+      title="C’est encore mieux sur l’application Agora."/>
 
     <BandeauTelechargementAdaptatif v-else title="Téléchargez l'application pour donner votre avis."/>
   </div>

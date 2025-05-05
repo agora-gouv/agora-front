@@ -15,8 +15,8 @@ const isTextChoiceChecked = (choiceId) => {
   if (currentQuestion?.value?.id == null || answersCheckbox.value[currentQuestion.value!!.id] == null) {
     return false
   }
-  
-  answersCheckbox.value[currentQuestion.value!!.id].includes(choiceId);
+
+  return answersCheckbox.value[currentQuestion.value!!.id].includes(choiceId);
 }
 
 const isMaximumChoices = computed(() => {
@@ -112,7 +112,8 @@ const activeAccordion = ref<number>()
       <div v-if="currentQuestion instanceof QuestionOpened">
         <div class="fr-input-group">
           <label class="fr-label" for="textarea">
-            Attention à n’indiquer ni données personnelles qui pourraient vous identifier, ni de lien vers un site internet
+            Vous avez jusqu’à 400 caractères. Attention à n’indiquer ni données personnelles qui pourraient vous identifier, ni de lien vers
+            un site internet
           </label>
           <textarea class="fr-input" id="textarea" maxlength="400"
                     v-model="answersText[currentQuestion.id]"></textarea>
