@@ -97,16 +97,15 @@ const fichesTerminees = fiches.filter(fiche => {
 .fr-grid-row .fr-card {
   min-height: 100%;
   height: auto;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-inline: 1rem;
 }
 
 .fr-badge {
-  font-size: 12px;
+  font-size: .75rem;
 }
 
 .fr-card__start div {
-  font-size: 12px;
+  font-size: .75rem;
 }
 
 h1, h2 {
@@ -119,6 +118,6 @@ h2 {
 }
 
 p {
-  font-size: 16px;
+  font-size: 1rem;
 }
 </style>
