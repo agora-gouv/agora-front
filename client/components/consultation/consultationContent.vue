@@ -70,15 +70,14 @@ const giveFeedback = async (isPositive: boolean) => {
         <ConsultationSections :sections="consultation.body.sections"/>
         <div class="fr-callout">
           <h3>Vous avez déjà répondu à cette consultation et nous vous en remercions !</h3>
-          <p>TODOOOOOO</p>
-          <NuxtLink :to="'/consultations/' + consultation.id + '/results'" class="fr-mb-4w fr-btn">
+          <NuxtLink :to="'/consultations/' + consultation.id + '/results'" class="fr-btn">
             Voir les premiers résultats
           </NuxtLink>
         </div>
         <div class="fr-callout">
           <h3>Donnez votre avis</h3>
           <p>Êtes-vous satisfait(e) de l’analyse de cette consultation ?</p>
-          <DsfrButton type="button" class="fr-btn" @click="giveFeedback(true)">Oui</DsfrButton>
+          <DsfrButton type="button" class="fr-btn fr-mr-2w" @click="giveFeedback(true)">Oui</DsfrButton>
           <DsfrButton type="button" class="fr-btn" @click="giveFeedback(false)">Non</DsfrButton>
         </div>
         <ConsultationShare
