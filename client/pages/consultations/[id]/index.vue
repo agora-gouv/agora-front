@@ -4,11 +4,12 @@ definePageMeta({
 })
 
 const consultation = ref()
+const jwtToken = ref()
 
 onMounted(async () => {
   const consultationId = useRoute().params.id
-  const {jwtToken} = await useAuthentication()
-  consultation.value = (await new ConsultationApi().getConsultation(consultationId.toString(), jwtToken)).value
+  jwtToken.value = (await useAuthentication()).jwtToken
+  consultation.value = (await new ConsultationApi().getConsultation(consultationId.toString(), jwtToken.value)).value
 })
 </script>
 
@@ -18,7 +19,7 @@ onMounted(async () => {
       <template #fallback>
         <Loader class="fr-mt-4w" />
       </template>
-      <ConsultationOther v-if="consultation" :consultation="consultation"/>
+      <ConsultationContent v-if="consultation && jwtToken" :consultation="consultation" :jwt-token="jwtToken"/>
     </ClientOnly>
   </div>
 </template>

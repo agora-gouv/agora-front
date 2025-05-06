@@ -3,7 +3,8 @@ import Consultation from "~/client/types/consultation/consultation";
 import svgBook from "@gouvfr/dsfr/dist/artwork/pictograms/leisure/book.svg";
 
 const props = defineProps<{
-  consultation: Consultation
+  consultation: Consultation,
+  jwtToken: string
 }>()
 
 const userHasAnswered = useRoute().query.answered
@@ -13,6 +14,11 @@ const estEnCours = props.consultation.consultationDates?.endDate
 
 const runtimeConfig = useRuntimeConfig();
 const isResponseActivated = runtimeConfig.public.features.consultations == '1'
+
+const giveFeedback = async (isPositive: boolean) => {
+  const api = new ConsultationApi()
+  await api.giveFeedback(props.consultation.id, props.consultation.updateId, isPositive, props.jwtToken)
+}
 </script>
 
 <template>
@@ -32,7 +38,7 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
 
         <h1>{{ consultation.title }}</h1>
 
-        <div v-if="consultation.questionsInfo" class="info-question fr-px-2w fr-py-1w">
+        <div v-if="consultation.questionsInfo" class="info-question fr-py-1w">
           <div class="fr-mb-2w">
             <VIcon icon="ri:calendar-2-line" :inline="true" :ssr="true"/>
             Jusqu'au
@@ -62,7 +68,24 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
         </div>
         <ConsultationSections :sections="consultation.body.headerSections"/>
         <ConsultationSections :sections="consultation.body.sections"/>
-        <NuxtLink :to="'/consultations/' + consultation.id + '/questions'" v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser" class="fr-mb-4w fr-btn">
+        <div class="fr-callout">
+          <h3>Vous avez déjà répondu à cette consultation et nous vous en remercions !</h3>
+          <p>TODOOOOOO</p>
+          <NuxtLink :to="'/consultations/' + consultation.id + '/results'" class="fr-mb-4w fr-btn">
+            Voir les premiers résultats
+          </NuxtLink>
+        </div>
+        <div class="fr-callout">
+          <h3>Donnez votre avis</h3>
+          <p>Êtes-vous satisfait(e) de l’analyse de cette consultation ?</p>
+          <DsfrButton type="button" class="fr-btn" @click="giveFeedback(true)">Oui</DsfrButton>
+          <DsfrButton type="button" class="fr-btn" @click="giveFeedback(false)">Non</DsfrButton>
+        </div>
+        <ConsultationShare
+          :share-text="`Participez à la consultation ${consultation.title}`"
+          :share-title="consultation.title"/>
+        <NuxtLink :to="'/consultations/' + consultation.id + '/questions'"
+                  v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser" class="fr-mb-4w fr-btn">
           Répondre à la consultation
         </NuxtLink>
       </div>
