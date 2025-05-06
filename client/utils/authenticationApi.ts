@@ -1,4 +1,3 @@
-import { AsyncData } from "nuxt/app";
 import { FetchError } from "ofetch";
 import { LoginResponse, SignupResponse } from "~/client/types/authentication/authenticationApiDTO";
 
@@ -7,20 +6,18 @@ export class AuthenticationApi {
     const baseUrl = useRuntimeConfig().public.apiBaseUrl;
 
     const routeUrl = `${baseUrl}/login`
-    const {data: contentLogin, error} = await useFetch(routeUrl, {
-      method: "POST",
-      headers: {
-        "versionCode": "1",
-        "platform": "web",
-      },
-      body: {"loginToken": loginToken},
-    }) as AsyncData<LoginResponse, FetchError>
-
-    if (error.value) {
-      throw createError({statusCode: error.value!.statusCode})
+    try {
+      return await $fetch<LoginResponse, FetchError>(routeUrl, {
+        method: "POST",
+        headers: {
+          "versionCode": "1",
+          "platform": "web",
+        },
+        body: {"loginToken": loginToken},
+      })
+    } catch (error) {
+      throw createError({statusCode: error.statusCode})
     }
-
-    return contentLogin.value
   }
 
   async signup(): Promise<SignupResponse> {
