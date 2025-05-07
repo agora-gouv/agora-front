@@ -15,8 +15,8 @@ const isTextChoiceChecked = (choiceId) => {
   if (currentQuestion?.value?.id == null || answersCheckbox.value[currentQuestion.value!!.id] == null) {
     return false
   }
-  
-  answersCheckbox.value[currentQuestion.value!!.id].includes(choiceId);
+
+  return answersCheckbox.value[currentQuestion.value!!.id].includes(choiceId);
 }
 
 const isMaximumChoices = computed(() => {
@@ -31,7 +31,7 @@ const activeAccordion = ref<number>()
 
 <template>
   <div class="fr-col-offset-1 fr-col-10 fr-pt-3w">
-    <a id="top" :href="`/consultations/${consultationId}`">Retour à la consultation</a>
+    <a id="top" :href="`/consultations/${consultationId}`">Retour à la présentation</a>
 
     <div v-if="errorMessage" class="fr-alert fr-alert--error fr-mt-2w">
       <h6 class="fr-alert__title">{{ errorMessage }}</h6>
@@ -43,7 +43,6 @@ const activeAccordion = ref<number>()
 
     <DsfrAccordionsGroup class="fr-my-3w" v-model="activeAccordion">
       <DsfrAccordion v-if="currentQuestion?.popupDescription" title="Plus de précision" id="accordion-1">
-        <h5>Contenu</h5>
         <div v-html="currentQuestion?.popupDescription"/>
       </DsfrAccordion>
     </DsfrAccordionsGroup>
@@ -112,7 +111,8 @@ const activeAccordion = ref<number>()
       <div v-if="currentQuestion instanceof QuestionOpened">
         <div class="fr-input-group">
           <label class="fr-label" for="textarea">
-            Attention à n’indiquer ni données personnelles qui pourraient vous identifier, ni de lien vers un site internet
+            Vous avez jusqu’à 400 caractères. Attention à n’indiquer ni données personnelles qui pourraient vous identifier, ni de lien vers
+            un site internet
           </label>
           <textarea class="fr-input" id="textarea" maxlength="400"
                     v-model="answersText[currentQuestion.id]"></textarea>

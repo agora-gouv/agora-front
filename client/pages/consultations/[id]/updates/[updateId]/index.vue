@@ -5,12 +5,13 @@ definePageMeta({
 
 const links = ref()
 const consultationUpdate = ref()
+const jwtToken = ref()
 
 onMounted(async () => {
   const consultationId = useRoute().params.id.toString()
   const consultationUpdateId = useRoute().params.updateId.toString()
-  const {jwtToken} = await useAuthentication()
-  consultationUpdate.value = (await (new ConsultationApi()).getConsultationUpdate(consultationId, consultationUpdateId, jwtToken)).value
+  jwtToken.value = (await useAuthentication()).jwtToken
+  consultationUpdate.value = (await (new ConsultationApi()).getConsultationUpdate(consultationId, consultationUpdateId, jwtToken.value)).value
 
   links.value = [
     {to: '/', text: 'Accueil'},
@@ -27,7 +28,7 @@ onMounted(async () => {
       <Loader class="fr-mt-4w"/>
     </template>
     <DsfrBreadcrumb :links="links"/>
-    <ConsultationOther v-if="consultationUpdate" :consultation="consultationUpdate"/>
+    <ConsultationContent v-if="consultationUpdate && jwtToken" :consultation="consultationUpdate" :jwt-token="jwtToken"/>
   </ClientOnly>
 </template>
 
