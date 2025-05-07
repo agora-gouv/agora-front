@@ -58,7 +58,7 @@ const vAutofocus = {
     </p>
     <DsfrButton label="Réessayer" type="submit" :form="id"/>
   </DsfrAlert>
-  <ProfilForm class="fr-pb-4w" id="profil-form" @submit="submit" :profil="profil"/>
+  <ProfilForm class="fr-pb-4w" id="profil-form" @submit="submit" :modelValue="profil"/>
   <p>Ces informations nous permettent d'analyser plus finement les résultats des consultations à des fins statistiques et de manière anonyme.</p>
   <p>Conformément au RGPD, vous avez la possibilité de consulter, modifier ou supprimer l'ensemble des informations vous concernant.</p>
   <p><a href="/politique-confidentialite">Lire la politique de confidentialité</a></p>

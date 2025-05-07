@@ -8,7 +8,6 @@ if (!app.$departements) {
   const departements = await new DepartementsApi().getDepartements();
   app.provide('departements', departements);
 }
-
 </script>
 
 <template>

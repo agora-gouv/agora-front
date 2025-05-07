@@ -24,6 +24,7 @@ import {
   DsfrTile,
   DsfrTranscription,
   DsfrVideo,
+  DsfrCheckbox,
   DsfrNotice,
 } from "@gouvminint/vue-dsfr";
 import { addIcon, Icon } from '@iconify/vue';
@@ -58,6 +59,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrTabs', DsfrTabs);
   nuxtApp.vueApp.component('DsfrTabItem', DsfrTabItem);
   nuxtApp.vueApp.component('DsfrTabContent', DsfrTabContent);
+  nuxtApp.vueApp.component('DsfrCheckbox', DsfrCheckbox);
   nuxtApp.vueApp.component('DsfrNotice', DsfrNotice);
 
   Object.entries(icons).forEach(([name, icon]) => {
