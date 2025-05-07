@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Consultation from "~/client/types/consultation/consultation";
 import svgBook from "@gouvfr/dsfr/dist/artwork/pictograms/leisure/book.svg";
+import { Ref } from "vue";
 
 const props = defineProps<{
   consultation: Consultation,
@@ -13,6 +14,29 @@ const estEnCours = props.consultation.consultationDates?.endDate
 
 const runtimeConfig = useRuntimeConfig();
 const isResponseActivated = runtimeConfig.public.features.consultations == '1'
+
+const mobilePlatformRef: Ref<string | null> = ref(null)
+onMounted(() => {
+  const userAgent = navigator.userAgent
+  if (/android/i.test(userAgent)) {
+    mobilePlatformRef.value = 'android'
+  }
+
+  if (/iPad|iPhone|iPod/.test(userAgent)) {
+    mobilePlatformRef.value = "iOS";
+  }
+})
+
+const openResponseModal = ref(false)
+const respond = async () => {
+  if (mobilePlatformRef.value !== null) {
+    await navigateTo({path: `/consultations/${props.consultation.id}/questions`})
+    return
+  }
+
+  return openResponseModal.value = true
+}
+
 </script>
 
 <template>
@@ -29,6 +53,7 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
           <DsfrTag :label="`${consultation.thematique.picto} ${consultation.thematique.label}`"/>
         </div>
         <h1>{{ consultation.title }}</h1>
+<<<<<<< HEAD:client/components/consultation/consultationContent.vue
         <ConsultationEnUnClinDOeil v-if="consultation.goals" :goals="consultation.goals"/>
         <ConsultationQuestionsInformations v-if="consultation.questionsInfo && estEnCours" class="info-question fr-py-1w" 
                                            :questions-info="consultation.questionsInfo" :consultation-est-en-cours="estEnCours"/>
@@ -47,10 +72,13 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
           :share-text="consultation.shareText"
           :share-title="consultation.title"/>
         <ConsultationEncartFeedback :consultation="consultation" v-if="consultation.feedbackQuestion" />
-        <NuxtLink :to="`/consultations/${consultation.id}/questions`"
-                  v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser" class="fr-mb-4w fr-btn">
+        <DsfrButton type="button" v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser"
+                    class="fr-mb-4w fr-btn" @click="respond()">
           Répondre à la consultation
-        </NuxtLink>
+        </DsfrButton>
+
+        <ConsultationRepondreModal :open="openResponseModal" @close="() => openResponseModal = false"
+                                   :on-click="() => navigateTo({path: `/consultations/${props.consultation.id}/questions`})"/>
       </div>
 
       <div id="left-column">
