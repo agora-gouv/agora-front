@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Consultation from "~/client/types/consultation/consultation";
 import svgBook from "@gouvfr/dsfr/dist/artwork/pictograms/leisure/book.svg";
+import { Ref } from "vue";
 
 const props = defineProps<{
   consultation: Consultation
@@ -13,6 +14,29 @@ const estEnCours = props.consultation.consultationDates?.endDate
 
 const runtimeConfig = useRuntimeConfig();
 const isResponseActivated = runtimeConfig.public.features.consultations == '1'
+
+const mobilePlatformRef: Ref<string | null> = ref(null)
+onMounted(() => {
+  const userAgent = navigator.userAgent
+  if (/android/i.test(userAgent)) {
+    mobilePlatformRef.value = 'android'
+  }
+
+  if (/iPad|iPhone|iPod/.test(userAgent)) {
+    mobilePlatformRef.value = "iOS";
+  }
+})
+
+const openResponseModal = ref(false)
+const respond = async () => {
+  if (mobilePlatformRef.value !== null) {
+    await navigateTo({path: `/consultations/${props.consultation.id}/questions`})
+    return
+  }
+
+  return openResponseModal.value = true
+}
+
 </script>
 
 <template>
@@ -32,7 +56,7 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
 
         <h1>{{ consultation.title }}</h1>
 
-        <div v-if="consultation.questionsInfo" class="info-question fr-px-2w fr-py-1w">
+        <div v-if="consultation.questionsInfo" id="info-question" class="fr-px-2w fr-py-1w">
           <div class="fr-mb-2w">
             <VIcon icon="ri:calendar-2-line" :inline="true" :ssr="true"/>
             Jusqu'au
@@ -60,11 +84,17 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
             </div>
           </div>
         </div>
+        
         <ConsultationSections :sections="consultation.body.headerSections"/>
         <ConsultationSections :sections="consultation.body.sections"/>
-        <NuxtLink :to="'/consultations/' + consultation.id + '/questions'" v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser" class="fr-mb-4w fr-btn">
+
+        <DsfrButton type="button" v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser"
+                    class="fr-mb-4w fr-btn" @click="respond()">
           Répondre à la consultation
-        </NuxtLink>
+        </DsfrButton>
+
+        <ConsultationRepondreModal :open="openResponseModal" @close="() => openResponseModal = false"
+                                   :on-click="() => navigateTo({path: `/consultations/${props.consultation.id}/questions`})"/>
       </div>
 
       <!-- Volet gauche -->
@@ -257,7 +287,7 @@ h2 {
   }
 }
 
-.info-question {
+#info-question {
   .iconify {
     color: var(--blue-france-sun-113-625);
     width: 1.2em;
