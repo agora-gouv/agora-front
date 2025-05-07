@@ -5,6 +5,7 @@ definePageMeta({
 })
 
 const consultationId = useRoute().params.id as string;
+const resultatsConsultation = `/consultations/${consultationId}?answered=true`;
 </script>
 
 <template>
@@ -20,11 +21,11 @@ const consultationId = useRoute().params.id as string;
 
   <p>Pour en savoir plus, lire la <NuxtLink to="/politique-confidentialite">politique de confidentialité</NuxtLink>.</p>
 
-  <NuxtLink to="/profil" class="fr-mb-4w fr-mr-2w fr-btn">
+  <NuxtLink :to="`/profil?redirect=${encodeURIComponent(resultatsConsultation)}`" class="fr-mb-4w fr-mr-2w fr-btn">
     Commencer
   </NuxtLink>
   
-  <NuxtLink :to="'/consultations/' + consultationId + '?answered=true'" class="fr-mb-4w fr-btn fr-btn--secondary">
+  <NuxtLink :to="resultatsConsultation" class="fr-mb-4w fr-btn fr-btn--secondary">
     Ne pas répondre
   </NuxtLink>
 </template>
