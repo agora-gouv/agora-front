@@ -31,19 +31,20 @@ const activeAccordion = ref<number>()
 
 <template>
   <div class="fr-col-offset-1 fr-col-10 fr-pt-3w">
-    <a id="top" :href="`/consultations/${consultationId}`">Retour à la consultation</a>
+    <a id="top" :href="`/consultations/${consultationId}`">Retour à la présentation</a>
 
     <div v-if="errorMessage" class="fr-alert fr-alert--error fr-mt-2w">
       <h6 class="fr-alert__title">{{ errorMessage }}</h6>
     </div>
 
+    <!-- TODO ordre des questions -->
+    <!-- TODO questions conditionnelles doivent bloquer le bouton suivante -->
     <Stepper :title="`Question ${currentQuestion?.order}`" :current-step="currentQuestion!!.order" :total-steps="questionCount!!"/>
 
     <h3 class="question-title">{{ currentQuestion?.title }}</h3>
 
     <DsfrAccordionsGroup class="fr-my-3w" v-model="activeAccordion">
       <DsfrAccordion v-if="currentQuestion?.popupDescription" title="Plus de précision" id="accordion-1">
-        <h5>Contenu</h5>
         <div v-html="currentQuestion?.popupDescription"/>
       </DsfrAccordion>
     </DsfrAccordionsGroup>

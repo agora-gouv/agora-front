@@ -27,8 +27,7 @@ const giveFeedback = async (isPositive: boolean) => {
       <h6 class="fr-alert__title">Vos réponses ont bien été envoyées.</h6>
     </div>
     <div class="consultation">
-      <!-- Volet droit -->
-      <div>
+      <div id="right-column">
         <div>
           <DsfrBadge label="Consultation en cours" no-icon/>
         </div>
@@ -38,7 +37,8 @@ const giveFeedback = async (isPositive: boolean) => {
 
         <h1>{{ consultation.title }}</h1>
 
-        <div v-if="consultation.questionsInfo" class="info-question fr-py-1w">
+        <ConsultationEnUnClinDOeil v-if="consultation.goals" :goals="consultation.goals"/>
+        <div v-if="consultation.questionsInfo && estEnCours" class="info-question fr-py-1w">
           <div class="fr-mb-2w">
             <VIcon icon="ri:calendar-2-line" :inline="true" :ssr="true"/>
             Jusqu'au
@@ -68,29 +68,41 @@ const giveFeedback = async (isPositive: boolean) => {
         </div>
         <ConsultationSections :sections="consultation.body.headerSections"/>
         <ConsultationSections :sections="consultation.body.sections"/>
-        <div class="fr-callout">
+        <!-- TODO Règles d'affichage des results = j'ai déjà répondu et que la consultation n'est pas terminée ? -->
+        <div class="fr-callout" id="results">
           <h3>Vous avez déjà répondu à cette consultation et nous vous en remercions !</h3>
           <NuxtLink :to="'/consultations/' + consultation.id + '/results'" class="fr-btn">
             Voir les premiers résultats
           </NuxtLink>
         </div>
+        <DsfrTile
+          v-if="consultation.downloadAnalysisUrl"
+          title="Télécharger la synthèse complète"
+          description="Pour aller plus loin, retrouvez l'analyse détaillée de l'ensemble des réponses à cette consultation."
+          :to="consultation.downloadAnalysisUrl"
+          :download="true"
+          :img-src="svgBook"
+          class="fr-mb-4w"
+        />
+        <ConsultationShare
+          :share-text="consultation.shareText"
+          :share-title="consultation.title"/>
+        <!-- TODO Quelles sont les règles d'affichage du Feedback ? -->
+        <!-- TODO Quel texte dans le p ? -->
+        <!-- TODO Qu'est-ce que ça fait quand j'ai appuyé sur le bouton ? -->
         <div class="fr-callout">
           <h3>Donnez votre avis</h3>
           <p>Êtes-vous satisfait(e) de l’analyse de cette consultation ?</p>
-          <DsfrButton type="button" class="fr-btn fr-mr-2w" @click="giveFeedback(true)">Oui</DsfrButton>
-          <DsfrButton type="button" class="fr-btn" @click="giveFeedback(false)">Non</DsfrButton>
+          <DsfrButton type="button" class="fr-btn fr-mr-2w" icon="ri:thumb-up-fill" @click="giveFeedback(true)">Oui</DsfrButton>
+          <DsfrButton type="button" class="fr-btn fr-btn--secondary" @click="giveFeedback(false)">Non</DsfrButton>
         </div>
-        <ConsultationShare
-          :share-text="`Participez à la consultation ${consultation.title}`"
-          :share-title="consultation.title"/>
         <NuxtLink :to="'/consultations/' + consultation.id + '/questions'"
                   v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser" class="fr-mb-4w fr-btn">
           Répondre à la consultation
         </NuxtLink>
       </div>
 
-      <!-- Volet gauche -->
-      <div class="left-column">
+      <div id="left-column">
         <img class="fr-responsive-img" :src="consultation.coverUrl" alt="">
         <div class="history" v-if="consultation.history">
           <h2>Suivi de la consultation</h2>
@@ -111,27 +123,9 @@ const giveFeedback = async (isPositive: boolean) => {
             </li>
           </ul>
         </div>
-        <div v-if="consultation.goals" class="goals fr-p-3w fr-my-4w">
-          <p class="fr-h5">La consultation en un clin d'œil</p>
-          <ul class="fr-mt-2w" v-for="goal in consultation.goals">
-            <li class="fr-grid-row">
-              <span aria-hidden="true" class="picto fr-col-2 fr-pt-1w">{{ goal.picto }}</span>
-              <span class="fr-col-10" v-html="goal.description"></span>
-            </li>
-          </ul>
-        </div>
+        <ConsultationEnUnClinDOeil v-if="consultation.goals" :goals="consultation.goals"/>
       </div>
     </div>
-
-    <DsfrTile
-      v-if="consultation.downloadAnalysisUrl"
-      title="Télécharger la synthèse complète"
-      description="Pour aller plus loin, retrouvez l'analyse détaillée de l'ensemble des réponses à cette consultation."
-      :to="consultation.downloadAnalysisUrl"
-      :download="true"
-      :img-src="svgBook"
-      class="fr-mb-4w"
-    />
     <BandeauTelechargementAdaptatif
       v-if="consultation.questionsInfo && new Date(consultation.questionsInfo.endDate) >= new Date()"
       title="C’est encore mieux sur l’application Agora."/>
@@ -153,6 +147,16 @@ const giveFeedback = async (isPositive: boolean) => {
   grid-auto-flow: dense;
 }
 
+#results {
+  background-color: var(--blue-france-950-100);
+}
+
+#right-column {
+  .goals {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .consultation {
     grid-template-columns: 1fr;
@@ -160,7 +164,7 @@ const giveFeedback = async (isPositive: boolean) => {
     column-gap: 0;
   }
 
-  .consultation .left-column {
+  .consultation #left-column {
     .fr-responsive-img, .goals {
       display: none;
     }
@@ -170,9 +174,15 @@ const giveFeedback = async (isPositive: boolean) => {
       margin-bottom: 2em;
     }
   }
+
+  #right-column {
+    .goals {
+      display: block;
+    }
+  }
 }
 
-.consultation .left-column {
+.consultation #left-column {
   grid-column: left;
 }
 
@@ -285,28 +295,6 @@ h2 {
     width: 1.2em;
     height: 1.2em;
     margin-right: 0.5em;
-  }
-}
-
-.goals {
-  background-color: var(--blue-france-950-100);
-  padding: 1em;
-
-  .picto {
-    font-size: 1.6em;
-  }
-
-  .fr-h5 {
-    color: var(--blue-france-sun-113-625);
-  }
-}
-
-.announcer {
-  color: var(--blue-france-sun-113-625);
-  text-align: center;
-
-  > span {
-    display: block;
   }
 }
 </style>
