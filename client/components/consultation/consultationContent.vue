@@ -7,7 +7,7 @@ const props = defineProps<{
   jwtToken: string
 }>()
 
-const userHasAnswered = useRoute().query.answered
+const userHasAnsweredToConsultation = useRoute().query.answered
 
 const estEnCours = props.consultation.consultationDates?.endDate
   && new Date() < new Date(props.consultation.consultationDates.endDate)
@@ -23,7 +23,7 @@ const giveFeedback = async (isPositive: boolean) => {
 
 <template>
   <div class="fr-mt-4w">
-    <div v-if="userHasAnswered" class="fr-alert fr-alert--success fr-mb-2w">
+    <div v-if="userHasAnsweredToConsultation" class="fr-alert fr-alert--success fr-mb-2w">
       <h6 class="fr-alert__title">Vos réponses ont bien été envoyées.</h6>
     </div>
     <div class="consultation">
@@ -34,45 +34,16 @@ const giveFeedback = async (isPositive: boolean) => {
         <div>
           <DsfrTag :label="`${consultation.thematique.picto} ${consultation.thematique.label}`"/>
         </div>
-
         <h1>{{ consultation.title }}</h1>
-
         <ConsultationEnUnClinDOeil v-if="consultation.goals" :goals="consultation.goals"/>
-        <div v-if="consultation.questionsInfo && estEnCours" class="info-question fr-py-1w">
-          <div class="fr-mb-2w">
-            <VIcon icon="ri:calendar-2-line" :inline="true" :ssr="true"/>
-            Jusqu'au
-            <Date :date="consultation.questionsInfo.endDate"/>
-          </div>
-          <div class="fr-mb-2w">
-            <VIcon :ssr="true" icon="ri:questionnaire-line" :inline="true"/>
-            {{ consultation.questionsInfo.questionCount }}
-          </div>
-          <div class="fr-mb-2w">
-            <VIcon :ssr="true" icon="ri:timer-line" :inline="true"/>
-            {{ consultation.questionsInfo.estimatedTime }}
-          </div>
-          <div class="fr-mb-2w">
-            <VIcon :ssr="true" icon="ri:group-line" :inline="true"/>
-            <span class="fr-pl-1v" v-if="consultation.questionsInfo.participantCount == 0">Aucun participant</span>
-            <span class="fr-pl-1v" v-else-if="consultation.questionsInfo.participantCount == 1">1 participant</span>
-            <span class="fr-pl-1v" v-else>{{ consultation.questionsInfo.participantCount }} participants</span>
-            <div class="fr-mt-1w fr-ml-3w" v-if="estEnCours">
-              <meter id="objectif" min="0" :max="consultation.questionsInfo.participantCountGoal"
-                     :value="consultation.questionsInfo.participantCount">
-                {{ consultation.questionsInfo.participantCount }} sur un objectif de {{ consultation.questionsInfo.participantCountGoal }}
-              </meter>
-              Prochain objectif : {{ consultation.questionsInfo.participantCountGoal }} participants !
-            </div>
-          </div>
-        </div>
+        <ConsultationQuestionsInformations v-if="consultation.questionsInfo && estEnCours" class="info-question fr-py-1w" 
+                                           :questions-info="consultation.questionsInfo" :consultation-est-en-cours="estEnCours"/>
         <ConsultationSections :sections="consultation.body.headerSections"/>
         <ConsultationSections :sections="consultation.body.sections"/>
-        <!-- TODO Règles d'affichage des results = j'ai déjà répondu et que la consultation n'est pas terminée ? -->
-        <div class="fr-callout" id="results">
-          <h3>Vous avez déjà répondu à cette consultation et nous vous en remercions !</h3>
+        <div v-if="consultation.responsesInfo" class="fr-callout" id="results">
+          <div v-html="consultation.responsesInfo.description" />
           <NuxtLink :to="'/consultations/' + consultation.id + '/results'" class="fr-btn">
-            Voir les premiers résultats
+            {{ consultation.responsesInfo.actionText }}
           </NuxtLink>
         </div>
         <DsfrTile
@@ -87,15 +58,7 @@ const giveFeedback = async (isPositive: boolean) => {
         <ConsultationShare
           :share-text="consultation.shareText"
           :share-title="consultation.title"/>
-        <!-- TODO Quelles sont les règles d'affichage du Feedback ? -->
-        <!-- TODO Quel texte dans le p ? -->
-        <!-- TODO Qu'est-ce que ça fait quand j'ai appuyé sur le bouton ? -->
-        <div class="fr-callout">
-          <h3>Donnez votre avis</h3>
-          <p>Êtes-vous satisfait(e) de l’analyse de cette consultation ?</p>
-          <DsfrButton type="button" class="fr-btn fr-mr-2w" icon="ri:thumb-up-fill" @click="giveFeedback(true)">Oui</DsfrButton>
-          <DsfrButton type="button" class="fr-btn fr-btn--secondary" @click="giveFeedback(false)">Non</DsfrButton>
-        </div>
+        <ConsultationEncartFeedback :feedback-question="consultation.feedbackQuestion" :send-feedback="giveFeedback" v-if="consultation.feedbackQuestion" />
         <NuxtLink :to="'/consultations/' + consultation.id + '/questions'"
                   v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser" class="fr-mb-4w fr-btn">
           Répondre à la consultation
@@ -129,7 +92,6 @@ const giveFeedback = async (isPositive: boolean) => {
     <BandeauTelechargementAdaptatif
       v-if="consultation.questionsInfo && new Date(consultation.questionsInfo.endDate) >= new Date()"
       title="C’est encore mieux sur l’application Agora."/>
-
     <BandeauTelechargementAdaptatif v-else title="Téléchargez l'application pour donner votre avis."/>
   </div>
 </template>
@@ -286,15 +248,6 @@ h2 {
         color: var(--blue-france-main-525);
       }
     }
-  }
-}
-
-.info-question {
-  .iconify {
-    color: var(--blue-france-sun-113-625);
-    width: 1.2em;
-    height: 1.2em;
-    margin-right: 0.5em;
   }
 }
 </style>
