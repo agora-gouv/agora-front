@@ -37,8 +37,6 @@ const activeAccordion = ref<number>()
       <h6 class="fr-alert__title">{{ errorMessage }}</h6>
     </div>
 
-    <!-- TODO ordre des questions -->
-    <!-- TODO questions conditionnelles doivent bloquer le bouton suivante -->
     <Stepper :title="`Question ${currentQuestion?.order}`" :current-step="currentQuestion!!.order" :total-steps="questionCount!!"/>
 
     <h3 class="question-title">{{ currentQuestion?.title }}</h3>

@@ -24,11 +24,10 @@ const giveFeedback = async (isPositive: boolean) => {
     <div v-if="userHasAnsweredToFeedback" class="fr-alert fr-alert--success fr-mt-2w">
       <h6 class="fr-alert__title">Merci pour votre avis !</h6>
     </div>
-    <DsfrButton type="button" class="fr-btn fr-mr-2w" icon="ri:thumb-up-fill" v-if="!userHasAnsweredToFeedback" @click="giveFeedback(true)">
-      Oui
-    </DsfrButton>
-    <DsfrButton type="button" class="fr-btn fr-btn--secondary" v-if="!userHasAnsweredToFeedback" @click="giveFeedback(false)">Non
-    </DsfrButton>
+    <DsfrButton type="button" class="fr-btn fr-mr-2w" icon="ri:thumb-up-fill" v-if="!userHasAnsweredToFeedback"
+                @click="giveFeedback(true)">Oui</DsfrButton>
+    <DsfrButton type="button" class="fr-btn fr-btn--secondary" icon="ri:thumb-down-fill" v-if="!userHasAnsweredToFeedback"
+                @click="giveFeedback(false)">Non</DsfrButton>
   </div>
 </template>
 
