@@ -16,7 +16,7 @@
 
 <template>
   <form action="/consultations">
-    <DsfrInput name="motCle" label-visible label="Rechercher par mot clé"/>
+    <DsfrInputGroup name="motCle" label-visible label="Rechercher par mot clé" />
     <DsfrSelect name="thematique" label="Thématique" :options="thematiques" />
     <DsfrSelect name="etat" label="État de la consultation" :options="etats" />
     <DsfrCheckboxSet legend="Modalités" :options="modalites" :modelValue="[]" />
