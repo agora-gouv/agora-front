@@ -1,17 +1,22 @@
 <script setup lang="ts">
 // NOTE (GAFI 12-05-2025): Besoin du model parce que les checkboxes VueDSFR ne gèrent pas bien le reset
-const defaultModel = {
-  motCle: "",
-  thematique: "",
-  etat: "",
-  modalite: [],
-  annee: "",
-};
-const model = useState(() => defaultModel)
+const queries = useRoute().query
+const model = useState(() => ({
+  motCle: queries['motCle'],
+  thematique: queries['thematique'],
+  etat: queries['etat'],
+  modalite: queries['modalite'],
+  annee: Number(queries['annee']) || "",
+}))
 function reset() {
-  model.value = defaultModel
+  model.value = {
+    motCle: "",
+    thematique: "",
+    etat: "",
+    modalite: [],
+    annee: "",
+  }
 }
-
 
  const thematiques = [
    "Culture",  "Transition Écologique", "Logement",
