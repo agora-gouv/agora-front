@@ -32,22 +32,24 @@ const consultations = await (new ConsultationApi().getAllConsultations())
     
 
     <h2 id="terminees">Consultations terminées</h2>
-    <ConsultationFiltres />
-    <div class="fr-grid-row">
-      <div class="fr-col fr-col-sm-6 fr-col-md-4 fr-mb-2w" v-for="consultation in consultations.finished" :key="consultation.id">
-        <DsfrCard
-          :img-src="consultation.coverUrl"
-          :link="`/consultations/${consultation.slug}`"
-          :title="consultation.title"
-          description=""
-          alt-img="">
-          <template #start-details>
-            <DsfrBadge :label="`${consultation.thematique.picto} ${consultation.thematique.label}`" no-icon/>
-            <div>terminée le <Date :date="consultation.updateDate" /></div>
-          </template>
-          <template #end-details>
-          </template>
-        </DsfrCard>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <ConsultationFiltres class="fr-col fr-col-sm-12 fr-col-md-4" />
+      <div class="fr-grid-row fr-col fr-col-sm-12 fr-col-md-8 fr-grid-row--gutters">
+        <div class="fr-col fr-col-sm-6 fr-col-md-6 fr-mb-2w" v-for="consultation in consultations.finished" :key="consultation.id">
+          <DsfrCard
+            :img-src="consultation.coverUrl"
+            :link="`/consultations/${consultation.slug}`"
+            :title="consultation.title"
+            description=""
+            alt-img="">
+            <template #start-details>
+              <DsfrBadge :label="`${consultation.thematique.picto} ${consultation.thematique.label}`" no-icon/>
+              <div>terminée le <Date :date="consultation.updateDate" /></div>
+            </template>
+            <template #end-details>
+            </template>
+          </DsfrCard>
+        </div>
       </div>
     </div>
   </div>
