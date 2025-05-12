@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
   <div class="fr-share" id="share-7093">
-    <p class="fr-share__title">Partager la page</p>
+    <p class="fr-share__title">Partager la consultation</p>
     <ul class="fr-btns-group">
       <li>
         <a class="fr-btn--facebook fr-btn" target="_blank" rel="noopener" title="Partager sur Facebook - nouvelle fenêtre" id="share-7094"
@@ -23,21 +23,21 @@ defineProps<{
         <a class="fr-btn--twitter-x fr-btn" target="_blank" rel="noopener" title="Partager sur Twitter - nouvelle fenêtre"
            id="share-7095"
            onclick="window.open(this.href,'Partager sur X (anciennement Twitter)','toolbar=no,location=yes,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=420'); event.preventDefault();"
-           :href="'https://twitter.com/intent/tweet?&text=' + shareText + '&hashtags=agora'">
+           :href="`https://twitter.com/intent/tweet?&text=${shareText}&hashtags=agora`">
           Partager sur X (anciennement Twitter)
         </a>
       </li>
       <li>
         <a class="fr-btn--linkedin fr-btn" target="_blank" rel="noopener" title="Partager sur LinkedIn - nouvelle fenêtre" id="share-7096"
            onclick="window.open(this.href,'Partager sur LinkedIn','toolbar=no,location=yes,status=no,menubar=no,scrollbars=yes,resizable=yes,width=550,height=550'); event.preventDefault();"
-           :href="'https://www.linkedin.com/shareArticle?summary=' + shareText + '&title=' + shareTitle">
+           :href="`https://www.linkedin.com/shareArticle?summary=${shareText}&title=${shareTitle}`">
           Partager sur LinkedIn
         </a>
       </li>
       <li>
         <a class="fr-btn--mail fr-btn" target="_blank" rel="noopener external" title="Partager par courriel - nouvelle fenêtre"
            id="share-7097"
-           :href="'mailto:?subject=' + shareTitle + '&body=' + shareText">
+           :href="`mailto:?subject=${shareTitle}&body=${shareText}`">
           Partager par email
         </a>
       </li>

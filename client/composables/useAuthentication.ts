@@ -5,7 +5,7 @@ export const useAuthentication = async () => {
   
   const authenticationApi = new AuthenticationApi();
 
-  if (localStorage.getItem(localStorageLoginRefreshToken) == null) {
+  if (localStorage.getItem(localStorageLoginRefreshToken) == null || localStorage.getItem(localStorageJwtToken) == null) {
     const content = await authenticationApi.signup()
     localStorage.setItem(localStorageLoginRefreshToken, content.loginToken)
     localStorage.setItem(localStorageJwtToken, content.jwtToken)
@@ -26,5 +26,5 @@ export const useAuthentication = async () => {
     localStorage.setItem(localStorageJwtExpiration, freshAuthInfo.jwtExpirationEpochMilli)
   }
   
-  return { jwtToken: localStorage.getItem(localStorageJwtToken) }
+  return { jwtToken: localStorage.getItem(localStorageJwtToken)! }
 }

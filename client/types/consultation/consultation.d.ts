@@ -1,6 +1,6 @@
 import Thematique from "~/client/types/thematique/thematique";
 
-export default interface Consultation{
+export default interface Consultation {
   id: string,
   title: string,
   slug: string,
@@ -9,18 +9,12 @@ export default interface Consultation{
   coverUrl: string,
   shareText: string,
   thematique: Thematique,
-  questionsInfo: {
-    endDate: string,
-    questionCount: string,
-    estimatedTime: string,
-    participantCount: number,
-    participantCountGoal: number
-  } | null,
+  questionsInfo: ConsultationQuestionInfo | null,
   consultationDates: {
     startDate: string,
     endDate: string
   } | null,
-  responsesInfo: { // Nullable
+  responsesInfo: {
     picto: string,
     description: string,
     actionText: string
@@ -31,7 +25,7 @@ export default interface Consultation{
   },
   body: {
     headerSections: Section[]
-    sections : Section[]
+    sections: Section[]
   },
   participationInfo: {
     participantCount: number
@@ -42,7 +36,8 @@ export default interface Consultation{
     title: string,
     picto: string,
     description: string
-  },
+    results?: { userResponse?: boolean }
+  } | null,
   goals: {
     picto: string,
     description: string
@@ -57,7 +52,15 @@ export default interface Consultation{
   isAnsweredByUser: boolean,
 }
 
-export interface ConsultationUpdate{
+export interface ConsultationQuestionInfo {
+  endDate: string,
+  questionCount: string,
+  estimatedTime: string,
+  participantCount: number,
+  participantCountGoal: number
+}
+
+export interface ConsultationUpdate {
   updateId: string,
   slug?: string,
   type: ConsultationUpdateType,
@@ -67,28 +70,28 @@ export interface ConsultationUpdate{
   actionText?: string
 }
 
-type ConsultationUpdateType =  "update" | "results"
-type ConsultationUpdateStatus =  "done" | "current" | "incoming"
+type ConsultationUpdateType = "update" | "results"
+type ConsultationUpdateStatus = "done" | "current" | "incoming"
 
 export type Section = SectionTitre | SectionTexteRiche | SectionImage | SectionVideo | SectionFocusNumber | SectionAccordion | SectionQuote;
 
-interface SectionTitre{
+interface SectionTitre {
   type: 'title',
   title: string
 }
 
-interface SectionTexteRiche{
+interface SectionTexteRiche {
   type: 'richText',
   description: string
 }
 
-interface SectionImage{
+interface SectionImage {
   type: 'image',
   url: string,
   description: string
 }
 
-interface SectionVideo{
+interface SectionVideo {
   type: 'video',
   url: string,
   videoWidth: number,
@@ -101,19 +104,19 @@ interface SectionVideo{
   transcription: string
 }
 
-interface SectionFocusNumber{
+interface SectionFocusNumber {
   type: 'focusNumber',
   title: string,
   description: string
 }
 
-interface SectionAccordion{
+interface SectionAccordion {
   type: 'accordion',
   title: string,
   sections: Section[]
 }
 
-interface SectionQuote{
+interface SectionQuote {
   type: 'quote',
   description: string
 }

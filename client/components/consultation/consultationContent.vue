@@ -3,10 +3,10 @@ import Consultation from "~/client/types/consultation/consultation";
 import svgBook from "@gouvfr/dsfr/dist/artwork/pictograms/leisure/book.svg";
 
 const props = defineProps<{
-  consultation: Consultation
+  consultation: Consultation,
 }>()
 
-const userHasAnswered = useRoute().query.answered
+const userHasAnsweredToConsultation = useRoute().query.answered
 
 const estEnCours = props.consultation.consultationDates?.endDate
   && new Date() < new Date(props.consultation.consultationDates.endDate)
@@ -17,58 +17,43 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
 
 <template>
   <div class="fr-mt-4w">
-    <div v-if="userHasAnswered" class="fr-alert fr-alert--success fr-mb-2w">
+    <div v-if="userHasAnsweredToConsultation" class="fr-alert fr-alert--success fr-mb-2w">
       <h6 class="fr-alert__title">Vos réponses ont bien été envoyées.</h6>
     </div>
     <div class="consultation">
-      <!-- Volet droit -->
-      <div>
+      <div id="right-column">
         <div>
           <DsfrBadge label="Consultation en cours" no-icon/>
         </div>
         <div>
           <DsfrTag :label="`${consultation.thematique.picto} ${consultation.thematique.label}`"/>
         </div>
-
         <h1>{{ consultation.title }}</h1>
-
-        <div v-if="consultation.questionsInfo" class="info-question fr-px-2w fr-py-1w">
-          <div class="fr-mb-2w">
-            <VIcon icon="ri:calendar-2-line" :inline="true" :ssr="true"/>
-            Jusqu'au
-            <Date :date="consultation.questionsInfo.endDate"/>
-          </div>
-          <div class="fr-mb-2w">
-            <VIcon :ssr="true" icon="ri:questionnaire-line" :inline="true"/>
-            {{ consultation.questionsInfo.questionCount }}
-          </div>
-          <div class="fr-mb-2w">
-            <VIcon :ssr="true" icon="ri:timer-line" :inline="true"/>
-            {{ consultation.questionsInfo.estimatedTime }}
-          </div>
-          <div class="fr-mb-2w">
-            <VIcon :ssr="true" icon="ri:group-line" :inline="true"/>
-            <span class="fr-pl-1v" v-if="consultation.questionsInfo.participantCount == 0">Aucun participant</span>
-            <span class="fr-pl-1v" v-else-if="consultation.questionsInfo.participantCount == 1">1 participant</span>
-            <span class="fr-pl-1v" v-else>{{ consultation.questionsInfo.participantCount }} participants</span>
-            <div class="fr-mt-1w fr-ml-3w" v-if="estEnCours">
-              <meter id="objectif" min="0" :max="consultation.questionsInfo.participantCountGoal"
-                     :value="consultation.questionsInfo.participantCount">
-                {{ consultation.questionsInfo.participantCount }} sur un objectif de {{ consultation.questionsInfo.participantCountGoal }}
-              </meter>
-              Prochain objectif : {{ consultation.questionsInfo.participantCountGoal }} participants !
-            </div>
-          </div>
-        </div>
+        <ConsultationEnUnClinDOeil v-if="consultation.goals" :goals="consultation.goals"/>
+        <ConsultationQuestionsInformations v-if="consultation.questionsInfo && estEnCours" class="info-question fr-py-1w" 
+                                           :questions-info="consultation.questionsInfo" :consultation-est-en-cours="estEnCours"/>
         <ConsultationSections :sections="consultation.body.headerSections"/>
         <ConsultationSections :sections="consultation.body.sections"/>
-        <NuxtLink :to="'/consultations/' + consultation.id + '/questions'" v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser" class="fr-mb-4w fr-btn">
+        <div v-if="consultation.responsesInfo" class="fr-callout" id="results">
+          <div v-html="consultation.responsesInfo.description" />
+          <NuxtLink :to="`/consultations/${consultation.id}/results`" class="fr-btn">
+            {{ consultation.responsesInfo.actionText }}
+          </NuxtLink>
+        </div>
+        <DsfrTile v-if="consultation.downloadAnalysisUrl" title="Télécharger la synthèse complète"
+          :to="consultation.downloadAnalysisUrl" :download="true" :img-src="svgBook" class="fr-mb-4w"
+          description="Pour aller plus loin, retrouvez l'analyse détaillée de l'ensemble des réponses à cette consultation."/>
+        <ConsultationShare
+          :share-text="consultation.shareText"
+          :share-title="consultation.title"/>
+        <ConsultationEncartFeedback :consultation="consultation" v-if="consultation.feedbackQuestion" />
+        <NuxtLink :to="`/consultations/${consultation.id}/questions`"
+                  v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser" class="fr-mb-4w fr-btn">
           Répondre à la consultation
         </NuxtLink>
       </div>
 
-      <!-- Volet gauche -->
-      <div class="left-column">
+      <div id="left-column">
         <img class="fr-responsive-img" :src="consultation.coverUrl" alt="">
         <div class="history" v-if="consultation.history">
           <h2>Suivi de la consultation</h2>
@@ -89,36 +74,17 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
             </li>
           </ul>
         </div>
-        <div v-if="consultation.goals" class="goals fr-p-3w fr-my-4w">
-          <p class="fr-h5">La consultation en un clin d'œil</p>
-          <ul class="fr-mt-2w" v-for="goal in consultation.goals">
-            <li class="fr-grid-row">
-              <span aria-hidden="true" class="picto fr-col-2 fr-pt-1w">{{ goal.picto }}</span>
-              <span class="fr-col-10" v-html="goal.description"></span>
-            </li>
-          </ul>
-        </div>
+        <ConsultationEnUnClinDOeil v-if="consultation.goals" :goals="consultation.goals"/>
       </div>
     </div>
-
-    <DsfrTile
-      v-if="consultation.downloadAnalysisUrl"
-      title="Télécharger la synthèse complète"
-      description="Pour aller plus loin, retrouvez l'analyse détaillée de l'ensemble des réponses à cette consultation."
-      :to="consultation.downloadAnalysisUrl"
-      :download="true"
-      :img-src="svgBook"
-      class="fr-mb-4w"
-    />
     <BandeauTelechargementAdaptatif
       v-if="consultation.questionsInfo && new Date(consultation.questionsInfo.endDate) >= new Date()"
-      title="Pour répondre à cette consultation, rendez-vous sur l’application Agora."/>
-
+      title="C’est encore mieux sur l’application Agora."/>
     <BandeauTelechargementAdaptatif v-else title="Téléchargez l'application pour donner votre avis."/>
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .consultation {
   display: grid;
   grid-template-columns: 
@@ -131,6 +97,16 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
   grid-auto-flow: dense;
 }
 
+#results {
+  background-color: var(--blue-france-950-100);
+}
+
+#right-column {
+  .goals {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .consultation {
     grid-template-columns: 1fr;
@@ -138,7 +114,7 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
     column-gap: 0;
   }
 
-  .consultation .left-column {
+  .consultation #left-column {
     .fr-responsive-img, .goals {
       display: none;
     }
@@ -148,9 +124,15 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
       margin-bottom: 2em;
     }
   }
+
+  #right-column {
+    .goals {
+      display: block;
+    }
+  }
 }
 
-.consultation .left-column {
+.consultation #left-column {
   grid-column: left;
 }
 
@@ -254,37 +236,6 @@ h2 {
         color: var(--blue-france-main-525);
       }
     }
-  }
-}
-
-.info-question {
-  .iconify {
-    color: var(--blue-france-sun-113-625);
-    width: 1.2em;
-    height: 1.2em;
-    margin-right: 0.5em;
-  }
-}
-
-.goals {
-  background-color: var(--blue-france-950-100);
-  padding: 1em;
-
-  .picto {
-    font-size: 1.6em;
-  }
-
-  .fr-h5 {
-    color: var(--blue-france-sun-113-625);
-  }
-}
-
-.announcer {
-  color: var(--blue-france-sun-113-625);
-  text-align: center;
-
-  > span {
-    display: block;
   }
 }
 </style>

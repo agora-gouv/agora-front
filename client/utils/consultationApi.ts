@@ -9,9 +9,9 @@ export class ConsultationApi {
 
   async getConsultation(consultationId: string, jwtToken: string | null) {
     const routeConsultationUrl = `${this.baseUrl}/v2/consultations/${consultationId}`
-    
-    const jwtOption = jwtToken ? { headers: {"Authorization": `Bearer ${jwtToken}`} } : {}
-    
+
+    const jwtOption = jwtToken ? {headers: {"Authorization": `Bearer ${jwtToken}`}} : {}
+
     const {
       data: consultation,
       error: errorConsultation
@@ -27,8 +27,8 @@ export class ConsultationApi {
   async getConsultationUpdate(consultationId: string, consultationUpdateId: string, jwtToken: string | null) {
     const routeUrl = `${this.baseUrl}/v2/consultations/${consultationId}/updates/${consultationUpdateId}`
 
-    const jwtOption = jwtToken ? { headers: {"Authorization": `Bearer ${jwtToken}`} } : {}
-    
+    const jwtOption = jwtToken ? {headers: {"Authorization": `Bearer ${jwtToken}`}} : {}
+
     const {
       data: consultationUpdate,
       error
@@ -69,5 +69,21 @@ export class ConsultationApi {
     }
 
     return consultations
+  }
+
+  async giveFeedback(consultationId: string, consultationUpdate: string, isPositive: boolean, token: string) {
+    const route = `${this.baseUrl}/consultations/${consultationId}/updates/${consultationUpdate}/feedback`
+
+    const {
+      error
+    } = await useFetch<never, FetchError>(route, {
+      method: "POST",
+      body: {isPositive: isPositive},
+      headers: {"Authorization": `Bearer ${token}`}
+    })
+
+    if (error.value) {
+      throw createError({statusCode: error.value!.statusCode})
+    }
   }
 }
