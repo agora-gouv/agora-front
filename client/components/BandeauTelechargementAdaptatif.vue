@@ -52,7 +52,7 @@ onMounted(()=>{
             <div v-if="!isMobileRef" class="qr-code fr-my-2w">
               <img
                 alt="QR code Agora AppStore"
-                src="/qrCodes/qr-code-ios.png"
+                src="/qrCodes/qr-code-ios.webp"
                 style="max-width:150px;"
               />
             </div>
@@ -75,7 +75,7 @@ onMounted(()=>{
             <div v-if="!isMobileRef" class="qr-code fr-my-2w">
               <img
                 alt="QR code Agora Google Play"
-                src="/qrCodes/qr-code-android.png"
+                src="/qrCodes/qr-code-android.webp"
                 style="max-width:150px;"
               />
             </div>
