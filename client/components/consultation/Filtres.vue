@@ -34,7 +34,7 @@ function reset() {
 </script>
 
 <template>
-  <form action="/consultations">
+  <form action="/consultations#terminees">
     <h3>Filtres</h3>
     <DsfrInputGroup name="motCle" label-visible label="Rechercher par mot clé" :modelValue="model.motCle" />
     <DsfrSelect name="thematique" label="Thématique" :options="thematiques" :modelValue="model.thematique" />
