@@ -4,10 +4,10 @@ import { ProfilInfoDto } from "~/client/utils/profilApi";
 const categorieSocioProModalOpen = useState<boolean>(() => false);
 const profilVoteurModalOpen = useState<boolean>(() => false);
 
-const { id = useId(), profil } = defineProps<{
-  profil: ProfilInfoDto,
+const { id = useId() } = defineProps<{
   id?: string
 }>()
+const profil = defineModel<ProfilInfoDto>()
 
 function convertLetters(code: string) {
   return code.replace(/([A-Za-z])/, (match, letter) => `0${letter}`)
@@ -97,13 +97,16 @@ const maxYear = new Date().getFullYear()
         labelVisible
         label="Dans quel département ou collectivité d'outre-mer vivez-vous ?"
         :options="departementsOptions"
-        :model-value="profil?.department"
+        :model-value="profil?.departement"
+        @change="(event) => profil.departement = event.currentTarget.value"
         selectId="select-departement"
       >
       </DsfrSelect>
-      <SetValueButton for="select-departement" value="99">
-        J'habite à l'étranger
-      </SetValueButton>
+      <DsfrCheckbox
+        label="J'habite à l'étranger"
+        @change="(event) => event.currentTarget.checked ? profil.departement = '99' : profil.departement = ''"
+        :modelValue="profil?.departement === '99'"
+      ></DsfrCheckbox>
     </div>
 
     <DsfrSelect
