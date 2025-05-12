@@ -17,7 +17,7 @@ const fichesAVenir = fiches.filter(fiche => {
 const fichesEnCours = fiches.filter(fiche => {
   const dateFin = new Date(fiche.fin)
   const dateDebut = new Date(fiche.debut)
-  return dateFin > today && dateDebut < today
+  return dateFin > today //&& dateDebut < today
 })
 const fichesTerminees = fiches.filter(fiche => {
   const dateFin = new Date(fiche.fin)
@@ -27,52 +27,42 @@ const fichesTerminees = fiches.filter(fiche => {
 </script>
 <template>
   <div class="fr-mb-2w fr-mt-6w">
-    <div v-if="fichesAVenir.length > 0">
-      <h2>Fiches à venir</h2>
+    <div v-if="fichesEnCours.length > 0" id="fiches-en-cours">
+      <h2>Participer aux consultations en cours</h2>
+      <p>Pour répondre au plus près à vos préoccupations et vos attentes, le Gouvernement peut vous demander votre avis et vos idées sur les
+        politiques à mener. Il propose régulièrement des consultations en ligne : voici celles actuellement ouvertes à la participation.</p>
 
       <DsfrCard
         :img-src="fiche.illustrationUrl"
-        :link="`/fiches-inventaire/${fiche.id}`"
-        :title="fiche.titre"
-        description=""
-        alt-img=""
-        horizontal
-        v-for="fiche in fichesAVenir" :key="fiche.id"
-        class="fr-mb-2w"
-      >
-        <template #start-details>
-          <DsfrBadge :label="`${fiche.thematique.picto} ${fiche.thematique.label}`" no-icon/>
-        </template>
-        <template #end-details>
-          <div>se termine le <Date :date="fiche.fin" /></div>
-        </template>
-      </DsfrCard>
-    </div>
-    
-    <div v-if="fichesEnCours.length > 0">
-      <h2>Fiches en cours</h2>
-
-      <DsfrCard
-        :img-src="fiche.illustrationUrl"
-        :link="`/fiches-inventaire/${fiche.id}`"
+        :link="fiche.lienSite"
         :title="fiche.titre"
         description=""
         alt-img=""
         horizontal
         v-for="fiche in fichesEnCours" :key="fiche.id"
-        class="fr-mb-2w"
-      >
+        class="fr-mb-2w">
         <template #start-details>
-          <DsfrBadge :label="`${fiche.thematique.picto} ${fiche.thematique.label}`" no-icon/>
+          <DsfrTag :label="fiche.thematique.label"/>
+          <div>
+            <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
+            {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
+          </div>
         </template>
         <template #end-details>
-          <div>se termine le <Date :date="fiche.fin" /></div>
+          <div><b>Porteur :</b> {{ fiche.porteur }}</div>
+          <div class="date-fin">
+            <VIcon icon="ri:calendar-line" :inline="true" :ssr="true"/>
+            jusqu'au
+            <Date :date="fiche.fin"/>
+          </div>
         </template>
       </DsfrCard>
     </div>
 
-    <div v-if="fichesTerminees.length > 0">
-      <h2>Fiches terminées</h2>
+    <div v-if="fichesTerminees.length > 0" id="fiches-terminees">
+      <h2>Explorez toutes les consultations</h2>
+      <p>Les résultats de chaque initiative sont publics et l'Etat s’engage à vous informer des suites qui y sont données. Voici l’ensemble
+        des initiatives lancées, avec la synthèse de des contributions citoyennes et ce sur quoi elles ont abouti.</p>
       <div class="fr-grid-row">
         <div class="fr-col fr-col-sm-6 fr-col-md-4 fr-mb-2w" v-for="fiche in fichesTerminees" :key="fiche.id">
           <DsfrCard
@@ -80,10 +70,20 @@ const fichesTerminees = fiches.filter(fiche => {
             :link="`/fiches-inventaire/${fiche.id}`"
             :title="fiche.titre"
             description=""
+            :badges="[
+            {
+              label: fiche.etape,
+              type: 'success',
+            }
+            ]"
             alt-img="">
             <template #start-details>
-              <DsfrBadge :label="`${fiche.thematique.picto} ${fiche.thematique.label}`" no-icon/>
-              <div>terminée le <Date :date="fiche.fin" /></div>
+              <DsfrTag :label="fiche.thematique.label"/>
+              <DsfrTag :label="fiche.anneeDeLancement"/>
+              <div>
+                <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
+                {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
+              </div>
             </template>
             <template #end-details>
             </template>
@@ -93,7 +93,7 @@ const fichesTerminees = fiches.filter(fiche => {
     </div>
   </div>
 </template>
-<style scoped>
+<style scoped lang="scss">
 .fr-grid-row .fr-card {
   min-height: 100%;
   height: auto;
@@ -102,6 +102,18 @@ const fichesTerminees = fiches.filter(fiche => {
 
 .fr-badge {
   font-size: .75rem;
+}
+
+.fr-card__end {
+  b {
+    color: var(--blue-france-sun-113-625);
+  }
+}
+
+.date-fin {
+  font-size: .75rem;
+  margin-top: 0.5rem;
+  color: var(--grey-425-625)
 }
 
 .fr-card__start div {
