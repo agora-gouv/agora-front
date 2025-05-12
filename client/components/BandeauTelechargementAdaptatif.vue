@@ -86,7 +86,7 @@ onMounted(()=>{
     <div class="fr-col-offset-md-1"/>
     <div class="fr-col-12 fr-col-md-5 hero-image-wrapper">
       <img
-        src="/smartphones_complet.png"
+        src="/smartphones_complet.webp"
         style="max-width: 90%"
       >
     </div>

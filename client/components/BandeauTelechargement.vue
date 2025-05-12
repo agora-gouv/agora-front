@@ -55,7 +55,7 @@ onMounted(()=>{
       </div>
     </div>
     <div class="fr-col-12 fr-col-md-4">
-      <img src="/smartphones_complet.png" style="width: 70%;
+      <img src="/smartphones_complet.webp" style="width: 70%;
         max-width: 100vw;">
     </div>
   </div>
