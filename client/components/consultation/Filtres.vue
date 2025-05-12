@@ -1,4 +1,18 @@
 <script setup lang="ts">
+// NOTE (GAFI 12-05-2025): Besoin du model parce que les checkboxes VueDSFR ne gèrent pas bien le reset
+const defaultModel = {
+  motCle: "",
+  thematique: "",
+  etat: "",
+  modalite: [],
+  annee: "",
+};
+const model = useState(() => defaultModel)
+function reset() {
+  model.value = defaultModel
+}
+
+
  const thematiques = [
    "Culture",  "Transition Écologique", "Logement",
    "Services publics", "Économie", "Autonomie",
@@ -16,13 +30,22 @@
 
 <template>
   <form action="/consultations">
-    <DsfrInputGroup name="motCle" label-visible label="Rechercher par mot clé" />
-    <DsfrSelect name="thematique" label="Thématique" :options="thematiques" />
-    <DsfrSelect name="etat" label="État de la consultation" :options="etats" />
-    <DsfrCheckboxSet legend="Modalités" :options="modalites" :modelValue="[]" />
-    <DsfrSelect name="annee" label="Année de la consultation" :options="annees" />
+    <DsfrInputGroup name="motCle" label-visible label="Rechercher par mot clé" :modelValue="model.motCle" />
+    <DsfrSelect name="thematique" label="Thématique" :options="thematiques" :modelValue="model.thematique" />
+    <DsfrSelect name="etat" label="État de la consultation" :options="etats" :modelValue="model.etat" />
+    <DsfrCheckboxSet legend="Modalités" :options="modalites" :modelValue="model.modalite" />
+    <DsfrSelect name="annee" label="Année de la consultation" :options="annees" :modelValue="model.annee" />
     <DsfrButton type="submit" class="button">Filtrer les consultations</DsfrButton>
-    <DsfrButton type="reset" tertiary noOutline icon="ri:refresh-line" class="button">Réinitialiser les filtres</DsfrButton>
+    <DsfrButton
+      type="reset"
+      tertiary
+      noOutline
+      icon="ri:refresh-line"
+      class="button"
+      @click.prevent="reset"
+    >
+      Réinitialiser les filtres
+    </DsfrButton>
   </form>
 </template>
 
