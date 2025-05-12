@@ -35,6 +35,7 @@ function reset() {
 
 <template>
   <form action="/consultations">
+    <h3>Filtres</h3>
     <DsfrInputGroup name="motCle" label-visible label="Rechercher par mot clé" :modelValue="model.motCle" />
     <DsfrSelect name="thematique" label="Thématique" :options="thematiques" :modelValue="model.thematique" />
     <DsfrSelect name="etat" label="État de la consultation" :options="etats" :modelValue="model.etat" />
