@@ -1,12 +1,8 @@
 <script setup lang="ts">
+import { ConsultationQuestionInfo } from "~/client/types/consultation/consultation";
+
 defineProps<{
-  questionsInfo: {
-    endDate: string,
-    questionCount: string,
-    estimatedTime: string,
-    participantCount: number,
-    participantCountGoal: number
-  },
+  questionsInfo: ConsultationQuestionInfo,
   consultationEstEnCours: boolean
 }>()
 </script>

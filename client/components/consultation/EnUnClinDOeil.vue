@@ -8,15 +8,15 @@ defineProps<{
 </script>
 
 <template>
-  <div class="goals fr-p-3w fr-my-4w">
-    <p class="fr-h5">La consultation en un clin d'œil</p>
+  <section aria-labelledby="clin-titre" class="goals fr-p-3w fr-my-4w">
+    <h2 id="clin-titre" class="fr-h5">La consultation en un clin d'œil</h2>
     <ul class="fr-mt-2w" v-for="goal in goals">
       <li class="fr-grid-row">
         <span aria-hidden="true" class="picto fr-col-2 fr-pt-1w">{{ goal.picto }}</span>
         <span class="fr-col-10" v-html="goal.description"></span>
       </li>
     </ul>
-  </div>
+  </section>
 </template>
 
 <style>

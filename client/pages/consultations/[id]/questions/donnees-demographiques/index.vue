@@ -24,7 +24,7 @@ const consultationId = useRoute().params.id as string;
     Commencer
   </NuxtLink>
   
-  <NuxtLink :to="'/consultations/' + consultationId + '?answered=true'" class="fr-mb-4w fr-btn fr-btn--secondary">
+  <NuxtLink :to="`/consultations/${consultationId}?answered=true`" class="fr-mb-4w fr-btn fr-btn--secondary">
     Ne pas répondre
   </NuxtLink>
 </template>

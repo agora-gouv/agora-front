@@ -4,7 +4,6 @@ import svgBook from "@gouvfr/dsfr/dist/artwork/pictograms/leisure/book.svg";
 
 const props = defineProps<{
   consultation: Consultation,
-  jwtToken: string
 }>()
 
 const userHasAnsweredToConsultation = useRoute().query.answered
@@ -14,11 +13,6 @@ const estEnCours = props.consultation.consultationDates?.endDate
 
 const runtimeConfig = useRuntimeConfig();
 const isResponseActivated = runtimeConfig.public.features.consultations == '1'
-
-const giveFeedback = async (isPositive: boolean) => {
-  const api = new ConsultationApi()
-  await api.giveFeedback(props.consultation.id, props.consultation.updateId, isPositive, props.jwtToken)
-}
 </script>
 
 <template>
@@ -42,24 +36,18 @@ const giveFeedback = async (isPositive: boolean) => {
         <ConsultationSections :sections="consultation.body.sections"/>
         <div v-if="consultation.responsesInfo" class="fr-callout" id="results">
           <div v-html="consultation.responsesInfo.description" />
-          <NuxtLink :to="'/consultations/' + consultation.id + '/results'" class="fr-btn">
+          <NuxtLink :to="`/consultations/${consultation.id}/results`" class="fr-btn">
             {{ consultation.responsesInfo.actionText }}
           </NuxtLink>
         </div>
-        <DsfrTile
-          v-if="consultation.downloadAnalysisUrl"
-          title="Télécharger la synthèse complète"
-          description="Pour aller plus loin, retrouvez l'analyse détaillée de l'ensemble des réponses à cette consultation."
-          :to="consultation.downloadAnalysisUrl"
-          :download="true"
-          :img-src="svgBook"
-          class="fr-mb-4w"
-        />
+        <DsfrTile v-if="consultation.downloadAnalysisUrl" title="Télécharger la synthèse complète"
+          :to="consultation.downloadAnalysisUrl" :download="true" :img-src="svgBook" class="fr-mb-4w"
+          description="Pour aller plus loin, retrouvez l'analyse détaillée de l'ensemble des réponses à cette consultation."/>
         <ConsultationShare
           :share-text="consultation.shareText"
           :share-title="consultation.title"/>
-        <ConsultationEncartFeedback :feedback-question="consultation.feedbackQuestion" :send-feedback="giveFeedback" v-if="consultation.feedbackQuestion" />
-        <NuxtLink :to="'/consultations/' + consultation.id + '/questions'"
+        <ConsultationEncartFeedback :consultation="consultation" v-if="consultation.feedbackQuestion" />
+        <NuxtLink :to="`/consultations/${consultation.id}/questions`"
                   v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser" class="fr-mb-4w fr-btn">
           Répondre à la consultation
         </NuxtLink>
@@ -96,7 +84,7 @@ const giveFeedback = async (isPositive: boolean) => {
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .consultation {
   display: grid;
   grid-template-columns: 

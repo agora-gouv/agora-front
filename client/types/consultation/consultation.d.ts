@@ -9,13 +9,7 @@ export default interface Consultation {
   coverUrl: string,
   shareText: string,
   thematique: Thematique,
-  questionsInfo: {
-    endDate: string,
-    questionCount: string,
-    estimatedTime: string,
-    participantCount: number,
-    participantCountGoal: number
-  } | null,
+  questionsInfo: ConsultationQuestionInfo | null,
   consultationDates: {
     startDate: string,
     endDate: string
@@ -56,6 +50,14 @@ export default interface Consultation {
   titrePageWeb: string,
   sousTitrePageWeb: string,
   isAnsweredByUser: boolean,
+}
+
+export interface ConsultationQuestionInfo {
+  endDate: string,
+  questionCount: string,
+  estimatedTime: string,
+  participantCount: number,
+  participantCountGoal: number
 }
 
 export interface ConsultationUpdate {

@@ -1,18 +1,17 @@
 <script setup lang="ts">
+import Consultation from "~/client/types/consultation/consultation";
+
 const props = defineProps<{
-  feedbackQuestion: {
-    title: string,
-    picto: string,
-    description: string
-    results?: { userResponse?: boolean }
-  },
-  sendFeedback: (isPositive: boolean) => void,
+  consultation: Consultation,
 }>()
 
-const userHasAnsweredToFeedback = ref(props.feedbackQuestion?.results?.userResponse != undefined)
+const feedbackQuestion = props.consultation.feedbackQuestion!
+const userHasAnsweredToFeedback = ref(props.consultation.feedbackQuestion?.results?.userResponse != undefined)
 
 const giveFeedback = async (isPositive: boolean) => {
-  props.sendFeedback(isPositive)
+  const api = new ConsultationApi()
+  const jwtToken = (await useAuthentication()).jwtToken
+  await api.giveFeedback(props.consultation.id, props.consultation.updateId, isPositive, jwtToken)
   userHasAnsweredToFeedback.value = true
 }
 </script>
@@ -22,7 +21,7 @@ const giveFeedback = async (isPositive: boolean) => {
     <h3>{{ feedbackQuestion.title }}</h3>
     <p v-html="feedbackQuestion.description"/>
     <div v-if="userHasAnsweredToFeedback" class="fr-alert fr-alert--success fr-mt-2w">
-      <h6 class="fr-alert__title">Merci pour votre avis !</h6>
+      <p class="fr-h6 fr-alert__title">Merci pour votre avis !</p>
     </div>
     <DsfrButton type="button" class="fr-btn fr-mr-2w" icon="ri:thumb-up-fill" v-if="!userHasAnsweredToFeedback"
                 @click="giveFeedback(true)">Oui</DsfrButton>
