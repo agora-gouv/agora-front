@@ -5,7 +5,7 @@ const model = useState(() => ({
   motCle: queries['motCle'],
   thematique: queries['thematique'],
   etat: queries['etat'],
-  modalite: queries['modalite'],
+  modalite: queries['modalite'] || [],
   annee: Number(queries['annee']) || "",
 }))
 function reset() {
