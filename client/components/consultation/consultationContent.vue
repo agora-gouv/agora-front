@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Consultation from "~/client/types/consultation/consultation";
 import svgBook from "@gouvfr/dsfr/dist/artwork/pictograms/leisure/book.svg";
-import { Ref } from "vue";
 
 const props = defineProps<{
   consultation: Consultation,
@@ -15,27 +14,18 @@ const estEnCours = props.consultation.consultationDates?.endDate
 const runtimeConfig = useRuntimeConfig();
 const isResponseActivated = runtimeConfig.public.features.consultations == '1'
 
-const mobilePlatformRef: Ref<string | null> = ref(null)
-onMounted(() => {
-  const userAgent = navigator.userAgent
-  if (/android/i.test(userAgent)) {
-    mobilePlatformRef.value = 'android'
-  }
-
-  if (/iPad|iPhone|iPod/.test(userAgent)) {
-    mobilePlatformRef.value = "iOS";
-  }
-})
-
 const openResponseModal = ref(false)
 const respond = async () => {
-  if (mobilePlatformRef.value !== null) {
+  const isMobileDevice = /android|iPad|iPhone|iPod/i.test(navigator.userAgent)
+  if (!isMobileDevice) {
     await navigateTo({path: `/consultations/${props.consultation.id}/questions`})
     return
   }
 
   return openResponseModal.value = true
 }
+
+const navigateToQuestions = () => navigateTo({path: `/consultations/${props.consultation.id}/questions`})
 
 </script>
 
@@ -78,7 +68,7 @@ const respond = async () => {
         </DsfrButton>
 
         <ConsultationRepondreModal :open="openResponseModal" @close="() => openResponseModal = false"
-                                   :on-click="() => navigateTo({path: `/consultations/${props.consultation.id}/questions`})"/>
+                                   :on-click="navigateToQuestions"/>
       </div>
 
       <div id="left-column">
