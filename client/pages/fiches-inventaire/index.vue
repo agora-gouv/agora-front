@@ -10,20 +10,14 @@ const fiches = await (new FicheInventaireApi().getAll())
 
 const today = new Date()
 
-const fichesAVenir = fiches.filter(fiche => {
-  const dateDebut = new Date(fiche.debut)
-  return dateDebut > today
-})
 const fichesEnCours = fiches.filter(fiche => {
   const dateFin = new Date(fiche.fin)
-  const dateDebut = new Date(fiche.debut)
-  return dateFin > today //&& dateDebut < today
+  return dateFin >= today
 })
 const fichesTerminees = fiches.filter(fiche => {
   const dateFin = new Date(fiche.fin)
   return dateFin < today
 })
-
 </script>
 <template>
   <div class="fr-mb-2w fr-mt-6w">
@@ -32,18 +26,11 @@ const fichesTerminees = fiches.filter(fiche => {
       <p>Pour répondre au plus près à vos préoccupations et vos attentes, le Gouvernement peut vous demander votre avis et vos idées sur les
         politiques à mener. Il propose régulièrement des consultations en ligne : voici celles actuellement ouvertes à la participation.</p>
 
-      <DsfrCard
-        :img-src="fiche.illustrationUrl"
-        :link="fiche.lienSite"
-        :title="fiche.titre"
-        description=""
-        alt-img=""
-        horizontal
-        v-for="fiche in fichesEnCours" :key="fiche.id"
-        class="fr-mb-2w">
+      <DsfrCard :img-src="fiche.illustrationUrl" :link="fiche.lienSite" :title="fiche.titre" description=""
+                alt-img="" horizontal v-for="fiche in fichesEnCours" :key="fiche.id" class="fr-mb-2w">
         <template #start-details>
           <DsfrTag :label="fiche.thematique.label"/>
-          <div>
+          <div class="modalites">
             <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
             {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
           </div>
@@ -70,17 +57,15 @@ const fichesTerminees = fiches.filter(fiche => {
             :link="`/fiches-inventaire/${fiche.id}`"
             :title="fiche.titre"
             description=""
-            :badges="[
-            {
+            :badges="[{
               label: fiche.etape,
               type: 'success',
-            }
-            ]"
+            }]"
             alt-img="">
             <template #start-details>
               <DsfrTag :label="fiche.thematique.label"/>
               <DsfrTag :label="fiche.anneeDeLancement"/>
-              <div>
+              <div class="modalites">
                 <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
                 {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
               </div>
@@ -100,19 +85,31 @@ const fichesTerminees = fiches.filter(fiche => {
   margin-inline: 1rem;
 }
 
+.modalites {
+  margin-block: 0.5rem 0.4rem;
+}
+
+.fr-tag {
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+}
+
 .fr-badge {
   font-size: .75rem;
 }
 
-.fr-card__end {
-  b {
-    color: var(--blue-france-sun-113-625);
-  }
+:deep(.fr-card__end) {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.fr-card__body .fr-card__end b {
+  color: var(--blue-france-sun-113-625);
 }
 
 .date-fin {
   font-size: .75rem;
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
   color: var(--grey-425-625)
 }
 
@@ -125,11 +122,15 @@ h1, h2 {
 }
 
 h2 {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   margin-top: 4rem;
 }
 
 p {
   font-size: 1rem;
+}
+
+h2 + p {
+  margin-bottom: 3rem;
 }
 </style>
