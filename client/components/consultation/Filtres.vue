@@ -19,18 +19,18 @@ function reset() {
 }
 
  const thematiques = [
-   "Culture",  "Transition Écologique", "Logement",
-   "Services publics", "Économie", "Autonomie",
-   "Agriculture & alimentation"
+   { text: "Non renseigné", value: "" }, "Culture",
+   "Transition Écologique", "Logement", "Services publics",
+   "Économie", "Autonomie", "Agriculture & alimentation"
  ]
- const etats = [ "À venir", "En cours", "Terminée" ]
+ const etats = [ { text: "Non renseigné", value: "" }, "À venir", "En cours", "Terminée" ]
  const modalites = [
    { label: "Ouvert à tout le monde", value: "open", name: "modalite" },
    { label: "Par tirage au sort", value: "tirage", name: "modalite" },
    { label: "Consultation en ligne", value: "remote", name: "modalite" },
    { label: "Consultation en local", value: "local", name: "modalite" },
  ]
- const annees = ["2020", "2021", "2022", "2023", "2024", "2025", "2026"]
+ const annees = [ { text: "Non renseigné", value: "" }, "2020", "2021", "2022", "2023", "2024", "2025", "2026" ]
 </script>
 
 <template>
