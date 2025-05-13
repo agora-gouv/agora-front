@@ -83,7 +83,7 @@ const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Questions citoyennes'
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .heart-icon {
   color: var(--red-marianne-main-472);
 }

@@ -93,7 +93,7 @@ onMounted(()=>{
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .bandeau-adaptatif {
   background-color: var(--blue-france-975-75);
   color: var(--blue-france-sun-113-625);
