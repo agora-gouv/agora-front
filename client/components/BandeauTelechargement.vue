@@ -33,7 +33,7 @@ onMounted(()=>{
             <div v-if="platformRef=='desktop'" class="qr-code fr-my-2w">
               <img
                 alt="QR code Agora AppStore"
-                src="/qrCodes/qr-code-ios-fond-blanc.png"
+                src="/qrCodes/qr-code-ios-fond-blanc.webp"
               />
             </div>
           </div>
@@ -47,7 +47,7 @@ onMounted(()=>{
             <div v-if="platformRef=='desktop'" class="qr-code fr-my-2w">
               <img
                 alt="QR code Agora Google Play"
-                src="/qrCodes/qr-code-android-fond-blanc.png"
+                src="/qrCodes/qr-code-android-fond-blanc.webp"
               />
             </div>
           </div>
@@ -55,7 +55,7 @@ onMounted(()=>{
       </div>
     </div>
     <div class="fr-col-12 fr-col-md-4">
-      <img src="/smartphones_complet.png" style="width: 70%;
+      <img src="/smartphones_complet.webp" style="width: 70%;
         max-width: 100vw;">
     </div>
   </div>
