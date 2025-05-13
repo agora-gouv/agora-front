@@ -30,18 +30,18 @@ const fichesTerminees = fiches.filter(fiche => {
                 alt-img="" horizontal v-for="fiche in fichesEnCours" :key="fiche.id" class="fr-mb-2w">
         <template #start-details>
           <DsfrTag :label="fiche.thematique.label"/>
-          <div class="modalites">
+          <p class="modalites">
             <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
             {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
-          </div>
+          </p>
         </template>
         <template #end-details>
-          <div><b>Porteur :</b> {{ fiche.porteur }}</div>
-          <div class="date-fin">
+          <p><b>Porteur :</b> {{ fiche.porteur }}</p>
+          <p class="date-fin">
             <VIcon icon="ri:calendar-line" :inline="true" :ssr="true"/>
             jusqu'au
             <Date :date="fiche.fin"/>
-          </div>
+          </p>
         </template>
       </DsfrCard>
     </div>
@@ -65,10 +65,10 @@ const fichesTerminees = fiches.filter(fiche => {
             <template #start-details>
               <DsfrTag :label="fiche.thematique.label"/>
               <DsfrTag :label="fiche.anneeDeLancement"/>
-              <div class="modalites">
+              <p class="modalites">
                 <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
                 {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
-              </div>
+              </p>
             </template>
             <template #end-details>
             </template>
@@ -83,6 +83,10 @@ const fichesTerminees = fiches.filter(fiche => {
   min-height: 100%;
   height: auto;
   margin-inline: 1rem;
+}
+
+.iconify {
+  color: var(--grey-425-625)
 }
 
 .modalites {
@@ -113,7 +117,7 @@ const fichesTerminees = fiches.filter(fiche => {
   color: var(--grey-425-625)
 }
 
-.fr-card__start div {
+.fr-card__start p {
   font-size: .75rem;
 }
 
