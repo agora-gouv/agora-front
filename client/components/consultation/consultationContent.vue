@@ -84,7 +84,7 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .consultation {
   display: grid;
   grid-template-columns: 
@@ -140,7 +140,7 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
   grid-column: right;
 }
 
-meter#objectif {
+:deep(meter#objectif) {
   border-radius: 7px;
   height: 7px;
   display: block;
@@ -149,20 +149,20 @@ meter#objectif {
   -webkit-appearance: none;
 }
 
-meter#objectif::-webkit-meter-bar {
+:deep(meter#objectif::-webkit-meter-bar) {
   background: #d9d9d98c;
   -webkit-appearance: none;
 }
 
-meter#objectif::-webkit-meter-optimum-value {
+:deep(meter#objectif::-webkit-meter-optimum-value) {
   background: var(--text-title-blue-france);
 }
 
-meter#objectif::-moz-meter-bar {
+:deep(meter#objectif::-moz-meter-bar) {
   background: var(--text-title-blue-france);
 }
 
-meter#objectif::-webkit-meter-bar {
+:deep(meter#objectif::-webkit-meter-bar) {
   border-radius: 7px;
   height: 7px;
   width: 100%;
