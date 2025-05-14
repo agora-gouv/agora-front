@@ -12,10 +12,9 @@ interface FicheInventaireApiDTO {
   lienSite: string,
   conditionParticipation: string,
   modaliteParticipation: string,
-  objectif: string,
   thematique: Thematique,
   illustrationUrl: string,
   etape: string,
   anneeDeLancement: string,
-  statut: string,
+  type: string,
 }

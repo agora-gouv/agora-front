@@ -58,22 +58,22 @@ const menu = [
     text: 'Accueil'
   },
   runtimeConfig.public.features.consultations === '1' && {
-    to: '/consultations',
-    text: 'Initiatives de l’État pour associer les citoyens',
+    to: '/fiches-inventaire',
+    text: 'Je participe',
   },
   runtimeConfig.public.features.qags === '1' && {
     to: '/qags',
-    text: 'Questions au Gouvernement',
+    text: 'Je pose une question au Gouvernement',
+  },
+  {
+    to: '/',
+    text: 'Actions pour renforcer la démocratie',
   },
   runtimeConfig.public.features.pedagogie === '1' && {
-    text: 'Qu’est-ce que la participation citoyenne ?',
+    text: 'En savoir plus sur la participation citoyenne',
     to: 'https://www.modernisation.gouv.fr/associer-les-citoyens/quest-ce-que-la-participation-citoyenne',
     target: "_blank",
     rel: "noopener noreferrer"
-  },
-  runtimeConfig.public.features.fiches === '1' && {
-    to: '/fiches-inventaire',
-    text: 'Fiches inventaire',
   },
 ].filter(element => Boolean(element))
 

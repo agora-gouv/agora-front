@@ -23,16 +23,16 @@ if (error.value) {
         title="Donner votre avis sur les politiques publiques"
         imgSrc="./fonctionnalite_1.svg"
         class="tuile"
-        to="/consultations"
+        to="/fiches-inventaire"
         :disabled="!runtimeConfig.public.features.consultations"
       />
     </div>
     <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
-        title="Suivre les résultats"
+        title="Suivre les résultats de la participation citoyenne"
         imgSrc="./fonctionnalite_2.svg"
         class="tuile"
-        to="/consultations#terminees"
+        to="/fiches-inventaire#terminees"
         :disabled="!runtimeConfig.public.features.consultations"
       />
     </div>

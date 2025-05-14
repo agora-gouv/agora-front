@@ -12,12 +12,12 @@ const neContientQueDesBalisesSansContenu = /^\s*(<[^>]+>\s*)+$/i
 
 const tabListName = 'Étapes de la consultation'
 const tabs = [
-  {id: "lancement", title: 'Lancement de la consultation', content: ficheInventaire.etapeLancementHtml},
-  {id: "analyse", title: 'Analyse des résultats', content: ficheInventaire.etapeAnalyseHtml},
-  {id: "suivi", title: 'Suivi de la consultation', content: ficheInventaire.etapeSuiviHtml},
+  {id: "lancement", title: 'Présentation', content: ficheInventaire.etapeLancementHtml},
+  {id: "analyse", title: 'Résultats', content: ficheInventaire.etapeAnalyseHtml},
+  {id: "suivi", title: 'Actions mises en oeuvre', content: ficheInventaire.etapeSuiviHtml},
 ]
 
-const activeTabIndex = tabs.findIndex((tab) => tab.title.toLowerCase() === ficheInventaire.etape.toLowerCase())
+const activeTabIndex = tabs.findLastIndex(tab => !neContientQueDesBalisesSansContenu.test(tab.content))
 const activeTab = ref(activeTabIndex !== -1 ? activeTabIndex : 0)
 
 const selectPrevious = async () => {
@@ -43,7 +43,6 @@ const selectLast = async () => {
         <p>{{ `${ficheInventaire.thematique.picto} ${ficheInventaire.thematique.label}` }}</p>
         <div class="fr-mb-2w">
           <DsfrBadge :label="ficheInventaire.etape" type="success" class="fr-mr-1w" no-icon/>
-          <DsfrBadge :label="ficheInventaire.objectif" type="info" no-icon/>
         </div>
       </div>
       <div>
@@ -63,12 +62,12 @@ const selectLast = async () => {
         <div>
           <dt>
             <VIcon icon="ri:government-fill" :inline="true" :ssr="true"/>
-            Porteur :
+            Proposé par :
           </dt>
           <dd>{{ ficheInventaire.porteur }}</dd>
         </div>
       </dl>
-      <a :href="ficheInventaire.lienSite" class="fr-btn" rel="external" target="_blank">Site officiel de la consultation</a>
+      <a :href="ficheInventaire.lienSite" class="fr-btn" rel="external" target="_blank">Accéder au site dédié</a>
     </div>
 
     <DsfrTabs v-model="activeTab" :tab-list-name="tabListName" :tab-titles="tabs">
@@ -85,10 +84,10 @@ const selectLast = async () => {
         <dl class="head">
           <div>
             <dt>
-              <VIcon icon="ri:time-fill" :inline="true" :ssr="true"/>
-              Statut de la consultation :
+              <VIcon icon="ri:dna-fill" :inline="true" :ssr="true"/>
+              Type :
             </dt>
-            <dd>{{ ficheInventaire.statut }}</dd>
+            <dd>{{ ficheInventaire.type }}</dd>
           </div>
           <div>
             <dt>

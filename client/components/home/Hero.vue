@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-import {FetchError} from "ofetch";
+import { FetchError } from "ofetch";
 import AccueilContent from "~/client/types/content/accueilContent";
-import {AsyncData} from "nuxt/app";
+import { AsyncData } from "nuxt/app";
 
 const runtimeConfig = useRuntimeConfig()
 
@@ -21,8 +21,8 @@ if (error.value) {
     <div class="content fr-col-12 fr-col-md-6 fr-grid-row fr-grid-row--middle">
       <h1>La plateforme de participation citoyenne de l'État</h1>
       <p>
-        Vous avez votre mot à dire sur la politique de la France, et pas seulement au moment des élections. Découvrez sur Agora comment les
-        citoyens contribuent à la décision publique.
+        Vous avez votre mot à dire sur la politique de la France, et pas seulement au moment des élections. Découvrez sur Agora les actions
+        menées pour rendre notre démocratie plus forte.
       </p>
     </div>
     <img src="/cooperation.svg" alt="" class="fr-col-12 fr-col-md-6">

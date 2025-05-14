@@ -12,5 +12,5 @@ useHead({
   <HomeALaUne />
   <HomeHero class="fr-pt-4w" />
   <HomeFonctionnalites />
-  <BandeauTelechargementAdaptatif title="Également disponible sur mobile" />
+  <BandeauTelechargementAdaptatif title="Ne manquez rien avec l'application mobile Agora." />
 </template>
