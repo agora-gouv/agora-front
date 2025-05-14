@@ -4,7 +4,7 @@ const queries = useRoute().query
 const model = useState(() => ({
   motCle: queries['motCle'] || "",
   thematique: queries['thematique'] || "",
-  etat: queries['etat'] || "",
+  etapes: queries['etapes'] || "",
   modalite: queries['modalite'] || [],
   annee: queries['annee'] || "",
 }))
@@ -12,7 +12,7 @@ function reset() {
   model.value = {
     motCle: "",
     thematique: "",
-    etat: "",
+    etapes: "",
     modalite: [],
     annee: "",
   }
@@ -23,13 +23,14 @@ function reset() {
    "Transition Écologique", "Logement", "Services publics",
    "Économie", "Autonomie", "Agriculture & alimentation"
  ]
- const etats = [ { text: "Non renseigné", value: "" }, "À venir", "En cours", "Terminée" ]
+ const etapes = [ { text: "Non renseigné", value: "" }, "À venir", "En cours", "Résultats à venir", "Résultats disponibles", "✓ Actions " ]
  const modalites = [
-   { label: "Ouvert à tout le monde", value: "open", name: "modalite" },
-   { label: "Par tirage au sort", value: "tirage", name: "modalite" },
-   { label: "Consultation en ligne", value: "remote", name: "modalite" },
-   { label: "Consultation en local", value: "local", name: "modalite" },
- ]
+   { label: "Ouvert à tous", value: "open", name: "modalite" },
+   { label: "Tirage au sort représentatif", value: "tirage", name: "modalite" },
+   { label: "En ligne", value: "remote", name: "modalite" },
+   { label: "En présentiel", value: "local", name: "modalite" },
+]
+
  const annees = [ { text: "Non renseigné", value: "" }, "2020", "2021", "2022", "2023", "2024", "2025", "2026" ]
 </script>
 
@@ -38,10 +39,10 @@ function reset() {
     <h3>Filtres</h3>
     <DsfrInputGroup name="motCle" label-visible label="Rechercher par mot clé" v-model="model.motCle" />
     <DsfrSelect name="thematique" label="Thématique" :options="thematiques" v-model="model.thematique" />
-    <DsfrSelect name="etat" label="État de la consultation" :options="etats" v-model="model.etat" />
-    <DsfrCheckboxSet legend="Modalités" :options="modalites" v-model="model.modalite" />
-    <DsfrSelect name="annee" label="Année de la consultation" :options="annees" v-model="model.annee" />
-    <DsfrButton type="submit" class="button">Filtrer les consultations</DsfrButton>
+    <DsfrSelect name="etape" label="Étape" :options="etapes" v-model="model.etapes" />
+    <DsfrCheckboxSet legend="Modalités de participation" :options="modalites" v-model="model.modalite" />
+    <DsfrSelect name="annee" label="Année de lancement" :options="annees" v-model="model.annee" />
+    <DsfrButton type="submit" class="button">Filtrer les dispositifs</DsfrButton>
     <DsfrButton
       type="reset"
       tertiary
