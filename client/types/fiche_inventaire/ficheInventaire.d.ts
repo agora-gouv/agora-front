@@ -16,5 +16,5 @@ interface FicheInventaireApiDTO {
   illustrationUrl: string,
   etape: string,
   anneeDeLancement: string,
-  statut: string,
+  type: string,
 }

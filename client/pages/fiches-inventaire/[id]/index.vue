@@ -17,13 +17,7 @@ const tabs = [
   {id: "suivi", title: 'Actions mises en oeuvre', content: ficheInventaire.etapeSuiviHtml},
 ]
 
-const activeTabIndex = tabs.findIndex((tab) => tab.title.toLowerCase() === ficheInventaire.etape.toLowerCase())
-/* À venir
-En cours
-Résultats à venir
-Résultats disponibles
-✓ Actions 
-*/
+const activeTabIndex = tabs.findLastIndex(tab => neContientQueDesBalisesSansContenu.test(tab.content))
 const activeTab = ref(activeTabIndex !== -1 ? activeTabIndex : 0)
 
 const selectPrevious = async () => {
@@ -90,10 +84,10 @@ const selectLast = async () => {
         <dl class="head">
           <div>
             <dt>
-              <VIcon icon="ri:time-fill" :inline="true" :ssr="true"/>
+              <VIcon icon="ri:dna-fill" :inline="true" :ssr="true"/>
               Type :
             </dt>
-            <dd>{{ ficheInventaire.statut }}</dd>
+            <dd>{{ ficheInventaire.type }}</dd>
           </div>
           <div>
             <dt>
