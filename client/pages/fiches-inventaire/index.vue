@@ -21,7 +21,7 @@ const fichesTerminees = fiches.filter(fiche => {
 </script>
 <template>
   <div class="fr-mb-2w fr-mt-6w">
-    <div v-if="fichesEnCours.length > 0" id="fiches-en-cours">
+    <div v-if="fichesEnCours.length > 0" id="en-cours">
       <h2>Participez dès maintenant</h2>
       <p>La participation citoyenne permet à l’Etat d'associer les citoyens aux orientations du pays et des réformes à mener, en dehors du
         moment des élections. Elle peut prendre différentes formes selon les besoins : participer en ligne ou bien en se réunissant en
@@ -29,7 +29,7 @@ const fichesTerminees = fiches.filter(fiche => {
         dispositifs qui impliquent les citoyens dans la vie publique en ce moment et faites entendre votre voix.</p>
 
       <DsfrCard :img-src="fiche.illustrationUrl" :link="fiche.lienSite" :title="fiche.titre" description=""
-                alt-img="" horizontal v-for="fiche in fichesEnCours" :key="fiche.id" class="fr-mb-2w">
+                alt-img="" horizontal v-for="fiche in fichesEnCours" :key="fiche.id" class="fr-mb-4w">
         <template #start-details>
           <DsfrTag :label="fiche.thematique.label"/>
           <p class="modalites">
@@ -48,14 +48,16 @@ const fichesTerminees = fiches.filter(fiche => {
       </DsfrCard>
     </div>
 
-    <div v-if="fichesTerminees.length > 0" id="fiches-terminees">
+    <div v-if="fichesTerminees.length > 0" id="terminees">
       <h2>Explorez ce qui a été fait</h2>
       <p>Depuis 2017, plusieurs rendez-vous ont permis aux Français de contribuer sur différents sujets. Certains, comme les Conventions
         citoyennes, visent à construire un avis collectif sur des questions complexes. D'autres, comme les consultations en ligne,
         permettent à chacun de donner ses idées et ses préférences de façon individuelle. Ici, vous pouvez découvrir toutes les initiatives
         lancées, ce que les citoyens ont exprimé et ce à quoi cela a mené concrètement.</p>
-      <div class="fr-grid-row">
-        <div class="fr-col fr-col-sm-6 fr-col-md-4 fr-mb-2w" v-for="fiche in fichesTerminees" :key="fiche.id">
+      <div class="fr-grid-row fr-grid-row--gutters">
+        <ConsultationFiltres class="fr-col fr-col-sm-12 fr-col-md-4" />
+        <div class="fr-grid-row fr-col fr-col-sm-12 fr-col-md-8 fr-grid-row--gutters">
+          <div class="fr-col fr-col-sm-6 fr-col-md-6 fr-mb-2w" v-for="fiche in fichesTerminees" :key="fiche.id">
           <DsfrCard
             :img-src="fiche.illustrationUrl"
             :link="`/fiches-inventaire/${fiche.id}`"
@@ -78,13 +80,13 @@ const fichesTerminees = fiches.filter(fiche => {
             </template>
           </DsfrCard>
         </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <style scoped lang="scss">
 .fr-grid-row .fr-card {
-  min-height: 100%;
   height: auto;
   margin-inline: 1rem;
 }

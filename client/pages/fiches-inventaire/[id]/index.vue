@@ -17,7 +17,7 @@ const tabs = [
   {id: "suivi", title: 'Actions mises en oeuvre', content: ficheInventaire.etapeSuiviHtml},
 ]
 
-const activeTabIndex = tabs.findLastIndex(tab => neContientQueDesBalisesSansContenu.test(tab.content))
+const activeTabIndex = tabs.findLastIndex(tab => !neContientQueDesBalisesSansContenu.test(tab.content))
 const activeTab = ref(activeTabIndex !== -1 ? activeTabIndex : 0)
 
 const selectPrevious = async () => {

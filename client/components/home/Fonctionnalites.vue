@@ -23,7 +23,7 @@ if (error.value) {
         title="Donner votre avis sur les politiques publiques"
         imgSrc="./fonctionnalite_1.svg"
         class="tuile"
-        to="/consultations"
+        to="/fiches-inventaire"
         :disabled="!runtimeConfig.public.features.consultations"
       />
     </div>
