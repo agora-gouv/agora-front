@@ -23,7 +23,7 @@ function reset() {
    "Transition Écologique", "Logement", "Services publics",
    "Économie", "Autonomie", "Agriculture & alimentation"
  ]
- const etapes = [ { text: "Non renseigné", value: "" }, "À venir", "En cours", "Résultats à venir", "Résultats disponibles", "Actions " ]
+ const etapes = [ { text: "Non renseigné", value: "" }, "À venir", "En cours", "Résultats à venir", "Résultats disponibles", "Actions" ]
  const modalites = [
    { label: "Ouvert à tous", value: "open", name: "modalite" },
    { label: "Tirage au sort représentatif", value: "tirage", name: "modalite" },
