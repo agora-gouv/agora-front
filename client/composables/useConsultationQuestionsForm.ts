@@ -33,6 +33,7 @@ export const useConsultationQuestionsForm = () => {
   const questionCount = computed(() => {
     return questions.value?.questionCount
   })
+  const numberOfAnsweredQuestions = computed(() => respondedQuestions.value.length + 1);
 
   const initQuestions = async () => {
     const questionsApi = (await consultationQuestionApi.getQuestions(consultationId)).value
@@ -88,7 +89,7 @@ export const useConsultationQuestionsForm = () => {
 
   return {
     currentQuestion, initQuestions, questionCount, nextQuestion, hasPreviousQuestion, errorMessage,
-    previousQuestion, consultationId, answersCheckbox, submit, hasNextQuestion, answersText,
+    previousQuestion, consultationId, answersCheckbox, submit, hasNextQuestion, answersText, numberOfAnsweredQuestions,
   };
 }
 

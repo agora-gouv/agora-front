@@ -6,7 +6,7 @@ definePageMeta({
 
 const {
   currentQuestion, questionCount, initQuestions, hasNextQuestion, hasPreviousQuestion, errorMessage,
-  nextQuestion, previousQuestion, consultationId, submit, answersCheckbox, answersText,
+  nextQuestion, previousQuestion, consultationId, submit, answersCheckbox, answersText, numberOfAnsweredQuestions
 } = useConsultationQuestionsForm();
 
 await initQuestions()
@@ -37,7 +37,7 @@ const activeAccordion = ref<number>()
       <h6 class="fr-alert__title">{{ errorMessage }}</h6>
     </div>
 
-    <Stepper :title="`Question ${currentQuestion?.order}`" :current-step="currentQuestion!!.order" :total-steps="questionCount!!"/>
+    <ConsultationQuestionsStepper :current-question="numberOfAnsweredQuestions" :current-step="currentQuestion!!.order" :number-of-steps="questionCount!!"/>
 
     <h3 class="question-title">{{ currentQuestion?.title }}</h3>
 
