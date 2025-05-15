@@ -86,6 +86,9 @@ progress {
   margin-bottom: 10px;
   background-color: white;
   border: 1px solid #bbbbbb;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 progress::-webkit-progress-bar {
