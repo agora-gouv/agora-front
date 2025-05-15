@@ -43,7 +43,6 @@ const navigateToQuestions = () => navigateTo({path: `/consultations/${props.cons
           <DsfrTag :label="`${consultation.thematique.picto} ${consultation.thematique.label}`"/>
         </div>
         <h1>{{ consultation.title }}</h1>
-<<<<<<< HEAD:client/components/consultation/consultationContent.vue
         <ConsultationEnUnClinDOeil v-if="consultation.goals" :goals="consultation.goals"/>
         <ConsultationQuestionsInformations v-if="consultation.questionsInfo && estEnCours" class="info-question fr-py-1w" 
                                            :questions-info="consultation.questionsInfo" :consultation-est-en-cours="estEnCours"/>
@@ -206,7 +205,7 @@ h1 {
   margin: 0 0 0.4em 0;
 }
 
-h2 {
+:deep(h2) {
   color: var(--blue-france-sun-113-625);
 }
 
