@@ -46,14 +46,14 @@ const navigateToQuestions = () => navigateTo({path: `/consultations/${props.cons
         <ConsultationEnUnClinDOeil v-if="consultation.goals" :goals="consultation.goals"/>
         <ConsultationQuestionsInformations v-if="consultation.questionsInfo && estEnCours" class="info-question fr-py-1w" 
                                            :questions-info="consultation.questionsInfo" :consultation-est-en-cours="estEnCours"/>
-        <ConsultationSections :sections="consultation.body.headerSections"/>
-        <ConsultationSections :sections="consultation.body.sections"/>
         <div v-if="consultation.responsesInfo" class="fr-callout" id="results">
           <div v-html="consultation.responsesInfo.description" />
           <NuxtLink :to="`/consultations/${consultation.id}/results`" class="fr-btn">
             {{ consultation.responsesInfo.actionText }}
           </NuxtLink>
         </div>
+        <ConsultationSections :sections="consultation.body.headerSections"/>
+        <ConsultationSections :sections="consultation.body.sections"/>
         <DsfrTile v-if="consultation.downloadAnalysisUrl" title="Télécharger la synthèse complète"
           :to="consultation.downloadAnalysisUrl" :download="true" :img-src="svgBook" class="fr-mb-4w"
           description="Pour aller plus loin, retrouvez l'analyse détaillée de l'ensemble des réponses à cette consultation."/>
