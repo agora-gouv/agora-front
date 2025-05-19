@@ -1,7 +1,8 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'basic'
+  layout: 'basic',
 })
+useNoIndexation();
 
 const links = ref()
 const consultationUpdate = ref()
