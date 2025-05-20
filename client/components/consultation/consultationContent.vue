@@ -13,6 +13,20 @@ const estEnCours = props.consultation.consultationDates?.endDate
 
 const runtimeConfig = useRuntimeConfig();
 const isResponseActivated = runtimeConfig.public.features.consultations == '1'
+
+const openResponseModal = ref(false)
+const respond = async () => {
+  const isMobileDevice = /android|iPad|iPhone|iPod/i.test(navigator.userAgent)
+  if (!isMobileDevice) {
+    await navigateTo({path: `/consultations/${props.consultation.id}/questions`})
+    return
+  }
+
+  return openResponseModal.value = true
+}
+
+const navigateToQuestions = () => navigateTo({path: `/consultations/${props.consultation.id}/questions`})
+
 </script>
 
 <template>
@@ -32,14 +46,14 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
         <ConsultationEnUnClinDOeil v-if="consultation.goals" :goals="consultation.goals"/>
         <ConsultationQuestionsInformations v-if="consultation.questionsInfo && estEnCours" class="info-question fr-py-1w" 
                                            :questions-info="consultation.questionsInfo" :consultation-est-en-cours="estEnCours"/>
-        <ConsultationSections :sections="consultation.body.headerSections"/>
-        <ConsultationSections :sections="consultation.body.sections"/>
         <div v-if="consultation.responsesInfo" class="fr-callout" id="results">
           <div v-html="consultation.responsesInfo.description" />
           <NuxtLink :to="`/consultations/${consultation.id}/results`" class="fr-btn">
             {{ consultation.responsesInfo.actionText }}
           </NuxtLink>
         </div>
+        <ConsultationSections :sections="consultation.body.headerSections"/>
+        <ConsultationSections :sections="consultation.body.sections"/>
         <DsfrTile v-if="consultation.downloadAnalysisUrl" title="Télécharger la synthèse complète"
           :to="consultation.downloadAnalysisUrl" :download="true" :img-src="svgBook" class="fr-mb-4w"
           description="Pour aller plus loin, retrouvez l'analyse détaillée de l'ensemble des réponses à cette consultation."/>
@@ -47,10 +61,13 @@ const isResponseActivated = runtimeConfig.public.features.consultations == '1'
           :share-text="consultation.shareText"
           :share-title="consultation.title"/>
         <ConsultationEncartFeedback :consultation="consultation" v-if="consultation.feedbackQuestion" />
-        <NuxtLink :to="`/consultations/${consultation.id}/questions`"
-                  v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser" class="fr-mb-4w fr-btn">
+        <DsfrButton type="button" v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser"
+                    class="fr-mb-4w fr-btn" @click="respond()">
           Répondre à la consultation
-        </NuxtLink>
+        </DsfrButton>
+
+        <ConsultationRepondreModal :open="openResponseModal" @close="() => openResponseModal = false"
+                                   :on-click="navigateToQuestions"/>
       </div>
 
       <div id="left-column">
@@ -188,7 +205,7 @@ h1 {
   margin: 0 0 0.4em 0;
 }
 
-h2 {
+:deep(h2) {
   color: var(--blue-france-sun-113-625);
 }
 
