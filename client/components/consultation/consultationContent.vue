@@ -58,6 +58,7 @@ const navigateToQuestions = () => navigateTo({path: `/consultations/${props.cons
           :to="consultation.downloadAnalysisUrl" :download="true" :img-src="svgBook" class="fr-mb-4w"
           description="Pour aller plus loin, retrouvez l'analyse détaillée de l'ensemble des réponses à cette consultation."/>
         <ConsultationShare
+          v-if="consultation.isAnsweredByUser"
           :share-text="consultation.shareText"
           :share-title="consultation.title"/>
         <ConsultationEncartFeedback :consultation="consultation" v-if="consultation.feedbackQuestion" />
