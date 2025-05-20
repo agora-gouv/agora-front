@@ -14,10 +14,23 @@ const fichesEnCours = fiches.filter(fiche => {
   const dateFin = new Date(fiche.fin)
   return dateFin >= today
 })
+const fichesEnCoursAvecOuvertATousEnPremier = fichesEnCours.sort((a) => {
+  return a.conditionParticipation === "Ouvert à tous" ? -1 : 1
+});
+
 const fichesTerminees = fiches.filter(fiche => {
   const dateFin = new Date(fiche.fin)
   return dateFin < today
 })
+
+const getEtapeType = (etape: string) => {
+  switch (etape) {
+    case 'En cours':
+      return 'info'
+    default:
+      return 'success'
+  }
+}
 </script>
 <template>
   <div class="fr-mb-2w fr-mt-6w">
@@ -28,8 +41,9 @@ const fichesTerminees = fiches.filter(fiche => {
         physique, ouverte au plus grand nombre ou bien avec un échantillon représentatif de la population, etc. Retrouvez ici les
         dispositifs qui impliquent les citoyens dans la vie publique en ce moment et faites entendre votre voix.</p>
 
-      <DsfrCard :img-src="fiche.illustrationUrl" :link="fiche.lienSite" :title="fiche.titre" description=""
-                alt-img="" horizontal v-for="fiche in fichesEnCours" :key="fiche.id" class="fr-mb-4w">
+      <DsfrCard :img-src="fiche.illustrationUrl" :link="fiche.lienSite" :title="fiche.titre" description="" 
+                :badges="[{label: fiche.etape, type: getEtapeType(fiche.etape), noIcon: true}]"
+                alt-img="" horizontal v-for="fiche in fichesEnCoursAvecOuvertATousEnPremier" :key="fiche.id" class="fr-mb-4w">
         <template #start-details>
           <DsfrTag :label="fiche.thematique.label"/>
           <p class="modalites">
