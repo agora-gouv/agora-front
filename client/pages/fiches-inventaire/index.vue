@@ -24,12 +24,8 @@ const fichesTerminees = fiches.filter(fiche => {
 })
 
 const getEtapeType = (etape: string) => {
-  switch (etape) {
-    case 'En cours':
-      return 'info'
-    default:
-      return 'success'
-  }
+  if (etape === 'En cours') return 'info'
+  return 'success'
 }
 </script>
 <template>
