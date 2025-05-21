@@ -17,7 +17,7 @@ if (error.value) {
 </script>
 
 <template>
-  <div class="tuiles fr-grid-row fr-grid-row--gutters fr-grid-row--center fr-py-8w">
+  <div class="tuiles fr-grid-row fr-grid-row--gutters fr-grid-row--center fr-my-8w">
     <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
         title="Donner votre avis sur les politiques publiques"
