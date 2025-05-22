@@ -27,6 +27,7 @@ import {
   DsfrCheckbox,
   DsfrCheckboxSet,
   DsfrNotice,
+  DsfrQuote,
 } from "@gouvminint/vue-dsfr";
 import { addIcon, Icon } from '@iconify/vue';
 
@@ -63,6 +64,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrCheckbox', DsfrCheckbox);
   nuxtApp.vueApp.component('DsfrCheckboxSet', DsfrCheckboxSet);
   nuxtApp.vueApp.component('DsfrNotice', DsfrNotice);
+  nuxtApp.vueApp.component('DsfrQuote', DsfrQuote);
 
   Object.entries(icons).forEach(([name, icon]) => {
     addIcon(name, icon)
