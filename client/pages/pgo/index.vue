@@ -3,6 +3,9 @@
 definePageMeta({
   layout: 'basic',
 })
+useHead({
+  title: 'Actions pour renforcer la démocratie - Agora'
+})
 </script>
 
 <template>

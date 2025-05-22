@@ -2,6 +2,9 @@
 definePageMeta({
   layout: 'basic'
 })
+useHead({
+  title: 'Mon profil - Agora'
+})
 
 const app = useNuxtApp()
 if (!app.$departements) {
