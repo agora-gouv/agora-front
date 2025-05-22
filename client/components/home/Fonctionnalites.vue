@@ -21,7 +21,7 @@ if (error.value) {
     <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
         title="Donner votre avis sur les politiques publiques"
-        imgSrc="./fonctionnalite_1.svg"
+        imgSrc="/community.svg"
         class="tuile"
         to="/fiches-inventaire"
         :disabled="!runtimeConfig.public.features.consultations"
@@ -30,7 +30,7 @@ if (error.value) {
     <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
         title="Suivre les résultats de la participation citoyenne"
-        imgSrc="./fonctionnalite_2.svg"
+        imgSrc="/search.svg"
         class="tuile"
         to="/fiches-inventaire#terminees"
         :disabled="!runtimeConfig.public.features.consultations"
@@ -39,7 +39,7 @@ if (error.value) {
     <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
         title="Poser vos questions au Gouvernement"
-        imgSrc="./fonctionnalite_3.svg"
+        imgSrc="/conclusion.svg"
         class="tuile"
         to="/qags"
         :disabled="!runtimeConfig.public.features.qags"
