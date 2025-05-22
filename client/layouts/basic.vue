@@ -66,7 +66,7 @@ const menu = [
     text: 'Je pose une question au Gouvernement',
   },
   {
-    to: '/',
+    to: '/pgo',
     text: 'Actions pour renforcer la démocratie',
   },
   runtimeConfig.public.features.pedagogie === '1' && {
