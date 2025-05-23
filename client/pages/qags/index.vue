@@ -40,6 +40,7 @@ onMounted(async () => {
       </li>
     </ol>
   </div>
+  <BandeauTelechargementAdaptatif title="Rendez-vous sur l'application mobile Agora pour participer." />
 </template>
 <style scoped>
 .fr-card__title {
