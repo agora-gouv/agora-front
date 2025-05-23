@@ -6,7 +6,7 @@ definePageMeta({
   layout: 'basic',
 })
 useHead({
-  title: 'Réponses des Questions au Gouvernement - Agora',
+  title: 'Questions au gouvernement - Agora',
 })
 
 const latest = useState<QagsApiDTO["qags"]>(() => ([]));
