@@ -131,8 +131,4 @@ ol {
 ol > li::marker {
   content: revert;
 }
-
- {
-  color: var(--blue-france-sun-113-625);
-}
 </style>

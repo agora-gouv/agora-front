@@ -1,7 +1,5 @@
-import { AsyncData } from "nuxt/app";
-import { FetchError } from "ofetch";
 import type Qag from "~/client/types/qag/qag";
-import QagsApiDTO from "~/client/types/qag/qags";
+import { QagsApiDTO, QagsWithResponsesApiDTO } from "~/client/types/qag/qags";
 
 export class QagApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;
@@ -11,7 +9,7 @@ export class QagApi {
     const {
       data: qag,
       error: qagError
-    } = await useFetch(routeQagUrl) as AsyncData<Qag, FetchError>
+    } = await useFetch<Qag>(routeQagUrl)
 
     if (qagError.value) {
       throw createError({statusCode: qagError.value!.statusCode})
@@ -25,7 +23,35 @@ export class QagApi {
     const {
       data: qags,
       error: qagError
-    } = await useFetch(routeQagUrl) as AsyncData<QagsApiDTO, FetchError>
+    } = await useFetch<QagsWithResponsesApiDTO>(routeQagUrl)
+
+    if (qagError.value) {
+      throw createError({statusCode: qagError.value!.statusCode})
+    }
+
+    return qags
+  }
+
+  async getLatest(token: string) {
+    const routeQagUrl = `${this.baseUrl}/v2/qags?pageNumber=1&filterType=latest`
+    const {
+      data: qags,
+      error: qagError
+    } = await useFetch<QagsApiDTO>(routeQagUrl, {headers: {"Authorization": `Bearer ${token}`}})
+
+    if (qagError.value) {
+      throw createError({statusCode: qagError.value!.statusCode})
+    }
+
+    return qags
+  }
+
+  async getPopular(token: string) {
+    const routeQagUrl = `${this.baseUrl}/v2/qags?pageNumber=1&filterType=trending`
+    const {
+      data: qags,
+      error: qagError
+    } = await useFetch<QagsApiDTO>(routeQagUrl, {headers: {"Authorization": `Bearer ${token}`}})
 
     if (qagError.value) {
       throw createError({statusCode: qagError.value!.statusCode})
