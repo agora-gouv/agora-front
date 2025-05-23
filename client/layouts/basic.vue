@@ -134,7 +134,7 @@ const app = useNuxtApp().vueApp.mixin({
     </template>
   </DsfrHeader>
   <main id="main">
-    <div class="fr-container fr-mb-8w">
+    <div class="fr-container">
       <slot/>
     </div>    
   </main>
@@ -144,5 +144,15 @@ const app = useNuxtApp().vueApp.mixin({
     :operator-img-src="operatorImgSrc"
     :operator-img-style="operatorImgStyleFooter"
     :ecosystem-links="ecosystemLinks"
+    class="footer"
   />
 </template>
+
+<style>
+.footer {
+  margin-top: 64px;
+}
+main:has(.bandeau-adaptatif) + .footer {
+  margin-top: 0;
+}
+</style>
