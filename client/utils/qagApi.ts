@@ -47,7 +47,7 @@ export class QagApi {
   }
 
   async getPopular(token: string) {
-    const routeQagUrl = `${this.baseUrl}/v2/qags?pageNumber=1&filterType=trending`
+    const routeQagUrl = `${this.baseUrl}/v2/qags?pageNumber=1&filterType=top`
     const {
       data: qags,
       error: qagError
