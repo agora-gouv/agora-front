@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import {QagsApiDTO} from "~/client/types/qag/qags";
+
 definePageMeta({
   layout: 'basic',
 })
@@ -7,27 +9,20 @@ useHead({
   title: 'Réponses des Questions au Gouvernement - Agora',
 })
 
-const qags = (await (new QagApi().getQags(1))).value.responses
+const qags = useState<QagsApiDTO["qags"]>(() => ([]));
+
+onMounted(async () => {
+  const { jwtToken } = await useAuthentication()
+  qags.value = (await (new QagApi().getLatest(jwtToken))).value.qags.slice(0, 4)
+})
 </script>
 <template>
   <div class="fr-mb-2w fr-mt-6w">
-    <div class="fr-grid-row fr-mb-1w">
-      <div class="fr-col-md-6 fr-col-md fr-my-1w" v-for="qag in qags" :key="qag.qagId">
-        <div class="fr-card fr-mx-1w">
-          <div class="fr-card__body">
-            <div class="fr-card__content">
-              <h3 class="fr-card__title">
-                <NuxtLink :to="`/qags/${qag.qagId}`">{{ qag.title }}</NuxtLink>
-              </h3>
-              <div class="fr-card__start">
-                <img :src="qag.authorPortraitUrl" alt="Portrait de l'auteur" class="fr-card__portrait">
-                <span class="card_author">{{qag.author}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ol class="fr-mb-1w fr-raw-list">
+      <li class="fr-my-4w" v-for="qag in qags" :key="qag.qagId">
+        <Qag :qag="qag" />
+      </li>
+    </ol>
   </div>
 </template>
 <style scoped>
