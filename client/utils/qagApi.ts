@@ -45,4 +45,18 @@ export class QagApi {
 
     return qags
   }
+
+  async getPopular(token: string) {
+    const routeQagUrl = `${this.baseUrl}/v2/qags?pageNumber=1&filterType=trending`
+    const {
+      data: qags,
+      error: qagError
+    } = await useFetch<QagsApiDTO>(routeQagUrl, {headers: {"Authorization": `Bearer ${token}`}})
+
+    if (qagError.value) {
+      throw createError({statusCode: qagError.value!.statusCode})
+    }
+
+    return qags
+  }
 }
