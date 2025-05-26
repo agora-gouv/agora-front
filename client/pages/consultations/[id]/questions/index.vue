@@ -42,7 +42,7 @@ const activeAccordion = ref<number>()
     <h3 class="question-title">{{ currentQuestion?.title }}</h3>
 
     <DsfrAccordionsGroup class="fr-my-3w" v-model="activeAccordion">
-      <DsfrAccordion v-if="currentQuestion?.popupDescription" title="Plus de précision" id="accordion-1">
+      <DsfrAccordion v-if="currentQuestion?.popupDescription" title="Plus de précisions" id="accordion-1">
         <div v-html="currentQuestion?.popupDescription"/>
       </DsfrAccordion>
     </DsfrAccordionsGroup>
@@ -112,7 +112,7 @@ const activeAccordion = ref<number>()
         <div class="fr-input-group">
           <label class="fr-label" for="textarea">
             Vous avez jusqu’à 400 caractères. Attention à n’indiquer ni données personnelles qui pourraient vous identifier, ni de lien vers
-            un site internet
+            un site internet.
           </label>
           <textarea class="fr-input" id="textarea" maxlength="400"
                     v-model="answersText[currentQuestion.id]"></textarea>

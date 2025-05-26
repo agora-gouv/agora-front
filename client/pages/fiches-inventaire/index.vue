@@ -32,10 +32,12 @@ const getEtapeType = (etape: string) => {
   <div class="fr-mb-2w fr-mt-6w">
     <div v-if="fichesEnCours.length > 0" id="en-cours">
       <h2>Participez dès maintenant</h2>
-      <p>La participation citoyenne permet à l’Etat d'associer les citoyens aux orientations du pays et des réformes à mener, en dehors du
-        moment des élections. Elle peut prendre différentes formes selon les besoins : participer en ligne ou bien en se réunissant en
-        physique, ouverte au plus grand nombre ou bien avec un échantillon représentatif de la population, etc. Retrouvez ici les
-        dispositifs qui impliquent les citoyens dans la vie publique en ce moment et faites entendre votre voix.</p>
+      <p>
+        La participation citoyenne permet à l’État d'associer les citoyens aux orientations du pays et des réformes à mener, en dehors des
+        élections. Elle peut prendre différentes formes selon les besoins : participer en ligne ou bien en se réunissant en physique,
+        ouverte au plus grand nombre ou avec un échantillon représentatif de la population, etc. Retrouvez ici les dispositifs qui
+        impliquent les citoyens dans la vie publique en ce moment et faites entendre votre voix.
+      </p>
 
       <DsfrCard :img-src="fiche.illustrationUrl" :link="fiche.lienSite" :title="fiche.titre" description="" 
                 :badges="[{label: fiche.etape, type: getEtapeType(fiche.etape), noIcon: true}]"
@@ -60,10 +62,12 @@ const getEtapeType = (etape: string) => {
 
     <div v-if="fichesTerminees.length > 0" id="terminees">
       <h2>Explorez ce qui a été fait</h2>
-      <p>Depuis 2017, plusieurs rendez-vous ont permis aux Français de contribuer sur différents sujets. Certains, comme les Conventions
-        citoyennes, visent à construire un avis collectif sur des questions complexes. D'autres, comme les consultations en ligne,
-        permettent à chacun de donner ses idées et ses préférences de façon individuelle. Ici, vous pouvez découvrir toutes les initiatives
-        lancées, ce que les citoyens ont exprimé et ce à quoi cela a mené concrètement.</p>
+      <p>
+        Depuis <time>2017</time>, plusieurs rendez-vous ont permis aux Français de contribuer sur différents sujets. Certains, comme les
+        conventions citoyennes, visent à construire un avis collectif sur des questions complexes. D'autres, comme les consultations en
+        ligne, permettent à chacun de donner ses idées et ses préférences de façon individuelle. Ici, vous pouvez découvrir toutes les
+        initiatives lancées, ce que les citoyens ont exprimé et ce à quoi cela a mené concrètement.
+      </p>
       <div class="fr-grid-row fr-grid-row--gutters">
         <ConsultationFiltres class="fr-col fr-col-sm-12 fr-col-md-4" />
         <div class="fr-grid-row fr-col fr-col-sm-12 fr-col-md-8 fr-grid-row--gutters">
