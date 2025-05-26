@@ -89,6 +89,7 @@ useHead({
              "
              author="Patrick Mignola, Ministre délégué auprès du Premier ministre, chargé des Relations avec le Parlement"
              quoteImage="/Mignola.jpg"
+             source="Débat à l'assemblée nationale le 11 mars 2025"
              class="fr-mb-4w" />
 
    <div class="bandeau-cta fr-grid-row fr-grid-row--gutters fr-p-5w">
