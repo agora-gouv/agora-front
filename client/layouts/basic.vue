@@ -57,11 +57,11 @@ const menu = [
     to: '/',
     text: 'Accueil'
   },
-  runtimeConfig.public.features.consultations === '1' && {
+  runtimeConfig.public.features.consultations && {
     to: '/fiches-inventaire',
     text: 'Je participe',
   },
-  runtimeConfig.public.features.qags === '1' && {
+  runtimeConfig.public.features.qags && {
     to: '/qags',
     text: 'Je pose une question au Gouvernement',
   },
@@ -69,7 +69,7 @@ const menu = [
     to: '/pgo',
     text: 'Actions pour renforcer la démocratie',
   },
-  runtimeConfig.public.features.pedagogie === '1' && {
+  runtimeConfig.public.features.pedagogie && {
     text: 'En savoir plus sur la participation citoyenne',
     to: 'https://www.modernisation.gouv.fr/associer-les-citoyens/quest-ce-que-la-participation-citoyenne',
     target: "_blank",
