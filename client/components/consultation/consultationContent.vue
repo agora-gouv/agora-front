@@ -12,7 +12,7 @@ const estEnCours = props.consultation.consultationDates?.endDate
   && new Date() < new Date(props.consultation.consultationDates.endDate)
 
 const runtimeConfig = useRuntimeConfig();
-const isResponseActivated = runtimeConfig.public.features.consultations == '1'
+const isResponseActivated = runtimeConfig.public.features.consultations
 
 const openResponseModal = ref(false)
 const respond = async () => {

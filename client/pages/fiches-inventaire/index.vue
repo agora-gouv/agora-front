@@ -6,6 +6,9 @@ useHead({
   title: 'Fiches inventaire - Agora',
 })
 
+const runtimeConfig = useRuntimeConfig();
+const withFilters = runtimeConfig.public.features.filtresConsultations
+
 const fiches = await (new FicheInventaireApi().getAll())
 
 const today = new Date()
@@ -69,8 +72,8 @@ const getEtapeType = (etape: string) => {
         initiatives lancées, ce que les citoyens ont exprimé et ce à quoi cela a mené concrètement.
       </p>
       <div class="fr-grid-row fr-grid-row--gutters">
-        <ConsultationFiltres class="fr-col fr-col-sm-12 fr-col-md-4" />
-        <div class="fr-grid-row fr-col fr-col-sm-12 fr-col-md-8 fr-grid-row--gutters">
+        <ConsultationFiltres class="fr-col fr-col-sm-12 fr-col-md-4" v-if="withFilters" />
+        <div :class="`fr-grid-row fr-col fr-grid-row--gutters ${withFilters ? 'fr-col-sm-12 fr-col-md-8' : 'fr-col-12'}`">
           <div class="fr-col fr-col-sm-6 fr-col-md-6 fr-mb-2w" v-for="fiche in fichesTerminees" :key="fiche.id">
           <DsfrCard
             :img-src="fiche.illustrationUrl"

@@ -63,9 +63,10 @@ export default defineNuxtConfig({
       domainName: process.env.DOMAIN_NAME,
       apiBaseUrl: process.env.API_BASE_URL,
       features: {
-        qags: process.env.QAGS_FEATURE,
-        consultations: process.env.CONSULTATIONS_FEATURE,
-        pedagogie: process.env.PEDAGOGIE_FEATURE,
+        qags: process.env.QAGS_FEATURE === "1",
+        consultations: process.env.CONSULTATIONS_FEATURE === "1",
+        pedagogie: process.env.PEDAGOGIE_FEATURE === "1",
+        filtresConsultations: process.env.FILTRES_CONSULTATIONS_FEATURE === "1"
       },
     },
   },
