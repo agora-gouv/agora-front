@@ -21,16 +21,16 @@ const { qag } = defineProps<{ qag: QagApiDTO }>()
     </div>
     <div class="fr-card__header fr-p-4w">
       <div class="fr-card__img">
-        <VIcon name="ri:account-circle-line" aria-hidden />
+        <img src="@gouvfr/dsfr/dist/artwork/pictograms/digital/avatar.svg" alt="" />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.fr-card svg {
+.fr-card img {
   width: 4rem;
-  height: 100%;
+  height: 4rem;
   text-align: center;
   align-content: center;
 }
