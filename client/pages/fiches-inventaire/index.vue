@@ -77,7 +77,7 @@ const getEtapeType = (etape: string) => {
           <div class="fr-col fr-col-sm-6 fr-col-md-6 fr-mb-2w" v-for="fiche in fichesTerminees" :key="fiche.id">
           <DsfrCard
             :img-src="fiche.illustrationUrl"
-            :link="`/fiches-inventaire/${fiche.id}`"
+            :link="`/je-participe/${fiche.id}`"
             :title="fiche.titre"
             description=""
             :badges="[{

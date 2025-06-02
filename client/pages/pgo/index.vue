@@ -100,8 +100,8 @@ useHead({
   <h2 class="fr-pt-8w">Les Conventions citoyennes</h2>
   <p>Les Conventions citoyennes sont devenues, en quelques années, un format incontournable de la démocratie participative en France.</p>
   <ul class="fr-mt-2w fr-mb-4w">
-    <li>La <a href="/fiches-inventaire/9"><b><i>Convention citoyenne pour le climat</i></b></a> (2019-2020) a débouché sur de nombreuses mesures intégrées à la loi <i>Climat et Résilience</i> de 2021</li>
-    <li>La <a href="/fiches-inventaire/10"><b><i>Convention citoyenne sur la fin de vie</i></b></a> (2022-2023) a débouché sur 2 propositions de loi adoptées par l'Assemblée nationale le <time datetime="2025-05-27">27 mai 2025</time></li>
+    <li>La <a href="/je-participe/9"><b><i>Convention citoyenne pour le climat</i></b></a> (2019-2020) a débouché sur de nombreuses mesures intégrées à la loi <i>Climat et Résilience</i> de 2021</li>
+    <li>La <a href="/je-participe/10"><b><i>Convention citoyenne sur la fin de vie</i></b></a> (2022-2023) a débouché sur 2 propositions de loi adoptées par l'Assemblée nationale le <time datetime="2025-05-27">27 mai 2025</time></li>
   </ul>
   <p class="fr-mb-8w">
     À partir de <time datetime="2025-06">juin 2025</time>, une nouvelle convention s’organise sur le thème des temps de l’enfant : rythmes

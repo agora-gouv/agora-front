@@ -6,7 +6,7 @@ const news = await new NewsApi().get();
 function convertRouteName(routeName: NewsDto['routeName'], argument: NewsDto['routeArgument']) {
   switch (routeName) {
     case '/consultationsPage':
-      return '/fiches-inventaire'
+      return '/je-participe'
     case '/qagsPage':
       return '/qags'
     case '/consultation/dynamic':
