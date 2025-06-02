@@ -23,7 +23,7 @@ if (error.value) {
         title="Donner votre avis sur les politiques publiques"
         imgSrc="/community.svg"
         class="tuile"
-        to="/fiches-inventaire"
+        to="/je-participe"
         :disabled="!runtimeConfig.public.features.consultations"
       />
     </div>
@@ -32,7 +32,7 @@ if (error.value) {
         title="Suivre les résultats de la participation citoyenne"
         imgSrc="/search.svg"
         class="tuile"
-        to="/fiches-inventaire#terminees"
+        to="/je-participe#terminees"
         :disabled="!runtimeConfig.public.features.consultations"
       />
     </div>

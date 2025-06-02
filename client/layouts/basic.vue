@@ -58,7 +58,7 @@ const menu = [
     text: 'Accueil'
   },
   runtimeConfig.public.features.consultations && {
-    to: '/fiches-inventaire',
+    to: '/je-participe',
     text: 'Je participe',
   },
   runtimeConfig.public.features.qags && {
