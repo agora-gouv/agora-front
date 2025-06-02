@@ -20,10 +20,10 @@ const textWithoutLineBreaks = news.value.description.replace(/<(\/?)br(\/?)>/g, 
 </script>
 
 <template>
-  <DsfrNotice title="À la une !" class="break-container">
+  <DsfrNotice title="Nouvelle consultation" class="break-container">
     <template #desc>
-      <span v-html="textWithoutLineBreaks"></span> <a :href="convertRouteName(news.routeName, news.routeArgument)">
-        {{ news.callToActionText }}
+      <span><span role="img" aria-hidden>📣</span> Économie sociale et solidaire : quelle stratégie nationale ?</span> <a :href="convertRouteName(news.routeName, news.routeArgument)">
+        Je réponds à la consultation
       </a>
     </template>
   </DsfrNotice>
