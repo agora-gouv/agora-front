@@ -21,8 +21,9 @@ onMounted(async () => {
 <template>
   <h1 class="fr-mt-4w">Posez vos questions au Gouvernement avec l’application mobile Agora</h1>
   <p>
-    Dans le cadre de la consultation sur l'Économie sociale et solidaire (<abbr>ESS</abbr>), Véronique Louwagie, ministre déléguée chargée
-    du Commerce, de l'Artisanat des Petites et Moyennes entreprises et de l'<abbr>ESS</abbr> répondra à vos questions sur ce thème.
+    Dans le cadre de la consultation sur l'Économie sociale et solidaire (<abbr>ESS</abbr>), la <b>Ministre Véronique Louwagie</b> répondra à vos questions sur ce thème.
+  </p>
+  <p>
     Vous pouvez poser vos questions et soutenir celles que vous trouvez les plus intéressantes en téléchargeant l'application (sur <a
     href="https://apps.apple.com/app/6449599025">iOS</a> ou <a href="https://play.google.com/store/apps/details?id=fr.gouv.agora">Android</a>).
   </p>
