@@ -24,7 +24,7 @@ onMounted(async () => {
     Dans le cadre de la consultation sur l'Économie sociale et solidaire (<abbr>ESS</abbr>), la <b>Ministre Véronique Louwagie</b> répondra à vos questions sur ce thème.
   </p>
   <p>
-    Vous pouvez poser vos questions et soutenir celles que vous trouvez les plus intéressantes en téléchargeant l'application (sur <a
+    Vous pouvez <strong>poser vos questions sur l'Économie sociale et solidaire</strong> et soutenir celles que vous trouvez les plus intéressantes en téléchargeant l'application (sur <a
     href="https://apps.apple.com/app/6449599025">iOS</a> ou <a href="https://play.google.com/store/apps/details?id=fr.gouv.agora">Android</a>).
   </p>
   <p>
