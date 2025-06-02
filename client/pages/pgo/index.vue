@@ -21,7 +21,7 @@ useHead({
   <h2 class="fr-mt-8w">Le plan d'action de la France pour un Gouvernement Ouvert</h2>
   <p>
     La France est membre du <dfn>Partenariat pour un Gouvernement Ouvert (<abbr>PGO</abbr>)</dfn> depuis <time datetime="2014">2014</time>. Ce partenariat international regroupe
-    77 pays et 150 gouvernement locaux engagés à promouvoir la transparence, la participation citoyenne et la responsabilité des pouvoirs publics.
+    77 pays et 150 gouvernements locaux (régions et communes) engagés à promouvoir la transparence, la participation citoyenne et la responsabilité des pouvoirs publics.
   </p>
   <DsfrQuote quote="
                La France est un fervent soutien du Partenariat pour un Gouvernement Ouvert. C'est le principal forum mondial pour que les gouvernements,
@@ -36,7 +36,7 @@ useHead({
              class="fr-mb-4w" />
   <p>En <time datetime="2024">2024</time>, la France a lancé son <a href="https://www.modernisation.gouv.fr/files/2024-03/Plan_Action_National_2024_2026_0.pdf">4ème plan d’action national dans le cadre du <abbr>PGO</abbr></a>.</p>
   <h3 class="fr-mt-4w fr-mb-2w">Concrètement, la France s’est engagée à réaliser 17 actions&nbsp;:</h3>
-  <h4 class="fr-mt-4w fr-mb-2w">Axe 1 : Améliorer et renforcer les pratiques de participation citoyenne et d’innovation démocratique</h4>
+  <h4 class="fr-mt-4w fr-mb-2w">Axe 1 : Améliorer et renforcer les pratiques de participation citoyenne et de l'innovation démocratique</h4>
   <ul class="fr-mt-2w fr-mb-4w">
     <li>Réaliser un état des lieux des démarches de participation et d’innovation démocratique</li>
     <li>Former les agents publics aux méthodes participatives pour mieux associer les citoyens aux politiques qui les concernent</li>
@@ -52,6 +52,7 @@ useHead({
     <li>Expérimenter de nouveaux projets scolaires avec les communautés éducatives locales pour favoriser le bien-être des élèves et lutter contre les inégalités scolaires</li>
     <li>Impliquer un maximum d’acteurs (société civile, entreprises, collectivités) dans la planification écologique du pays</li>
     <li>Renforcer le dialogue social et l’information des citoyens pour développer une culture du numérique et de l’intelligence artificielle</li>
+    <li>Partager les bonnes pratiques en matière de lutte contre la désinformation auprès des Français de l'étranger</li>
   </ul>
   <h4 class="fr-mt-4w fr-mb-2w">Axe 3 : Mettre le numérique au service d’une action publique plus transparente et plus participative.</h4>
   <ul class="fr-mt-2w fr-mb-4w">
@@ -97,7 +98,7 @@ useHead({
    </div>
   
   <h2 class="fr-pt-8w">Les Conventions citoyennes</h2>
-  <p>Les conventions citoyennes sont devenues, en quelques années, un format incontournable de la démocratie participative en France.</p>
+  <p>Les Conventions citoyennes sont devenues, en quelques années, un format incontournable de la démocratie participative en France.</p>
   <ul class="fr-mt-2w fr-mb-4w">
     <li>La <a href="/fiches-inventaire/9"><b><i>Convention citoyenne pour le climat</i></b></a> (2019-2020) a débouché sur de nombreuses mesures intégrées à la loi <i>Climat et Résilience</i> de 2021</li>
     <li>La <a href="/fiches-inventaire/10"><b><i>Convention citoyenne sur la fin de vie</i></b></a> (2022-2023) a débouché sur 2 propositions de loi adoptées par l'Assemblée nationale le <time datetime="2025-05-27">27 mai 2025</time></li>
