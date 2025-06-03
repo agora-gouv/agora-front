@@ -22,7 +22,7 @@ const textWithoutLineBreaks = news.value.description.replace(/<(\/?)br(\/?)>/g, 
 <template>
   <DsfrNotice title="Nouvelle consultation" class="break-container">
     <template #desc>
-      <span><span role="img" aria-hidden>📣</span> Économie sociale et solidaire : quelle stratégie nationale ?</span> <a :href="convertRouteName(news.routeName, news.routeArgument)">
+      <span><span role="img" aria-hidden>📣</span> Économie sociale et solidaire : quelle stratégie nationale ?</span> <a href="/consultations/ess">
         Je réponds à la consultation
       </a>
     </template>
