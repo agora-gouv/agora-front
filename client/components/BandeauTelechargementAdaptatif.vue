@@ -60,7 +60,7 @@ onMounted(()=>{
           <div v-if="!isMobileRef || mobilePlatformRef=='android'" class="fr-col-12 fr-col-lg-6">
             <a
               class="fr-btn fr-btn--secondary"
-              href="https://play.google.com/store/apps/details?id=fr.gouv.agora"
+              href="/je-participe?app=force"
               target="_blank"
               rel="noopener"
               title="Télécharger sur GooglePlay - nouvelle fenêtre"
