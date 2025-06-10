@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 definePageMeta({
   layout: 'basic'
 })
@@ -16,7 +17,7 @@ onMounted(async () => {
   <div>
     <ClientOnly>
       <template #fallback>
-        <Loader class="fr-mt-4w" />
+        <ConsultationContentSkeleton />
       </template>
       <ConsultationContent v-if="consultation" :consultation="consultation"/>
     </ClientOnly>

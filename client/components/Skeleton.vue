@@ -1,33 +1,50 @@
 <script setup lang="ts">
-const { lineCount = 0 } = defineProps<{ lineCount?: number }>()
+const {
+  lineCount,
+  characterCount,
+  fullWidth = false,
+  aspectRatio = '',
+} = defineProps<{ lineCount?: number, characterCount?: number, fullWidth?: boolean, aspectRatio?: string }>()
 </script>
 
 <template>
-  <span aria-busy="true" class="skeleton" :style="`--line-count: ${lineCount}`"></span>
+  <span aria-busy="true" class="skeleton" :style="`
+    --line-count: ${lineCount ?? 'initial'};
+    --character-count: ${characterCount ?? 'initial'};
+    --aspect-ratio: ${aspectRatio ?? 'initial'};
+    --full-width: ${fullWidth ? '100%' : 'initial'};`"></span>
 </template>
 
 <style>
-.skeleton {
-  --line-count: 0;
-  min-height: calc(var(--line-count) * 1.2em);
-}
-@supports (min-height: calc(var(--line-count) * 1lh)) {
-  .skeleton {
-    min-height: calc(var(--line-count) * 1lh);
-  }
+:where(.skeleton) {
+  border-radius: .2em;
 }
 
 .skeleton {
   position: relative;
+  display: inline-flex;
   overflow: hidden;
-  border-radius: .2em;
+  min-width: 0;
+  width: var(--full-width);
+  max-width: 100%;
+}
+.skeleton {
 }
 .skeleton::before {
-  content: "";
-  z-index: 1;
-  position: absolute;
-  inset: 0;
+  all: revert;
+  display: block;
+  /* NOTE (GAFI 04-06-2025): Workaround pour le DSFR */
+  content: "" !important;
+  height: calc(var(--line-count) * 1.2em);
+  width: var(--full-width, calc(var(--character-count) * 1ch));
+  aspect-ratio: var(--aspect-ratio, );
 }
+@supports (height: calc(var(--line-count) * 1lh)) {
+  .skeleton::before {
+    height: calc(var(--line-count) * 1lh);
+  }
+}
+
 .skeleton::after {
   content: "";
   position: absolute;
@@ -35,11 +52,8 @@ const { lineCount = 0 } = defineProps<{ lineCount?: number }>()
   z-index: 2;
 }
 
-.skeleton::before {
-  background-color: var(--background-disabled-grey);
-}
 .skeleton::after {
-  background: linear-gradient(.2turn, transparent 40%, var(--text-disabled-grey) 50%, transparent 60%);
+  background: linear-gradient(.2turn, var(--background-disabled-grey) 40%, var(--text-disabled-grey) 50%, var(--background-disabled-grey) 60%);
   opacity: .5;
   animation: skeleton 2s infinite ease-in-out;
 }
