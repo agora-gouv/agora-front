@@ -1,0 +1,17 @@
+.goals ul {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.goals {
+  background-color: var(--blue-france-950-100);
+  padding: 1em;
+
+  .picto {
+    font-size: 1.6em;
+  }
+
+  .fr-h5 {
+    color: var(--blue-france-sun-113-625);
+  }
+}

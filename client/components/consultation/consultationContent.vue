@@ -103,60 +103,7 @@ const navigateToQuestions = () => navigateTo({path: `/consultations/${props.cons
 </template>
 
 <style scoped lang="scss">
-.consultation {
-  display: grid;
-  grid-template-columns: 
-      [left-start]
-      1fr
-      [left-end right-start]
-      2fr
-      [right-end];
-  column-gap: 2em;
-  grid-auto-flow: dense;
-}
-
-#results {
-  background-color: var(--blue-france-950-100);
-}
-
-#right-column {
-  .goals {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .consultation {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    column-gap: 0;
-  }
-
-  .consultation #left-column {
-    .fr-responsive-img, .goals {
-      display: none;
-    }
-
-    .history {
-      display: block;
-      margin-bottom: 2em;
-    }
-  }
-
-  #right-column {
-    .goals {
-      display: block;
-    }
-  }
-}
-
-.consultation #left-column {
-  grid-column: left;
-}
-
-.consultation > * {
-  grid-column: right;
-}
+@use './ConsultationContentLayout.module';
 
 :deep(meter#objectif) {
   border-radius: 7px;
@@ -186,26 +133,6 @@ const navigateToQuestions = () => navigateTo({path: `/consultations/${props.cons
   width: 100%;
 }
 
-h1::after {
-  content: "";
-  border-bottom: var(--blue-france-main-525) 4px solid;
-  width: 80px;
-  height: 20px;
-  display: block;
-}
-
-.fr-badge {
-  margin-bottom: 1.6em;
-}
-
-.fr-tag {
-  margin-bottom: 0.4em;
-}
-
-h1 {
-  margin: 0 0 0.4em 0;
-}
-
 :deep(h2) {
   color: var(--blue-france-sun-113-625);
 }
@@ -228,31 +155,6 @@ h1 {
     a {
       font-weight: bold;
       color: var(--blue-france-sun-113-625);
-    }
-
-    li {
-      margin-left: 0.5em;
-      padding: 0.5em 0;
-
-      .iconify {
-        width: 1.4em;
-        height: 1.4em;
-        margin-left: 1.2em;
-      }
-    }
-
-    li[aria-current="true"] {
-      margin-left: 4px;
-    }
-
-    li[aria-current="true"] {
-      border-left-width: 4px;
-      border-left-color: var(--blue-france-sun-113-625);
-      border-left-style: solid;
-
-      .iconify {
-        color: var(--blue-france-main-525);
-      }
     }
   }
 }

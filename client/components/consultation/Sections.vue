@@ -51,8 +51,6 @@ const expandedSectionId = ref('')
   </div>
 </template>
 
-<style>
-.section {
-  margin-bottom: 3vh;
-}
+<style lang="scss">
+@use './Sections.module';
 </style>

@@ -38,11 +38,6 @@ defineProps<{
   </div>
 </template>
 
-<style>
-.iconify {
-  color: var(--blue-france-sun-113-625);
-  width: 1.2em;
-  height: 1.2em;
-  margin-right: 0.5em;
-}
+<style lang="scss">
+@use './QuestionsInformations.module';
 </style>
