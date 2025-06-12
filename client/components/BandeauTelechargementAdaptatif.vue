@@ -37,7 +37,7 @@ onMounted(()=>{
           <div v-if="!isMobileRef || mobilePlatformRef=='iOS'" class="fr-col-12 fr-col-lg-6">
             <a
               class="fr-btn fr-btn--secondary"
-              href="https://apps.apple.com/app/6449599025"
+              href="/je-participe?app=force"
               target="_blank"
               rel="noopener"
               title="Télécharger sur l’AppStore - nouvelle fenêtre"
