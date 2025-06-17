@@ -4,7 +4,6 @@
       "details": [
       {
         "appID": "PR958DC548.fr.gouv.agora",
-        "paths": ["*"],
         "components": [
           { "?": { "app": "force" } },
           { "?": { "app": "if-possible" } }
