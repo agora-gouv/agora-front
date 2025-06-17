@@ -37,7 +37,7 @@ onMounted(()=>{
           <div v-if="!isMobileRef || mobilePlatformRef=='iOS'" class="fr-col-12 fr-col-lg-6">
             <a
               class="fr-btn fr-btn--secondary"
-              href="/je-participe?app=force"
+              href="https://agora.gouv.fr/je-participe?app=force"
               target="_blank"
               rel="noopener"
               title="Télécharger sur l’AppStore - nouvelle fenêtre"
@@ -60,7 +60,7 @@ onMounted(()=>{
           <div v-if="!isMobileRef || mobilePlatformRef=='android'" class="fr-col-12 fr-col-lg-6">
             <a
               class="fr-btn fr-btn--secondary"
-              href="/je-participe?app=force"
+              href="https://agora.gouv.fr/je-participe?app=force"
               target="_blank"
               rel="noopener"
               title="Télécharger sur GooglePlay - nouvelle fenêtre"
