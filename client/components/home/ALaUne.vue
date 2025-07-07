@@ -22,7 +22,7 @@ const textWithoutLineBreaks = news.value.description.replace(/<(\/?)br(\/?)>/g, 
 <template>
   <DsfrNotice title="Nouvelle consultation" class="break-container">
     <template #desc>
-      <span><span role="img" aria-hidden>📣</span> Économie sociale et solidaire : quelle stratégie nationale ?</span> <a href="/consultations/ess">
+      <span><span role="img" aria-hidden>📣</span> La place des femmes en agriculture : quelles difficultés ? quelles solutions ?</span> <a href="/consultations/place-des-femmes-en-agriculture">
         Je réponds à la consultation
       </a>
     </template>
