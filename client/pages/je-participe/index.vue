@@ -17,8 +17,8 @@ const fichesEnCours = fiches.filter(fiche => {
   const dateFin = new Date(fiche.fin)
   return dateFin >= today
 })
-const fichesEnCoursAvecOuvertATousEnPremier = fichesEnCours.sort((a) => {
-  return a.conditionParticipation === "Ouvert à tous" ? -1 : 1
+const fichesEnCoursAvecOuvertATousEnPremier = fichesEnCours.sort((a, b) => {
+  return Number(b.conditionParticipation === "Ouvert à tous") - Number(a.conditionParticipation === "Ouvert à tous")
 });
 
 const fichesTerminees = fiches.filter(fiche => {
