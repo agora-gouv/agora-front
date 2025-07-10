@@ -6,10 +6,16 @@ const {id = useId()} = defineProps<{
 </script>
 
 <template>
-  <div class="question-result" :style="`--value: '${value}';`">
-    <!-- FIXME (GAFI 10-07-2025): Passer sur <meter> -->
-    <progress :id="id" :value="value" max="100" v-bind="$attrs">{{ value }} %</progress>
-    <label :for="id">
+  <div class="question-result" :style="`--value-text: '${value}'; --value: ${value}`">
+    <div role="meter"
+         :id="id"
+         :aria-labelledby="`${id}-label`"
+         aria-valuemin="0"
+         :aria-valuenow="value"
+         :aria-valuetext="`${value} %`"
+         aria-valuemax="100"
+         v-bind="$attrs" />
+    <label :id="`${id}-label`">
       <slot name="label"></slot>
     </label>
   </div>
@@ -23,37 +29,33 @@ const {id = useId()} = defineProps<{
   padding: 8px;
   gap: 1ch;
   &::before {
-    content: var(--value) " %";
-    @supports (content: var(--value) " %" / "") { content: var(--value) " %" / ""; }
+    content: var(--value-text) " %";
+    @supports (content: var(--value-text) " %" / "") { content: var(--value-text) " %" / ""; }
   }
   
   position: relative;
-  progress {
+  [role="meter"] {
     position: absolute;
     z-index: -1;
     width: 100%;
     height: 100%;
   }
+  [role="meter"]::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: calc(var(--value) * 1%);
+  }
   
-  progress {
+  [role="meter"] {
     border-radius: 5px;
     overflow: hidden;
     background-color: white;
     border: 1px solid #bbbbbb;
   }
-
-  progress::-webkit-progress-bar {
-    background-color: white;
-  }
-
-  progress::-webkit-progress-value {
+  [role="meter"]::after {
     background-color: #ECECFE;
   }
-
-  progress::-moz-progress-bar {
-    background-color: #ECECFE;
-  }
-
   &::before {
     font-weight: bold;
     align-content: center;
