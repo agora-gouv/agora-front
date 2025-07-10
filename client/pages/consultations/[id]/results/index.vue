@@ -34,11 +34,11 @@ const consultationResults = (await (new ConsultationApi().getConsultationResults
       <h3>{{ consultationQuestion.questionTitle }}</h3>
 
       <div v-for="consultationResponse in consultationQuestion.responses" style="position: relative;">
-        <label class="progress-label">
-          <span class="ratio">{{ consultationResponse.ratio }} %</span>
-          {{ consultationResponse.label }}
-        </label>
-        <progress :value="consultationResponse.ratio" max="100"></progress>
+        <ConsultationQuestionResult :value="consultationResponse.ratio">
+          <template #label>
+            {{consultationResponse.label}}
+          </template>
+        </ConsultationQuestionResult>
       </div>
     </div>
 
@@ -51,18 +51,18 @@ const consultationResults = (await (new ConsultationApi().getConsultationResults
       <h3>{{ consultationQuestion.questionTitle }}</h3>
       <p>Plusieurs réponses possibles</p>
       <div v-for="consultationResponse in consultationQuestion.responses">
-        <label class="progress-label">
-          <span class="ratio">{{ consultationResponse.ratio }} %</span>
-          {{ consultationResponse.label }}
-        </label>
-        <progress :value="consultationResponse.ratio" max="100"></progress>
+        <ConsultationQuestionResult :value="consultationResponse.ratio">
+          <template #label>
+            {{consultationResponse.label}}
+          </template>
+        </ConsultationQuestionResult>
       </div>
     </div>
 
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .question-title {
   color: var(--blue-france-sun-113-625)
 }
@@ -77,47 +77,6 @@ img {
 
 a {
   color: var(--blue-france-sun-113-625)
-}
-
-progress {
-  width: 100%;
-  height: 40px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  background-color: white;
-  border: 1px solid #bbbbbb;
-}
-
-progress::-webkit-progress-bar {
-  background-color: white;
-  border-radius: 5px;
-}
-
-progress::-webkit-progress-value {
-  background-color: #ECECFE;
-  border-radius: 5px;
-}
-
-progress::-moz-progress-bar {
-  background-color: #ECECFE;
-  border-radius: 5px;
-}
-
-.progress-label {
-  position: absolute;
-  width: 100%;
-  margin-left: 4px;
-  text-align: left;
-  line-height: 40px;
-  color: #161616;
-  z-index: 1;
-  font-size: 14px;
-  
-  .ratio {
-    font-weight: bold;
-    margin-right: 4px;
-    margin-left: 8px;
-  }
 }
 
 h2 {
