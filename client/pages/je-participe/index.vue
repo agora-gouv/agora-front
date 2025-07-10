@@ -104,7 +104,7 @@ const getEtapeType = (etape: string) => {
 </template>
 <style scoped lang="scss">
 .fr-grid-row .fr-card {
-  height: auto;
+  height: 100%;
   margin-inline: 1rem;
 }
 
