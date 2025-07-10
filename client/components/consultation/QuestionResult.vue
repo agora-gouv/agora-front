@@ -15,57 +15,51 @@ const {id = useId()} = defineProps<{
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .question-result {
   display: grid;
-  grid-template-columns: minmax(6ch, auto) 1fr;
-  margin-bottom: 10px;
+  grid-template-columns: minmax(5ch, auto) 1fr;
+  margin-bottom: 8px;
   padding: 8px;
+  gap: 1ch;
   &::before {
-    // NOTE (GAFI 10-07-2025): Fallback si `content: ... / ""` pas supporté 
     content: var(--value) " %";
-    content: var(--value) " %" / "";
-    font-weight: bold;
-    display: inline;
-    align-content: center;
+    @supports (content: var(--value) " %" / "") { content: var(--value) " %" / ""; }
   }
   
   position: relative;
   progress {
     position: absolute;
     z-index: -1;
-    inset: 0;
+    width: 100%;
+    height: 100%;
   }
   
   progress {
-    width: 100%;
-    height: 100%;
     border-radius: 5px;
+    overflow: hidden;
     background-color: white;
     border: 1px solid #bbbbbb;
   }
 
   progress::-webkit-progress-bar {
     background-color: white;
-    border-radius: 5px;
   }
 
   progress::-webkit-progress-value {
     background-color: #ECECFE;
-    border-radius: 5px;
   }
 
   progress::-moz-progress-bar {
     background-color: #ECECFE;
-    border-radius: 5px;
   }
 
+  &::before {
+    font-weight: bold;
+    align-content: center;
+  }
   label {
-    width: 100%;
-    margin-left: 4px;
-    text-align: left;
     color: #161616;
-    z-index: 1;
     font-size: 14px;
   }
 }
