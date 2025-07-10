@@ -96,5 +96,10 @@ export default defineNuxtConfig({
     siteUrl: `https://${process.env.DOMAIN_NAME}`,
   },
 
-  compatibilityDate: '2024-08-01'
+  compatibilityDate: '2024-08-01',
+
+  routeRules: {
+    '/consultations': { redirect: { to: '/je-participe', statusCode: 301 }
+    },
+  }
 })
