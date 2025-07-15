@@ -15,14 +15,12 @@ function convertRouteName(routeName: NewsDto['routeName'], argument: NewsDto['ro
       return `/qags/${argument}`
   }
 }
-
-const textWithoutLineBreaks = news.value.description.replace(/<(\/?)br(\/?)>/g, '')
 </script>
 
 <template>
   <DsfrNotice title="À la une !" class="break-container">
     <template #desc>
-      <span v-html="textWithoutLineBreaks"></span> <a :href="convertRouteName(news.routeName, news.routeArgument)">
+      {{ news.short_description }} <a :href="convertRouteName(news.routeName, news.routeArgument)">
         {{ news.callToActionText }}
       </a>
     </template>
