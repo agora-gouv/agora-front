@@ -20,10 +20,10 @@ const textWithoutLineBreaks = news.value.description.replace(/<(\/?)br(\/?)>/g, 
 </script>
 
 <template>
-  <DsfrNotice title="Nouvelle consultation" class="break-container">
+  <DsfrNotice title="À la une !" class="break-container">
     <template #desc>
-      <span><span role="img" aria-hidden>📣</span> La place des femmes en agriculture : quelles difficultés ? quelles solutions ?</span> <a href="/consultations/place-des-femmes-en-agriculture">
-        Je réponds à la consultation
+      <span v-html="textWithoutLineBreaks"></span> <a :href="convertRouteName(news.routeName, news.routeArgument)">
+        {{ news.callToActionText }}
       </a>
     </template>
   </DsfrNotice>
