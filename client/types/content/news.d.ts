@@ -1,6 +1,5 @@
 type NewsDto = {
   "description": string,
-  "short_description": string,
   "callToActionText": string,
   "routeName": "/consultationsPage" | "/qagsPage" | "/consultation/dynamic" | "/qagDetailsPage",
 } & ({

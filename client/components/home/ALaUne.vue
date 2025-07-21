@@ -15,13 +15,15 @@ function convertRouteName(routeName: NewsDto['routeName'], argument: NewsDto['ro
       return `/qags/${argument}`
   }
 }
+
+const textWithoutLineBreaks = news.value.description.replace(/<(\/?)br(\/?)>/g, '')
 </script>
 
 <template>
-  <DsfrNotice title="À la une !" class="break-container">
+  <DsfrNotice title="Nouvelle consultation" class="break-container">
     <template #desc>
-      {{ news.short_description }} <a :href="convertRouteName(news.routeName, news.routeArgument)">
-        {{ news.callToActionText }}
+      <span><span role="img" aria-hidden>📣</span> La place des femmes en agriculture : quelles difficultés ? quelles solutions ?</span> <a href="/consultations/place-des-femmes-en-agriculture">
+        Je réponds à la consultation
       </a>
     </template>
   </DsfrNotice>

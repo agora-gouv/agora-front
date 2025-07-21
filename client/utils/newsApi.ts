@@ -11,7 +11,7 @@ export class NewsApi {
     const {
       data: news,
       error
-    } = await useFetch<NewsDto>(routeUrl);
+    } = await useFetch(routeUrl) as AsyncData<NewsDto, FetchError>
 
     if (error.value) {
       throw createError({statusCode: error.value!.statusCode})
