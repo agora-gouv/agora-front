@@ -21,10 +21,7 @@ onMounted(async () => {
 <template>
   <h1 class="fr-mt-4w">Posez vos questions au Gouvernement avec l’application mobile Agora</h1>
   <p>
-    Dans le cadre de la consultation sur l'Économie sociale et solidaire (<abbr>ESS</abbr>), la <b>Ministre Véronique Louwagie</b> répondra à vos questions sur ce thème.
-  </p>
-  <p>
-    Vous pouvez <strong>poser vos questions sur l'Économie sociale et solidaire</strong> et soutenir celles que vous trouvez les plus intéressantes en téléchargeant l'application (sur <a
+    Vous pouvez <strong>poser vos questions</strong> et soutenir celles que vous trouvez les plus intéressantes en téléchargeant l'application (sur <a
     href="https://apps.apple.com/app/6449599025">iOS</a> ou <a href="https://play.google.com/store/apps/details?id=fr.gouv.agora">Android</a>).
   </p>
   <p>
@@ -37,7 +34,7 @@ onMounted(async () => {
       </li>
     </ol>
   </div>
-  <h2 class="fr-mt-8w">Découvrez les questions les plus populaires sur l'<abbr title="Économie sociale et solidaire">ESS</abbr></h2>
+  <h2 class="fr-mt-8w">Découvrez les questions les plus populaires</h2>
   <div class="fr-mb-2w fr-mt-6w">
     <ol class="fr-mb-1w fr-raw-list">
       <li class="fr-my-4w" v-for="qag in popular" :key="qag.qagId">
