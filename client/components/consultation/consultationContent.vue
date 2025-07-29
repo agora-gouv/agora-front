@@ -37,7 +37,7 @@ const navigateToQuestions = () => navigateTo({path: `/consultations/${props.cons
     <div class="consultation">
       <div id="right-column">
         <div>
-          <DsfrBadge label="Consultation en cours" no-icon/>
+          <DsfrBadge label="En cours" no-icon/>
         </div>
         <div>
           <DsfrTag :label="`${consultation.thematique.picto} ${consultation.thematique.label}`"/>
@@ -64,7 +64,7 @@ const navigateToQuestions = () => navigateTo({path: `/consultations/${props.cons
         <ConsultationEncartFeedback :consultation="consultation" v-if="consultation.feedbackQuestion" />
         <DsfrButton type="button" v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser"
                     class="fr-mb-4w fr-btn" @click="respond()">
-          Répondre à la consultation
+          Répondre
         </DsfrButton>
 
         <ConsultationRepondreModal :open="openResponseModal" @close="() => openResponseModal = false"
