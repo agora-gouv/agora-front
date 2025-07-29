@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
   <section aria-labelledby="clin-titre" class="goals fr-p-3w fr-my-4w">
-    <h2 id="clin-titre" class="fr-h5">La consultation en un clin d'œil</h2>
+    <h2 id="clin-titre" class="fr-h5">En un clin d'œil</h2>
     <ul>
       <li class="fr-grid-row fr-mt-2w" v-for="goal in goals">
         <span aria-hidden="true" class="picto fr-col-2 fr-pt-1w">{{ goal.picto }}</span>

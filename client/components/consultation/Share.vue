@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
   <div class="fr-share" id="share-7093">
-    <p class="fr-share__title">Partager la consultation</p>
+    <p class="fr-share__title">Partager la page</p>
     <ul class="fr-btns-group">
       <li>
         <a class="fr-btn--facebook fr-btn" target="_blank" rel="noopener" title="Partager sur Facebook - nouvelle fenêtre" id="share-7094"
