@@ -9,14 +9,13 @@ defineProps<{
 </script>
 
 <template>
-  <Stepper :title="`Question ${currentQuestion}`" :current-step="currentStep" 
+  <Stepper :title="`Étape ${currentQuestion}`" :current-step="currentStep"
            :total-steps="numberOfSteps"/>
 </template>
 
 <style scoped>
 :deep(.fr-stepper__steps) {
   --steps: v-bind(numberOfSteps);
-  --step-width: calc(v-bind(numberOfSteps)/100)%;
   --current-step: v-bind(currentStep);
 }
 </style>
