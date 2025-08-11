@@ -62,8 +62,17 @@ const menu = [
     text: 'Je participe',
   },
   runtimeConfig.public.features.qags && {
-    to: '/qags',
-    text: 'Je pose une question au Gouvernement',
+    title: 'Je pose une question au Gouvernement',
+    links: [
+      {
+        to: '/qags',
+        text: 'Les questions au gouvernement'
+      },
+      {
+        to: '/qags/reponses',
+        text: 'Toutes les réponses aux questions'
+      }
+    ]
   },
   {
     to: '/pgo',
