@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import NewsDto from "~/client/types/content/news";
 
-const news = await new NewsApi().get();
+let news;
+try {
+  news = await new NewsApi().get();
+} catch {
+  news = undefined;
+}
 
 function convertRouteName(routeName: NewsDto['routeName'], argument: NewsDto['routeArgument']) {
   switch (routeName) {
@@ -18,7 +23,7 @@ function convertRouteName(routeName: NewsDto['routeName'], argument: NewsDto['ro
 </script>
 
 <template>
-  <DsfrNotice title="À la une !" class="break-container">
+  <DsfrNotice title="À la une !" class="break-container" v-if="news">
     <template #desc>
       {{ news.short_description }} <a :href="convertRouteName(news.routeName, news.routeArgument)">
         {{ news.callToActionText }}
