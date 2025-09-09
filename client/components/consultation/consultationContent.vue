@@ -27,6 +27,13 @@ const respond = async () => {
 
 const navigateToQuestions = () => navigateTo({path: `/consultations/${props.consultation.id}/questions`})
 
+const app = useNuxtApp()
+const typeTerritoire =
+    app.$departements.value.regions.find(region => region.region === props.consultation.territory)
+        ? 'regional'
+        : app.$departements.value.regions.find(region => region.departements.find(departement => departement.label === props.consultation.territory))
+        ? 'departemental'
+        : 'national'
 </script>
 
 <template>
@@ -36,9 +43,10 @@ const navigateToQuestions = () => navigateTo({path: `/consultations/${props.cons
     </div>
     <div class="consultation">
       <div id="right-column">
-        <div>
-          <DsfrBadge label="En cours" no-icon/>
-        </div>
+        <ul class="badges">
+          <li><DsfrBadge label="En cours" no-icon/></li>
+          <li :class="`fr-badge fr-badge--no-icon territoire-${typeTerritoire}`">{{ consultation.territory }}</li>
+        </ul>
         <div>
           <DsfrTag :label="`${consultation.thematique.picto} ${consultation.thematique.label}`"/>
         </div>
@@ -137,9 +145,17 @@ const navigateToQuestions = () => navigateTo({path: `/consultations/${props.cons
   color: var(--blue-france-sun-113-625);
 }
 
-.goals ul {
-  list-style: none;
-  padding-inline-start: 0;
+.badges > .territoire-national {
+  background-color: var(--info-950-100);
+  color: var(--info-425-625)
+}
+.badges > .territoire-regional {
+  background-color: var(--green-menthe-950-100);
+  color: var(--green-menthe-sun-373-moon-652);
+}
+.badges > .territoire-departemental {
+  background-color: var(--purple-glycine-950-100);
+  color: var(--purple-glycine-sun-319-moon-630);
 }
 
 .history {

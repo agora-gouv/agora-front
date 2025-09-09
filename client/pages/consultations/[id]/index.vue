@@ -4,8 +4,13 @@ definePageMeta({
   layout: 'basic'
 })
 
-const consultation = ref()
+const app = useNuxtApp()
+if (!app.$departements) {
+  const departements = await new DepartementsApi().getDepartements();
+  app.provide('departements', departements);
+}
 
+const consultation = ref()
 onMounted(async () => {
   const consultationId = useRoute().params.id
   const jwtToken = (await useAuthentication()).jwtToken

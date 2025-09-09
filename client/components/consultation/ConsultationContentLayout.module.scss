@@ -60,8 +60,9 @@ h1::after {
   height: 20px;
   display: block;
 }
-
-.fr-badge {
+ul.badges {
+  list-style: none;
+  padding-inline-start: 0;
   margin-bottom: 1.6em;
 }
 

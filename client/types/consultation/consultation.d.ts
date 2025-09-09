@@ -50,6 +50,7 @@ export default interface Consultation {
   titrePageWeb: string,
   sousTitrePageWeb: string,
   isAnsweredByUser: boolean,
+  territory: string,
 }
 
 export interface ConsultationQuestionInfo {
