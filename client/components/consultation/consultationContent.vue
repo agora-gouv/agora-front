@@ -43,13 +43,11 @@ const typeTerritoire =
     </div>
     <div class="consultation">
       <div id="right-column">
-        <ul class="badges">
-          <li><DsfrBadge label="En cours" no-icon/></li>
-          <li :class="`fr-badge fr-badge--no-icon territoire-${typeTerritoire}`">{{ consultation.territory }}</li>
+        <DsfrBadge label="En cours" no-icon/>
+        <ul>
+          <li class="fr-tag fr-tag--no-icon">{{consultation.thematique.picto}} {{consultation.thematique.label}}</li>
+          <li :class="`fr-tag fr-tag--no-icon territoire-${typeTerritoire}`">{{ consultation.territory }}</li>
         </ul>
-        <div>
-          <DsfrTag :label="`${consultation.thematique.picto} ${consultation.thematique.label}`"/>
-        </div>
         <h1>{{ consultation.title }}</h1>
         <ConsultationEnUnClinDOeil v-if="consultation.goals" :goals="consultation.goals"/>
         <ConsultationQuestionsInformations v-if="consultation.questionsInfo && estEnCours" class="info-question fr-py-1w" 
@@ -143,19 +141,6 @@ const typeTerritoire =
 
 :deep(h2) {
   color: var(--blue-france-sun-113-625);
-}
-
-.badges > .territoire-national {
-  background-color: var(--info-950-100);
-  color: var(--info-425-625)
-}
-.badges > .territoire-regional {
-  background-color: var(--green-menthe-950-100);
-  color: var(--green-menthe-sun-373-moon-652);
-}
-.badges > .territoire-departemental {
-  background-color: var(--purple-glycine-950-100);
-  color: var(--purple-glycine-sun-319-moon-630);
 }
 
 .history {
