@@ -2,9 +2,10 @@
   <div class="fr-mt-4w">
     <div class="consultation">
       <div id="right-column">
-        <div>
-          <Skeleton class="fr-badge fr-badge--no-icon" characterCount="21" lineCount="1" />
-        </div>
+        <ul class="badges">
+          <li><Skeleton class="fr-badge fr-badge--no-icon" characterCount="21" lineCount="1"/></li>
+          <li><Skeleton class="fr-badge fr-badge--no-icon" characterCount="21" lineCount="1" /></li>
+        </ul>
         <div>
           <Skeleton class="fr-tag" characterCount="10" lineCount="1" />
         </div>

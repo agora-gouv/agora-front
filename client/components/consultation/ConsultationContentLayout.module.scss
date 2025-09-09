@@ -60,12 +60,11 @@ h1::after {
   height: 20px;
   display: block;
 }
-
-.fr-badge {
-  margin-bottom: 1.6em;
-}
-
-.fr-tag {
+ul:has(> .fr-tag) {
+  display: flex;
+  gap: .5rem;
+  list-style: none;
+  padding-inline-start: 0;
   margin-bottom: 0.4em;
 }
 

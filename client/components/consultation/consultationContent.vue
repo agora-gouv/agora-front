@@ -27,6 +27,13 @@ const respond = async () => {
 
 const navigateToQuestions = () => navigateTo({path: `/consultations/${props.consultation.id}/questions`})
 
+const app = useNuxtApp()
+const typeTerritoire =
+    app.$departements.value.regions.find(region => region.region === props.consultation.territory)
+        ? 'regional'
+        : app.$departements.value.regions.find(region => region.departements.find(departement => departement.label === props.consultation.territory))
+        ? 'departemental'
+        : 'national'
 </script>
 
 <template>
@@ -36,12 +43,11 @@ const navigateToQuestions = () => navigateTo({path: `/consultations/${props.cons
     </div>
     <div class="consultation">
       <div id="right-column">
-        <div>
-          <DsfrBadge label="En cours" no-icon/>
-        </div>
-        <div>
-          <DsfrTag :label="`${consultation.thematique.picto} ${consultation.thematique.label}`"/>
-        </div>
+        <DsfrBadge label="En cours" no-icon/>
+        <ul>
+          <li class="fr-tag fr-tag--no-icon">{{consultation.thematique.picto}} {{consultation.thematique.label}}</li>
+          <li :class="`fr-tag fr-tag--no-icon territoire-${typeTerritoire}`">{{ consultation.territory }}</li>
+        </ul>
         <h1>{{ consultation.title }}</h1>
         <ConsultationEnUnClinDOeil v-if="consultation.goals" :goals="consultation.goals"/>
         <ConsultationQuestionsInformations v-if="consultation.questionsInfo && estEnCours" class="info-question fr-py-1w" 
@@ -135,11 +141,6 @@ const navigateToQuestions = () => navigateTo({path: `/consultations/${props.cons
 
 :deep(h2) {
   color: var(--blue-france-sun-113-625);
-}
-
-.goals ul {
-  list-style: none;
-  padding-inline-start: 0;
 }
 
 .history {
