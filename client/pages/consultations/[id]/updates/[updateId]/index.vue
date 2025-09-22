@@ -20,10 +20,16 @@ onMounted(async () => {
   jwtToken.value = (await useAuthentication()).jwtToken
   consultationUpdate.value = (await (new ConsultationApi()).getConsultationUpdate(consultationId, consultationUpdateId, jwtToken.value)).value
 
+  const currentUpdateTitle = consultationUpdate.value.history?.find(element => element.updateId == consultationUpdate.value.updateId)?.title
+
+  useHead({
+    title: `${consultationUpdate.value.title} - ${currentUpdateTitle} - Agora`,
+  })
+
   links.value = [
     {to: '/', text: 'Accueil'},
     {to: `/consultations/${consultationId}`, text: `Consultation citoyenne "${consultationUpdate.value.title}"`},
-    {text: consultationUpdate.value.history?.find(element => element.updateId == consultationUpdate.value.updateId)?.title ?? ""}
+    {text: currentUpdateTitle}
   ]
 })
 

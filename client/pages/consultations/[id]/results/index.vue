@@ -7,6 +7,10 @@ definePageMeta({
 const consultationId = useRoute().params.id.toString()
 const consultationResults = (await (new ConsultationApi().getConsultationResults(consultationId))).value
 
+useHead({
+  title: `${consultationResults.title} - Réponses - Agora`,
+})
+
 </script>
 
 <template>

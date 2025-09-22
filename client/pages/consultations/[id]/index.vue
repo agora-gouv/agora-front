@@ -15,6 +15,9 @@ onMounted(async () => {
   const consultationId = useRoute().params.id
   const jwtToken = (await useAuthentication()).jwtToken
   consultation.value = (await new ConsultationApi().getConsultation(consultationId.toString(), jwtToken)).value
+  useHead({
+    title: `${consultation.value.title} - Agora`,
+  })
 })
 </script>
 

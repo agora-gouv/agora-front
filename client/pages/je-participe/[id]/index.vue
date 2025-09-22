@@ -7,6 +7,9 @@ definePageMeta({
 
 const ficheId = useRoute().params.id as string
 const ficheInventaire = (await new FicheInventaireApi().get(ficheId))
+useHead({
+  title: `${ficheInventaire.titre} - Agora`,
+})
 
 const neContientQueDesBalisesSansContenu = /^\s*(<[^>]+>\s*)+$/i
 
