@@ -21,6 +21,7 @@ if (error.value) {
     <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
         title="Donner votre avis sur les politiques publiques"
+        titleTag="h2"
         imgSrc="/community.svg"
         class="tuile"
         to="/je-participe"
@@ -30,6 +31,7 @@ if (error.value) {
     <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
         title="Suivre les résultats de la participation citoyenne"
+        titleTag="h2"
         imgSrc="/search.svg"
         class="tuile"
         to="/je-participe#terminees"
@@ -39,6 +41,7 @@ if (error.value) {
     <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
         title="Poser vos questions au Gouvernement"
+        titleTag="h2"
         imgSrc="/conclusion.svg"
         class="tuile"
         to="/qags"
