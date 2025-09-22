@@ -55,8 +55,9 @@ onMounted(()=>{
       </div>
     </div>
     <div class="fr-col-12 fr-col-md-4">
-      <img src="/smartphones_complet.webp" style="width: 70%;
-        max-width: 100vw;">
+      <img src="/smartphones_complet.webp"
+           style="width: 70%; max-width: 100vw;"
+           alt="">
     </div>
   </div>
 </template>

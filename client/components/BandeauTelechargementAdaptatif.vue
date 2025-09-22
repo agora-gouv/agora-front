@@ -88,6 +88,7 @@ onMounted(()=>{
       <img
         src="/smartphones_complet.webp"
         style="max-width: 90%"
+        alt=""
       >
     </div>
   </div>
