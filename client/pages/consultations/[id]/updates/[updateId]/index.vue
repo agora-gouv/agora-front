@@ -8,6 +8,12 @@ const links = ref()
 const consultationUpdate = ref()
 const jwtToken = ref()
 
+const app = useNuxtApp()
+if (!app.$departements) {
+  const departements = await new DepartementsApi().getDepartements();
+  app.provide('departements', departements);
+}
+
 onMounted(async () => {
   const consultationId = useRoute().params.id.toString()
   const consultationUpdateId = useRoute().params.updateId.toString()
