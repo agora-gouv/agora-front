@@ -9,6 +9,10 @@ const {
   nextQuestion, previousQuestion, consultationId, submit, answersCheckbox, answersText, numberOfAnsweredQuestions
 } = useConsultationQuestionsForm();
 
+useHead({
+  title: `Répondre à la consultation - Étape ${numberOfAnsweredQuestions.value} - Agora`,
+})
+
 await initQuestions()
 
 const isTextChoiceChecked = (choiceId) => {

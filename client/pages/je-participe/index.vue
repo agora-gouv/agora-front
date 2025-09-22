@@ -3,7 +3,7 @@ definePageMeta({
   layout: 'basic',
 })
 useHead({
-  title: 'Fiches inventaire - Agora',
+  title: 'Consultations - Agora',
 })
 
 const runtimeConfig = useRuntimeConfig();

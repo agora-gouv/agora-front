@@ -10,6 +10,10 @@ const qagId = useRoute().params.id.toString()
 
 const qag = await (new QagApi()).getQag(qagId)
 
+useHead({
+  title: `${qag.value.title} - Agora`
+})
+
 const content = await (new PageContentApi()).getQuestionAuGouvernementContent()
 
 const sousTitreWithUsername = content.value.sousTitre.replace("{}", qag.value.username)

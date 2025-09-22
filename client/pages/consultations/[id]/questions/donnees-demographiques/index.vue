@@ -4,6 +4,10 @@ definePageMeta({
   layout: 'basic',
 })
 
+useHead({
+  title: `Indiquez votre profil - Agora`,
+})
+
 const consultationId = useRoute().params.id as string;
 const resultatsConsultation = `/consultations/${consultationId}?answered=true`;
 </script>
