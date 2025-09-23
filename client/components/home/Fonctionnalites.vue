@@ -17,8 +17,8 @@ if (error.value) {
 </script>
 
 <template>
-  <div class="tuiles fr-grid-row fr-grid-row--gutters fr-grid-row--center fr-my-8w">
-    <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
+  <ul class="tuiles fr-grid-row fr-grid-row--gutters fr-grid-row--center fr-my-8w">
+    <li class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
         title="Donner votre avis sur les politiques publiques"
         titleTag="h2"
@@ -27,8 +27,8 @@ if (error.value) {
         to="/je-participe"
         :disabled="!runtimeConfig.public.features.consultations"
       />
-    </div>
-    <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
+    </li>
+    <li class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
         title="Suivre les résultats de la participation citoyenne"
         titleTag="h2"
@@ -37,8 +37,8 @@ if (error.value) {
         to="/je-participe#terminees"
         :disabled="!runtimeConfig.public.features.consultations"
       />
-    </div>
-    <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
+    </li>
+    <li class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <DsfrTile
         title="Poser vos questions au Gouvernement"
         titleTag="h2"
@@ -47,13 +47,17 @@ if (error.value) {
         to="/qags"
         :disabled="!runtimeConfig.public.features.qags"
       />
-    </div>
-  </div>
+    </li>
+  </ul>
 </template>
 
 <style>
 .tuile img {
   object-fit: cover;
   width: 100%;
+}
+
+ul.tuiles {
+  list-style: none;
 }
 </style>
