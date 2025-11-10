@@ -1,12 +1,8 @@
 <script setup lang="ts">
 import NewsDto from "~/client/types/content/news";
 
-let news;
-try {
-  news = await new NewsApi().get();
-} catch {
-  news = undefined;
-}
+const news = await new NewsApi().get()
+    .catch(error => undefined);
 
 function convertRouteName(routeName: NewsDto['routeName'], argument: NewsDto['routeArgument']) {
   switch (routeName) {
