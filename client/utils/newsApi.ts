@@ -1,5 +1,3 @@
-import {AsyncData} from "nuxt/app";
-import {FetchError} from "ofetch";
 import NewsDto from "~/client/types/content/news";
 
 export class NewsApi {
