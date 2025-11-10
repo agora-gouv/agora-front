@@ -18,7 +18,7 @@ function convertRouteName(routeName: NewsDto['routeName'], argument: NewsDto['ro
 </script>
 
 <template>
-  <DsfrNotice title="À la une !" class="break-container">
+  <DsfrNotice title="À la une !" class="break-container" v-if="news">
     <template #desc>
       {{ news.short_description }} <a :href="convertRouteName(news.routeName, news.routeArgument)">
         {{ news.callToActionText }}
