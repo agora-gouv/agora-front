@@ -31,6 +31,7 @@ const getEtapeType = (etape: string) => {
   return 'success'
 }
 </script>
+
 <template>
   <div class="fr-mb-2w fr-mt-6w">
     <div v-if="fichesEnCours.length > 0" id="en-cours">
@@ -42,25 +43,29 @@ const getEtapeType = (etape: string) => {
         impliquent les citoyens dans la vie publique en ce moment et faites entendre votre voix.
       </p>
 
-      <DsfrCard :img-src="fiche.illustrationUrl" :link="fiche.lienSite" :title="fiche.titre" description="" 
-                :badges="[{label: fiche.etape, type: getEtapeType(fiche.etape), noIcon: true}]"
-                alt-img="" horizontal v-for="fiche in fichesEnCoursAvecOuvertATousEnPremier" :key="fiche.id" class="fr-mb-4w">
-        <template #start-details>
-          <DsfrTag :label="fiche.thematique.label"/>
-          <p class="modalites">
-            <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
-            {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
-          </p>
-        </template>
-        <template #end-details>
-          <p><b>Proposé par :</b> {{ fiche.porteur }}</p>
-          <p class="date-fin">
-            <VIcon icon="ri:calendar-line" :inline="true" :ssr="true"/>
-            jusqu'au
-            <Date :date="fiche.fin"/>
-          </p>
-        </template>
-      </DsfrCard>
+      <ul class="fr-p-0 fr-m-0">
+        <li v-for="fiche in fichesEnCoursAvecOuvertATousEnPremier" :key="fiche.id" class="fr-mb-4w fr-p-0">
+          <DsfrCard :img-src="fiche.illustrationUrl" :link="fiche.lienSite" :title="fiche.titre" description=""
+                    :badges="[{label: fiche.etape, type: getEtapeType(fiche.etape), noIcon: true}]"
+                    alt-img="" horizontal>
+            <template #start-details>
+              <DsfrTag :label="fiche.thematique.label"/>
+              <p class="modalites">
+                <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
+                {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
+              </p>
+            </template>
+            <template #end-details>
+              <p><b>Proposé par :</b> {{ fiche.porteur }}</p>
+              <p class="date-fin">
+                <VIcon icon="ri:calendar-line" :inline="true" :ssr="true"/>
+                jusqu'au
+                <Date :date="fiche.fin"/>
+              </p>
+            </template>
+          </DsfrCard>
+        </li>
+      </ul>
     </div>
 
     <div v-if="fichesTerminees.length > 0" id="terminees">
@@ -75,34 +80,40 @@ const getEtapeType = (etape: string) => {
         <ConsultationFiltres class="fr-col fr-col-sm-12 fr-col-md-4" v-if="withFilters" />
         <div :class="`fr-grid-row fr-col fr-grid-row--gutters ${withFilters ? 'fr-col-sm-12 fr-col-md-8' : 'fr-col-12'}`">
           <div class="fr-col fr-col-sm-6 fr-col-md-6 fr-mb-2w" v-for="fiche in fichesTerminees" :key="fiche.id">
-          <DsfrCard
-            :img-src="fiche.illustrationUrl"
-            :link="`/je-participe/${fiche.id}`"
-            :title="fiche.titre"
-            description=""
-            :badges="[{
-              label: fiche.etape,
-              type: 'success',
-            }]"
-            alt-img="">
-            <template #start-details>
-              <DsfrTag :label="fiche.thematique.label"/>
-              <DsfrTag :label="fiche.anneeDeLancement"/>
-              <p class="modalites">
-                <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
-                {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
-              </p>
-            </template>
-            <template #end-details>
-            </template>
-          </DsfrCard>
-        </div>
+            <DsfrCard
+              :img-src="fiche.illustrationUrl"
+              :link="`/je-participe/${fiche.id}`"
+              :title="fiche.titre"
+              description=""
+              :badges="[{
+                label: fiche.etape,
+                type: 'success',
+              }]"
+              alt-img="">
+              <template #start-details>
+                <DsfrTag :label="fiche.thematique.label"/>
+                <DsfrTag :label="fiche.anneeDeLancement"/>
+                <p class="modalites">
+                  <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
+                  {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
+                </p>
+              </template>
+              <!-- FIXME (GAFI 12-11-2025): Sans template vide, il y a un espacement supplémentaire -->
+              <template #end-details>
+              </template>
+            </DsfrCard>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <style scoped lang="scss">
+ul {
+  list-style: none;
+}
+
 .fr-grid-row .fr-card {
   height: 100%;
   margin-inline: 1rem;
