@@ -78,32 +78,42 @@ const getEtapeType = (etape: string) => {
       </p>
       <div class="fr-grid-row fr-grid-row--gutters">
         <ConsultationFiltres class="fr-col fr-col-sm-12 fr-col-md-4" v-if="withFilters" />
-        <div :class="`fr-grid-row fr-col fr-grid-row--gutters ${withFilters ? 'fr-col-sm-12 fr-col-md-8' : 'fr-col-12'}`">
-          <div class="fr-col fr-col-sm-6 fr-col-md-6 fr-mb-2w" v-for="fiche in fichesTerminees" :key="fiche.id">
-            <DsfrCard
-              :img-src="fiche.illustrationUrl"
-              :link="`/je-participe/${fiche.id}`"
-              :title="fiche.titre"
-              description=""
-              :badges="[{
-                label: fiche.etape,
-                type: 'success',
-              }]"
-              alt-img="">
-              <template #start-details>
-                <DsfrTag :label="fiche.thematique.label"/>
-                <DsfrTag :label="fiche.anneeDeLancement"/>
-                <p class="modalites">
-                  <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
-                  {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
-                </p>
-              </template>
-              <!-- FIXME (GAFI 12-11-2025): Sans template vide, il y a un espacement supplémentaire -->
-              <template #end-details>
-              </template>
-            </DsfrCard>
-          </div>
-        </div>
+        <ul :class="`fr-grid-row fr-col fr-grid-row--gutters ${withFilters ? 'fr-col-sm-12 fr-col-md-8' : 'fr-col-12'}`">
+          <li class="fr-col fr-col-sm-6 fr-col-md-6 fr-mb-2w" v-for="fiche in fichesTerminees" :key="fiche.id">
+            <!-- FIXME (GAFI 19-11-2025): Pas DsfrCard, sinon on est obligés d'avoir une liste autour des tags -->
+            <div class="fr-card fr-enlarge-link">
+                <div class="fr-card__body">
+                  <div class="fr-card__content">
+                    <h3 class="fr-card__title">
+                      <a :href="`/je-participe/${fiche.id}`">{{ fiche.titre }}</a>
+                    </h3>
+                    <div class="fr-card__start">
+                      <DsfrTag :label="fiche.thematique.label"/>
+                      <DsfrTag :label="fiche.anneeDeLancement"/>
+                      <p class="modalites">
+                        <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
+                        {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
+                      </p>
+                    </div>
+                    <!-- FIXME (GAFI 12-11-2025): Sans end vide, il y a un espacement supplémentaire -->
+                    <div class="fr-card__end"></div>
+                    <!-- FIXME (GAFI 12-11-2025): Sans desc vide, il y a manque un espacement -->
+                    <div class="fr-card__desc"></div>
+                  </div>
+                </div>
+                <div class="fr-card__header">
+                  <div class="fr-card__img">
+                    <img class="fr-responsive-img" :src="fiche.illustrationUrl" alt="">
+                  </div>
+                  <div class="fr-badges-group">
+                    <p class="fr-badge fr-badge--success">
+                      {{ fiche.etape }}
+                    </p>
+                  </div>
+                </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -130,10 +140,6 @@ ul {
 .fr-tag {
   font-size: 0.9rem;
   margin-right: 0.5rem;
-}
-
-.fr-badge {
-  font-size: .75rem;
 }
 
 :deep(.fr-card__end) {
@@ -166,6 +172,10 @@ h2 {
 
 p {
   font-size: 1rem;
+}
+// FIXME (GAFI 19-11-2025): Le style scopé de `p` écrase le style par défaut de `.fr-badge`
+.fr-badge {
+  font-size: .875rem;
 }
 
 h2 + p {
