@@ -45,25 +45,43 @@ const getEtapeType = (etape: string) => {
 
       <ul class="fr-p-0 fr-m-0">
         <li v-for="fiche in fichesEnCoursAvecOuvertATousEnPremier" :key="fiche.id" class="fr-mb-4w fr-p-0">
-          <DsfrCard :img-src="fiche.illustrationUrl" :link="fiche.lienSite" :title="fiche.titre" description=""
-                    :badges="[{label: fiche.etape, type: getEtapeType(fiche.etape), noIcon: true}]"
-                    alt-img="" horizontal>
-            <template #start-details>
-              <DsfrTag :label="fiche.thematique.label"/>
-              <p class="modalites">
-                <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
-                {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
-              </p>
-            </template>
-            <template #end-details>
-              <p><b>Proposé par :</b> {{ fiche.porteur }}</p>
-              <p class="date-fin">
-                <VIcon icon="ri:calendar-line" :inline="true" :ssr="true"/>
-                jusqu'au
-                <Date :date="fiche.fin"/>
-              </p>
-            </template>
-          </DsfrCard>
+          <!-- FIXME (GAFI 19-11-2025): Pas DsfrCard, sinon on est obligés d'avoir une liste au tour des tags -->
+          <div class="fr-card fr-enlarge-link fr-card--horizontal">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <h3 class="fr-card__title">
+                  <a :href="fiche.lienSite">{{ fiche.titre }}</a>
+                </h3>
+                  <div class="fr-card__start">
+                    <DsfrTag :label="fiche.thematique.label"/>
+                    <p class="modalites">
+                      <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
+                      {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
+                    </p>
+                  </div>
+                  <div class="fr-card__end">
+                    <p><b>Proposé par :</b> {{ fiche.porteur }}</p>
+                    <p class="date-fin">
+                      <VIcon icon="ri:calendar-line" :inline="true" :ssr="true"/>
+                      jusqu'au
+                      <Date :date="fiche.fin"/>
+                    </p>
+                  </div>
+                <!-- FIXME (GAFI 12-11-2025): Sans desc vide, il y a manque un espacement -->
+                <div class="fr-card__desc"></div>
+              </div>
+            </div>
+            <div class="fr-card__header">
+              <div class="fr-card__img">
+                <img class="fr-responsive-img" :src="fiche.illustrationUrl" alt="">
+              </div>
+              <div class="fr-badges-group">
+                <p :class="`fr-badge fr-badge--${getEtapeType(fiche.etape)} fr-badge--no-icon`">
+                  {{ fiche.etape }}
+                </p>
+              </div>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
