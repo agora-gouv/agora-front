@@ -31,6 +31,7 @@ const getEtapeType = (etape: string) => {
   return 'success'
 }
 </script>
+
 <template>
   <div class="fr-mb-2w fr-mt-6w">
     <div v-if="fichesEnCours.length > 0" id="en-cours">
@@ -42,25 +43,47 @@ const getEtapeType = (etape: string) => {
         impliquent les citoyens dans la vie publique en ce moment et faites entendre votre voix.
       </p>
 
-      <DsfrCard :img-src="fiche.illustrationUrl" :link="fiche.lienSite" :title="fiche.titre" description="" 
-                :badges="[{label: fiche.etape, type: getEtapeType(fiche.etape), noIcon: true}]"
-                alt-img="" horizontal v-for="fiche in fichesEnCoursAvecOuvertATousEnPremier" :key="fiche.id" class="fr-mb-4w">
-        <template #start-details>
-          <DsfrTag :label="fiche.thematique.label"/>
-          <p class="modalites">
-            <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
-            {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
-          </p>
-        </template>
-        <template #end-details>
-          <p><b>Proposé par :</b> {{ fiche.porteur }}</p>
-          <p class="date-fin">
-            <VIcon icon="ri:calendar-line" :inline="true" :ssr="true"/>
-            jusqu'au
-            <Date :date="fiche.fin"/>
-          </p>
-        </template>
-      </DsfrCard>
+      <ul class="fr-p-0 fr-m-0">
+        <li v-for="fiche in fichesEnCoursAvecOuvertATousEnPremier" :key="fiche.id" class="fr-mb-4w fr-p-0">
+          <!-- FIXME (GAFI 19-11-2025): Pas DsfrCard, sinon on est obligés d'avoir une liste au tour des tags -->
+          <div class="fr-card fr-enlarge-link fr-card--horizontal">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <h3 class="fr-card__title">
+                  <a :href="fiche.lienSite">{{ fiche.titre }}</a>
+                </h3>
+                  <div class="fr-card__start">
+                    <DsfrTag :label="fiche.thematique.label"/>
+                    <p class="modalites">
+                      <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
+                      {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
+                    </p>
+                  </div>
+                  <div class="fr-card__end">
+                    <p><b>Proposé par :</b> {{ fiche.porteur }}</p>
+                    <p class="date-fin">
+                      <VIcon icon="ri:calendar-line" :inline="true" :ssr="true"/>
+                      jusqu'au
+                      <Date :date="fiche.fin"/>
+                    </p>
+                  </div>
+                <!-- FIXME (GAFI 12-11-2025): Sans desc vide, il y a manque un espacement -->
+                <div class="fr-card__desc"></div>
+              </div>
+            </div>
+            <div class="fr-card__header">
+              <div class="fr-card__img">
+                <img class="fr-responsive-img" :src="fiche.illustrationUrl" alt="">
+              </div>
+              <div class="fr-badges-group">
+                <p :class="`fr-badge fr-badge--${getEtapeType(fiche.etape)} fr-badge--no-icon`">
+                  {{ fiche.etape }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
 
     <div v-if="fichesTerminees.length > 0" id="terminees">
@@ -73,36 +96,52 @@ const getEtapeType = (etape: string) => {
       </p>
       <div class="fr-grid-row fr-grid-row--gutters">
         <ConsultationFiltres class="fr-col fr-col-sm-12 fr-col-md-4" v-if="withFilters" />
-        <div :class="`fr-grid-row fr-col fr-grid-row--gutters ${withFilters ? 'fr-col-sm-12 fr-col-md-8' : 'fr-col-12'}`">
-          <div class="fr-col fr-col-sm-6 fr-col-md-6 fr-mb-2w" v-for="fiche in fichesTerminees" :key="fiche.id">
-          <DsfrCard
-            :img-src="fiche.illustrationUrl"
-            :link="`/je-participe/${fiche.id}`"
-            :title="fiche.titre"
-            description=""
-            :badges="[{
-              label: fiche.etape,
-              type: 'success',
-            }]"
-            alt-img="">
-            <template #start-details>
-              <DsfrTag :label="fiche.thematique.label"/>
-              <DsfrTag :label="fiche.anneeDeLancement"/>
-              <p class="modalites">
-                <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
-                {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
-              </p>
-            </template>
-            <template #end-details>
-            </template>
-          </DsfrCard>
-        </div>
-        </div>
+        <ul :class="`fr-grid-row fr-col fr-grid-row--gutters ${withFilters ? 'fr-col-sm-12 fr-col-md-8' : 'fr-col-12'}`">
+          <li class="fr-col fr-col-sm-6 fr-col-md-6 fr-mb-2w" v-for="fiche in fichesTerminees" :key="fiche.id">
+            <!-- FIXME (GAFI 19-11-2025): Pas DsfrCard, sinon on est obligés d'avoir une liste autour des tags -->
+            <div class="fr-card fr-enlarge-link">
+                <div class="fr-card__body">
+                  <div class="fr-card__content">
+                    <h3 class="fr-card__title">
+                      <a :href="`/je-participe/${fiche.id}`">{{ fiche.titre }}</a>
+                    </h3>
+                    <div class="fr-card__start">
+                      <DsfrTag :label="fiche.thematique.label"/>
+                      <DsfrTag :label="fiche.anneeDeLancement"/>
+                      <p class="modalites">
+                        <VIcon icon="ri:chat-3-line" :inline="true" :ssr="true"/>
+                        {{ fiche.conditionParticipation }} ∙ {{ fiche.modaliteParticipation }}
+                      </p>
+                    </div>
+                    <!-- FIXME (GAFI 12-11-2025): Sans end vide, il y a un espacement supplémentaire -->
+                    <div class="fr-card__end"></div>
+                    <!-- FIXME (GAFI 12-11-2025): Sans desc vide, il y a manque un espacement -->
+                    <div class="fr-card__desc"></div>
+                  </div>
+                </div>
+                <div class="fr-card__header">
+                  <div class="fr-card__img">
+                    <img class="fr-responsive-img" :src="fiche.illustrationUrl" alt="">
+                  </div>
+                  <div class="fr-badges-group">
+                    <p class="fr-badge fr-badge--success">
+                      {{ fiche.etape }}
+                    </p>
+                  </div>
+                </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
+
 <style scoped lang="scss">
+ul {
+  list-style: none;
+}
+
 .fr-grid-row .fr-card {
   height: 100%;
   margin-inline: 1rem;
@@ -119,10 +158,6 @@ const getEtapeType = (etape: string) => {
 .fr-tag {
   font-size: 0.9rem;
   margin-right: 0.5rem;
-}
-
-.fr-badge {
-  font-size: .75rem;
 }
 
 :deep(.fr-card__end) {
@@ -155,6 +190,10 @@ h2 {
 
 p {
   font-size: 1rem;
+}
+// FIXME (GAFI 19-11-2025): Le style scopé de `p` écrase le style par défaut de `.fr-badge`
+.fr-badge {
+  font-size: .875rem;
 }
 
 h2 + p {
