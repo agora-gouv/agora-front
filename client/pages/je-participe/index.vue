@@ -5,13 +5,11 @@ definePageMeta({
 useHead({
   title: 'Consultations - Agora',
 })
-// todo récupérer les queries param et les mettre dans le getAll()
 
-const queries = useRoute().query
 const runtimeConfig = useRuntimeConfig();
 const withFilters = runtimeConfig.public.features.filtresConsultations
 
-const fiches = await (new FicheInventaireApi().getAll(queries))
+const fiches = await (new FicheInventaireApi().getAll())
 
 const today = new Date()
 
