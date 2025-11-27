@@ -1,7 +1,6 @@
 <script setup lang="ts">
 // NOTE (GAFI 12-05-2025): Besoin du model parce que les checkboxes VueDSFR ne gèrent pas bien le reset
 const queries = useRoute().query
-// todo recuper la liste des values depuis le cms
 const model = useState(() => ({
   motCle: queries['motCle'] || "",
   thematique: queries['thematique'] || "",
@@ -33,16 +32,11 @@ function reset() {
 ]
 
  const annees = [ { text: "Non renseigné", value: "" }, "2020", "2021", "2022", "2023", "2024", "2025", "2026" ]
-
- async function onSubmit() {
-  await useRouter().push({ path: '/je-participe', query: model.value as any, hash: '#terminees'})
- }
 </script>
 
 <template>
-  <form @submit.prevent="onSubmit">
+  <form action="/je-participe#terminees">
     <h3>Filtres</h3>
-<!--    todo changer name pour nam cms-->
     <DsfrInputGroup name="motCle" label-visible label="Rechercher par mot clé" v-model="model.motCle" />
     <DsfrSelect name="thematique" label="Thématique" :options="thematiques" v-model="model.thematique" />
     <DsfrSelect name="etape" label="Étape" :options="etapes" v-model="model.etapes" />

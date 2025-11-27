@@ -1,14 +1,13 @@
 import { FicheInventaireApiDTO } from "~/client/types/fiche_inventaire/ficheInventaire";
-import {LocationQuery} from "vue-router";
 
 export class FicheInventaireApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;
-  // todo Ajouter clean query
-  async getAll(query: LocationQuery = {}) {
+
+  async getAll() {
     const routeFicheInventaireResponsesUrl = `${this.baseUrl}/fiches_inventaire`
 
     const {data: fichesInventaire, error}
-      = await useFetch<FicheInventaireApiDTO[]>(routeFicheInventaireResponsesUrl, { query })
+      = await useFetch<FicheInventaireApiDTO[]>(routeFicheInventaireResponsesUrl)
 
     if (error.value) throw createError({statusCode: error.value.statusCode})
 
