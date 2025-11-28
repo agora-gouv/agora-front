@@ -59,7 +59,7 @@ const redirect = useRoute().query.redirect;
       Un problème est survenu avec l'enregistrement de vos informations.
       Veuillez réessayer plus tard.
     </p>
-    <DsfrButton label="Réessayer" type="submit" :form="id"/>
+    <DsfrButton label="Réessayer" type="submit" form="profil-form"/>
   </DsfrAlert>
   <ProfilForm class="fr-pb-4w" id="profil-form" @submit="submit" :modelValue="profil"/>
   <p>Ces informations nous permettent d'analyser plus finement les résultats des consultations à des fins statistiques et de manière anonyme.</p>
