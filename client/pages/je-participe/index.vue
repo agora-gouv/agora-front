@@ -43,6 +43,8 @@ const fichesTerminees = computed(() => fichesArray.value.filter(fiche => {
   return dateFin < today
 }))
 
+const queryEntries = computed(() => Object.entries(route.query))
+
 const getEtapeType = (etape: string) => {
   if (etape === 'En cours') return 'info'
   return 'success'
@@ -149,6 +151,12 @@ const getEtapeType = (etape: string) => {
             </div>
           </li>
         </ul>
+        <ul v-else class="">
+          <p>Aucun résultat avec les filtres sélectionnés</p>
+          <li class="puce" v-for="([key, value]) in queryEntries" :key="key">
+            {{ key }} : {{ Array.isArray(value) ? value.join(', ') : value }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -157,6 +165,12 @@ const getEtapeType = (etape: string) => {
 <style scoped lang="scss">
 ul {
   list-style: none;
+}
+
+.puce {
+  list-style: disc;
+  list-style-position: outside;
+  padding-left: 1.25rem;
 }
 
 .fr-grid-row .fr-card {
