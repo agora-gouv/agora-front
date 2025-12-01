@@ -1,4 +1,7 @@
 <script setup lang="ts">
+
+import {FicheInventaireApiDTO} from "~/client/types/fiche_inventaire/ficheInventaire";
+
 definePageMeta({
   layout: 'basic',
 })
@@ -6,12 +9,13 @@ useHead({
   title: 'Consultations - Agora',
 })
 
+const route = useRoute()
 const runtimeConfig = useRuntimeConfig();
 const withFilters = runtimeConfig.public.features.filtresConsultations
 
-const fiches = await (new FicheInventaireApi().getAll())
-
 const today = new Date()
+
+const fiches = await (new FicheInventaireApi().getAll())
 
 const fichesEnCours = fiches.filter(fiche => {
   const dateFin = new Date(fiche.fin)
@@ -21,10 +25,23 @@ const fichesEnCoursAvecOuvertATousEnPremier = fichesEnCours.sort((a, b) => {
   return Number(b.conditionParticipation === "Ouvert à tous") - Number(a.conditionParticipation === "Ouvert à tous")
 });
 
-const fichesTerminees = fiches.filter(fiche => {
+const api = new FicheInventaireApi()
+
+const { data: fichesFiltrees } = await useAsyncData<FicheInventaireApiDTO[]>(
+  'fiches-inventaire',
+  () => api.getAllWithFetch(route.query as any),
+  {
+    watch: [() => route.query],
+    default: () => [],
+  }
+)
+
+const fichesArray = computed(() => fichesFiltrees.value ?? [])
+
+const fichesTerminees = computed(() => fichesArray.value.filter(fiche => {
   const dateFin = new Date(fiche.fin)
   return dateFin < today
-})
+}))
 
 const getEtapeType = (etape: string) => {
   if (etape === 'En cours') return 'info'
@@ -86,7 +103,7 @@ const getEtapeType = (etape: string) => {
       </ul>
     </div>
 
-    <div v-if="fichesTerminees.length > 0" id="terminees">
+    <div id="terminees">
       <h2>Explorez ce qui a été fait</h2>
       <p>
         Depuis <time>2017</time>, plusieurs rendez-vous ont permis aux Français de contribuer sur différents sujets. Certains, comme les
@@ -96,7 +113,7 @@ const getEtapeType = (etape: string) => {
       </p>
       <div class="fr-grid-row fr-grid-row--gutters">
         <ConsultationFiltres class="fr-col fr-col-sm-12 fr-col-md-4" v-if="withFilters" />
-        <ul :class="`fr-grid-row fr-col fr-grid-row--gutters ${withFilters ? 'fr-col-sm-12 fr-col-md-8' : 'fr-col-12'}`">
+        <ul v-if="fichesTerminees.length > 0" :class="`fr-grid-row fr-col fr-grid-row--gutters ${withFilters ? 'fr-col-sm-12 fr-col-md-8' : 'fr-col-12'}`">
           <li class="fr-col fr-col-sm-6 fr-col-md-6 fr-mb-2w" v-for="fiche in fichesTerminees" :key="fiche.id">
             <!-- FIXME (GAFI 19-11-2025): Pas DsfrCard, sinon on est obligés d'avoir une liste autour des tags -->
             <div class="fr-card fr-enlarge-link">
