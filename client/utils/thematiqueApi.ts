@@ -1,4 +1,4 @@
-import { ThematiqueApiDTO } from "~/client/types/thematique/thematique";
+import ThematiqueApiDTO from "~/client/types/thematique/thematique";
 
 export class ThematiqueApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;
