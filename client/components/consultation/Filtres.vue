@@ -30,11 +30,17 @@ function reset() {
    ];
  }
 
+const anneeCourante: number = new Date().getFullYear();
+const premiereDateDeLancement = 2017 as const;
+const NombreAnneeTotale: number = anneeCourante - premiereDateDeLancement + 1
+
+const annees: number[] = Array.from({ length: NombreAnneeTotale }, (_, i) => anneeCourante - i)
+
 const thematiques: { text: string; value: string }[] = dataFromCms()
 
 const etapes = useAppConfig().lists.etapesTerminees
 const modalites = useAppConfig().lists.modalites
-const annees = [ { text: "Non renseigné", value: "" }, "2020", "2021", "2022", "2023", "2024", "2025", "2026" ]
+
 
 function isEmptyValue(val: unknown): boolean {
   if (val == null) return true
