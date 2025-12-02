@@ -1,7 +1,9 @@
 <script setup lang="ts">
 // NOTE (GAFI 12-05-2025): Besoin du model parce que les checkboxes VueDSFR ne gèrent pas bien le reset
+import ThematiqueApiDTO from "~/client/types/thematique/thematique";
+
 const queries = useRoute().query
-// todo recuper la liste des values depuis le cms
+
 const model = useState(() => ({
   titre: queries['titre'] || "",
   thematique: queries['thematique'] || "",
@@ -19,11 +21,16 @@ function reset() {
   }
 }
 
- const thematiques = [
-   { text: "Non renseigné", value: "" }, "Culture",
-   "Transition Écologique", "Logement", "Services publics",
-   "Économie", "Autonomie", "Agriculture & alimentation"
- ]
+ const data = await new ThematiqueApi().getAll()
+
+ function dataFromCms() {
+   return [
+     {text: "Non renseigné", value: ""},
+     ...((data["thematiques"] ?? []).map(({label, id}: ThematiqueApiDTO) => ({text: label, value: id})))
+   ];
+ }
+
+ const thematiques: { text: string; value: string }[] = dataFromCms()
  const etapes = [ { text: "Non renseigné", value: "" }, "À venir", "En cours", "Résultats à venir", "Résultats disponibles", "Actions" ]
  const modalites = [
    { label: "Ouvert à tous", value: "open", name: "modalite" },
