@@ -30,16 +30,11 @@ function reset() {
    ];
  }
 
- const thematiques: { text: string; value: string }[] = dataFromCms()
- const etapes = [ { text: "Non renseigné", value: "" }, "À venir", "En cours", "Résultats à venir", "Résultats disponibles", "Actions" ]
- const modalites = [
-   { label: "Ouvert à tous", value: "open", name: "modalite" },
-   { label: "Tirage au sort représentatif", value: "tirage", name: "modalite" },
-   { label: "En ligne", value: "remote", name: "modalite" },
-   { label: "En présentiel", value: "local", name: "modalite" },
-]
+const thematiques: { text: string; value: string }[] = dataFromCms()
 
- const annees = [ { text: "Non renseigné", value: "" }, "2020", "2021", "2022", "2023", "2024", "2025", "2026" ]
+const etapes = useAppConfig().lists.etapesTerminees
+const modalites = useAppConfig().lists.modalites
+const annees = [ { text: "Non renseigné", value: "" }, "2020", "2021", "2022", "2023", "2024", "2025", "2026" ]
 
 function isEmptyValue(val: unknown): boolean {
   if (val == null) return true
@@ -71,7 +66,7 @@ function cleanQuery(raw: Record<string, any>) {
     <DsfrInputGroup name="titre" label-visible label="Rechercher par mot clé" v-model="model.titre" />
     <DsfrSelect name="thematique" label="Thématique" :options="thematiques" v-model="model.thematique" />
     <DsfrSelect name="etape" label="Étape" :options="etapes" v-model="model.etape" />
-    <DsfrCheckboxSet legend="modaliteParticipation de participation" :options="modalites" v-model="model.modaliteParticipation" />
+    <DsfrCheckboxSet legend="Modalité de participation" :options="modalites" v-model="model.modaliteParticipation" />
     <DsfrSelect name="anneeDeLancement" label="Année de lancement" :options="annees" v-model="model.anneeDeLancement" />
     <DsfrButton type="submit" class="button">Filtrer les dispositifs</DsfrButton>
     <DsfrButton

@@ -101,5 +101,27 @@ export default defineNuxtConfig({
   routeRules: {
     '/consultations': { redirect: { to: '/je-participe', statusCode: 301 }
     },
+  },
+
+  appConfig: {
+    lists: {
+      etapesTerminees: [
+        { text: 'Non renseigné', value: '' },
+        'Résultats à venir',
+        'Résultats disponibles',
+        'Actions'
+      ] as const,
+      etapesEnCours: [
+        { text: 'Non renseigné', value: '' },
+        'À venir',
+        'En cours'
+      ] as const,
+      modalites: [
+        { label: "Ouvert à tous", value: "open", name: "modalite" },
+        { label: "Tirage au sort représentatif", value: "tirage", name: "modalite" },
+        { label: "En ligne", value: "remote", name: "modalite" },
+        { label: "En présentiel", value: "local", name: "modalite" },
+      ] as const
+    }
   }
 })
