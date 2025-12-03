@@ -106,16 +106,12 @@ export default defineNuxtConfig({
   appConfig: {
     lists: {
       etapesTerminees: [
-        { text: 'Non renseigné', value: '' },
-        'Résultats à venir',
-        'Résultats disponibles',
-        'Actions'
+        { text: 'Non renseigné', value: "" },
+        "Résultats à venir",
+        "Résultats disponibles",
+        "Actions"
       ] as const,
-      etapesEnCours: [
-        { text: 'Non renseigné', value: '' },
-        'À venir',
-        'En cours'
-      ] as const,
+      etapesEnCours: { "etape": ["En cours", "À venir"] },
       modalites: [
         { label: "Ouvert à tous", value: "Ouvert à tous", name: "modaliteParticipation" },
         { label: "Tirage au sort représentatif", value: "Tirage au sort représentatif", name: "modaliteParticipation" },

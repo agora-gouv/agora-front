@@ -15,19 +15,6 @@ export class FicheInventaireApi {
     return fichesInventaire.value!
   }
 
-  async getAllWithFetch(query: LocationQuery = {}) {
-    const url = `${this.baseUrl}/fiches_inventaire`;
-    try {
-      return await $fetch<FicheInventaireApiDTO[]>(url, {
-        method: 'GET',
-        params: query,
-      });
-    } catch (e: any) {
-      const statusCode = e?.response?.status ?? 500;
-      throw createError({ statusCode });
-    }
-  }
-
   async get(id: string) {
     const routeFicheInventaireResponsesUrl = `${this.baseUrl}/fiches_inventaire/${id}`
 

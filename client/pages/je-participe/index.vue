@@ -14,8 +14,9 @@ const runtimeConfig = useRuntimeConfig();
 const withFilters = runtimeConfig.public.features.filtresConsultations
 
 const today = new Date()
+const etapes = useAppConfig().lists.etapesEnCours
 
-const fiches = await (new FicheInventaireApi().getAll())
+const fiches = await (new FicheInventaireApi().getAll(etapes))
 
 const fichesEnCours = fiches.filter(fiche => {
   const dateFin = new Date(fiche.fin)
@@ -25,25 +26,12 @@ const fichesEnCoursAvecOuvertATousEnPremier = fichesEnCours.sort((a, b) => {
   return Number(b.conditionParticipation === "Ouvert à tous") - Number(a.conditionParticipation === "Ouvert à tous")
 });
 
-const api = new FicheInventaireApi()
+const fichesFiltrees = await (new FicheInventaireApi().getAll(route.query))
 
-const { data: fichesFiltrees } = await useAsyncData<FicheInventaireApiDTO[]>(
-  'fiches-inventaire',
-  () => api.getAllWithFetch(route.query as any),
-  {
-    watch: [() => route.query],
-    default: () => [],
-  }
-)
-
-const fichesArray = computed(() => fichesFiltrees.value ?? [])
-
-const fichesTerminees = computed(() => fichesArray.value.filter(fiche => {
+const fichesTerminees = fichesFiltrees.filter(fiche => {
   const dateFin = new Date(fiche.fin)
   return dateFin < today
-}))
-
-const queryEntries = computed(() => Object.entries(route.query))
+})
 
 const getEtapeType = (etape: string) => {
   if (etape === 'En cours') return 'info'

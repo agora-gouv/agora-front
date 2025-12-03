@@ -1,3 +1,5 @@
+import {LocationQuery} from "vue-router";
+
 export {}
 
 declare module 'nuxt/schema' {
@@ -14,7 +16,7 @@ declare module 'nuxt/schema' {
   interface AppConfig {
     lists: {
       etapesTerminees: EtapeOption[]
-      etapesEnCours: EtapeOption[]
+      etapesEnCours: LocationQuery
       modalites: ModaliteOption[]
     }
   }
