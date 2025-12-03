@@ -117,10 +117,10 @@ export default defineNuxtConfig({
         'En cours'
       ] as const,
       modalites: [
-        { label: "Ouvert à tous", value: "open", name: "modalite" },
-        { label: "Tirage au sort représentatif", value: "tirage", name: "modalite" },
-        { label: "En ligne", value: "remote", name: "modalite" },
-        { label: "En présentiel", value: "local", name: "modalite" },
+        { label: "Ouvert à tous", value: "Ouvert à tous", name: "modaliteParticipation" },
+        { label: "Tirage au sort représentatif", value: "Tirage au sort représentatif", name: "modaliteParticipation" },
+        { label: "En ligne", value: "En ligne", name: "modaliteParticipation" },
+        { label: "En présentiel", value: "En présentiel", name: "modaliteParticipation" },
       ] as const
     }
   }
