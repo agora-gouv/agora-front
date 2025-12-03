@@ -11,7 +11,7 @@ interface FicheInventaireApiDTO {
   porteur: string,
   lienSite: string,
   conditionParticipation: string,
-  modaliteParticipation: string,
+  modaliteParticipation: string[],
   thematique: ThematiqueApiDTO,
   illustrationUrl: string,
   etape: string,
