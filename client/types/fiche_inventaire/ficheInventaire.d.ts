@@ -1,4 +1,4 @@
-import Thematique from "~/client/types/thematique/thematique";
+import ThematiqueApiDTO from "~/client/types/thematique/thematique";
 
 interface FicheInventaireApiDTO {
   id: string,
@@ -12,7 +12,7 @@ interface FicheInventaireApiDTO {
   lienSite: string,
   conditionParticipation: string,
   modaliteParticipation: string,
-  thematique: Thematique,
+  thematique: ThematiqueApiDTO,
   illustrationUrl: string,
   etape: string,
   anneeDeLancement: string,

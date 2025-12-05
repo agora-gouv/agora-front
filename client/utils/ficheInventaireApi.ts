@@ -1,13 +1,14 @@
 import { FicheInventaireApiDTO } from "~/client/types/fiche_inventaire/ficheInventaire";
+import QueryParam from "~/client/types/fiche_inventaire/query"
 
 export class FicheInventaireApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;
 
-  async getAll() {
+  async getAll(query: QueryParam) {
     const routeFicheInventaireResponsesUrl = `${this.baseUrl}/fiches_inventaire`
 
     const {data: fichesInventaire, error}
-      = await useFetch<FicheInventaireApiDTO[]>(routeFicheInventaireResponsesUrl)
+      = await useFetch<FicheInventaireApiDTO[]>(routeFicheInventaireResponsesUrl, { query })
 
     if (error.value) throw createError({statusCode: error.value.statusCode})
 

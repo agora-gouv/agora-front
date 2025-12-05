@@ -2,46 +2,52 @@
 // NOTE (GAFI 12-05-2025): Besoin du model parce que les checkboxes VueDSFR ne gèrent pas bien le reset
 const queries = useRoute().query
 const model = useState(() => ({
-  motCle: queries['motCle'] || "",
+  titre: queries['titre'] || "",
   thematique: queries['thematique'] || "",
-  etapes: queries['etapes'] || "",
-  modalite: queries['modalite'] || [],
-  annee: queries['annee'] || "",
+  etape: queries['etape'] || "",
+  modaliteParticipation: Array.isArray(queries['participation']) ? queries['participation'] : [queries['participation']], 
+  anneeDeLancement: queries['anneeDeLancement'] || "",
 }))
 function reset() {
   model.value = {
-    motCle: "",
+    titre: "",
     thematique: "",
-    etapes: "",
-    modalite: [],
-    annee: "",
+    etape: "",
+    modaliteParticipation: [],
+    anneeDeLancement: "",
   }
 }
 
- const thematiques = [
-   { text: "Non renseigné", value: "" }, "Culture",
-   "Transition Écologique", "Logement", "Services publics",
-   "Économie", "Autonomie", "Agriculture & alimentation"
- ]
- const etapes = [ { text: "Non renseigné", value: "" }, "À venir", "En cours", "Résultats à venir", "Résultats disponibles", "Actions" ]
- const modalites = [
-   { label: "Ouvert à tous", value: "open", name: "modalite" },
-   { label: "Tirage au sort représentatif", value: "tirage", name: "modalite" },
-   { label: "En ligne", value: "remote", name: "modalite" },
-   { label: "En présentiel", value: "local", name: "modalite" },
+const data = await new ThematiqueApi().getAll()
+const thematiques: { text: string; value: string }[] = [
+    {text: "Non renseigné", value: ""},
+    ...((data["thematiques"] ?? []).map(({label, id}) => ({text: label, value: id})))
+  ];
+const anneeCourante: number = new Date().getFullYear();
+const premiereDateDeLancement = 2017;
+
+const annees = [
+  {text: "Non renseigné", value: ""},
+  ...new Array(anneeCourante - premiereDateDeLancement + 1).fill(0).map((_, i)  => String(anneeCourante - i))
 ]
 
- const annees = [ { text: "Non renseigné", value: "" }, "2020", "2021", "2022", "2023", "2024", "2025", "2026" ]
+const etapes = [{text: "Non renseigné", value: ""}, EtapeTerminee.Resultat, EtapeTerminee.Dispo, EtapeTerminee.Action]
+const modalites = [
+  { label: ModaliteLabel.Ouvert, name:"participation", value: ModaliteValue.Ouvert},
+  { label: ModaliteLabel.Tirage, name:"participation", value: ModaliteValue.Tirage},
+  { label: ModaliteLabel.Remote, name:"participation",  value: ModaliteValue.Remote},
+  { label: ModaliteLabel.Local, name:"participation", value: ModaliteValue.Local}]
+
 </script>
 
 <template>
   <form action="/je-participe#terminees">
     <h3>Filtres</h3>
-    <DsfrInputGroup name="motCle" label-visible label="Rechercher par mot clé" v-model="model.motCle" />
+    <DsfrInputGroup name="titre" label-visible label="Rechercher par mot clé" v-model="model.titre" />
     <DsfrSelect name="thematique" label="Thématique" :options="thematiques" v-model="model.thematique" />
-    <DsfrSelect name="etape" label="Étape" :options="etapes" v-model="model.etapes" />
-    <DsfrCheckboxSet legend="Modalités de participation" :options="modalites" v-model="model.modalite" />
-    <DsfrSelect name="annee" label="Année de lancement" :options="annees" v-model="model.annee" />
+    <DsfrSelect name="etape" label="Étape" :options="etapes" v-model="model.etape" />
+    <DsfrCheckboxSet legend="Modalité de participation" :options="modalites" v-model="model.modaliteParticipation" />
+    <DsfrSelect name="anneeDeLancement" label="Année de lancement" :options="annees" v-model="model.anneeDeLancement" />
     <DsfrButton type="submit" class="button">Filtrer les dispositifs</DsfrButton>
     <DsfrButton
       type="reset"

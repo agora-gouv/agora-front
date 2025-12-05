@@ -51,6 +51,7 @@ export default defineNuxtConfig({
 
   imports: {
     autoImport: true,
+    dirs: ['config'],
   },
 
   modules: [
