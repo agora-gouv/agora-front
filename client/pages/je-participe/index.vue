@@ -1,6 +1,5 @@
 <script setup lang="ts">
-
-import {FicheInventaireApiDTO} from "~/client/types/fiche_inventaire/ficheInventaire";
+import QueryParam from "~/client/types/fiche_inventaire/query";
 
 definePageMeta({
   layout: 'basic',
@@ -9,12 +8,11 @@ useHead({
   title: 'Consultations - Agora',
 })
 
-const route = useRoute()
 const runtimeConfig = useRuntimeConfig();
 const withFilters = runtimeConfig.public.features.filtresConsultations
 
 const today = new Date()
-const etapes = useAppConfig().lists.etapesEnCours
+const etapes: QueryParam = { "etape": [Etape.EnCours, Etape.AVenir]}
 
 const fiches = await (new FicheInventaireApi().getAll(etapes))
 
@@ -25,8 +23,17 @@ const fichesEnCours = fiches.filter(fiche => {
 const fichesEnCoursAvecOuvertATousEnPremier = fichesEnCours.sort((a, b) => {
   return Number(b.conditionParticipation === "Ouvert à tous") - Number(a.conditionParticipation === "Ouvert à tous")
 });
+const query = useRoute().query
+const queryParam: QueryParam = {
+  titre: <string> query.titre,
+  // titre = Array.isArray(query.titre) ? query.titre[0] ?? '' : (query.titre ?? '')
+  thematique: <string> query.thematique,
+  etape: <string[]> query.etape,
+  participation: <string> query.participation,
+  anneeDeLancement: <string> query.anneeDeLancement
+}
 
-const fichesFiltrees = await (new FicheInventaireApi().getAll(route.query))
+const fichesFiltrees = await (new FicheInventaireApi().getAll(queryParam))
 
 const fichesTerminees = fichesFiltrees.filter(fiche => {
   const dateFin = new Date(fiche.fin)
@@ -139,7 +146,7 @@ const getEtapeType = (etape: string) => {
             </div>
           </li>
         </ul>
-        <p v-else >Aucun résultat avec les filtres sélectionnés</p>
+        <p v-else>Aucun résultat avec les filtres sélectionnés</p>
       </div>
     </div>
   </div>

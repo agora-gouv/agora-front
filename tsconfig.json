@@ -36,7 +36,6 @@
   "include": [
     "env.d.ts",
     ".nuxt/nuxt.d.ts",
-    "**/*",
-    "**/*.d.ts"
+    "**/*"
   ]
 }
