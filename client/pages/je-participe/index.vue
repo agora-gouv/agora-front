@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import type QueryParam from "~/types/fiche_inventaire/query";
+import {FicheInventaireDTO} from "~/types/fiche_inventaire/ficheInventaire";
 
-import {FicheInventaireApiDTO} from "~/client/types/fiche_inventaire/ficheInventaire";
 
 definePageMeta({
   layout: 'basic',
@@ -9,13 +10,14 @@ useHead({
   title: 'Consultations - Agora',
 })
 
-const route = useRoute()
 const runtimeConfig = useRuntimeConfig();
 const withFilters = runtimeConfig.public.features.filtresConsultations
+const etapeDTO = FicheInventaireDTO.Etape
 
 const today = new Date()
+const etapes: QueryParam = { "etape": [etapeDTO.EnCours, etapeDTO.AVenir]}
 
-const fiches = await (new FicheInventaireApi().getAll())
+const fiches = await (new FicheInventaireApi().getAll(etapes))
 
 const fichesEnCours = fiches.filter(fiche => {
   const dateFin = new Date(fiche.fin)
@@ -24,26 +26,16 @@ const fichesEnCours = fiches.filter(fiche => {
 const fichesEnCoursAvecOuvertATousEnPremier = fichesEnCours.sort((a, b) => {
   return Number(b.conditionParticipation === "Ouvert à tous") - Number(a.conditionParticipation === "Ouvert à tous")
 });
+const query: QueryParam = useRoute().query
 
-const api = new FicheInventaireApi()
+const fichesFiltrees = await (new FicheInventaireApi().getAll(query))
 
-const { data: fichesFiltrees } = await useAsyncData<FicheInventaireApiDTO[]>(
-  'fiches-inventaire',
-  () => api.getAllWithFetch(route.query as any),
-  {
-    watch: [() => route.query],
-    default: () => [],
-  }
-)
+const etapesTerminees = [etapeDTO.Actions, etapeDTO.ResultatAVenir, etapeDTO.ResultatDispo]
 
-const fichesArray = computed(() => fichesFiltrees.value ?? [])
-
-const fichesTerminees = computed(() => fichesArray.value.filter(fiche => {
+const fichesTerminees = fichesFiltrees.filter(fiche => {
   const dateFin = new Date(fiche.fin)
-  return dateFin < today
-}))
-
-const queryEntries = computed(() => Object.entries(route.query))
+  return dateFin < today && etapesTerminees.includes(fiche.etape)
+})
 
 const getEtapeType = (etape: string) => {
   if (etape === 'En cours') return 'info'
@@ -151,7 +143,7 @@ const getEtapeType = (etape: string) => {
             </div>
           </li>
         </ul>
-        <p v-else >Aucun résultat avec les filtres sélectionnés</p>
+        <p v-else>Aucun résultat avec les filtres sélectionnés</p>
       </div>
     </div>
   </div>

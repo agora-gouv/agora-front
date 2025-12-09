@@ -1,21 +1,18 @@
 <script setup lang="ts">
 // NOTE (GAFI 12-05-2025): Besoin du model parce que les checkboxes VueDSFR ne gèrent pas bien le reset
-import ThematiqueApiDTO from "~/client/types/thematique/thematique";
-
+import {FicheInventaireDTO} from "~/types/fiche_inventaire/ficheInventaire";
 const queries = useRoute().query
 
-function toArray(modalite: unknown): string[] {
-  if (Array.isArray(modalite)) return modalite as string[]
-  if (typeof modalite === 'string' && modalite.length > 0) return [modalite]
-  return []
+function getArrayQueryParam(paramName: string) {
+  return Array.isArray(queries[paramName]) ? queries[paramName] : [queries[paramName]];
 }
 
-const model = useState('consultation-filtres', () => ({
-  titre: (queries.titre as string) ?? "",
-  thematique: (queries.thematique as string) ?? "",
-  etape: (queries.etape as string) ?? "",
-  modaliteParticipation: toArray(queries.modaliteParticipation),
-  anneeDeLancement: (queries.anneeDeLancement as string) ?? "",
+let model = useState('filtre', () => ({
+  titre: queries['titre'] || "",
+  thematique: queries['thematique'] || "",
+  etape: queries['etape'] || "",
+  modaliteParticipation: getArrayQueryParam("conditionParticipation").concat(getArrayQueryParam("modaliteParticipation")),
+  anneeDeLancement: queries['anneeDeLancement'] || "",
 }))
 function reset() {
   model.value = {
@@ -27,26 +24,29 @@ function reset() {
   }
 }
 
- const data = await new ThematiqueApi().getAll()
-
- function dataFromCms() {
-   return [
-     {text: "Non renseigné", value: ""},
-     ...((data["thematiques"] ?? []).map(({label, id}: ThematiqueApiDTO) => ({text: label, value: id})))
-   ];
- }
-const thematiques: { text: string; value: string }[] = dataFromCms()
-
+const data = await new ThematiqueApi().getAll()
+const thematiques: { text: string; value: string }[] = [
+    {text: "Non renseigné", value: ""},
+    ...((data["thematiques"] ?? []).map(({label, id}) => ({text: label, value: id})))
+  ];
 const anneeCourante: number = new Date().getFullYear();
-const premiereDateDeLancement = 2017 as const;
-const NombreAnneeTotale: number = anneeCourante - premiereDateDeLancement + 1
+const premiereDateDeLancement = 2017;
 
 const annees = [
   {text: "Non renseigné", value: ""},
-  ...Array.from({ length: NombreAnneeTotale }, (_, i) => String(anneeCourante - i))
-  ]
-const etapes = useAppConfig().lists.etapesTerminees
-const modalites = useAppConfig().lists.modalites
+  ...new Array(anneeCourante - premiereDateDeLancement + 1).fill(0).map((_, i)  => String(anneeCourante - i))
+]
+
+const etapes = [{text: "Non renseigné", value: ""},
+  {text: "Résultats à venir", value: FicheInventaireDTO.Etape.ResultatAVenir},
+  {text: "Résultats disponibles", value: FicheInventaireDTO.Etape.ResultatDispo},
+  {text: "Actions", value: FicheInventaireDTO.Etape.Actions,}]
+
+const modalites = [
+  { label: "Ouvert à tous", name:"conditionParticipation", value: FicheInventaireDTO.Condition.Ouvert},
+  { label: "Tirage au sort représentatif", name:"conditionParticipation", value: FicheInventaireDTO.Condition.Tirage},
+  { label: "En ligne", name:"modaliteParticipation",  value: FicheInventaireDTO.Modalite.Remote},
+  { label: "En présentiel", name:"modaliteParticipation", value: FicheInventaireDTO.Modalite.Local}]
 
 </script>
 

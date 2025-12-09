@@ -13,15 +13,4 @@ export class ThematiqueApi {
 
     return thematiques.value!
   }
-
-  async get(id: string) {
-    const routeThematiqueResponsesUrl = `${this.baseUrl}/thematiques/${id}`
-
-    const {data: thematiques, error}
-      = await useFetch<ThematiqueApiDTO>(routeThematiqueResponsesUrl)
-
-    if (error.value) throw createError({statusCode: error.value.statusCode})
-
-    return thematiques.value!
-  }
 }
