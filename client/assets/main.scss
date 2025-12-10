@@ -31,3 +31,10 @@ body {
     background-color: inherit;
   }
 }
+#terminees ul:has(> li:first-child:last-child) .fr-card {
+  height: auto;
+}
+#terminees:target {
+  outline: none;
+  box-shadow: none;
+}

@@ -2,7 +2,6 @@
 import type QueryParam from "~/types/fiche_inventaire/query";
 import {FicheInventaireDTO} from "~/types/fiche_inventaire/ficheInventaire";
 
-
 definePageMeta({
   layout: 'basic',
 })
@@ -38,8 +37,20 @@ const fichesTerminees = fichesFiltrees.filter(fiche => {
 })
 
 const getEtapeType = (etape: string) => {
-  if (etape === 'En cours') return 'info'
-  return 'success'
+  switch (etape as FicheInventaireDTO.Etape) {
+    case FicheInventaireDTO.Etape.EnCours:
+      return 'info'      
+    case FicheInventaireDTO.Etape.AVenir:
+      return 'new'
+    case FicheInventaireDTO.Etape.ResultatDispo:
+      return 'success'
+    case FicheInventaireDTO.Etape.ResultatAVenir:
+      return 'warning'
+    case FicheInventaireDTO.Etape.Actions:
+      return 'info'
+    default:
+      return 'info'
+  }
 }
 </script>
 
@@ -135,7 +146,8 @@ const getEtapeType = (etape: string) => {
                     <img class="fr-responsive-img" :src="fiche.illustrationUrl" alt="">
                   </div>
                   <div class="fr-badges-group">
-                    <p class="fr-badge fr-badge--success">
+<!--                    <p class="fr-badge fr-badge&#45;&#45;success">-->
+                    <p :class="`fr-badge fr-badge--${getEtapeType(fiche.etape)} fr-badge--no-icon`">
                       {{ fiche.etape }}
                     </p>
                   </div>
@@ -143,7 +155,7 @@ const getEtapeType = (etape: string) => {
             </div>
           </li>
         </ul>
-        <p v-else>Aucun résultat avec les filtres sélectionnés</p>
+        <p v-else>Aucun dispositif ne correspond aux filtres sélectionnés.</p>
       </div>
     </div>
   </div>
