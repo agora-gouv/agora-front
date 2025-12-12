@@ -40,6 +40,7 @@ const typeTerritoire =
   <div class="fr-mt-4w">
     <div v-if="userHasAnsweredToConsultation" class="fr-alert fr-alert--success fr-mb-2w">
       <h6 class="fr-alert__title">Vos réponses ont bien été envoyées.</h6>
+      <NuxtLink to="/je-participe">Répondre aux autres consultations</NuxtLink>
     </div>
     <div class="consultation">
       <div id="right-column">
