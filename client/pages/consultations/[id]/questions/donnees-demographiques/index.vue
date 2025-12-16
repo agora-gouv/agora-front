@@ -8,8 +8,11 @@ useHead({
   title: `Indiquez votre profil - Agora`,
 })
 
+/* Switch redirect consultation
 const consultationId = useRoute().params.id as string;
-const resultatsConsultation = `/consultations/${consultationId}?answered=true`;
+const resultatsConsultation = `/consultations/${consultationId}?answered=true`*/
+
+const resultatsConsultation = `/je-participe`
 </script>
 
 <template>

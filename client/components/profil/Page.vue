@@ -45,13 +45,15 @@ const vAutofocus = {
     element.focus({ preventScroll: true, focusVisible: true, })
   }
 }
-const redirect = useRoute().query.redirect;
+const redirect= useRoute().query.redirect;
+const redirectUrl = typeof(redirect) === "string" ? new URL(redirect, document.location.origin) : null
+const isUrlOrigin = redirectUrl?.origin === document.location.origin
 </script>
 
 <template>
   <DsfrAlert tabindex="-1" v-autofocus v-if="status === 'success'" type="success" title="Modifications enregistrées" class="fr-mb-4w">
     Vos modifications ont été enregistrées avec succès.
-    <NuxtLink to="/je-participe" v-if="redirect != null">Répondre aux autres consultations</NuxtLink>
+    <NuxtLink :to=redirect v-if="redirect != null && isUrlOrigin">Répondre aux autres consultations</NuxtLink>
   </DsfrAlert>
   <DsfrAlert tabindex="-1" v-autofocus v-if="status === 'error'" type="error" title="Un problème est survenu" class="fr-mb-4w">
     <p>
