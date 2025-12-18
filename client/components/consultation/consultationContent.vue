@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import Consultation from "~/client/types/consultation/consultation";
+import type { ConsultationUpdateStatus } from '~/client/types/consultation/consultation';
 import svgBook from "@gouvfr/dsfr/dist/artwork/pictograms/leisure/book.svg";
 
 const props = defineProps<{
   consultation: Consultation,
 }>()
 
+const STATUT: Record<ConsultationUpdateStatus, string> = { done: "terminée", current: "en cours", incoming: "à venir"}
+const status = STATUT[props.consultation.history[0].status]
 const userHasAnsweredToConsultation = useRoute().query.answered
 
 const estEnCours = props.consultation.consultationDates?.endDate
@@ -44,7 +47,7 @@ const typeTerritoire =
     </div>
     <div class="consultation">
       <div id="right-column">
-        <DsfrBadge label="En cours" no-icon/>
+        <DsfrBadge :label=status no-icon/>
         <ul>
           <li class="fr-tag fr-tag--no-icon">{{consultation.thematique.picto}} {{consultation.thematique.label}}</li>
           <li :class="`fr-tag fr-tag--no-icon territoire-${typeTerritoire}`">{{ consultation.territory }}</li>

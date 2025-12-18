@@ -72,7 +72,7 @@ export interface ConsultationUpdate {
 }
 
 type ConsultationUpdateType = "update" | "results"
-type ConsultationUpdateStatus = "done" | "current" | "incoming"
+export type ConsultationUpdateStatus = "done" | "current" | "incoming"
 
 export type Section = SectionTitre | SectionTexteRiche | SectionImage | SectionVideo | SectionFocusNumber | SectionAccordion | SectionQuote;
 
