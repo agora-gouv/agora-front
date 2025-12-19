@@ -2,12 +2,12 @@ export interface ConsultationResultsApiDTO {
     title: string,
     coverUrl: string,
     participantCount: number,
-    resultsUniqueChoice: ConsultationQuestionResultsApiDTO[],
-    resultsMultipleChoice: ConsultationQuestionResultsApiDTO[],
+    resultsUniqueChoice: ConsultationUniqueChoiceQuestionResultsApiDTO[],
+    resultsMultipleChoice: ConsultationMultipleChoiceQuestionResultsApiDTO[],
     resultsOpen: ConsultationOpenQuestionResultsApiDTO[],
 }
 
-interface ConsultationQuestionResultsApiDTO {
+export interface ConsultationUniqueChoiceQuestionResultsApiDTO {
   questionId: string,
   questionTitle: string,
   order: number,
@@ -15,7 +15,15 @@ interface ConsultationQuestionResultsApiDTO {
   responses: ConsultationChoiceResultsApiDTO[],
 }
 
-interface ConsultationOpenQuestionResultsApiDTO {
+export interface ConsultationMultipleChoiceQuestionResultsApiDTO {
+  questionId: string,
+  questionTitle: string,
+  order: number,
+  seenRatio: number,
+  responses: ConsultationChoiceResultsApiDTO[],
+}
+
+export interface ConsultationOpenQuestionResultsApiDTO {
   questionId: string,
   questionTitle: string,
   order: number,

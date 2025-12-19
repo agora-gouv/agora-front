@@ -23,6 +23,7 @@ const {id = useId()} = defineProps<{
 
 <style lang="scss">
 .question-result {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(5ch, auto) 1fr;
   margin-bottom: 8px;
@@ -33,7 +34,7 @@ const {id = useId()} = defineProps<{
     @supports (content: var(--value-text) " %" / "") { content: var(--value-text) " %" / ""; }
   }
   
-  position: relative;
+  
   [role="meter"] {
     position: absolute;
     z-index: -1;

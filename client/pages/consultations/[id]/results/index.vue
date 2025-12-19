@@ -1,6 +1,10 @@
 <script setup lang="ts">
 
-import ConsultationAnswers from "~/client/types/consultation/consultationAnswers";
+import { ConsultationResponse,
+  ResponseUniqueChoice,
+  ResponseOpened,
+  ResponseMultipleChoices } from "~/composables/useConsultationResponses";
+
 definePageMeta({
   layout: 'basic'
 })
@@ -8,18 +12,7 @@ definePageMeta({
 const consultationId = useRoute().params.id.toString()
 const consultationResults = (await (new ConsultationApi().getConsultationResults(consultationId))).value
 
-const questionsPresentation: ConsultationAnswers[] = (
-  ['resultsOpen', 'resultsMultipleChoice','resultsUniqueChoice' ])
-  .flatMap((key) => ((consultationResults)[key])
-    .map(({ order, questionId, questionTitle, responses}) => ({
-      type: key,
-      order,
-      questionId,
-      questionTitle,
-      responses
-    })));
-
-questionsPresentation.sort((a,b) => a.order - b.order)
+const questions = ConsultationResponse.fromApi(consultationResults).questions;
 
 useHead({
   title: `${consultationResults.title} - Réponses - Agora`,
@@ -47,11 +40,10 @@ useHead({
         class="icon"
       /> {{ consultationResults.participantCount }} participants</p>
     </div>
-    <div v-for="questionPresentation in questionsPresentation" :key="questionPresentation.questionId">
-  
-      <div class="question" v-if="questionPresentation.type == 'resultsUniqueChoice'">
-        <h3>{{ questionPresentation.questionTitle }}</h3>
-        <div v-for="consultationResponse in questionPresentation.responses" style="position: relative;">
+    <div v-for="question in questions" :key="question.questionId">
+      <div class="question" v-if="question instanceof ResponseUniqueChoice">
+        <h3>{{ question.questionTitle }}</h3>
+        <div v-for="consultationResponse in question.responses" style="position: relative;">
           <ConsultationQuestionResult :value="consultationResponse.ratio">
             <template #label>
               {{consultationResponse.label}}
@@ -60,15 +52,15 @@ useHead({
         </div>
       </div>
       
-      <div class="question" v-if="questionPresentation.type == 'resultsOpen'">
-        <h3>{{ questionPresentation.questionTitle }}</h3>
+      <div class="question" v-if="question instanceof ResponseOpened">
+        <h3>{{ question.questionTitle }}</h3>
         <p>L’analyse des réponses à cette question sera disponible dans la synthèse</p>
       </div>
   
-      <div class="question" v-if="questionPresentation.type == 'resultsMultipleChoice'">
-        <h3>{{ questionPresentation.questionTitle }}</h3>
+      <div class="question" v-if="question instanceof ResponseMultipleChoices">
+        <h3>{{ question.questionTitle }}</h3>
         <p>Plusieurs réponses possibles</p>
-        <div v-for="consultationResponse in questionPresentation.responses">
+        <div v-for="consultationResponse in question.responses">
           <ConsultationQuestionResult :value="consultationResponse.ratio">
             <template #label>
               {{consultationResponse.label}}
