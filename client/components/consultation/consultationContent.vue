@@ -7,7 +7,7 @@ const props = defineProps<{
   consultation: Consultation,
 }>()
 
-const STATUT: Record<ConsultationUpdateStatus, string> = { done: "terminée", current: "en cours", incoming: "à venir"}
+const STATUT: Record<ConsultationUpdateStatus, string> = { done: "Terminée", current: "En cours", incoming: "À venir"}
 const status = STATUT[props.consultation.history[0].status]
 const userHasAnsweredToConsultation = useRoute().query.answered
 
