@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Consultation from "~/client/types/consultation/consultation";
 import type { ConsultationUpdateStatus } from '~/client/types/consultation/consultation';
+import Consultation from "~/client/types/consultation/consultation";
 import svgBook from "@gouvfr/dsfr/dist/artwork/pictograms/leisure/book.svg";
 
 const props = defineProps<{
@@ -8,11 +8,12 @@ const props = defineProps<{
 }>()
 
 const STATUT: Record<ConsultationUpdateStatus, string> = { done: "Terminée", current: "En cours", incoming: "À venir"}
-const status = STATUT[props.consultation.history[0].status]
 const userHasAnsweredToConsultation = useRoute().query.answered
 
-const estEnCours = props.consultation.consultationDates?.endDate
-  && new Date() < new Date(props.consultation.consultationDates.endDate)
+const estAVenir = new Date() < new Date(props.consultation.consultationDates?.startDate || '')
+const estEnCours = new Date() < new Date(props.consultation.consultationDates?.endDate || '')
+
+const status = estAVenir? STATUT.incoming : estEnCours ? STATUT.current : STATUT.done
 
 const runtimeConfig = useRuntimeConfig();
 const isResponseActivated = runtimeConfig.public.features.consultations
