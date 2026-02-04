@@ -137,7 +137,7 @@ const activeAccordion = ref<number>()
       <div v-if="currentQuestion instanceof QuestionWithCondition">
         <fieldset class="fr-fieldset" id="radio-hint" aria-labelledby="radio-hint-legend radio-hint-messages">
           <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id="radio-hint-legend">
-            Vous pouvez choisir une seule réponse.
+            Vous devez répondre à cette question pour accéder à la suite de la consultation, adaptée pour vous.
           </legend>
 
           <div class="fr-fieldset__element" v-for="choice in currentQuestion.possibleChoices">
