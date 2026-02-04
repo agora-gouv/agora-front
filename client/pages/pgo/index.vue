@@ -83,15 +83,6 @@ useHead({
     <li><b><time datetime="2025-06-05">Juin 2025</time>&nbsp;:</b> lancement d’un groupe de travail chargé de rendre ces doléances lisibles, exploitables et ouvertes à tous d’ici <time>2026</time></li>
   </ol>
 
-  <DsfrQuote quote="
-               Pour le gouvernement, l’association des citoyennes et des citoyens à l’élaboration des politiques publiques est une question
-               majeure et une condition indispensable de la solidité et de la vitalité de notre démocratie.
-             "
-             author="Patrick Mignola, ministre délégué auprès du Premier ministre, chargé des Relations avec le Parlement"
-             quoteImage="/Mignola.jpg"
-             source="Débat à l'Assemblée nationale le 11 mars 2025"
-             class="fr-mb-4w" />
-
    <div class="bandeau-cta fr-grid-row fr-grid-row--gutters fr-p-5w">
     <img src="@gouvfr/dsfr/dist/artwork/pictograms/digital/application.svg" alt="" class="fr-col-1 fr-py-0">
     <p class="fr-h3 fr-col-11 fr-m-0 fr-py-0">Téléchargez l’application Agora pour être prévenu(e) dès que les cahiers de doléance sont en ligne&nbsp;!</p>
@@ -102,12 +93,8 @@ useHead({
   <ul class="fr-mt-2w fr-mb-4w">
     <li>La <a href="/je-participe/9"><b><i>Convention citoyenne pour le climat</i></b></a> (2019-2020) a débouché sur de nombreuses mesures intégrées à la loi <i>Climat et Résilience</i> de 2021</li>
     <li>La <a href="/je-participe/10"><b><i>Convention citoyenne sur la fin de vie</i></b></a> (2022-2023) a débouché sur 2 propositions de loi adoptées par l'Assemblée nationale le <time datetime="2025-05-27">27 mai 2025</time></li>
+    <li>La <a href="/je-participe/11"><b><i>Convention citoyenne sur les temps de l’enfant</i></b></a> (2025) a remis son rapport en novembre 2025.</li>
   </ul>
-  <p class="fr-mb-8w">
-    À partir de <time datetime="2025-06">juin 2025</time>, une nouvelle convention s’organise sur le thème des temps de l’enfant : rythmes
-    scolaires, temps extrascolaires, conciliation avec la vie familiale, etc. Ce sujet, au croisement de l’éducation, du bien-être et de
-    l’organisation de la société, mobilise à nouveau un panel de citoyens tirés au sort pour formuler des recommandations concrètes.
-  </p>
   <BandeauTelechargementAdaptatif title="Activez les notifications sur l'application Agora pour ne rien louper." />
 </template>
 
