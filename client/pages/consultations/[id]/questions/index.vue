@@ -30,6 +30,10 @@ const isMaximumChoices = computed(() => {
   return false
 })
 
+const isQuestionAnswered = computed(() => {
+  return currentQuestion.value != null && answersCheckbox.value[currentQuestion.value.id] > 0
+})
+
 const activeAccordion = ref<number>()
 </script>
 
@@ -149,12 +153,15 @@ const activeAccordion = ref<number>()
           <div class="fr-messages-group" id="radio-hint-messages" aria-live="assertive">
           </div>
         </fieldset>
-        <ConsultationQuestionButtons
+        <ConsultationQuestionButtons  v-if="isQuestionAnswered"
           :hasPreviousQuestion="hasPreviousQuestion.valueOf()"
           :hasNextQuestion="hasNextQuestion.valueOf()"
           :nextQuestionId="currentQuestion.possibleChoices.find((choice) => choice.id == answersCheckbox[currentQuestion!!.id])?.nextQuestionId!!"
           :nextQuestion="nextQuestion"
           :previousQuestion="previousQuestion"
+        />
+        <ConsultationQuestionButtonsPreviousOnly v-else
+                                     :previousQuestion="previousQuestion"
         />
       </div>
 
