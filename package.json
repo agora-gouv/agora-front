@@ -16,7 +16,7 @@
     "@gouvminint/vue-dsfr": "^8.8.0",
     "@nuxtjs/robots": "^5.2.8",
     "@nuxtjs/sitemap": "^7.2.9",
-    "nuxt": "^3.16.1",
+    "nuxt": "^3.19.0",
     "sass": "^1.86.0",
     "typescript": "^5.4.5",
     "vue-matomo": "^4.2.0"
