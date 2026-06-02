@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Section } from '~/client/types/consultation/consultation';
+import type { Section } from '~/types/consultation/consultation';
 import { DsfrTranscription } from "@gouvminint/vue-dsfr";
 
 const props = defineProps<{

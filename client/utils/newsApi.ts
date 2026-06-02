@@ -1,4 +1,4 @@
-import NewsDto from "~/client/types/content/news";
+import type NewsDto from "~/types/content/news";
 
 export class NewsApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;

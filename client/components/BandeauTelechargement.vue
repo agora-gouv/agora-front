@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {Ref} from "vue";
+import type {Ref} from "vue";
 
 const platformRef : Ref<string| null> = ref('desktop')
 const isMobileRef = ref(false)

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Link from "~/client/types/dsfr/link";
+import type Link from "~/types/dsfr/link";
 
 definePageMeta({
   layout: 'basic',

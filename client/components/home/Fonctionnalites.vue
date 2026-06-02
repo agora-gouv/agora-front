@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
-import {AsyncData} from "nuxt/app";
-import AccueilContent from "~/client/types/content/accueilContent";
+import type {AsyncData} from "nuxt/app";
+import type AccueilContent from "~/types/content/accueilContent";
 import {FetchError} from "ofetch";
 
 const runtimeConfig = useRuntimeConfig()

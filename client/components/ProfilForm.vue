@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ProfilInfoDto } from "~/client/utils/profilApi";
+import { ProfilInfoDto } from "~/utils/profilApi";
 
 const categorieSocioProModalOpen = useState<boolean>(() => false);
 const profilVoteurModalOpen = useState<boolean>(() => false);

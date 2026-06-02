@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { ConsultationUpdateStatus } from '~/client/types/consultation/consultation';
-import Consultation from "~/client/types/consultation/consultation";
+import type { ConsultationUpdateStatus } from '~/types/consultation/consultation';
+import type Consultation from "~/types/consultation/consultation";
 import svgBook from "@gouvfr/dsfr/dist/artwork/pictograms/leisure/book.svg";
 
 const props = defineProps<{

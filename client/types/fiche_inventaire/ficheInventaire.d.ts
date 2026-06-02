@@ -1,4 +1,4 @@
-import ThematiqueApiDTO from "~/client/types/thematique/thematique";
+import type ThematiqueApiDTO from "~/types/thematique/thematique";
 import {FicheInventaireDTO} from "./ficheInventaire";
 
 interface FicheInventaireApiDTO {

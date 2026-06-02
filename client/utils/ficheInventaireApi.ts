@@ -1,5 +1,5 @@
-import { FicheInventaireApiDTO } from "~/client/types/fiche_inventaire/ficheInventaire";
-import QueryParam from "~/client/types/fiche_inventaire/query"
+import type { FicheInventaireApiDTO } from "~/types/fiche_inventaire/ficheInventaire";
+import type QueryParam from "~/types/fiche_inventaire/query"
 
 export class FicheInventaireApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;

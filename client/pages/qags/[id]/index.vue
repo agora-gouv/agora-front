@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type Link from '~/client/types/dsfr/link';
+import type Link from '~/types/dsfr/link';
 import { DsfrTranscription } from "@gouvminint/vue-dsfr";
 
 definePageMeta({

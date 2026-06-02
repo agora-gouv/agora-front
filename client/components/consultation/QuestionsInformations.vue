@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ConsultationQuestionInfo } from "~/client/types/consultation/consultation";
+import type { ConsultationQuestionInfo } from "~/types/consultation/consultation";
 
 defineProps<{
   questionsInfo: ConsultationQuestionInfo,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Ref } from "vue";
+import type { Ref } from "vue";
 import { VIcon } from "@gouvminint/vue-dsfr";
 
 const {open} = defineProps<{

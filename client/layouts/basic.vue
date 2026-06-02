@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useScheme } from '@gouvminint/vue-dsfr'
 import type { CSSProperties } from 'nuxt/dist/app/compat/capi';
-import { AsyncData } from "nuxt/app";
-import AccueilContent from "~/client/types/content/accueilContent";
+import type { AsyncData } from "nuxt/app";
+import type AccueilContent from "~/types/content/accueilContent";
 import { FetchError } from "ofetch";
 
 const runtimeConfig = useRuntimeConfig();
@@ -138,7 +138,7 @@ const app = useNuxtApp().vueApp.mixin({
     :logo-text="logoText"
     :operator-img-src="operatorImgSrc"
     :operator-img-style="operatorImgStyle"
-    :service-title="accueilContent.titreHeader"
+    :service-title="accueilContent?.titreHeader"
     :quick-links="profil"
   >
     <template #mainnav>

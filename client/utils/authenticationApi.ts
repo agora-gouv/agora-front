@@ -1,5 +1,5 @@
 import { FetchError } from "ofetch";
-import { LoginResponse, SignupResponse } from "~/client/types/authentication/authenticationApiDTO";
+import type { LoginResponse, SignupResponse } from "~/types/authentication/authenticationApiDTO";
 
 export class AuthenticationApi {
   async login(loginToken: string): Promise<LoginResponse> {

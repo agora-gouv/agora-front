@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {QagsApiDTO} from "~/client/types/qag/qags";
+import type {QagsApiDTO} from "~/types/qag/qags";
 
 definePageMeta({
   layout: 'basic',

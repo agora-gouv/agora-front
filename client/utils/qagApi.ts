@@ -1,5 +1,5 @@
-import type Qag from "~/client/types/qag/qag";
-import { QagsApiDTO, QagsWithResponsesApiDTO } from "~/client/types/qag/qags";
+import type Qag from "~/types/qag/qag";
+import type { QagsApiDTO, QagsWithResponsesApiDTO } from "~/types/qag/qags";
 
 export class QagApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;
