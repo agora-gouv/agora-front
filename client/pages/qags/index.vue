@@ -9,8 +9,8 @@ useHead({
   title: 'Questions au gouvernement - Agora',
 })
 
-const latest = useState<QagsApiDTO["qags"]>(() => ([]));
-const popular = useState<QagsApiDTO["qags"]>(() => ([]));
+const latest = useState<QagsApiDTO["qags"]>((): QagsApiDTO["qags"] => []);
+const popular = useState<QagsApiDTO["qags"]>((): QagsApiDTO["qags"] => []);
 
 onMounted(async () => {
   const {jwtToken} = await useAuthentication()
