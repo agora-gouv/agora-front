@@ -71,14 +71,17 @@ export class ConsultationApi {
   async giveFeedback(consultationId: string, consultationUpdate: string, isPositive: boolean, token: string) {
     const route = `${this.baseUrl}/consultations/${consultationId}/updates/${consultationUpdate}/feedback`;
 
-    const { error } = await useFetch<never, FetchError>(route, {
-      method: "POST",
-      body: { isPositive: isPositive },
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    if (error.value) {
-      throw createError({ statusCode: error.value!.statusCode });
+    try {
+      await $fetch(route, {
+        method: "POST",
+        body: { isPositive: isPositive },
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    } catch (error) {
+      if (error instanceof FetchError) {
+        throw createError({ statusCode: error.statusCode });
+      }
+      throw error;
     }
   }
 }

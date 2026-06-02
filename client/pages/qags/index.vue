@@ -14,8 +14,8 @@ const popular = useState<QagsApiDTO["qags"]>(() => ([]));
 
 onMounted(async () => {
   const {jwtToken} = await useAuthentication()
-  latest.value = (await (new QagApi().getLatest(jwtToken))).value.qags.slice(0, 4)
-  popular.value = (await (new QagApi().getPopular(jwtToken))).value.qags.slice(0, 4)
+  latest.value = (await (new QagApi().getLatest(jwtToken))).value?.qags.slice(0, 4) ?? []
+  popular.value = (await (new QagApi().getPopular(jwtToken))).value?.qags.slice(0, 4) ?? []
 })
 </script>
 <template>

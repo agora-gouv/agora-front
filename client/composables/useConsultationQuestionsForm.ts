@@ -16,8 +16,8 @@ export const useConsultationQuestionsForm = () => {
 
   const questions: Ref<ConsultationQuestions | undefined> = ref();
   const currentIndexQuestion: Ref<number> = ref(1);
-  const answersCheckbox = ref({});
-  const answersText = ref({});
+  const answersCheckbox: Ref<Record<string, any[]>> = ref({});
+  const answersText: Ref<Record<string, any>> = ref({});
   const respondedQuestions: Ref<string[]> = ref([]);
   const errorMessage = ref("");
 
