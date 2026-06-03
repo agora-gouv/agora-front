@@ -5,35 +5,37 @@ export class AuthenticationApi {
   async login(loginToken: string): Promise<LoginResponse> {
     const baseUrl = useRuntimeConfig().public.apiBaseUrl;
 
-    const routeUrl = `${baseUrl}/login`
+    const routeUrl = `${baseUrl}/login`;
     try {
-      return await $fetch<LoginResponse, FetchError>(routeUrl, {
+      return await $fetch<LoginResponse>(routeUrl, {
         method: "POST",
         headers: {
-          "versionCode": "1",
-          "platform": "web",
+          versionCode: "1",
+          platform: "web",
         },
-        body: {"loginToken": loginToken},
-      })
+        body: { loginToken: loginToken },
+      });
     } catch (error) {
-      throw createError({statusCode: error.statusCode})
+      const statusCode = error instanceof FetchError ? error.statusCode : 500;
+      throw createError({ statusCode });
     }
   }
 
   async signup(): Promise<SignupResponse> {
-    const runtimeConfig = useRuntimeConfig()
-    const routeUrl = `${runtimeConfig.public.apiBaseUrl}/signup`
+    const runtimeConfig = useRuntimeConfig();
+    const routeUrl = `${runtimeConfig.public.apiBaseUrl}/signup`;
     try {
-      const content = await $fetch<SignupResponse, FetchError>(routeUrl, {
+      const content = await $fetch<SignupResponse>(routeUrl, {
         method: "POST",
         headers: {
-          "versionCode": "1",
-          "platform": "web",
-        }
-      })
-      return content
+          versionCode: "1",
+          platform: "web",
+        },
+      });
+      return content;
     } catch (error) {
-      throw createError({statusCode: error.statusCode})
+      const statusCode = error instanceof FetchError ? error.statusCode : 500;
+      throw createError({ statusCode });
     }
   }
 }
