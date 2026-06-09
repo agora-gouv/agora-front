@@ -1,5 +1,6 @@
 <script setup lang="ts">
 
+import type ThemeHebdo from "~/types/theme_hebdo/themeHebdo";
 import type {QagsApiDTO} from "~/types/qag/qags";
 
 definePageMeta({
@@ -9,17 +10,25 @@ useHead({
   title: 'Questions au gouvernement - Agora',
 })
 
+const themeHebdo = useState<ThemeHebdo>();
 const latest = useState<QagsApiDTO["qags"]>((): QagsApiDTO["qags"] => []);
 const popular = useState<QagsApiDTO["qags"]>((): QagsApiDTO["qags"] => []);
 
 onMounted(async () => {
   const {jwtToken} = await useAuthentication()
+  themeHebdo.value = (await (new ThemeHebdoApi().getThemeHebdo())).value
   latest.value = (await (new QagApi().getLatest(jwtToken))).value?.qags.slice(0, 4) ?? []
   popular.value = (await (new QagApi().getPopular(jwtToken))).value?.qags.slice(0, 4) ?? []
 })
 </script>
 <template>
   <h1 class="fr-mt-4w">Posez vos questions au Gouvernement avec l’application mobile Agora</h1>
+  <p v-if="themeHebdo">
+    {{ themeHebdo.titre }} - {{ themeHebdo.periode }} 
+  </p>
+  <p v-if="themeHebdo">
+    Posez toutes vos questions sur {{ themeHebdo.theme }} à {{ themeHebdo.nom }}, {{ themeHebdo.fonction }}.
+  </p>
   <p>
     Vous pouvez <strong>poser vos questions</strong> et soutenir celles que vous trouvez les plus intéressantes en téléchargeant l'application (sur <a
     href="https://apps.apple.com/app/6449599025">iOS</a> ou <a href="https://play.google.com/store/apps/details?id=fr.gouv.agora">Android</a>).
@@ -30,6 +39,7 @@ onMounted(async () => {
   <div class="fr-mb-2w fr-mt-6w">
     <ol class="fr-mb-1w fr-raw-list">
       <li class="fr-my-4w" v-for="qag in latest" :key="qag.qagId">
+        {{console.log(qag)}}
         <Qag :qag="qag"/>
       </li>
     </ol>
