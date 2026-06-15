@@ -39,7 +39,6 @@ onMounted(async () => {
   <div class="fr-mb-2w fr-mt-6w">
     <ol class="fr-mb-1w fr-raw-list">
       <li class="fr-my-4w" v-for="qag in latest" :key="qag.qagId">
-        {{console.log(qag)}}
         <Qag :qag="qag"/>
       </li>
     </ol>

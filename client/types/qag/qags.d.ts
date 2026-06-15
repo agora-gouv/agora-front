@@ -9,6 +9,8 @@ interface QagWithResponseApiDTO {
   author: string;
   authorPortraitUrl: string;
   responseDate: string;
+  responseTexte: string;
+  username: string;
 }
 
 export interface QagsWithResponsesApiDTO {
