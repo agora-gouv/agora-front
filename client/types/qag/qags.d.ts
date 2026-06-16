@@ -1,44 +1,46 @@
-import Thematique from "~/client/types/thematique/thematique";
+import type Thematique from "~/types/thematique/thematique";
 
-type QagID = string
+type QagID = string;
 
 interface QagWithResponseApiDTO {
-  qagId: QagID,
-  thematique: Thematique,
-  title: string,
-  author: string,
-  authorPortraitUrl: string,
-  responseDate: string,
+  qagId: QagID;
+  thematique: Thematique;
+  title: string;
+  author: string;
+  authorPortraitUrl: string;
+  responseDate: string;
+  responseTexte: string;
+  username: string;
 }
 
 export interface QagsWithResponsesApiDTO {
-  maxPageNumber: number,
-  responses: QagWithResponseApiDTO[],
+  maxPageNumber: number;
+  responses: QagWithResponseApiDTO[];
 }
 
-export interface QagApiDTO  {
-  "qagId": QagID,
-  "thematique": {
-    "label": string,
-    "picto": string
-  },
-  "title": string,
-  "description": string,
-  "username": string,
-  "date": string,
-  "support": {
-    "count": number,
-    "isSupported": boolean
-  },
-  "isAuthor": boolean
+export interface QagApiDTO {
+  qagId: QagID;
+  thematique: {
+    label: string;
+    picto: string;
+  };
+  title: string;
+  description: string;
+  username: string;
+  date: string;
+  support: {
+    count: number;
+    isSupported: boolean;
+  };
+  isAuthor: boolean;
 }
 
 export interface QagsApiDTO {
-  maxPageNumber: number,
-  qags: QagsApiDTO[],
+  maxPageNumber: number;
+  qags: QagApiDTO[];
   header: {
-    headerId: string,
-    title: string,
-    message: string,
-  }
+    headerId: string;
+    title: string;
+    message: string;
+  };
 }

@@ -13,7 +13,8 @@ const runtimeConfig = useRuntimeConfig();
 const withFilters = runtimeConfig.public.features.filtresConsultations
 const etapeDTO = FicheInventaireDTO.Etape
 
-const today = new Date().setHours(0, 0, 0, 0)
+const today = new Date()
+today.setHours(0, 0, 0, 0)
 const etapes: QueryParam = { "etape": [etapeDTO.EnCours, etapeDTO.AVenir]}
 
 const fiches = await (new FicheInventaireApi().getAll(etapes))

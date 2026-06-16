@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import NewsDto from "~/client/types/content/news";
+import type NewsDto from "~/types/content/news";
 
 const news = await new NewsApi().get()
     .catch(error => undefined);

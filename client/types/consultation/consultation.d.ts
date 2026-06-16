@@ -1,4 +1,4 @@
-import Thematique from "~/client/types/thematique/thematique";
+import type Thematique from "~/types/thematique/thematique";
 
 export default interface Consultation {
   id: string,

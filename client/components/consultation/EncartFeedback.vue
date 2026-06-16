@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Consultation from "~/client/types/consultation/consultation";
+import type Consultation from "~/types/consultation/consultation";
 
 const props = defineProps<{
   consultation: Consultation,

@@ -1,4 +1,4 @@
-import {DepartementsDto} from "~/client/types/departements/departementsDto";
+import type {DepartementsDto} from "~/types/departements/departementsDto";
 
 export class DepartementsApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;

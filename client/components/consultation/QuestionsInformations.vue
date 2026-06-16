@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ConsultationQuestionInfo } from "~/client/types/consultation/consultation";
+import type { ConsultationQuestionInfo } from "~/types/consultation/consultation";
+import {VIcon} from "@gouvminint/vue-dsfr";
 
 defineProps<{
   questionsInfo: ConsultationQuestionInfo,

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useScheme } from '@gouvminint/vue-dsfr'
-import type { CSSProperties } from 'nuxt/dist/app/compat/capi';
-import { AsyncData } from "nuxt/app";
-import AccueilContent from "~/client/types/content/accueilContent";
+import type { CSSProperties } from 'vue';
+import type { AsyncData } from "nuxt/app";
+import type AccueilContent from "~/types/content/accueilContent";
 import { FetchError } from "ofetch";
 
 const runtimeConfig = useRuntimeConfig();
@@ -41,18 +41,22 @@ const mandatoryLinks: {label: string, to: string}[] = [{
   to: '/plan-du-site',
 }]
 
-const ecosystemLinks: {label: string, href: string}[] = [{  
+const ecosystemLinks: {label: string, href: string, title: string}[] = [{  
     href: 'https://www.info.gouv.fr/',
     label: 'info.gouv.fr',
+    title: 'info.gouv.fr',
   }, {
     href: 'https://www.service-public.fr/',
     label: 'service-public.fr',
+    title: 'service-public.fr',
   }, {
     href: 'https://legifrance.gouv.fr/',
     label: 'legifrance.gouv.fr',
+    title: 'legifrance.gouv.fr',
   }, {
     href: 'https://data.gouv.fr/',
     label: 'data.gouv.fr',
+    title: 'data.gouv.fr',
 }]
 
 const menu = [
@@ -87,7 +91,7 @@ const menu = [
     target: "_blank",
     rel: "noopener noreferrer"
   },
-].filter(element => Boolean(element))
+].filter(Boolean) as any
 
 const preferences = reactive({
   theme: '',
@@ -95,7 +99,10 @@ const preferences = reactive({
 })
 
 onMounted(() => {
-  const {theme, setScheme} = useScheme()
+  const schemeResult = useScheme()
+  if (!schemeResult) return
+
+  const { theme, setScheme } = schemeResult
   // preferences.scheme = 'dark';
   preferences.scheme = 'light'
 
@@ -138,7 +145,7 @@ const app = useNuxtApp().vueApp.mixin({
     :logo-text="logoText"
     :operator-img-src="operatorImgSrc"
     :operator-img-style="operatorImgStyle"
-    :service-title="accueilContent.titreHeader"
+    :service-title="accueilContent?.titreHeader"
     :quick-links="profil"
   >
     <template #mainnav>

@@ -1,4 +1,4 @@
-import Thematique from "~/client/types/thematique/thematique";
+import type Thematique from "~/types/thematique/thematique";
 type QagStatus = 'responseAvailable' | 'selectedForResponse' | 'openForSupport'
 export default interface Qag{
   id: string,

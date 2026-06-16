@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { Ref } from "vue";
+import type { Ref } from "vue";
+import { ref, onMounted } from "vue";
 import { VIcon } from "@gouvminint/vue-dsfr";
 
-const {open} = defineProps<{
-  open: Ref<boolean>
+const { open } = defineProps<{
+  open: boolean
   onClick: () => void
 }>()
 const emit = defineEmits<{

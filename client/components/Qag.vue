@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { QagApiDTO } from "~/client/types/qag/qags";
+import type { QagApiDTO } from "~/types/qag/qags";
 import {VIcon} from "@gouvminint/vue-dsfr";
 
 const { qag } = defineProps<{ qag: QagApiDTO }>()

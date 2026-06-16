@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type Link from '~/client/types/dsfr/link';
+import type Link from '~/types/dsfr/link';
 import { DsfrTranscription } from "@gouvminint/vue-dsfr";
 
 definePageMeta({
@@ -11,15 +11,15 @@ const qagId = useRoute().params.id.toString()
 const qag = await (new QagApi()).getQag(qagId)
 
 useHead({
-  title: `${qag.value.title} - Agora`
+  title: qag.value ? `${qag.value.title} - Agora` : 'Agora'
 })
 
 const content = await (new PageContentApi()).getQuestionAuGouvernementContent()
 
-const sousTitreWithUsername = content.value.sousTitre.replace("{}", qag.value.username)
-const texteSoutienWithUsername = content.value.texteSoutien
+const sousTitreWithUsername = qag.value && content.value ? content.value.sousTitre.replace("{}", qag.value.username) : ''
+const texteSoutienWithUsername = qag.value && content.value ? content.value.texteSoutien
   .replace("{}", qag.value.supportCount)
-  .replace("{}", qag.value.username)
+  .replace("{}", qag.value.username) : ''
 
 const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Questions citoyennes'}]
 
