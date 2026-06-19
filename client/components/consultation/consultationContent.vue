@@ -1,19 +1,21 @@
 <script setup lang="ts">
-import type { ConsultationUpdateStatus } from '~/types/consultation/consultation';
+import type {ConsultationUpdateStatus} from '~/types/consultation/consultation';
 import type Consultation from "~/types/consultation/consultation";
 import svgBook from "@gouvfr/dsfr/dist/artwork/pictograms/leisure/book.svg";
+import {VIcon} from "@gouvminint/vue-dsfr";
+import type {DepartementsDto} from "~/types/departements/departementsDto";
 
 const props = defineProps<{
   consultation: Consultation,
 }>()
 
-const STATUT: Record<ConsultationUpdateStatus, string> = { done: "Terminée", current: "En cours", incoming: "À venir"}
+const STATUT: Record<ConsultationUpdateStatus, string> = {done: "Terminée", current: "En cours", incoming: "À venir"}
 const userHasAnsweredToConsultation = useRoute().query.answered
 
 const estAVenir = new Date() < new Date(props.consultation.consultationDates?.startDate || '')
 const estEnCours = new Date() < new Date(props.consultation.consultationDates?.endDate || '')
 
-const status = estAVenir? STATUT.incoming : estEnCours ? STATUT.current : STATUT.done
+const status = estAVenir ? STATUT.incoming : estEnCours ? STATUT.current : STATUT.done
 
 const runtimeConfig = useRuntimeConfig();
 const isResponseActivated = runtimeConfig.public.features.consultations
@@ -32,12 +34,19 @@ const respond = async () => {
 const navigateToQuestions = () => navigateTo({path: `/consultations/${props.consultation.id}/questions`})
 
 const app = useNuxtApp()
-const typeTerritoire =
-    app.$departements.value.regions.find(region => region.region === props.consultation.territory)
-        ? 'regional'
-        : app.$departements.value.regions.find(region => region.departements.find(departement => departement.label === props.consultation.territory))
-        ? 'departemental'
-        : 'national'
+
+const typeTerritoire = computed(() => {
+  const regions = (app.$departements as DepartementsDto)?.regions ?? []
+  const territory = props.consultation.territory
+
+  if (regions.some(region => region.region === territory)) return 'regional'
+
+  if (regions.some(region =>
+    region.departements?.some(departements => departements.label === territory)
+  )) return 'departemental'
+
+  return 'national'
+})
 </script>
 
 <template>
@@ -50,15 +59,15 @@ const typeTerritoire =
       <div id="right-column">
         <DsfrBadge :label=status no-icon/>
         <ul>
-          <li class="fr-tag fr-tag--no-icon">{{consultation.thematique.picto}} {{consultation.thematique.label}}</li>
+          <li class="fr-tag fr-tag--no-icon">{{ consultation.thematique.picto }} {{ consultation.thematique.label }}</li>
           <li :class="`fr-tag fr-tag--no-icon territoire-${typeTerritoire}`">{{ consultation.territory }}</li>
         </ul>
         <h1>{{ consultation.title }}</h1>
         <ConsultationEnUnClinDOeil v-if="consultation.goals" :goals="consultation.goals"/>
-        <ConsultationQuestionsInformations v-if="consultation.questionsInfo && estEnCours" class="info-question fr-py-1w" 
+        <ConsultationQuestionsInformations v-if="consultation.questionsInfo && estEnCours" class="info-question fr-py-1w"
                                            :questions-info="consultation.questionsInfo" :consultation-est-en-cours="estEnCours"/>
         <div v-if="consultation.responsesInfo" class="fr-callout" id="results">
-          <div v-html="consultation.responsesInfo.description" />
+          <div v-html="consultation.responsesInfo.description"/>
           <NuxtLink :to="`/consultations/${consultation.id}/results`" class="fr-btn">
             {{ consultation.responsesInfo.actionText }}
           </NuxtLink>
@@ -66,13 +75,13 @@ const typeTerritoire =
         <ConsultationSections :sections="consultation.body.headerSections"/>
         <ConsultationSections :sections="consultation.body.sections"/>
         <DsfrTile v-if="consultation.downloadAnalysisUrl" title="Télécharger la synthèse complète"
-          :to="consultation.downloadAnalysisUrl" :download="true" :img-src="svgBook" class="fr-mb-4w"
-          description="Pour aller plus loin, retrouvez l'analyse détaillée de l'ensemble des réponses à cette consultation."/>
+                  :to="consultation.downloadAnalysisUrl" :download="true" :img-src="svgBook" class="fr-mb-4w"
+                  description="Pour aller plus loin, retrouvez l'analyse détaillée de l'ensemble des réponses à cette consultation."/>
         <ConsultationShare
           v-if="consultation.isAnsweredByUser"
           :share-text="consultation.shareText"
           :share-title="consultation.title"/>
-        <ConsultationEncartFeedback :consultation="consultation" v-if="consultation.feedbackQuestion" />
+        <ConsultationEncartFeedback :consultation="consultation" v-if="consultation.feedbackQuestion"/>
         <DsfrButton type="button" v-if="estEnCours && isResponseActivated && !consultation.isAnsweredByUser"
                     class="fr-mb-4w fr-btn" @click="respond()">
           Répondre

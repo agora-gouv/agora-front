@@ -10,7 +10,7 @@ const jwtToken = ref()
 
 const app = useNuxtApp()
 if (!app.$departements) {
-  const departements = await new DepartementsApi().getDepartements();
+  const departements = new DepartementsApi().getDepartements();
   app.provide('departements', departements);
 }
 
