@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // NOTE (GAFI 12-05-2025): Besoin du model parce que les checkboxes VueDSFR ne gèrent pas bien le reset
-import type {FicheInventaireDTO} from "~/types/fiche_inventaire/ficheInventaire";
+import {FicheInventaireDTO} from "~/types/fiche_inventaire/ficheInventaire";
 const queries = useRoute().query
 
 function getArrayQueryParam(paramName: string) {

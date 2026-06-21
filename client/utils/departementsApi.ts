@@ -3,7 +3,7 @@ import type {DepartementsDto} from "~/types/departements/departementsDto";
 export class DepartementsApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;
 
-  async getDepartements(): DepartementsDto {
+  async getDepartements(): Promise<DepartementsDto> {
     const route = `${this.baseUrl}/referentiels/regions-et-departements`
 
     const {
@@ -15,6 +15,6 @@ export class DepartementsApi {
       throw createError({statusCode: error.value.statusCode})
     }
 
-    return departements
+    return departements.value
   }
 }

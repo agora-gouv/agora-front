@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type QueryParam from "~/types/fiche_inventaire/query";
 import {FicheInventaireDTO} from "~/types/fiche_inventaire/ficheInventaire";
+import {VIcon} from "@gouvminint/vue-dsfr";
 
 definePageMeta({
   layout: 'basic',
