@@ -20,22 +20,34 @@ onMounted(async () => {
   latest.value = (await (new QagApi().getLatest(jwtToken))).value?.qags.slice(0, 4) ?? []
   popular.value = (await (new QagApi().getPopular(jwtToken))).value?.qags.slice(0, 4) ?? []
 })
+
+const shareTitle = computed(() => {
+  const theme = themeHebdo.value
+  if (!theme) return ''
+  return "Questions au Gouvernement - " + themeHebdo.value.theme
+})
+const shareText = computed(() => {
+  const theme = themeHebdo.value
+  if (!theme) return ''
+  return themeHebdo.value.estThemeLibre ? "Cette semaine sur Agora, on peut poser nos questions à n'importe quel ministre.  J'ai pensé que ça pourrait t'intéresser !"
+    : "Cette semaine sur Agora, on peut poser nos questions à " + themeHebdo.value.nom + ", " + themeHebdo.value.fonction + " sur " + themeHebdo.value.theme + ". J'ai pensé que ça pourrait t'intéresser !"
+})
+
 </script>
 <template>
   <h1 class="fr-mt-4w">Posez vos questions au Gouvernement avec l’application mobile Agora</h1>
-  <p v-if="themeHebdo">
-    {{ themeHebdo.titre }} - {{ themeHebdo.periode }} 
-  </p>
-  <p v-if="themeHebdo">
-    Posez toutes vos questions sur {{ themeHebdo.theme }} à {{ themeHebdo.nom }}, {{ themeHebdo.fonction }}.
-  </p>
-  <p>
-    Vous pouvez <strong>poser vos questions</strong> et soutenir celles que vous trouvez les plus intéressantes en téléchargeant l'application (sur <a
-    href="https://apps.apple.com/app/6449599025">iOS</a> ou <a href="https://play.google.com/store/apps/details?id=fr.gouv.agora">Android</a>).
-  </p>
-  <p>
-    Voici les 4 dernières questions posées par des citoyens sur Agora.
-  </p>
+  <DsfrCallout v-if="themeHebdo" :title="`Thème de la semaine : ${themeHebdo.theme}`" class="fr-mb-4w">
+    <span v-if="themeHebdo.estThemeLibre">Posez vos questions sur n’importe quelle politique publique et votez pour celles que vous trouvez les plus intéressantes sur l’application mobile Agora.</span>
+    <span v-if="!themeHebdo.estThemeLibre">Posez vos questions à {{ themeHebdo.nom }}, {{ themeHebdo.fonction }} et votez pour celles que vous trouvez les plus intéressantes sur l’application mobile Agora.</span>
+    <div class="fr-btns-group fr-btns-group--inline-md">
+      <a href="https://apps.apple.com/app/6449599025" class="fr-btn">Télécharger l'application sur iOS</a>
+      <a href="https://play.google.com/store/apps/details?id=fr.gouv.agora" class="fr-btn">Télécharger l'application sur Android</a>
+    </div>
+  </DsfrCallout>
+  <ConsultationShare
+    :share-text="shareText"
+    :share-title="shareTitle"/>
+  <h2 class="fr-mt-6w">Découvrez les 4 dernières questions posées</h2>
   <div class="fr-mb-2w fr-mt-6w">
     <ol class="fr-mb-1w fr-raw-list">
       <li class="fr-my-4w" v-for="qag in latest" :key="qag.qagId">
@@ -51,33 +63,10 @@ onMounted(async () => {
       </li>
     </ol>
   </div>
-  <BandeauTelechargementAdaptatif title="Rendez-vous sur l'application mobile Agora pour participer." />
+  <BandeauTelechargementAdaptatif title="Rendez-vous sur l'application mobile Agora pour participer."/>
 </template>
+
 <style scoped>
-.fr-card__title {
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.5;
-  margin: 0;
-  color: #333;
-}
-
-.card_author {
-  color: var(--text-mention-grey);
-  font-size: 0.80rem;
-  line-height: 1.25rem;
-  margin-bottom: 0;
-  vertical-align: super;
-}
-
-.fr-card__portrait {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  margin-right: 1rem;
-  display: inline;
-}
-
 h2 {
   color: var(--blue-france-sun-113-625);
 }

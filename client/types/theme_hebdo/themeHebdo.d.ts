@@ -4,4 +4,5 @@ export default interface ThemeHebdo {
   theme: string,
   nom: string,
   fonction: string,
+  estThemeLibre: boolean,
 }
