@@ -1,3 +1,4 @@
+import { useRuntimeConfig } from "nuxt/app";
 import type ThemeHebdo from "~/types/theme_hebdo/themeHebdo";
 
 export class ThemeHebdoApi {

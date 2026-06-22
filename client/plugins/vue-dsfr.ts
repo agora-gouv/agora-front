@@ -6,6 +6,7 @@ import {
   DsfrBadge,
   DsfrBreadcrumb,
   DsfrButton,
+  DsfrCallout,
   DsfrCard,
   DsfrFieldset,
   DsfrFooter,
@@ -41,6 +42,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DsfrHeader', DsfrHeader);
   nuxtApp.vueApp.component('DsfrNavigation', DsfrNavigation);
   nuxtApp.vueApp.component('DsfrFooter', DsfrFooter);
+  nuxtApp.vueApp.component('DsfrCallout', DsfrCallout);
   nuxtApp.vueApp.component('DsfrCard', DsfrCard);
   nuxtApp.vueApp.component('DsfrTag', DsfrTag);
   nuxtApp.vueApp.component('DsfrBreadcrumb', DsfrBreadcrumb);
