@@ -40,8 +40,17 @@ const shareText = computed(() => {
     <span v-if="themeHebdo.estThemeLibre">Posez vos questions sur n’importe quelle politique publique et votez pour celles que vous trouvez les plus intéressantes sur l’application mobile Agora.</span>
     <span v-if="!themeHebdo.estThemeLibre">Posez vos questions à {{ themeHebdo.nom }}, {{ themeHebdo.fonction }} et votez pour celles que vous trouvez les plus intéressantes sur l’application mobile Agora.</span>
     <div class="fr-btns-group fr-btns-group--inline-md">
-      <a href="https://apps.apple.com/app/6449599025" class="fr-btn">Télécharger l'application sur iOS</a>
-      <a href="https://play.google.com/store/apps/details?id=fr.gouv.agora" class="fr-btn">Télécharger l'application sur Android</a>
+      <a href="https://apps.apple.com/app/6449599025"
+         target="_blank" rel="noopener noreferrer"
+         class="fr-btn">
+        Télécharger l'application sur iOS
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=fr.gouv.agora"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="fr-btn">
+        Télécharger l'application sur Android
+      </a>
     </div>
   </DsfrCallout>
   <ConsultationShare
