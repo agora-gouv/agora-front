@@ -73,11 +73,11 @@ const menu = [
     links: [
       {
         to: '/qags',
-        text: 'Les questions au gouvernement'
+        text: 'Questions citoyennes du moment'
       },
       {
         to: '/qags/reponses',
-        text: 'Toutes les réponses aux questions'
+        text: 'Réponses du Gouvernement'
       }
     ]
   },
