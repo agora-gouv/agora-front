@@ -10,7 +10,8 @@ const qags = (await (new QagApi().getQags(1))).value.responses
 </script>
 
 <template>
-  <div class="fr-mb-2w fr-mt-6w">
+  <h1 class="fr-mt-4w">Réponses du Gouvernement aux questions citoyennes</h1>
+  <div class="fr-mb-2w fr-mt-2w">
     <div class="fr-col-md fr-my-1w" v-for="qag in qags" :key="qag.qagId">
       <div class="fr-card fr-mx-1w fr-mb-10v">
         <div class="fr-card__body">
@@ -23,12 +24,12 @@ const qags = (await (new QagApi().getQags(1))).value.responses
               </div>
               <div class="fr-col-9 qag-answer">
                 <div class="card_author">
-                  Réponse de {{ qag.author }}, le
+                  Réponse de {{ qag.author }}, {{ qag.authorFunction }} le
                   <Date :date="qag.responseDate"/>
                 </div>
                 <div>{{ qag.responseTexte }}</div>
                 <h3 class="fr-card__title">
-                  <NuxtLink :to="`/qags/${qag.qagId}`">Voir la réponse complète du ministre</NuxtLink>
+                  <NuxtLink :to="`/qags/${qag.qagId}`">Voir la réponse complète</NuxtLink>
                 </h3>
               </div>
             </div>

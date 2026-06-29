@@ -8,6 +8,7 @@ interface QagWithResponseApiDTO {
   title: string;
   author: string;
   authorPortraitUrl: string;
+  authorFunction: string;
   responseDate: string;
   responseTexte: string;
   username: string;
