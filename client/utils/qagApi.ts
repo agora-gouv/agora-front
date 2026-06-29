@@ -19,7 +19,7 @@ export class QagApi {
   }
 
   async getQags(page: number) {
-    const routeQagUrl = `${this.baseUrl}/qags/responses/${page}?minDate=2025-06-14`
+    const routeQagUrl = `${this.baseUrl}/qags/responses/${page}?minDate=2026-06-14`
     const {
       data: qags,
       error: qagError
