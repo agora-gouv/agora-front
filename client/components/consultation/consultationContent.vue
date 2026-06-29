@@ -2,7 +2,6 @@
 import type {ConsultationUpdateStatus} from '~/types/consultation/consultation';
 import type Consultation from "~/types/consultation/consultation";
 import svgBook from "@gouvfr/dsfr/dist/artwork/pictograms/leisure/book.svg";
-import {VIcon} from "@gouvminint/vue-dsfr";
 import type {DepartementsDto} from "~/types/departements/departementsDto";
 
 const props = defineProps<{
