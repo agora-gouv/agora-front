@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "fr.gouv.agora",
+      "sha256_cert_fingerprints": [
+        "3B:F2:F4:9E:98:B2:A6:6B:C4:9E:4B:9D:69:74:A0:B8:4F:E1:17:68:82:72:91:BA:58:4C:04:78:46:B1:43:58"
+      ]
+    }
+  }
+]
