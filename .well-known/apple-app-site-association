@@ -1,0 +1,19 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "PR958DC548.com.monentreprise.monapp"
+        ],
+        "components": [
+          {
+            "/": "/qags/*"
+          },
+          {
+            "/": "/consultations/*"
+          }
+        ]
+      }
+    ]
+  }
+}
