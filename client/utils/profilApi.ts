@@ -14,21 +14,21 @@ export type ProfilInfoDto = {
 export class ProfilApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;
 
-  async getProfil(token: string) {
+  async getProfil(token: string): Promise<ProfilInfoDto | null> {
     const route = `${this.baseUrl}/profile`;
 
-    const result = await useFetch<ProfilInfoDto, FetchError>(route, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const { data: profil, error } = result;
-
-    if (error.value) {
-      throw createError({ statusCode: error.value.statusCode });
+    try {
+      return await $fetch<ProfilInfoDto>(route, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      if (error instanceof FetchError) {
+        throw createError({ statusCode: error.statusCode });
+      }
+      throw error;
     }
-
-    return result;
   }
 
   async editProfil(data: ProfilInfoDto, token: string) {

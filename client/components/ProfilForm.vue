@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ProfilInfoDto } from "~/utils/profilApi";
+import type { ProfilInfoDto } from "~/utils/profilApi";
+import type { DepartementsDto } from "~/types/departements/departementsDto";
 
 const categorieSocioProModalOpen = useState<boolean>(() => false);
 const profilVoteurModalOpen = useState<boolean>(() => false);
 
-const { id = useId() } = defineProps<{
+const { id = useId(), departements: departementsData } = defineProps<{
   id?: string
+  departements: DepartementsDto
 }>()
 const profil = defineModel<ProfilInfoDto>()
 
@@ -13,21 +15,13 @@ function convertLetters(code: string) {
   return code.replace(/([A-Za-z])/, (match, letter) => `0${letter}`)
 }
 
-const departements = useNuxtApp().$departements
-  .value
-  .regions
-  .flatMap(region => region.departements)
-  .sort((departement1, departement2) => convertLetters(departement1.codePostal)
-    .localeCompare(convertLetters(departement2.codePostal), undefined, { numeric: true }))
-  .map(departement => ({
-    value: departement.codePostal,
-    text: `${departement.codePostal} – ${departement.label}`
-  }))
-const departementsOptions = [
-  { value: '', text: 'Non renseigné'},
-  ...departements,
-  { value: '99', text: '99 – Étranger' }
-]
+const departementsOptions = computed(() => {
+  const list = departementsData?.regions
+    ?.flatMap((region) => region.departements)
+    ?.sort((d1, d2) => convertLetters(d1.codePostal).localeCompare(convertLetters(d2.codePostal), undefined, { numeric: true }))
+    ?.map((d) => ({ value: d.codePostal, text: `${d.codePostal} – ${d.label}` })) ?? []
+  return [{ value: '', text: 'Non renseigné' }, ...list, { value: '99', text: '99 – Étranger' }]
+})
 
 const genres = [
   {text: "Non renseigné", value: ''},
@@ -97,15 +91,15 @@ const maxYear = new Date().getFullYear()
         labelVisible
         label="Dans quel département ou collectivité d'outre-mer vivez-vous ?"
         :options="departementsOptions"
-        :model-value="profil?.departement"
-        @change="(event) => profil.departement = event.currentTarget.value"
+        :model-value="profil?.department"
+        @change="(event) => profil.department = event.currentTarget.value"
         selectId="select-departement"
       >
       </DsfrSelect>
       <DsfrCheckbox
         label="J'habite à l'étranger"
-        @change="(event) => event.currentTarget.checked ? profil.departement = '99' : profil.departement = ''"
-        :modelValue="profil?.departement === '99'"
+        @change="(event) => event.currentTarget.checked ? profil.department = '99' : profil.department = ''"
+        :modelValue="profil?.department === '99'"
       ></DsfrCheckbox>
     </div>
 

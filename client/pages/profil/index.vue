@@ -5,12 +5,6 @@ definePageMeta({
 useHead({
   title: 'Mon profil - Agora'
 })
-
-const app = useNuxtApp()
-if (!app.$departements) {
-  const departements = await new DepartementsApi().getDepartements();
-  app.provide('departements', departements);
-}
 </script>
 
 <template>

@@ -1,20 +1,19 @@
-import type {DepartementsDto} from "~/types/departements/departementsDto";
+import { FetchError } from "ofetch";
+import type { DepartementsDto } from "~/types/departements/departementsDto";
 
 export class DepartementsApi {
   private baseUrl = useRuntimeConfig().public.apiBaseUrl;
 
   async getDepartements(): Promise<DepartementsDto> {
-    const route = `${this.baseUrl}/referentiels/regions-et-departements`
+    const route = `${this.baseUrl}/referentiels/regions-et-departements`;
 
-    const {
-      data: departements,
-      error
-    } = await useFetch<DepartementsDto>(route)
-
-    if (error.value) {
-      throw createError({statusCode: error.value.statusCode})
+    try {
+      return await $fetch<DepartementsDto>(route);
+    } catch (error) {
+      if (error instanceof FetchError) {
+        throw createError({ statusCode: error.statusCode });
+      }
+      throw error;
     }
-
-    return departements.value
   }
 }
