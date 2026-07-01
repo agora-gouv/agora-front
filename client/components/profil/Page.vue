@@ -1,6 +1,14 @@
 <script setup lang="ts">
+import type { ProfilInfoDto } from "~/utils/profilApi";
+import type { DepartementsDto } from "~/types/departements/departementsDto";
+
 const {jwtToken} = await useAuthentication()
-const { data: profil, refresh } = await new ProfilApi().getProfil(jwtToken);
+const profil = ref<ProfilInfoDto | null>(await new ProfilApi().getProfil(jwtToken));
+const departements = ref<DepartementsDto>(await new DepartementsApi().getDepartements());
+
+async function refreshProfil() {
+  profil.value = await new ProfilApi().getProfil(jwtToken);
+}
 
 const status = useState<'pending' | 'success' | 'error'>(() => 'pending')
 
@@ -28,7 +36,7 @@ async function clearData(event) {
   status.value = "pending"
   try {
     await new ProfilApi().resetProfil(jwtToken)
-    await refresh();
+    await refreshProfil();
     status.value = "success"
   } catch (error) {
     status.value = "error"
@@ -62,7 +70,7 @@ const isUrlOrigin = redirectUrl?.origin === document.location.origin
     </p>
     <DsfrButton label="Réessayer" type="submit" form="profil-form"/>
   </DsfrAlert>
-  <ProfilForm class="fr-pb-4w" id="profil-form" @submit="submit" :modelValue="profil"/>
+  <ProfilForm class="fr-pb-4w" id="profil-form" @submit="submit" :modelValue="profil" :departements="departements"/>
   <p>Ces informations nous permettent d'analyser plus finement les résultats des consultations à des fins statistiques et de manière anonyme.</p>
   <p>Conformément au RGPD, vous avez la possibilité de consulter, modifier ou supprimer l'ensemble des informations vous concernant.</p>
   <p><a href="/politique-confidentialite">Lire la politique de confidentialité</a></p>
