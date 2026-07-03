@@ -21,7 +21,7 @@ const texteSoutienWithUsername = qag.value && content.value ? content.value.text
   .replace("{}", qag.value.supportCount)
   .replace("{}", qag.value.username) : ''
 
-const links: Link[] = [{to: '/', text: 'Accueil'}, {to: '/qags/reponses/', text: 'Réponses du gouvernement'}, {text: 'Question citoyenne'}]
+const links: Link[] = [{to: '/', text: 'Accueil'}, {to: '/qags/reponses/', text: 'Questions au Gouvernement'}, {text: 'Question citoyenne'}]
 
 const shareTitle = computed(() => {
   return "Je pense que la réponse du gouvernement peut t'intéresser"
@@ -46,17 +46,15 @@ const shareText = computed(() => {
     <DsfrBadge v-if="qag.status=='selectedForResponse'" type="info" label="Réponse à venir"/>
     <DsfrBadge v-else-if="qag.status=='responseAvailable'" type="success" label="Réponse reçue"/>
     <DsfrBadge v-else-if="qag.status=='openForSupport'" type="new" label="À soutenir"/>
-    <h2 class="fr-mt-4w question-text">{{ qag.title }}</h2>
+    <h3 class="fr-mt-4w question-text">{{ qag.title }}</h3>
     <div class="fr-mt-6w">
       <p>{{ qag.description }}</p>
     </div>
   </div>
 
-  <h1 class="fr-mt-4w" v-if="qag.response">Réponse du Gouvernement</h1>
-
-  <div class="video-response fr-mt-2w" v-if="qag.response">
-    <p class="fr-text--lead" v-if="qag.response.videoTitle">{{ qag.response.videoTitle }}</p>
-    <p class="fr-text--lead" v-else>Réponse du Gouvernement</p>
+  <div class="video-response fr-mt-4w" v-if="qag.response">
+    <h1 v-if="qag.response.videoTitle">{{ qag.response.videoTitle }}</h1>
+    <h1 v-else>Réponse du Gouvernement</h1>
 
     <div class="fr-px-1w">
       Par <b>{{ qag.response.author }}</b>, le
@@ -65,18 +63,18 @@ const shareText = computed(() => {
 
       <div>
         <Video :url=qag.response.videoUrl />
-          <DsfrTranscription class="fr-my-1" :content="qag.response.transcription"/>
+        <DsfrTranscription class="fr-my-1" :content="qag.response.transcription"/>
       </div>
 
-      <div v-if="qag.response.additionalInfo" class="additionnal-info">
-        <span class="fr-text--lead fr-mb-4w">{{ qag.response.additionalInfo.title }}</span>
+      <div v-if="qag.response.additionalInfo" class="additionnal-info fr-my-4w">
+        <span class="fr-text--lead">{{ qag.response.additionalInfo.title }}</span>
         <div class="fr-mt-2w" v-html="qag.response.additionalInfo.description"></div>
       </div>
     </div>
   </div>
 
-  <div class="text-response fr-mt-2w" v-if="qag.textResponse">
-    <p class="fr-text--lead">{{ qag.textResponse.responseLabel }}</p>
+  <div class="text-response fr-mt-4w" v-if="qag.textResponse">
+    <h1>{{ qag.textResponse.responseLabel }}</h1>
     <div class="fr-px-1w" v-html="qag.textResponse.responseText"></div>
   </div>
   <ConsultationShare

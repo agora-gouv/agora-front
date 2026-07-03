@@ -15,7 +15,7 @@ const themeHebdo = useState<ThemeHebdo>();
 const latest = useState<QagsApiDTO["qags"]>((): QagsApiDTO["qags"] => []);
 const popular = useState<QagsApiDTO["qags"]>((): QagsApiDTO["qags"] => []);
 
-const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Questions citoyennes du moment'}]
+const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Questions au Gouvernement'}]
 
 onMounted(async () => {
   const {jwtToken} = await useAuthentication()
