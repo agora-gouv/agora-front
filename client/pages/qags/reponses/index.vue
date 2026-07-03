@@ -10,7 +10,7 @@ useHead({
 
 const qags = (await (new QagApi().getQags(1))).value.responses
 
-const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Réponses du gouvernement'}]
+const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Questions au Gouvernement'}]
 </script>
 
 <template>
