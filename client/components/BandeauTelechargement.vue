@@ -19,7 +19,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bandeau fr-grid-row fr-pt-6w fr-pb-2w break-container">
+  <div class="bandeau-adaptatif fr-grid-row fr-pt-6w fr-pb-2w break-container">
     <div class="fr-col-12 fr-col-md-8">
       <slot/>
       <div class="fr-mt-1w fr-grid-row fr-grid-row--middle fr-grid-row--gutters fr-px-md-6w">
@@ -61,7 +61,7 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-.bandeau {
+.bandeau-adaptatif {
   background-color: var(--blue-france-975-75);
   color: var(--blue-france-sun-113-625);
 }

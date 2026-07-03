@@ -21,7 +21,7 @@ const texteSoutienWithUsername = qag.value && content.value ? content.value.text
   .replace("{}", qag.value.supportCount)
   .replace("{}", qag.value.username) : ''
 
-const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Question citoyenne'}]
+const links: Link[] = [{to: '/', text: 'Accueil'}, {to: '/qags/reponses/', text: 'Réponses du gouvernement'}, {text: 'Question citoyenne'}]
 
 const shareTitle = computed(() => {
   return "Je pense que la réponse du gouvernement peut t'intéresser"

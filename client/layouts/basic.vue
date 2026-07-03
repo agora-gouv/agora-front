@@ -171,7 +171,7 @@ const app = useNuxtApp().vueApp.mixin({
 .footer {
   margin-top: 64px;
 }
-main:has(.bandeau) + .footer {
+main:has(.bandeau-adaptatif) + .footer {
   margin-top: 0;
 }
 </style>
