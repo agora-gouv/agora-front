@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type Link from "~/types/dsfr/link";
+
 definePageMeta({
   layout: 'basic',
 })
@@ -7,6 +9,8 @@ useHead({
 })
 
 const qags = (await (new QagApi().getQags(1))).value.responses
+
+const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Réponses du gouvernement'}]
 </script>
 
 <template>
@@ -38,6 +42,7 @@ const qags = (await (new QagApi().getQags(1))).value.responses
       </div>
     </div>
   </div>
+  <DsfrBreadcrumb :links="links"/>
 </template>
 
 <style scoped>

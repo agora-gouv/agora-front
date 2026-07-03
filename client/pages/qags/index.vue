@@ -2,6 +2,7 @@
 
 import type ThemeHebdo from "~/types/theme_hebdo/themeHebdo";
 import type {QagsApiDTO} from "~/types/qag/qags";
+import type Link from "~/types/dsfr/link";
 
 definePageMeta({
   layout: 'basic',
@@ -13,6 +14,8 @@ useHead({
 const themeHebdo = useState<ThemeHebdo>();
 const latest = useState<QagsApiDTO["qags"]>((): QagsApiDTO["qags"] => []);
 const popular = useState<QagsApiDTO["qags"]>((): QagsApiDTO["qags"] => []);
+
+const links: Link[] = [{to: '/', text: 'Accueil'}, {text: 'Questions citoyennes du moment'}]
 
 onMounted(async () => {
   const {jwtToken} = await useAuthentication()
@@ -29,8 +32,8 @@ const shareTitle = computed(() => {
 const shareText = computed(() => {
   const theme = themeHebdo.value
   if (!theme) return ''
-  return themeHebdo.value.estThemeLibre ? "Cette semaine sur Agora, on peut poser nos questions à n'importe quel ministre.  J'ai pensé que ça pourrait t'intéresser !"
-    : "Cette semaine sur Agora, on peut poser nos questions à " + themeHebdo.value.nom + ", " + themeHebdo.value.fonction + " sur " + themeHebdo.value.theme + ". J'ai pensé que ça pourrait t'intéresser !"
+  return themeHebdo.value.estThemeLibre ? "Cette semaine sur Agora, on peut poser nos questions à n'importe quel ministre.  J'ai pensé que ça pourrait t'intéresser ! \nhttps://www.agora.gouv.fr/qags/"
+    : "Cette semaine sur Agora, on peut poser nos questions à " + themeHebdo.value.nom + ", " + themeHebdo.value.fonction + " sur " + themeHebdo.value.theme + ". J'ai pensé que ça pourrait t'intéresser ! \nhttps://www.agora.gouv.fr/qags/"
 })
 
 </script>
@@ -72,6 +75,7 @@ const shareText = computed(() => {
       </li>
     </ol>
   </div>
+  <DsfrBreadcrumb :links="links"/>
   <BandeauTelechargementAdaptatif title="Rendez-vous sur l'application mobile Agora pour participer."/>
 </template>
 
