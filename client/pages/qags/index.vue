@@ -29,8 +29,8 @@ const shareTitle = computed(() => {
 const shareText = computed(() => {
   const theme = themeHebdo.value
   if (!theme) return ''
-  return themeHebdo.value.estThemeLibre ? "Cette semaine sur Agora, on peut poser nos questions à n'importe quel ministre.  J'ai pensé que ça pourrait t'intéresser !"
-    : "Cette semaine sur Agora, on peut poser nos questions à " + themeHebdo.value.nom + ", " + themeHebdo.value.fonction + " sur " + themeHebdo.value.theme + ". J'ai pensé que ça pourrait t'intéresser !"
+  return themeHebdo.value.estThemeLibre ? "Cette semaine sur Agora, on peut poser nos questions à n'importe quel ministre.  J'ai pensé que ça pourrait t'intéresser ! \nhttps://www.agora.gouv.fr/qags/"
+    : "Cette semaine sur Agora, on peut poser nos questions à " + themeHebdo.value.nom + ", " + themeHebdo.value.fonction + " sur " + themeHebdo.value.theme + ". J'ai pensé que ça pourrait t'intéresser ! \nhttps://www.agora.gouv.fr/qags/"
 })
 
 </script>

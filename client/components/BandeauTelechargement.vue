@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type {Ref} from "vue";
 
-const platformRef : Ref<string| null> = ref('desktop')
+const platformRef: Ref<string | null> = ref('desktop')
 const isMobileRef = ref(false)
 
-onMounted(()=>{
+onMounted(() => {
   const userAgent = navigator.userAgent
   if (/android/i.test(userAgent)) {
     platformRef.value = 'android'
@@ -19,37 +19,35 @@ onMounted(()=>{
 </script>
 
 <template>
-  <div class="fr-grid-row fr-grid-row--middle fr-grid-row--center fr-grid-row--gutters">
+  <div class="bandeau fr-grid-row fr-pt-6w fr-pb-2w break-container">
     <div class="fr-col-12 fr-col-md-8">
-      <div class="text-grey fr-highlight fr-highlight--orange-terre-battue">
-        <slot/>
-        <div class="fr-mt-1w fr-grid-row fr-grid-row--middle fr-grid-row--gutters fr-px-md-6w">
-          <div v-if="!isMobileRef || platformRef == 'iOS'" class="fr-col-12 fr-col-lg-6">
-            <a class="fr-btn fr-btn--secondary" href="https://apps.apple.com/app/6449599025" target="_blank"
-               rel="noopener" title="Téléchargez sur l’AppStore - nouvelle fenêtre">
-              <VIcon icon="agora:apple" :ssr="true" class="fr-mr-1w" />
-              Téléchargez sur l’AppStore
-            </a>
-            <div v-if="platformRef=='desktop'" class="qr-code fr-my-2w">
-              <img
-                alt="QR code Agora AppStore"
-                src="/qrCodes/qr-code-ios-fond-blanc.webp"
-              />
-            </div>
+      <slot/>
+      <div class="fr-mt-1w fr-grid-row fr-grid-row--middle fr-grid-row--gutters fr-px-md-6w">
+        <div v-if="!isMobileRef || platformRef == 'iOS'" class="fr-col-12 fr-col-lg-6">
+          <a class="fr-btn fr-btn--secondary" href="https://apps.apple.com/app/6449599025" target="_blank"
+             rel="noopener" title="Téléchargez sur l’AppStore - nouvelle fenêtre">
+            <VIcon icon="agora:apple" :ssr="true" class="fr-mr-1w"/>
+            Téléchargez sur l’AppStore
+          </a>
+          <div v-if="platformRef=='desktop'" class="qr-code fr-my-2w">
+            <img
+              alt="QR code Agora AppStore"
+              src="/qrCodes/qr-code-ios.webp"
+            />
           </div>
+        </div>
 
-          <div v-if="!isMobileRef || platformRef == 'android'" class="fr-col-12 fr-col-lg-6">
-            <a class="fr-btn fr-btn--secondary" href="https://play.google.com/store/apps/details?id=fr.gouv.agora"
-               target="_blank" rel="noopener" title="Téléchargez sur GooglePlay - nouvelle fenêtre">
-              <VIcon icon="agora:google" :ssr="true" class="fr-mr-1w" />
-              Téléchargez sur GooglePlay
-            </a>
-            <div v-if="platformRef=='desktop'" class="qr-code fr-my-2w">
-              <img
-                alt="QR code Agora Google Play"
-                src="/qrCodes/qr-code-android-fond-blanc.webp"
-              />
-            </div>
+        <div v-if="!isMobileRef || platformRef == 'android'" class="fr-col-12 fr-col-lg-6">
+          <a class="fr-btn fr-btn--secondary" href="https://play.google.com/store/apps/details?id=fr.gouv.agora"
+             target="_blank" rel="noopener" title="Téléchargez sur GooglePlay - nouvelle fenêtre">
+            <VIcon icon="agora:google" :ssr="true" class="fr-mr-1w"/>
+            Téléchargez sur GooglePlay
+          </a>
+          <div v-if="platformRef=='desktop'" class="qr-code fr-my-2w">
+            <img
+              alt="QR code Agora Google Play"
+              src="/qrCodes/qr-code-android.webp"
+            />
           </div>
         </div>
       </div>
@@ -62,12 +60,17 @@ onMounted(()=>{
   </div>
 </template>
 
-<style>
-.qr-code{
+<style scoped lang="scss">
+.bandeau {
+  background-color: var(--blue-france-975-75);
+  color: var(--blue-france-sun-113-625);
+}
+
+.qr-code {
   display: flex;
   justify-content: center;
-  
-  > img{
+
+  > img {
     max-width: 150px;
   }
 }
