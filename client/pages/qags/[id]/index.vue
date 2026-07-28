@@ -78,6 +78,7 @@ const shareText = computed(() => {
     <div class="fr-px-1w" v-html="qag.textResponse.responseText"></div>
   </div>
   <ConsultationShare
+    class="fr-mt-4w"
     v-if="qag.response || qag.textResponse"
     :share-text="shareText"
     :share-title="shareTitle"/>
