@@ -5,6 +5,12 @@ server {
     location /.well-known/acme-challenge/ {
         proxy_pass <%= ENV['ACME_CHALLENGE_TARGET_URL'] %>;
         proxy_redirect off;
+        proxy_intercept_errors on;
+        error_page 404 = @empty_404;
+    }
+
+    location @empty_404 {
+        return 404;
     }
 
     location / {
