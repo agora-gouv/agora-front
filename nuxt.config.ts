@@ -92,6 +92,15 @@ export default defineNuxtConfig({
     url: `https://${process.env.DOMAIN_NAME}`,
   },
 
+  nitro: {
+    handlers: [
+      {
+        route: "/.well-known/acme-challenge/:token",
+        handler: "./server/handlers/acme-challenge",
+      },
+    ],
+  },
+
   compatibilityDate: "2024-08-01",
 
   routeRules: {
