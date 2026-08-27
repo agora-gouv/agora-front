@@ -2,17 +2,6 @@ server {
     server_name <%= ENV['DOMAIN_NAME'] %>;
     listen <%= ENV['PORT'] %>;
 
-    location /.well-known/acme-challenge/ {
-        proxy_pass <%= ENV['ACME_CHALLENGE_TARGET_URL'] %>;
-        proxy_redirect off;
-        proxy_intercept_errors on;
-        error_page 404 = @empty_404;
-    }
-
-    location @empty_404 {
-        return 404;
-    }
-
     location / {
         proxy_set_header  X-Remote-Address $remote_addr;
         proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
