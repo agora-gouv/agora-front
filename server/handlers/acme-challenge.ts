@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 500, statusMessage: "API_BASE_URL not configured" });
   }
 
-  const targetUrl = `${backendUrl}/acme_challenge/${token}`;
+  const targetUrl = `${backendUrl}/.well-known/acme-challenge/${token}`;
 
   try {
     const response = await $fetch.raw(targetUrl, { ignoreResponseError: true });
