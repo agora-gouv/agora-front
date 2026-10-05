@@ -19,6 +19,9 @@ const status = estAVenir ? STATUT.incoming : estEnCours ? STATUT.current : STATU
 const runtimeConfig = useRuntimeConfig();
 const isResponseActivated = runtimeConfig.public.features.consultations
 
+const consultationsSansObjectif = (runtimeConfig.public.consultationsSansObjectif as string || '').split(',').filter(Boolean)
+const showObjectif = !consultationsSansObjectif.includes(props.consultation.id)
+
 const openResponseModal = ref(false)
 const respond = async () => {
   const isMobileDevice = /android|iPad|iPhone|iPod/i.test(navigator.userAgent)
@@ -64,7 +67,8 @@ const typeTerritoire = computed(() => {
         <h1>{{ consultation.title }}</h1>
         <ConsultationEnUnClinDOeil v-if="consultation.goals" :goals="consultation.goals"/>
         <ConsultationQuestionsInformations v-if="consultation.questionsInfo && estEnCours" class="info-question fr-py-1w"
-                                           :questions-info="consultation.questionsInfo" :consultation-est-en-cours="estEnCours"/>
+                                           :questions-info="consultation.questionsInfo" :consultation-est-en-cours="estEnCours"
+                                           :show-objectif="showObjectif"/>
         <div v-if="consultation.responsesInfo" class="fr-callout" id="results">
           <div v-html="consultation.responsesInfo.description"/>
           <NuxtLink :to="`/consultations/${consultation.id}/results`" class="fr-btn">

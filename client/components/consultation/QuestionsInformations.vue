@@ -4,7 +4,8 @@ import {VIcon} from "@gouvminint/vue-dsfr";
 
 defineProps<{
   questionsInfo: ConsultationQuestionInfo,
-  consultationEstEnCours: boolean
+  consultationEstEnCours: boolean,
+  showObjectif?: boolean,
 }>()
 </script>
 
@@ -28,7 +29,7 @@ defineProps<{
       <span class="fr-pl-1v" v-if="questionsInfo.participantCount == 0">Aucun participant</span>
       <span class="fr-pl-1v" v-else-if="questionsInfo.participantCount == 1">1 participant</span>
       <span class="fr-pl-1v" v-else>{{ questionsInfo.participantCount }} participants</span>
-      <div class="fr-mt-1w fr-ml-3w">
+      <div v-if="showObjectif !== false" class="fr-mt-1w fr-ml-3w">
         <meter id="objectif" min="0" :max="questionsInfo.participantCountGoal"
                :value="questionsInfo.participantCount">
           {{ questionsInfo.participantCount }} sur un objectif de {{ questionsInfo.participantCountGoal }}
