@@ -64,6 +64,7 @@ export default defineNuxtConfig({
       domainName: process.env.DOMAIN_NAME,
       apiBaseUrl: process.env.API_BASE_URL,
       openQuestionMaxLength: parseInt(process.env.OPEN_QUESTION_MAX_LENGTH ?? "400"),
+      consultationsSansObjectif: process.env.CONSULTATIONS_SANS_OBJECTIF ?? "",
       features: {
         qags: process.env.QAGS_FEATURE === "1",
         consultations: process.env.CONSULTATIONS_FEATURE === "1",
