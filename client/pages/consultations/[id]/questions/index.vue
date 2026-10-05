@@ -122,8 +122,7 @@ const activeAccordion = ref<number>()
       <div v-if="currentQuestion instanceof QuestionOpened">
         <div class="fr-input-group">
           <label class="fr-label" for="textarea">
-            Vous avez jusqu'à {{ openQuestionMaxLength }} caractères. Attention à n'indiquer ni données personnelles qui pourraient vous identifier, ni de lien vers
-            un site internet.
+            Vous avez jusqu'à {{ openQuestionMaxLength }} caractères. Attention : ne donnez aucun nom ni détail permettant de reconnaître quelqu'un, que ce soit vous ou une autre personne. Les liens vers des sites internet sont interdits.
           </label>
           <textarea class="fr-input" id="textarea" :maxlength="openQuestionMaxLength"
                     v-model="answersText[currentQuestion.id]"></textarea>
