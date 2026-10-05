@@ -34,6 +34,9 @@ const isQuestionAnswered = computed(() => {
   return currentQuestion.value != null && answersCheckbox.value[currentQuestion.value.id] > 0
 })
 
+const config = useRuntimeConfig()
+const openQuestionMaxLength = config.public.openQuestionMaxLength as number
+
 const activeAccordion = ref<number>()
 </script>
 
@@ -119,10 +122,10 @@ const activeAccordion = ref<number>()
       <div v-if="currentQuestion instanceof QuestionOpened">
         <div class="fr-input-group">
           <label class="fr-label" for="textarea">
-            Vous avez jusqu’à 400 caractères. Attention à n’indiquer ni données personnelles qui pourraient vous identifier, ni de lien vers
+            Vous avez jusqu'à {{ openQuestionMaxLength }} caractères. Attention à n'indiquer ni données personnelles qui pourraient vous identifier, ni de lien vers
             un site internet.
           </label>
-          <textarea class="fr-input" id="textarea" maxlength="400"
+          <textarea class="fr-input" id="textarea" :maxlength="openQuestionMaxLength"
                     v-model="answersText[currentQuestion.id]"></textarea>
         </div>
         <ConsultationQuestionButtons
