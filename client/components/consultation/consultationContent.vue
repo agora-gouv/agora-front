@@ -71,9 +71,9 @@ const typeTerritoire = computed(() => {
                                            :show-objectif="showObjectif"/>
         <div v-if="consultation.responsesInfo" class="fr-callout" id="results">
           <div v-html="consultation.responsesInfo.description"/>
-          <NuxtLink :to="`/consultations/${consultation.id}/results`" class="fr-btn">
+          <!-- <NuxtLink :to="`/consultations/${consultation.id}/results`" class="fr-btn">
             {{ consultation.responsesInfo.actionText }}
-          </NuxtLink>
+          </NuxtLink> -->
         </div>
         <ConsultationSections :sections="consultation.body.headerSections"/>
         <ConsultationSections :sections="consultation.body.sections"/>
