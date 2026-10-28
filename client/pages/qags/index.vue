@@ -41,6 +41,7 @@ const shareText = computed(() => {
   <h1 class="fr-mt-4w">Posez vos questions au Gouvernement avec l’application mobile Agora</h1>
   <DsfrCallout title="RÉSERVE PRÉ-ÉLECTORALE" class="fr-mb-4w">
     <p>A partir du 1er octobre 2026 s'ouvre pour 6 mois la période préélectorale en vue de l'élection présidentielle durant laquelle le Gouvernement est tenu de respecter les dispositions de l'article 52-1 du code électoral.</p>
+    <br>
     <p>Par conséquent, les questions sont suspendues jusqu'à cette échéance.</p>
   </DsfrCallout>
   <ConsultationShare
