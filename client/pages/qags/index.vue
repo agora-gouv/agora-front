@@ -39,22 +39,9 @@ const shareText = computed(() => {
 </script>
 <template>
   <h1 class="fr-mt-4w">Posez vos questions au Gouvernement avec l’application mobile Agora</h1>
-  <DsfrCallout v-if="themeHebdo" :title="`Thème de la semaine : ${themeHebdo.theme}`" class="fr-mb-4w">
-    <span v-if="themeHebdo.estThemeLibre">Posez vos questions sur n’importe quelle politique publique et votez pour celles que vous trouvez les plus intéressantes sur l’application mobile Agora.</span>
-    <span v-if="!themeHebdo.estThemeLibre">Posez vos questions à {{ themeHebdo.nom }}, {{ themeHebdo.fonction }} et votez pour celles que vous trouvez les plus intéressantes sur l’application mobile Agora.</span>
-    <div class="fr-btns-group fr-btns-group--inline-md">
-      <a href="https://apps.apple.com/app/6449599025"
-         target="_blank" rel="noopener noreferrer"
-         class="fr-btn">
-        Télécharger l'application sur iOS
-      </a>
-      <a href="https://play.google.com/store/apps/details?id=fr.gouv.agora"
-         target="_blank"
-         rel="noopener noreferrer"
-         class="fr-btn">
-        Télécharger l'application sur Android
-      </a>
-    </div>
+  <DsfrCallout title="RÉSERVE PRÉ-ÉLECTORALE" class="fr-mb-4w">
+    <p>A partir du 1er octobre 2026 s'ouvre pour 6 mois la période préélectorale en vue de l'élection présidentielle durant laquelle le Gouvernement est tenu de respecter les dispositions de l'article 52-1 du code électoral.</p>
+    <p>Par conséquent, les questions sont suspendues jusqu'à cette échéance.</p>
   </DsfrCallout>
   <ConsultationShare
     :share-text="shareText"
