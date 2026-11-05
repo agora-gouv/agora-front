@@ -9,19 +9,54 @@ useHead({
 </script>
 
 <template>
-  <h1 class="fr-mt-4w">Les actions pour renforcer la démocratie</h1>
+  <h1 class="fr-mt-4w">Les actions pour renforcer notre vie démocratique</h1>
   <p>
-    Comment faire vivre une démocratie plus ouverte, plus participative et plus proche des citoyens&nbsp;? Qu’il s’agisse du Grand
-    Débat national, des Conventions citoyennes, de consultations ou de nouveaux outils numériques comme la plateforme Agora, l’État a mis en
+    Comment faire vivre une démocratie plus transparente, plus participative et plus proche des citoyens&nbsp;? Qu'il s'agisse du Grand
+    Débat national, des Conventions citoyennes, de consultations ou de nouveaux outils numériques comme la plateforme Agora, l'État a mis en
     place plusieurs initiatives pour mieux associer les Français aux décisions publiques ces dernières années.
   </p>
   <p>
-    Aujourd’hui, cette dynamique se poursuit avec de nouveaux chantiers structurants.
+    Aujourd'hui, cette dynamique se poursuit avec de nouveaux chantiers structurants.
   </p>
+
+  <h2 class="fr-mt-8w">L'état des lieux de la participation citoyenne</h2>
+  <p>
+    Le Premier ministre a confié au député de la 8ème circonscription du Finistère, Monsieur Erwan Balanant, une mission gouvernementale visant à établir un état des lieux des pratiques démocratiques en France.
+  </p>
+  <p>
+    Ce travail repose sur 120 auditions, une enquête nationale auprès des collectivités locales et un sondage sur un échantillon représentatif auprès de 2000 citoyens.
+  </p>
+  <p>
+    Le <a href="/Rapport_Mission_Gouvernementale_E_Balanant.pdf" target="_blank" rel="noreferrer noopener">rapport final</a> propose 24 mesures pour institutionnaliser une démocratie continue afin de refonder notre pacte républicain. Ces mesures incluent des propositions à droit constant et des pistes nécessitant un changement de la Loi&nbsp;:
+  </p>
+  <div class="fr-mt-2w fr-mb-4w">
+    <div class="fr-mb-2w">
+      <b>Étape 1&nbsp;: bâtir une politique publique de la vie démocratique et insuffler une culture de la participation au quotidien</b>
+      <br>
+      <p class="fr-mt-2w">Exemples de mesure&nbsp;:</p>
+      <ul class="fr-mt-2w fr-mb-2w">
+        <li>Renforcer l'apprentissage à la citoyenneté durant le cursus scolaire, notamment en encourageant des visites dans les institutions démocratiques, en introduisant des expérimentations délibératives et en envisageant l'augmentation du coefficient attribué à la matière dans le cadre du baccalauréat</li>
+        <li>Faire du lien à la décision et de la redevabilité les critères centraux de qualité d'une démarche, en les inscrivant dans une note de cadrage publique préalable à tout dispositif et en garantissant la reddition de comptes aux citoyens</li>
+        <li>Annoncer chaque année un agenda de la délibération citoyenne, en priorisant notamment les grandes réformes à venir avec un fort impact sociétal et les enjeux de société majeurs.</li>
+      </ul>
+    </div>
+    <div class="fr-mb-2w">
+      <b>Étape 2&nbsp;: légiférer pour protéger notre modèle démocratique et garantir une «&nbsp;justice démocratique&nbsp;» à l'ensemble des Français</b>
+      <ul class="fr-mt-2w fr-mb-2w">
+        <li>Assouplir les conditions relatives à l'examen des pétitions locales et nationales</li>
+        <li>Réviser le Code des relations entre le public et l'administration (<abbr>CRPA</abbr>) afin de consolider les garanties procédurales applicables aux dispositifs participatifs</li>
+        <li>Développer une évaluation citoyenne des politiques publiques au niveau parlementaire</li>
+      </ul>
+    </div>
+  </div>
+
   <h2 class="fr-mt-8w">Le plan d'action de la France pour un Gouvernement Ouvert</h2>
   <p>
     La France est membre du <dfn>Partenariat pour un Gouvernement Ouvert (<abbr>PGO</abbr>)</dfn> depuis <time datetime="2014">2014</time>. Ce partenariat international regroupe
-    77 pays et 150 gouvernements locaux (régions et communes) engagés à promouvoir la transparence, la participation citoyenne et la responsabilité des pouvoirs publics.
+    70 pays et 135 gouvernements locaux (régions et communes) engagés à promouvoir la transparence, la participation citoyenne et la responsabilité des pouvoirs publics.
+  </p>
+  <p>
+    Dans le cadre de cet accord international, la France s'engage à publier des plans d'action permettant de renforcer la transparence de l'action publique et l'association des citoyens à la décision.
   </p>
   <DsfrQuote quote="
                La France est un fervent soutien du Partenariat pour un Gouvernement Ouvert. C'est le principal forum mondial pour que les gouvernements,
@@ -34,66 +69,47 @@ useHead({
              sourceUrl="https://www.vie-publique.fr/discours/276468-emmanuel-macron-24092020-partenariat-pour-un-gouvernement-ouvert"
              quoteImage="/Macron.jpg"
              class="fr-mb-4w" />
-  <p>En <time datetime="2024">2024</time>, la France a lancé son <a href="https://www.modernisation.gouv.fr/files/2024-03/Plan_Action_National_2024_2026_0.pdf">4ème plan d’action national dans le cadre du <abbr>PGO</abbr></a>.</p>
-  <h3 class="fr-mt-4w fr-mb-2w">Concrètement, la France s’est engagée à réaliser 17 actions&nbsp;:</h3>
-  <h4 class="fr-mt-4w fr-mb-2w">Axe 1 : Améliorer et renforcer les pratiques de participation citoyenne et de l'innovation démocratique</h4>
+  <p>Le <a href="https://www.modernisation.gouv.fr/files/2024-03/Plan_Action_National_2024_2026_0.pdf" target="_blank" rel="noreferrer noopener">4ème plan d'action national dans le cadre du <abbr>PGO</abbr></a> pour la période <time>2024</time>-<time>2026</time> a permis de mettre en œuvre 17 engagements répartis sur 3 axes&nbsp;:</p>
   <ul class="fr-mt-2w fr-mb-4w">
-    <li>Réaliser un état des lieux des démarches de participation et d’innovation démocratique</li>
-    <li>Former les agents publics aux méthodes participatives pour mieux associer les citoyens aux politiques qui les concernent</li>
-    <li>Créer et animer dans la durée un espace de dialogue entre l’État et la société civile pour construire, suivre et évaluer les actions de renouveau démocratique</li>
-    <li>Accompagner les pays partenaires de la politique d’aide au développement dans la mise en œuvre de nouvelles pratiques démocratiques</li>
-    <li>Étudier la création d’un statut du citoyen participant favorisant l’accès de tous les citoyens aux démarches de participation citoyenne</li>
+    <li>Axe 1 : Améliorer et renforcer les pratiques de participation citoyenne et de l'innovation démocratique</li>
+    <li>Axe 2 : Renforcer l'inclusion et l'engagement sur l'ensemble du territoire</li>
+    <li>Axe 3 : Mettre le numérique au service d'une action publique plus transparente et plus participative.</li>
   </ul>
-  <h4 class="fr-mt-4w fr-mb-2w">Axe 2 : Renforcer l’inclusion et l’engagement sur l’ensemble du territoire</h4>
-  <ul class="fr-mt-2w fr-mb-4w">
-    <li>Favoriser l’engagement civique des jeunes à travers la diffusion d’outils interactifs comme les « Fresques de la démocratie »</li>
-    <li>Faciliter l’inscription sur les listes électorales grâce à un parcours numérique simplifié</li>
-    <li>Répondre aux besoins spécifiques en santé dans les territoires en s’appuyant sur des concertations territoriales</li>
-    <li>Expérimenter de nouveaux projets scolaires avec les communautés éducatives locales pour favoriser le bien-être des élèves et lutter contre les inégalités scolaires</li>
-    <li>Impliquer un maximum d’acteurs (société civile, entreprises, collectivités) dans la planification écologique du pays</li>
-    <li>Renforcer le dialogue social et l’information des citoyens pour développer une culture du numérique et de l’intelligence artificielle</li>
-    <li>Partager les bonnes pratiques en matière de lutte contre la désinformation auprès des Français de l'étranger</li>
-  </ul>
-  <h4 class="fr-mt-4w fr-mb-2w">Axe 3 : Mettre le numérique au service d’une action publique plus transparente et plus participative.</h4>
-  <ul class="fr-mt-2w fr-mb-4w">
-    <li>Permettre à chacun de suivre les résultats concrets de l’action publique dans son territoire via un <a
-      href="https://www.info.gouv.fr/politiques-prioritaires">baromètre en ligne, actualisé et accessible</a></li>
-    <li>Organiser régulièrement des consultations citoyennes sur les grands enjeux de politiques publiques en s’appuyant sur la plateforme Agora</li>
-    <li>Soutenir les logiciels libres et les projets numériques d’intérêt général en facilitant leur adoption dans les services publics et leur collaboration avec l’État</li>
-    <li>Mettre en place un observatoire du service public de la donnée en vue de faciliter leur réutilisation et leur transparence</li>
-    <li>Mettre à disposition un guichet d'accès centralisé des données en matière de transition écologique</li>
-  </ul>
-  <a href="https://www.modernisation.gouv.fr/files/2024-03/Plan_Action_National_2024_2026_0.pdf"
-     target="_blank"
-     class="fr-link"
-     rel="noreferrer noopener">
-    Consulter la liste détaillée des 17 engagements du 4ème plan d'action <time>2024-2026</time>
-  </a>
-  
+  <p>
+    Depuis le <time datetime="2026-04-22">22 avril 2026</time>, le pays s'est doté d'un espace de dialogue entre les administrations et la société civile&nbsp;: le Forum ouvert. Sa mission est d'élaborer les plans d'action, de suivre la mise en œuvre des engagements de la France et d'évaluer les actions réalisées.
+  </p>
+  <p>
+    Le Forum ouvert s'est réuni les 1<sup>er</sup> et <time datetime="2026-10-02">2 octobre 2026</time> pour définir et prioriser les engagements de la France dans le prochain plan d'action pour la période <time>2027</time>-<time>2028</time>. Sa publication est prévue à la fin de l'année.
+  </p>
+
   <h2 class="fr-pt-8w">La publication des cahiers de doléances du Grand Débat national</h2>
   <p>
     Dans le cadre du Grand Débat national de <time>2019</time>, les Français ont rempli près de 20 000 cahiers de doléances dans les
     mairies. Ces documents constituent un témoignage inédit de la parole citoyenne et des aspirations des Français. Pendant plusieurs années, ces cahiers étaient consultables uniquement sur dérogation. Ils sont désormais accessibles à tous sans dérogation dans les archives
     nationales et départementales. La prochaine étape est de les rendre consultables directement sur Internet.
   </p>
-  
+
   <ol class="fr-mt-2w fr-mb-4w">
-    <li><b><time datetime="2025-01">Janvier 2025</time>&nbsp;:</b> annonce par le Premier ministre François Bayrou de la reprise de l’étude des cahiers de doléances dans sa déclaration de politique générale au Parlement</li>
+    <li><b><time datetime="2025-01">Janvier 2025</time>&nbsp;:</b> annonce par le Premier ministre François Bayrou de la reprise de l'étude des cahiers de doléances dans sa déclaration de politique générale au Parlement</li>
+    <li><b><time datetime="2025-03-11">11 mars 2025</time>&nbsp;:</b> adoption à l'unanimité à l'Assemblée nationale d'une résolution transpartisane relative à la publicisation des cahiers de doléances du Grand débat national</li>
     <li><b><time datetime="2025-04-29">29 avril 2025</time>&nbsp;:</b> ouverture sans dérogation à tous les citoyens, grâce à un arrêté publié au <i>Journal officiel</i></li>
-    <li><b><time datetime="2025-06-05">Juin 2025</time>&nbsp;:</b> lancement d’un groupe de travail chargé de rendre ces doléances lisibles, exploitables et ouvertes à tous d’ici <time>2026</time></li>
+    <li><b><time datetime="2025-06">Juin 2025</time>&nbsp;:</b> lancement d'un groupe de travail chargé de rendre ces doléances lisibles, exploitables et ouvertes à tous d'ici <time>2027</time></li>
+    <li><b><time datetime="2025-11">Novembre 2025</time>&nbsp;:</b> pseudonymisation des cahiers citoyens confiée au Campus Condorcet sous la responsabilité du ministère de l'Enseignement supérieur, de la Recherche et de l'Espace</li>
+    <li><b><time datetime="2027-02">Février 2027</time>&nbsp;:</b> mise en ligne prévue d'un premier échantillon des cahiers</li>
   </ol>
 
    <div class="bandeau-cta fr-grid-row fr-grid-row--gutters fr-p-5w">
     <img src="@gouvfr/dsfr/dist/artwork/pictograms/digital/application.svg" alt="" class="fr-col-1 fr-py-0">
-    <p class="fr-h3 fr-col-11 fr-m-0 fr-py-0">Téléchargez l’application Agora pour être prévenu(e) dès que les cahiers de doléance sont en ligne&nbsp;!</p>
+    <p class="fr-h3 fr-col-11 fr-m-0 fr-py-0">Téléchargez l'application Agora pour être prévenu(e) dès que les cahiers de doléance sont en ligne&nbsp;!</p>
    </div>
-  
+
   <h2 class="fr-pt-8w">Les Conventions citoyennes</h2>
-  <p>Les Conventions citoyennes sont devenues, en quelques années, un format incontournable de la démocratie participative en France.</p>
+  <p>Les conventions citoyennes peuvent être initiées soit par le Président de la République, soit par le Premier ministre, soit par les Présidents de l'Assemblée nationale et du Sénat ou par le CESE lui-même. Ces dernières années, trois ont été lancées par le Gouvernement et une en 2026 par le CESE&nbsp;:</p>
   <ul class="fr-mt-2w fr-mb-4w">
-    <li>La <a href="/je-participe/9"><b><i>Convention citoyenne pour le climat</i></b></a> (2019-2020) a débouché sur de nombreuses mesures intégrées à la loi <i>Climat et Résilience</i> de 2021</li>
-    <li>La <a href="/je-participe/10"><b><i>Convention citoyenne sur la fin de vie</i></b></a> (2022-2023) a débouché sur 2 propositions de loi adoptées par l'Assemblée nationale le <time datetime="2025-05-27">27 mai 2025</time></li>
-    <li>La <a href="/je-participe/11"><b><i>Convention citoyenne sur les temps de l’enfant</i></b></a> (2025) a remis son rapport en novembre 2025.</li>
+    <li>La <a href="/je-participe/cvlxl5bel2poimuh4a6t2jbm"><b><i>Convention citoyenne pour le climat</i></b></a> (2019-2020) a débouché sur de nombreuses mesures intégrées à la loi <i>Climat et Résilience</i> de 2021</li>
+    <li>La <a href="/je-participe/aj270ejuz98a0l6u30e7z1br"><b><i>Convention citoyenne sur la fin de vie</i></b></a> (2022-2023) a débouché sur 2 propositions de loi adoptées par l'Assemblée nationale le <time datetime="2025-05-27">27 mai 2025</time></li>
+    <li>La <a href="/je-participe/dh2j9olyx6z1xv0a0nceey4b"><b><i>Convention citoyenne sur les temps de l'enfant</i></b></a> (2025) a remis son rapport en novembre 2025</li>
+    <li>La <a href="https://www.lecese.fr/conventions/convention-citoyenne-sur-les-finances-publiques" target="_blank" rel="noreferrer noopener"><b><i>Convention citoyenne sur les finances publiques</i></b></a> (2026) a été lancée à l'initiative du Conseil économique, social et environnemental (<abbr>CESE</abbr>)</li>
   </ul>
   <BandeauTelechargementAdaptatif title="Activez les notifications sur l'application Agora pour ne rien louper." />
 </template>
