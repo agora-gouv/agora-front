@@ -104,9 +104,9 @@ useHead({
   <h2 class="fr-pt-8w">Les Conventions citoyennes</h2>
   <p>Les conventions citoyennes peuvent être initiées soit par le Président de la République, soit par le Premier ministre, soit par les Présidents de l'Assemblée nationale et du Sénat ou par le CESE lui-même. Ces dernières années, trois ont été lancées par le Gouvernement et une en 2026 par le CESE&nbsp;:</p>
   <ul class="fr-mt-2w fr-mb-4w">
-    <li>La <a href="/je-participe/cvlxl5bel2poimuh4a6t2jbm"><b><i>Convention citoyenne pour le climat</i></b></a> (2019-2020) a débouché sur de nombreuses mesures intégrées à la loi <i>Climat et Résilience</i> de 2021</li>
-    <li>La <a href="/je-participe/aj270ejuz98a0l6u30e7z1br"><b><i>Convention citoyenne sur la fin de vie</i></b></a> (2022-2023) a débouché sur 2 propositions de loi adoptées par l'Assemblée nationale le <time datetime="2025-05-27">27 mai 2025</time></li>
-    <li>La <a href="/je-participe/dh2j9olyx6z1xv0a0nceey4b"><b><i>Convention citoyenne sur les temps de l'enfant</i></b></a> (2025) a remis son rapport en novembre 2025</li>
+    <li>La <a href="https://www.agora.gouv.fr/je-participe/cvlxl5bel2poimuh4a6t2jbm"><b><i>Convention citoyenne pour le climat</i></b></a> (2019-2020) a débouché sur de nombreuses mesures intégrées à la loi <i>Climat et Résilience</i> de 2021</li>
+    <li>La <a href="https://www.agora.gouv.fr/je-participe/aj270ejuz98a0l6u30e7z1br"><b><i>Convention citoyenne sur la fin de vie</i></b></a> (2022-2023) a débouché sur 2 propositions de loi adoptées par l'Assemblée nationale le <time datetime="2025-05-27">27 mai 2025</time></li>
+    <li>La <a href="https://www.agora.gouv.fr/je-participe/dh2j9olyx6z1xv0a0nceey4b"><b><i>Convention citoyenne sur les temps de l'enfant</i></b></a> (2025) a remis son rapport en novembre 2025</li>
     <li>La <a href="https://www.lecese.fr/conventions/convention-citoyenne-sur-les-finances-publiques" target="_blank" rel="noreferrer noopener"><b><i>Convention citoyenne sur les finances publiques</i> (2026)</b></a> a été lancée à l'initiative du Conseil économique, social et environnemental (<abbr>CESE</abbr>)</li>
   </ul>
   <BandeauTelechargementAdaptatif title="Activez les notifications sur l'application Agora pour ne rien louper." />
